@@ -21,7 +21,7 @@ import { loadProgressBar } from 'axios-progress-bar';
 import 'axios-progress-bar/dist/nprogress.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 type StickyPostPropsType = {
   obj: any;
   mybutton: any;
@@ -174,7 +174,8 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
                     src={
                       GET_BASE_URL_IMAGE +
                       '/disneyland/images/thumbs/' +
-                      obj.user?.image
+                      obj.user?.image +
+                      dTime
                     }
                     className='img-fluid'
                     alt='{obj.user?.user_name}'
@@ -233,7 +234,11 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
               <Link
                 to={
                   obj.mapping_url
-                    ? '/disneyworld/lands-talk/' + obj.mapping_url
+                    ? '/disneyworld/lands-talk/' +
+                      obj.mapping_url.replace(
+                        /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                        '-'
+                      )
                     : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
                 }
               >
@@ -265,7 +270,11 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
               <Link
                 to={
                   obj.mapping_url
-                    ? '/disneyworld/lands-talk/' + obj.mapping_url
+                    ? '/disneyworld/lands-talk/' +
+                      obj.mapping_url.replace(
+                        /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                        '-'
+                      )
                     : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
                 }
               >
@@ -277,7 +286,11 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
                 <Link
                   to={
                     obj.mapping_url
-                      ? '/disneyworld/lands-talk/' + obj.mapping_url
+                      ? '/disneyworld/lands-talk/' +
+                        obj.mapping_url.replace(
+                          /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                          '-'
+                        )
                       : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
                   }
                 >

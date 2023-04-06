@@ -68,7 +68,7 @@ const HashLandLounge = () => {
     window.scrollTo(0, 0);
 
     if (tag) {
-      tagValue = '#'+tag;
+      tagValue = '#' + tag;
     }
 
     dispatch(
@@ -120,9 +120,7 @@ const HashLandLounge = () => {
                     ? [...new Array(9)]?.map((_, index) => (
                         <Placeholder key={index} />
                       ))
-                    : tagItems?.map((obj) => (
-                      <LoungeList obj={obj} />
-                      ))}
+                    : tagItems?.map((obj) => <LoungeList obj={obj} />)}
                 </div>
               )}
             </div>

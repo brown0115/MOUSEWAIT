@@ -10,6 +10,8 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { selectLounges } from '../redux/lounges/selectors';
 import CircularProgress from '@mui/material/CircularProgress';
+import { isMobile } from 'react-device-detect';
+import Post from '../assets/img/h-p.png';
 // import ProgressBar from "@ramonak/react-progress-bar";
 type LoungeBoxPropsType = {
   onSubmit: any;
@@ -279,11 +281,24 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
           </div>
         </form>
       </Modal>
-      <div className='plus-show-btn' onClick={openModal}>
-        <button className='plus-show'>
-          <i className='fa fa-plus plus-i'></i>
-        </button>
-      </div>
+
+      {isMobile ? (
+        <li className='nav-item last-li my-link' onClick={openModal}>
+          <div className='nav-icon'>
+            <img src={Post} className='img-fluid' alt='img' />
+            <a style={{ marginLeft: '15px' }} href='javascript:void(0)'>
+              Post to the Lounge
+            </a>
+            {/*      <img src={Settings} className='img-fluid' alt='img' /> */}
+          </div>
+        </li>
+      ) : (
+        <div className='plus-show-btn' onClick={openModal}>
+          <button className='plus-show'>
+            <i className='fa fa-plus plus-i'></i>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

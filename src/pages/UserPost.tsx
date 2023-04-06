@@ -11,7 +11,7 @@ import { selectLounges } from '../redux/lounges/selectors';
 import { usersSelector } from '../redux/users/selectors';
 import { useForm } from 'react-hook-form';
 import midBanner from '../assets/img/mid-banner-img.png';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import stickerImage from '../assets/img/stickers.jpg';
 import faceBookImage from '../assets/img/face-s.jpg';
 import pinImage from '../assets/img/face-s.jpg';
@@ -164,7 +164,8 @@ const UserPost = () => {
                                   src={
                                     GET_BASE_URL_IMAGE +
                                     '/disneyland/images/thumbs/' +
-                                    obj.user.image
+                                    obj.user.image +
+                                    dTime
                                   }
                                   className='img-fluid'
                                   alt='{obj.user.user_name}'

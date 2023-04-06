@@ -18,7 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { fetchLounges, postLoungeFlag } from '../redux/lounges/slice';
 import { createModuleDeclaration } from 'typescript';
 import { LikeCommentReply } from '../components/LikeCommentReply';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 type CommentListPropsType = {
   chatId: any;
   cmt: any;
@@ -214,7 +214,8 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                   src={
                     GET_BASE_URL_IMAGE +
                     '/disneyland/images/thumbs/' +
-                    cmt.commentuser.image
+                    cmt.commentuser.image +
+                    dTime
                   }
                   className='com-imggg'
                 />

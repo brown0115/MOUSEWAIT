@@ -25,7 +25,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { removeUserLounge } from '../redux/lounges/slice';
 import { LikeCommentReply } from '../components/LikeCommentReply';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 type CommentReplyPropsType = {
   replyData: any;
   replyShow: boolean;
@@ -255,7 +255,8 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
                   src={
                     GET_BASE_URL_IMAGE +
                     '/disneyland/images/thumbs/' +
-                    rep.replyuser.image
+                    rep.replyuser.image +
+                    dTime
                   }
                   className='com-imggg'
                 />

@@ -83,7 +83,9 @@ const WdwLandLounge = () => {
     if (search) {
       searchValue = search;
     }
-    window.scrollTo(0, 0);
+    /*   if (currentPage == 1) {
+      window.scrollTo(0, 0);
+    } */
     loadProgressBar();
     dispatch(fetchStickyLoungeWdw({}));
     dispatch(

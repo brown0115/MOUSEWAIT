@@ -10,7 +10,7 @@ import { TopImges } from '../components/TopImges';
 import { TopTags } from '../components/TopTags';
 import { CommentButton } from '../components/CommentButton';
 import { MobileLoungeHeader } from '../components/MobileLoungeHeader';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import { fetchTagLounges } from '../redux/lounges/slice';
 import { selectLounges } from '../redux/lounges/selectors';
 import { usersSelector } from '../redux/users/selectors';
@@ -132,7 +132,8 @@ const TagLandLounge = () => {
                                     src={
                                       GET_BASE_URL_IMAGE +
                                       '/disneyland/images/thumbs/' +
-                                      obj.user?.image
+                                      obj.user?.image +
+                                      dTime
                                     }
                                     className='img-fluid'
                                     alt='{obj.user?.user_name}'

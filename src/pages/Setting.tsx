@@ -16,7 +16,7 @@ import cardmImage from '../assets/img/card-m-img.png';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { url } from 'inspector';
 import { verifyEmail } from '../redux/users/slice';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 const Setting = () => {
   const dispatch = useAppDispatch();
   const { getProfileItem, status } = useSelector(selectLounges);
@@ -258,8 +258,7 @@ const Setting = () => {
                                     GET_BASE_URL_IMAGE +
                                     '/disneyland/images/userimg/' +
                                     image +
-                                    '?' +
-                                    new Date().toLocaleString()
+                                    dTime
                                   }
                                   alt='big-top'
                                 />

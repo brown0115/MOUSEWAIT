@@ -10,7 +10,11 @@ export const getAllUserLoungesApi = async ({
   const responseBody = (response: AxiosResponse) => response.data;
   const token = localStorage.getItem('token');
   const apiEndpoint =
-    GET_BASE_URL + '/backend/api/v1/user/' + UserId + '/myposts';
+    GET_BASE_URL +
+    '/backend/api/v1/user/' +
+    UserId +
+    '/myposts' +
+    `?page=${currentPage}`;
   let searchByCategory = UserId > 0 ? `&category=${UserId}` : '';
 
   const { data } = await axios

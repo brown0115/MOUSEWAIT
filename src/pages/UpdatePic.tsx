@@ -11,12 +11,13 @@ import { selectLounges } from '../redux/lounges/selectors';
 import { usersSelector } from '../redux/users/selectors';
 import { useForm } from 'react-hook-form';
 import midBanner from '../assets/img/mid-banner-img.png';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import cardImage from '../assets/img/card-s-img.png';
 import cardmImage from '../assets/img/card-m-img.png';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CircularProgress from '@mui/material/CircularProgress';
 // import TabButons from "./TabButons";
 import { updateprofile, usersSlice, clearState } from '../redux/users/slice';
 function Updatepic() {
@@ -42,9 +43,9 @@ function Updatepic() {
 
   const [file, setFile] = useState<number | any>(); //for image
   const [imagePreviewUrl, setImagePreviewUrl] = useState<any>(
-    GET_BASE_URL_IMAGE + '/disneyland/images/userimg/' + userimage
+    GET_BASE_URL_IMAGE + '/disneyland/images/userimg/' + userimage + dTime
   ); // for image
-
+  const [isLoading, setIsLoading] = useState<any | string>(false);
   let key: any = null;
 
   //handle Image change
@@ -67,7 +68,9 @@ function Updatepic() {
   }
 
   const onSubmit = (file: any) => {
+    setIsLoading(true);
     dispatch<any>(updateprofile(file)).then((res: any) => {
+      setIsLoading(false);
       Notify(toast(res.payload.data));
     });
   };
@@ -180,13 +183,17 @@ function Updatepic() {
                                 className='col-sm-3 col-form-label'
                               />
                               <div className='input-t col-sm-9'>
-                                <button
-                                  type='button'
-                                  onClick={handleSubmit(onSubmit)}
-                                  className='btn pro-btn'
-                                >
-                                  Submit
-                                </button>
+                                {isLoading == true ? (
+                                  <CircularProgress />
+                                ) : (
+                                  <button
+                                    type='button'
+                                    onClick={handleSubmit(onSubmit)}
+                                    className='btn pro-btn'
+                                  >
+                                    Submit
+                                  </button>
+                                )}
                               </div>
                             </div>
                           </div>

@@ -20,6 +20,8 @@ import { useEffect, useRef, useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import RightLoungeBest from '../components/RightLoungeBest';
 import { isMobile } from 'react-device-detect';
+import { LoungeBox } from '../components/LoungeBox';
+import { useForm } from 'react-hook-form';
 const LeftLounge = (props: any) => {
   let navigate = useNavigate();
 
@@ -34,6 +36,16 @@ const LeftLounge = (props: any) => {
   };
 
   localStorage.getItem('token');
+
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  const [isLoading, setIsLoading] = useState<any | string>(false);
 
   const { items, totalPrice, totalCaunt } = useSelector(selectCart);
 
@@ -79,6 +91,7 @@ const LeftLounge = (props: any) => {
     let sortingTime: any = null;
 
     dispatch(setSortByTime({ SortTimeType }));
+    window.location.reload();
   };
   const SideBarLinks = (closeSideBar: any) => {
     return (
@@ -89,54 +102,32 @@ const LeftLounge = (props: any) => {
               <i onClick={ToggleSidebar} className='fa fa-plus plus-i'></i>
             </div>
             <li className='nav-item' onClick={closeSideBar}>
-              {/*      <div className='nav-icon'>
-                <img src={star} className='img-fluid' alt='img' />
-              </div> */}
               <Link to='disneyland/notification'>Notifications</Link>
             </li>
 
             <li className='nav-item' onClick={closeSideBar}>
-              {/*       <div className='nav-icon'>
-                    <img src={Disney} className='img-fluid' alt='img' />
-                  </div> */}
-              <Link to='/disneyland/lands/0/Disneyland-Talk/'>
+              <Link to='/disneyland/lands/7/Disneyland-Talk/'>
                 Disneyland Talk
               </Link>
             </li>
 
             <li className='nav-item' onClick={closeSideBar}>
-              {/*           <div className='nav-icon'>
-                    <img src={Real} className='img-fluid' alt='img' />
-                  </div> */}
               <Link to='/disneyland/lands/1/Disneyland-Real-Time/'>
                 Disneyland Real-Time
               </Link>
             </li>
             <li className='nav-item' onClick={closeSideBar}>
-              {/*    <div className='nav-icon'>
-                    <img src={Hub} className='img-fluid' alt='img' />
-                  </div> */}
               <Link to='/disneyland/lands/0/the-hub/'>The Hub</Link>
             </li>
 
             <li className='nav-item new-color' onClick={closeSideBar}>
-              {/*   <div className='nav-icon'>
-                <img src={MyMW} className='img-fluid' alt='img' />
-              </div> */}
-              {/*      <Link to={`/disneyland/user/myfav`} onClick={closeSideBar}> */}
               <Link to={`/disneyland/user/${userId}/mypost`}>MyMW</Link>
             </li>
 
             <li className='nav-item new-color' onClick={closeSideBar}>
-              {/* <div className='nav-icon'>
-                <img src={mws} className='img-fluid' alt='img' />
-              </div> */}
               <Link to='disneyland/mystore'>Sticker Store</Link>
             </li>
             <li className='nav-item new-color' onClick={closeSideBar}>
-              {/*      <div className='nav-icon'>
-                    <img src={Best} className='img-fluid' alt='img' />
-                  </div> */}
               <Link to='/disneyland/d/L/most-viewed/'>Best of the Day</Link>
             </li>
 
@@ -156,10 +147,6 @@ const LeftLounge = (props: any) => {
               </li>
             )}
             <li className='nav-item' onClick={closeSideBar}>
-              {/*               <div className='nav-icon'>
-                <img src={WDW} className='img-fluid' alt='img' />
-              </div> */}
-
               <Link to='disneyworld/lounge'>WDW Talk</Link>
             </li>
 
@@ -178,7 +165,15 @@ const LeftLounge = (props: any) => {
               <li></li>
             )}
 
-            <li className='nav-item last-li' onClick={closeSideBar}>
+            <LoungeBox
+              onSubmit={''}
+              register={register}
+              handleSubmit={handleSubmit}
+              setValue={setValue}
+              isLoading={isLoading}
+            />
+
+            <li className='nav-item' onClick={closeSideBar}>
               <div className='nav-icon'>
                 <img src={Settings} className='img-fluid' alt='img' />
               </div>
@@ -218,8 +213,16 @@ const LeftLounge = (props: any) => {
     setOpen(false);
     open === true ? setIsopen(false) : setIsopen(true);
   };
+
+  const backMe = () => {
+    window.history.back();
+  };
+
   return (
     <div className='leftbar'>
+      {/*    <div className='backarrow' onClick={() => backMe()}>
+        <i className='fa-solid fa-chevron-left'></i>
+      </div> */}
       <Menu right isOpen={isOpen} onOpen={handleIsOpen} onClose={handleIsOpen}>
         <SideBarLinks closeSideBar={closeSideBar} />
       </Menu>

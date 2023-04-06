@@ -99,11 +99,13 @@ const LandLounge = () => {
 
   // console.log(audienceSample);
 
-  useEffect(() => {
+  const loadDataOnlyOnce = () => {
+    /*    if (currentPage == 1) {
+      window.scrollTo(0, 0);
+    } */
     if (search) {
       searchValue = search;
     }
-    window.scrollTo(0, 0);
     loadProgressBar();
     dispatch(fetchStickyLounge({}));
     dispatch(
@@ -115,6 +117,12 @@ const LandLounge = () => {
         shortByTime,
       })
     );
+  };
+
+  //console.log(myData);
+
+  useEffect(() => {
+    loadDataOnlyOnce(); // this will fire only on first render
   }, [shortByTime, search, currentPage]);
 
   // to get user menu

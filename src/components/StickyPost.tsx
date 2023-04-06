@@ -20,7 +20,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TagMe from './TagMe';
 import DmMe from './DmMe';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 type StickyPostPropsType = {
   obj: any;
   mybutton: any;
@@ -191,7 +191,8 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
                     src={
                       GET_BASE_URL_IMAGE +
                       '/disneyland/images/thumbs/' +
-                      obj.user?.image
+                      obj.user?.image +
+                      dTime
                     }
                     className='img-fluid'
                     alt='{obj.user?.user_name}'
@@ -294,7 +295,11 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
               <Link
                 to={
                   obj.mapping_url
-                    ? '/disneyland/lands-talk/' + obj.mapping_url
+                    ? '/disneyland/lands-talk/' +
+                      obj.mapping_url.replace(
+                        /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                        '-'
+                      )
                     : '/disneyland/lands-talk/' + obj.chat_id + '/Mousewait'
                 }
               >
@@ -326,7 +331,11 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
               <Link
                 to={
                   obj.mapping_url
-                    ? '/disneyland/lands-talk/' + obj.mapping_url
+                    ? '/disneyland/lands-talk/' +
+                      obj.mapping_url.replace(
+                        /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                        '-'
+                      )
                     : '/disneyland/lands-talk/' + obj.chat_id + '/Mousewait'
                 }
               >
@@ -339,7 +348,11 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
                 <Link
                   to={
                     obj.mapping_url
-                      ? '/disneyland/lands-talk/' + obj.mapping_url
+                      ? '/disneyland/lands-talk/' +
+                        obj.mapping_url.replace(
+                          /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                          '-'
+                        )
                       : '/disneyland/lands-talk/' + obj.chat_id + '/Mousewait'
                   }
                 >

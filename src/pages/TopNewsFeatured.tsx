@@ -6,7 +6,7 @@ import { Placeholder } from '../components/Placeholder';
 import { selectLounges } from '../redux/lounges/selectors';
 import midBanner from '../assets/img/mid-banner-img.png';
 import { fetchTopNewsFeatured } from '../redux/lounges/slice';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 const TopNewsFeatured = (props: any) => {
   const dispatch = useAppDispatch();
 
@@ -62,7 +62,8 @@ const TopNewsFeatured = (props: any) => {
                                     src={
                                       GET_BASE_URL_IMAGE +
                                       '/disneyland/images/thumbs/' +
-                                      obj.image
+                                      obj.image +
+                                      dTime
                                     }
                                     className='com-imggg'
                                     style={{

@@ -21,7 +21,13 @@ export const Search = () => {
 
   // Optimization the search field. Update setSerchValue after same time.
   const onSearch = (data: any) => {
-    navigate('/disneyland/search/post/' + data.searchValue);
+    //navigate('/disneyland/search/post/' + data.searchValue);
+    if (window.location.href.indexOf('disneyland') > -1) {
+      window.location.href = '/disneyland/search/post/' + data.searchValue;
+    } else {
+      window.location.href = '/disneyworld/search/post/' + data.searchValue;
+    }
+
     reset();
   };
 

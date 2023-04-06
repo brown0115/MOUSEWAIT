@@ -6,6 +6,7 @@ import { TopImges } from '../components/TopImges';
 import { TopTags } from '../components/TopTags';
 import { useAppDispatch } from '../redux/store';
 import { LikeButton } from '../components/LikeButton';
+import { ThankButton } from '../components/ThankButton';
 import { CommentButton } from '../components/CommentButton';
 import { ToggleMenu } from '../components/ToggleMenu';
 import { selectLounges } from '../redux/lounges/selectors';
@@ -20,7 +21,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TagMe from './TagMe';
 import DmMe from './DmMe';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import Emoji from 'react-emoji-render';
 
 type LoungeListPropsType = {
@@ -172,7 +173,8 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
                   src={
                     GET_BASE_URL_IMAGE +
                     '/disneyland/images/thumbs/' +
-                    obj.user?.image
+                    obj.user?.image +
+                    dTime
                   }
                   className='img-fluid'
                   alt='{obj.user?.user_name}'
@@ -272,7 +274,11 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
             <Link
               to={
                 obj.mapping_url
-                  ? '/disneyland/lands-talk/' + obj.mapping_url
+                  ? '/disneyland/lands-talk/' +
+                    obj.mapping_url.replace(
+                      /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                      '-'
+                    )
                   : '/disneyland/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
@@ -312,7 +318,11 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
 
               to={
                 obj.mapping_url
-                  ? '/disneyland/lands-talk/' + obj.mapping_url
+                  ? '/disneyland/lands-talk/' +
+                    obj.mapping_url.replace(
+                      /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                      '-'
+                    )
                   : '/disneyland/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
@@ -325,11 +335,25 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
             </Link>
 
             <div className='chat-icon d-flex'>
-              <LikeButton likecount={obj.likecount} chatId={obj.chat_id} />
+              <ThankButton
+                likecount={obj.thankcount}
+                chatId={obj.chat_id}
+                getThankYou={
+                  obj.isthankyou?.user_id == user &&
+                  obj.isthankyou?.status == '1'
+                    ? true
+                    : false
+                }
+              />
+              {/*      <LikeButton likecount={obj.likecount} chatId={obj.chat_id} /> */}
               <Link
                 to={
                   obj.mapping_url
-                    ? '/disneyland/lands-talk/' + obj.mapping_url
+                    ? '/disneyland/lands-talk/' +
+                      obj.mapping_url.replace(
+                        /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                        '-'
+                      )
                     : '/disneyland/lands-talk/' + obj.chat_id + '/Mousewait'
                 }
               >

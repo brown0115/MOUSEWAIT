@@ -13,11 +13,12 @@ export const getTagLoungesApi = async ({
 
   let sorvalue = null;
 
-  let sortByTime = shortByTime == 'true' ? `?sortordefault=ww` : '';
-  const apiEndpoint = GET_BASE_URL + '/backend/api/v1/tag' + sortByTime;
+  let sortByTime = shortByTime == 'true' ? `&sortordefault=ww` : '';
+  const apiEndpoint =
+    GET_BASE_URL + `/backend/api/v1/tag?tags_name=${tagValue}` + sortByTime;
 
   const { data } = await axios
-    .get<Lounge[]>(`${apiEndpoint}?tags_name=${tagValue}`)
+    .get<Lounge[]>(`${apiEndpoint}`)
     .then(responseBody);
   return data;
 };
