@@ -21,7 +21,8 @@ import ToggleMWmenu from '../components/ToggleMWmenu';
 import DmMe from '../components/DmMe';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
+import { ThankButton } from '../components/ThankButton';
 const UserLounge = () => {
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
@@ -49,13 +50,14 @@ const UserLounge = () => {
   const [overRank, SetOverRank] = useState<any | string>(null);
   const [userName, SetUserName] = useState<any | string>(null);
   const [isLoading, setIsLoading] = useState<any | string>(false);
+  const [myData, SetMyData] = useState<any | string>([]);
   const [suscribeUnsuscribe, SetSuscribeUnsuscribe] = useState<any | string>(
     null
   );
   let sortType: any = null;
   let UserId: any = userId;
-  let currentPage: any = null;
-
+  //let currentPage: any = null;
+  const [currentPage, setCurrentPage] = useState(1);
   const {
     register,
     setValue,
@@ -64,11 +66,17 @@ const UserLounge = () => {
     formState: { errors },
   } = useForm<FormData>();
 
+  //console.log(items[0]?.['posts'].data);
+
   const loadDataOnlyOnce = () => {
-    window.scrollTo(0, 0);
+    if (currentPage == 1) {
+      window.scrollTo(0, 0);
+    }
 
     dispatch(fetchUserLounges({ sortType, UserId, currentPage })).then(
       (res: any) => {
+        console.log(res);
+        SetMyData((prev: any) => [...prev, ...res.payload[0]['posts']]);
         SetMemeberSince(converDate(res.payload[0]['user'].member_since));
         SetCreditPurchased(res.payload[0]['otherdetail'][0].credit_purchase);
         SetNoNews(res.payload[0]['otherdetail'][0].no_of_posts_news);
@@ -96,8 +104,28 @@ const UserLounge = () => {
     );
   };
 
+  //console.log(myData);
+
   useEffect(() => {
     loadDataOnlyOnce(); // this will fire only on first render
+  }, [currentPage]);
+
+  const handelInfiniteScroll = async () => {
+    try {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 1 >=
+        document.documentElement.scrollHeight
+      ) {
+        setCurrentPage((prev) => prev + 1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handelInfiniteScroll);
+    return () => window.removeEventListener('scroll', handelInfiniteScroll);
   }, []);
 
   function converDate(datevalue: any) {
@@ -123,7 +151,7 @@ const UserLounge = () => {
     //  alert('submitting');
   };
 
-  //console.log(items[0]);
+  //console.log(audienceSample);
   // console.log(loggeduser);
 
   //Dm Box
@@ -161,7 +189,29 @@ const UserLounge = () => {
       });
     }
   };
+  //console.log(items);
 
+  function removeTags(string: any) {
+    let newstring = string
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+    let content = newstring?.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
+    let hashtag;
+
+    return content?.map((word: any) => {
+      if (word.startsWith('#')) {
+        hashtag = word.replace('#', '');
+        return (
+          <Link to={`/disneyland/hash/${hashtag}`}>
+            <a style={{ color: 'blue', textDecoration: 'underline' }}>{word}</a>
+          </Link>
+        );
+      } else {
+        return word;
+      }
+    });
+  }
   return (
     <>
       {userId == 'null' ? (
@@ -334,19 +384,18 @@ const UserLounge = () => {
                         ? [...new Array(9)]?.map((_, index) => (
                             <Placeholder key={index} />
                           ))
-                        : items[0]['posts']?.map((obj: any) => (
+                        : myData.map((obj: any) => (
                             <div className='card-m rounded card-m2'>
                               <div className='card-s-img justify-content-between d-flex'>
                                 <div className='small-box d-flex'>
                                   <div className='small-c'>
-                                    <Link
-                                      to={`/disneyland/user/${items[0]['user']?.user_id}/mypost`}
-                                    >
+                                    <Link to={'#'}>
                                       <img
                                         src={
                                           GET_BASE_URL_IMAGE +
                                           '/disneyland/images/thumbs/' +
-                                          items[0]['user']?.image
+                                          items[0]['user']?.image +
+                                          dTime
                                         }
                                         className='img-fluid'
                                         alt="{items[0]['user'].user_name}"
@@ -355,10 +404,7 @@ const UserLounge = () => {
                                   </div>
                                   <div className='small-tt'>
                                     <h6>
-                                      <Link
-                                        style={{ color: 'black' }}
-                                        to={`/disneyland/user/${items[0]['user']?.user_id}/mypost`}
-                                      >
+                                      <Link style={{ color: 'black' }} to={'#'}>
                                         {items[0]['user']?.user_name}
                                       </Link>
                                     </h6>
@@ -409,7 +455,17 @@ const UserLounge = () => {
                               <div className='card-img-b my-2'>
                                 {obj.chat_img.includes('c_img') && (
                                   <Link
-                                    to={`/disneyland/lands-talk/${obj.mapping_url}`}
+                                    to={
+                                      obj.mapping_url
+                                        ? '/disneyland/lands-talk/' +
+                                          obj.mapping_url.replace(
+                                            /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                                            '-'
+                                          )
+                                        : '/disneyland/lands-talk/' +
+                                          obj.chat_id +
+                                          '/Mousewait'
+                                    }
                                   >
                                     <img
                                       src={
@@ -425,33 +481,47 @@ const UserLounge = () => {
                               </div>
                               <div className='card-body'>
                                 <Link
-                                  to={`/disneyland/lands-talk/${obj.mapping_url?.replace(
-                                    /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
-                                    '-'
-                                  )}`}
+                                  to={
+                                    obj.mapping_url
+                                      ? '/disneyland/lands-talk/' +
+                                        obj.mapping_url.replace(
+                                          /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                                          '-'
+                                        )
+                                      : '/disneyland/lands-talk/' +
+                                        obj.chat_id +
+                                        '/Mousewait'
+                                  }
                                 >
-                                  <h6
-                                    dangerouslySetInnerHTML={{
-                                      __html: obj.chat_msg?.replace(
-                                        'mousewait.com',
-                                        'mousewait.xyz'
-                                      ),
-                                    }}
-                                  />
+                                  <h6>{removeTags(obj.chat_msg)}</h6>
                                 </Link>
 
                                 <div className='chat-icon d-flex'>
-                                  <LikeButton
+                                  <ThankButton
+                                    likecount={obj.thankcount}
+                                    chatId={obj.chat_id}
+                                    getThankYou={
+                                      obj.isthankyou?.status == '1'
+                                        ? true
+                                        : false
+                                    }
+                                  />
+                                  {/*    <LikeButton
                                     likecount={obj.likecount}
                                     chatId={obj.chat_id}
-                                  />
+                                  /> */}
                                   <Link
-                                    to={`/disneyland/lands-talk/${
-                                      obj.chat_id
-                                    }/${obj.chat_msg?.replace(
-                                      /([/~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
-                                      '-'
-                                    )}`}
+                                    to={
+                                      obj.mapping_url
+                                        ? '/disneyland/lands-talk/' +
+                                          obj.mapping_url.replace(
+                                            /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                                            '-'
+                                          )
+                                        : '/disneyland/lands-talk/' +
+                                          obj.chat_id +
+                                          '/Mousewait'
+                                    }
                                   >
                                     <CommentButton
                                       commentcount={obj.commentcount}

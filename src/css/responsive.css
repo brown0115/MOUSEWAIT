@@ -675,6 +675,7 @@
     left: 83%;
     right: 0;
     z-index: 9999;
+    display: none;
   }
   .plus-show-btn .plus-show i {
     transform: translateY(2px);
@@ -767,7 +768,7 @@
 
   .leftbar .navbar-collapse {
     background: #99b5e6;
-    margin-left: -12rem;
+    margin-left: -14rem;
     padding-left: 1rem;
     margin-top: -0.5rem;
     margin-right: -0.8rem;
@@ -994,6 +995,20 @@
   }
   .right-side-bar i {
     display: inline-block;
+  }
+  .backarrow {
+    display: block;
+  }
+  .backarrow i {
+    position: fixed;
+    top: 1.2rem;
+    left: 0.8rem;
+    font-size: 1.4rem;
+    color: rgba(22, 23, 34, 0.3);
+    z-index: 9;
+  }
+  .ReactModal__Overlay {
+    z-index: 9999;
   }
 }
 

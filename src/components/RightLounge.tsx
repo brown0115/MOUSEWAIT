@@ -4,7 +4,7 @@ import RightLoungeBest from '../components/RightLoungeBest';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLounges, fetchMyProfile } from '../redux/lounges/slice';
 import { useForm } from 'react-hook-form';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 // import midbanner from '../assets/img/user_dp.png';
 const RightLounge = () => {
   const token = localStorage.getItem('token');
@@ -25,8 +25,7 @@ const RightLounge = () => {
                     GET_BASE_URL_IMAGE +
                     '/disneyland/images/thumbs/' +
                     image +
-                    '?' +
-                    new Date().toLocaleString()
+                    dTime
                   }
                   className='img-fluid'
                 />

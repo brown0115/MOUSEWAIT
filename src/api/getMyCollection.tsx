@@ -9,7 +9,8 @@ export const getAllMyCollectionApi = async ({
   const responseBody = (response: AxiosResponse) => response.data;
 
   const token = localStorage.getItem('token');
-  const apiEndpoint = GET_BASE_URL + '/backend/api/v1/getMyCollection';
+  const apiEndpoint =
+    GET_BASE_URL + `/backend/api/v1/getMyCollection?page=${currentPage}`;
 
   const { data } = await axios
     .get<MyStore[]>(`${apiEndpoint}`, {

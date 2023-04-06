@@ -6,7 +6,11 @@ import { Placeholder } from '../components/Placeholder';
 import { selectLounges } from '../redux/lounges/selectors';
 import midBanner from '../assets/img/mid-banner-img.png';
 import { fetchTopMwByQualityPostWdw } from '../redux/lounges/slice';
-import { GET_BASE_URL_IMAGE, GET_URL_PART } from '../constants/apiEndpoints';
+import {
+  GET_BASE_URL_IMAGE,
+  GET_URL_PART,
+  dTime,
+} from '../constants/apiEndpoints';
 const WdwTopMwByQualityPost = (props: any) => {
   const dispatch = useAppDispatch();
 
@@ -65,7 +69,8 @@ const WdwTopMwByQualityPost = (props: any) => {
                                     src={
                                       GET_BASE_URL_IMAGE +
                                       '/disneyland/images/thumbs/' +
-                                      obj.image
+                                      obj.image +
+                                      dTime
                                     }
                                     className='com-imggg'
                                     style={{

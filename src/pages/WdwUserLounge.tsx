@@ -13,7 +13,7 @@ import {
 import { selectLounges } from '../redux/lounges/selectors';
 import { usersSelector } from '../redux/users/selectors';
 import { LoungeHeader } from '../components/LoungeHeader';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import { MobileLoungeHeader } from '../components/MobileLoungeHeader';
 import midBanner from '../assets/img/mid-banner-img.png';
 
@@ -346,7 +346,8 @@ const UserLounge = () => {
                                         src={
                                           GET_BASE_URL_IMAGE +
                                           '/disneyland/images/thumbs/' +
-                                          items[0]['user']?.image
+                                          items[0]['user']?.image +
+                                          dTime
                                         }
                                         className='img-fluid'
                                         alt="{items[0]['user'].user_name}"

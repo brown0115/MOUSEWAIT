@@ -35,7 +35,7 @@ const LoungeLand = () => {
   let navigate = useNavigate();
 
   const landid = '3';
-
+  const { search } = useParams();
   const { items, stickyItem, status, sortByTime } = useSelector(selectLounges);
   const {
     register,
@@ -68,8 +68,17 @@ const LoungeLand = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchStickyLounge({}));
-    dispatch(fetchCatLounges({ landid, currentPage }));
-  }, [landid, currentPage]);
+    dispatch(
+      fetchCatLounges({
+        landid,
+        sortType,
+        LoungeId,
+        currentPage,
+        searchValue,
+        shortByTime,
+      })
+    );
+  }, [landid, currentPage, shortByTime, search]);
 
   const onSubmit = (data: any) => {
     /*     setIsLoading(true);

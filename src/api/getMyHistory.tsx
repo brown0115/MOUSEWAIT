@@ -9,7 +9,8 @@ export const getAllMyHistoryApi = async ({
   const responseBody = (response: AxiosResponse) => response.data;
 
   const token = localStorage.getItem('token');
-  const apiEndpoint = GET_BASE_URL + '/backend/api/v1/getMyHistory';
+  const apiEndpoint =
+    GET_BASE_URL + `/backend/api/v1/getMyHistory?page=${currentPage}`;
   const { data } = await axios
     .get<MyStore[]>(`${apiEndpoint}`, {
       headers: {

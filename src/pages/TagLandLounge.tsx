@@ -10,12 +10,12 @@ import { TopImges } from '../components/TopImges';
 import { TopTags } from '../components/TopTags';
 import { CommentButton } from '../components/CommentButton';
 import { MobileLoungeHeader } from '../components/MobileLoungeHeader';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import { fetchTagLounges } from '../redux/lounges/slice';
 import { selectLounges } from '../redux/lounges/selectors';
 import { usersSelector } from '../redux/users/selectors';
 import { useForm } from 'react-hook-form';
-
+import { ThankButton } from '../components/ThankButton';
 import stickerImage from '../assets/img/stickers.jpg';
 import faceBookImage from '../assets/img/face-s.jpg';
 import pinImage from '../assets/img/face-s.jpg';
@@ -154,7 +154,8 @@ const TagLandLounge = () => {
                                     src={
                                       GET_BASE_URL_IMAGE +
                                       '/disneyland/images/thumbs/' +
-                                      obj.user?.image
+                                      obj.user?.image +
+                                      dTime
                                     }
                                     className='img-fluid'
                                     alt='{obj.user?.user_name}'
@@ -236,10 +237,20 @@ const TagLandLounge = () => {
                             </Link>
 
                             <div className='chat-icon d-flex'>
-                              <LikeButton
+                              <ThankButton
+                                likecount={obj.thankcount}
+                                chatId={obj.chat_id}
+                                getThankYou={
+                                  obj.isthankyou?.user_id == user &&
+                                  obj.isthankyou?.status == '1'
+                                    ? true
+                                    : false
+                                }
+                              />
+                              {/*     <LikeButton
                                 likecount={obj.likecount}
                                 chatId={obj.chat_id}
-                              />
+                              /> */}
                               <Link
                                 to={
                                   obj.mapping_url

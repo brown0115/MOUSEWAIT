@@ -40,7 +40,7 @@ const MyCollection = () => {
 
   let sortType: any = null;
   let categoryId: any = null;
-  let currentPage: any = null;
+  //let currentPage: any = null;
   let searchValue: any = null;
 
   type FormData = {
@@ -52,25 +52,44 @@ const MyCollection = () => {
   const [UserName, setUserName] = useState<any | string>('');
   const [key, setKey] = useState<any | string>('');
   const [Notify, setIsNotify] = useState<any | string>();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [myData, SetMyData] = useState<any | string>([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch(fetchMyCollection({ sortType, currentPage })).then((res: any) => {
+      if (res.payload == undefined) {
+        SetMyData((myCollectionItem as any).store);
+      } else {
+        SetMyData((prev: any) => [...prev, ...res.payload.store]);
+      }
+    });
+  }, [currentPage]);
+
+  const handelInfiniteScroll = async () => {
+    try {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 1 >=
+        document.documentElement.scrollHeight
+      ) {
+        setCurrentPage((prev) => prev + 1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handelInfiniteScroll);
+    return () => window.removeEventListener('scroll', handelInfiniteScroll);
+  }, []);
+
   async function search(key: any) {
     setKey(key);
     if (key.length > 0) {
       dispatch(fetchUser({ key }));
     }
   }
-  /*     let  result = await fetch('http://144.208.70.141/~mouse/mousewaitnew/backend/api/v1/getUser?name='+key);
-    let response = await result.json(); */
-  //console.warn(response.data)
-
-  //console.log(userItem)
-  //setData(response.data)
-
-  //else{ setData([])}
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    dispatch(fetchMyCollection({ sortType, currentPage }));
-  }, []);
 
   useEffect(() => {
     setValue('Id', Id);
@@ -342,66 +361,58 @@ const MyCollection = () => {
                                       ? [...new Array(9)]?.map((_, index) => (
                                           <Placeholder key={index} />
                                         ))
-                                      : (myCollectionItem as any).store?.map(
-                                          (obj: any) => (
-                                            <tr className='in-sec'>
-                                              <th scope='row'>
-                                                <div className='tab-img'>
-                                                  <img
-                                                    src={
-                                                      GET_BASE_URL_IMAGE +
-                                                      '/disneyland/images/products_thumbnail/' +
-                                                      obj.product_image
-                                                    }
-                                                    className='img-fluid'
-                                                    alt='big-top'
-                                                  />
-                                                </div>
-                                              </th>
-                                              <td style={{ fontWeight: '500' }}>
-                                                {obj.product_name}
-                                              </td>
-                                              <td style={{ fontWeight: '500' }}>
-                                                {obj.product_description}
-                                              </td>
-                                              <td style={{ fontWeight: '500' }}>
-                                                {obj.status == '1' && (
-                                                  <>Owner</>
-                                                )}
-                                                {obj.status == '2' && (
-                                                  <>
-                                                    Gift from{' '}
-                                                    {obj.user?.user_name}
-                                                  </>
-                                                )}
-                                                {obj.status == '3' && (
-                                                  <>Traded</>
-                                                )}
-                                              </td>
-                                              <td>
-                                                <div className='buy-btn'>
-                                                  <a
-                                                    onClick={() =>
-                                                      myGift(obj.id)
-                                                    }
-                                                    /* onClick={() => setModal(true)} */ style={{
-                                                      background: '#a0b7e9',
-                                                      borderRadius: '0.5rem',
-                                                      padding: '0.5rem',
-                                                      fontSize: '1rem',
-                                                      textDecoration: 'none',
-                                                      color: '#fff',
-                                                    }}
-                                                    type='button'
-                                                    className='buy-b'
-                                                  >
-                                                    Gift
-                                                  </a>
-                                                </div>
-                                              </td>
-                                            </tr>
-                                          )
-                                        )}
+                                      : myData?.map((obj: any) => (
+                                          <tr className='in-sec'>
+                                            <th scope='row'>
+                                              <div className='tab-img'>
+                                                <img
+                                                  src={
+                                                    GET_BASE_URL_IMAGE +
+                                                    '/disneyland/images/products_thumbnail/' +
+                                                    obj.product_image
+                                                  }
+                                                  className='img-fluid'
+                                                  alt='big-top'
+                                                />
+                                              </div>
+                                            </th>
+                                            <td style={{ fontWeight: '500' }}>
+                                              {obj.product_name}
+                                            </td>
+                                            <td style={{ fontWeight: '500' }}>
+                                              {obj.product_description}
+                                            </td>
+                                            <td style={{ fontWeight: '500' }}>
+                                              {obj.status == '1' && <>Owner</>}
+                                              {obj.status == '2' && (
+                                                <>
+                                                  Gift from{' '}
+                                                  {obj.user?.user_name}
+                                                </>
+                                              )}
+                                              {obj.status == '3' && <>Traded</>}
+                                            </td>
+                                            <td>
+                                              <div className='buy-btn'>
+                                                <a
+                                                  onClick={() => myGift(obj.id)}
+                                                  /* onClick={() => setModal(true)} */ style={{
+                                                    background: '#a0b7e9',
+                                                    borderRadius: '0.5rem',
+                                                    padding: '0.5rem',
+                                                    fontSize: '1rem',
+                                                    textDecoration: 'none',
+                                                    color: '#fff',
+                                                  }}
+                                                  type='button'
+                                                  className='buy-b'
+                                                >
+                                                  Gift
+                                                </a>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                        ))}
                                   </tbody>
                                 </table>
                               </div>

@@ -14,11 +14,12 @@ export const getHashLoungesApiWdw = async ({
   localStorage.setItem('pagename', 'My Hash');
   let sorvalue = null;
 
-  let sortByTime = shortByTime == 'true' ? `?sortordefault=ww` : '';
-  const apiEndpoint = GET_BASE_URL + '/backend/api/v1/hashWdw' + sortByTime;
+  let sortByTime = shortByTime == 'true' ? `&sortordefault=ww` : '';
+  const apiEndpoint =
+    GET_BASE_URL + `/backend/api/v1/hashWdw=${tagValue}` + sortByTime;
 
   const { data } = await axios
-    .get<Lounge[]>(`${apiEndpoint}?hash=${tagValue}`)
+    .get<Lounge[]>(`${apiEndpoint}`)
     .then(responseBody);
   return data;
 };

@@ -12,6 +12,7 @@ import { selectLounges } from '../redux/lounges/selectors';
 import userEvent from '@testing-library/user-event';
 import { useForm } from 'react-hook-form';
 import { fetchDisneyWorldLounges } from '../redux/lounges/slice';
+import { ThankButtonWdw } from '../components/ThankButtonWdw';
 import {
   postLoungeFlagWdw,
   postLoungeCommentEditWdw,
@@ -21,7 +22,7 @@ import { loadProgressBar } from 'axios-progress-bar';
 import 'axios-progress-bar/dist/nprogress.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 type WDWLoungeListPropsType = {
   obj: any;
 };
@@ -157,7 +158,8 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
                   src={
                     GET_BASE_URL_IMAGE +
                     '/disneyland/images/thumbs/' +
-                    obj.user?.image
+                    obj.user?.image +
+                    dTime
                   }
                   className='img-fluid'
                   alt='{obj.user?.user_name}'
@@ -189,7 +191,11 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
               LoungeId={obj.chat_id}
               username={obj.user.user_name}
               userid={obj.user.user_id}
-              getThankYou={obj.isthankyou?.status == '1' ? true : false}
+              getThankYou={
+                obj.isthankyou?.user_id == user && obj.isthankyou?.status == '1'
+                  ? true
+                  : false
+              }
               getBookMark={obj.isbookmark?.status == '1' ? true : false}
               editType={obj.user?.user_id == user ? true : false}
               chat_reply_msg={obj.chat_msg}
@@ -222,7 +228,11 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
 
               to={
                 obj.mapping_url
-                  ? '/disneyworld/lands-talk/' + obj.mapping_url
+                  ? '/disneyworld/lands-talk/' +
+                    obj.mapping_url.replace(
+                      /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                      '-'
+                    )
                   : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
@@ -254,7 +264,11 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
             <Link
               to={
                 obj.mapping_url
-                  ? '/disneyworld/lands-talk/' + obj.mapping_url
+                  ? '/disneyworld/lands-talk/' +
+                    obj.mapping_url.replace(
+                      /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                      '-'
+                    )
                   : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
@@ -262,11 +276,25 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
             </Link>
 
             <div className='chat-icon d-flex'>
-              <LikeButtonWdw likecount={obj.likecount} chatId={obj.chat_id} />
+              <ThankButtonWdw
+                likecount={obj.thankcount}
+                chatId={obj.chat_id}
+                getThankYou={
+                  obj.isthankyou?.user_id == user &&
+                  obj.isthankyou?.status == '1'
+                    ? true
+                    : false
+                }
+              />
+              {/*   <LikeButtonWdw likecount={obj.likecount} chatId={obj.chat_id} /> */}
               <Link
                 to={
                   obj.mapping_url
-                    ? '/disneyworld/lands-talk/' + obj.mapping_url
+                    ? '/disneyworld/lands-talk/' +
+                      obj.mapping_url.replace(
+                        /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
+                        '-'
+                      )
                     : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
                 }
               >

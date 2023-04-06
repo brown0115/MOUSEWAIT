@@ -13,15 +13,15 @@ export const getDisnyworldLoungesApi = async ({
   localStorage.setItem('pagename', 'Disneyworld Lounge');
   let sorvalue = null;
   const token = localStorage.getItem('token');
-  let sortByTime = shortByTime == 'true' ? `&sortordefault=ww` : '';
-  const apiEndpoint =
-    GET_BASE_URL +
-    `/backend/api/v1/disneyworldHome?page=${currentPage}` +
-    sortByTime;
+  let sortByTime =
+    shortByTime == 'true'
+      ? `?page=${currentPage}&sortordefault=ww`
+      : `?page=${currentPage}`;
+  const apiEndpoint = GET_BASE_URL + `/backend/api/v1/disneyworldHome`;
 
   if (searchValue != null) {
     const { data } = await axios
-      .get<Lounge[]>(`${apiEndpoint}/search/post/${searchValue}`, {
+      .get<Lounge[]>(`${apiEndpoint}/search/post/${searchValue}${sortByTime}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -30,7 +30,7 @@ export const getDisnyworldLoungesApi = async ({
     return data.data;
   } else {
     const { data } = await axios
-      .get<Lounge[]>(`${apiEndpoint}`, {
+      .get<Lounge[]>(`${apiEndpoint}${sortByTime}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },

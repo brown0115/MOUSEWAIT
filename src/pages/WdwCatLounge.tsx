@@ -35,7 +35,7 @@ const WdwCatLounge = () => {
   let navigate = useNavigate();
 
   const { landid } = useParams();
-
+  const { search } = useParams();
   const { items, stickyItem, status, sortByTime } = useSelector(selectLounges);
   const {
     register,
@@ -73,10 +73,25 @@ const WdwCatLounge = () => {
   }, [items]); // set the relation between redux campaign and local state
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (search) {
+      searchValue = search;
+    }
+    /*   if (currentPage == 1) {
+      window.scrollTo(0, 0);
+    } */
+
     dispatch(fetchStickyLoungeWdw({}));
-    dispatch(fetchCatLoungesWdw({ landid, currentPage }));
-  }, [landid, currentPage]);
+    dispatch(
+      fetchCatLoungesWdw({
+        landid,
+        sortType,
+        LoungeId,
+        currentPage,
+        searchValue,
+        shortByTime,
+      })
+    );
+  }, [landid, currentPage, shortByTime, search]);
 
   const handelInfiniteScroll = async () => {
     // console.log("scrollHeight" + document.documentElement.scrollHeight);

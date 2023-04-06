@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { FetchLoungesType } from '../redux/lounges/slice';
 import { Lounge } from '../redux/lounges/types';
-import { GET_BASE_URL } from '../constants/apiEndpoints';
+import { GET_BASE_URL, LOCAL_BASE_URL } from '../constants/apiEndpoints';
 export const getAllLoungesApi = async ({
   sortType,
   LoungeId,
@@ -29,28 +29,31 @@ export const getAllLoungesApi = async ({
   localStorage.setItem('pagename', 'Disneyland Lounge');
   const token = localStorage.getItem('token');
 
-  let sortByTime = shortByTime == 'true' ? `&sortordefault=ww` : '';
-  const apiEndpoint =
-    GET_BASE_URL + `/backend/api/v1/home?page=${currentPage}` + sortByTime;
+  let sortByTime =
+    shortByTime == 'true'
+      ? `?page=${currentPage}&sortordefault=ww`
+      : `?page=${currentPage}`;
+
+  const apiEndpoint = GET_BASE_URL + `/backend/api/v1/home`;
 
   if (searchValue != null) {
     const { data } = await axios
-      .get<Lounge[]>(`${apiEndpoint}/search/post/${searchValue}`, {
+      .get<Lounge[]>(`${apiEndpoint}/search/post/${searchValue}${sortByTime}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
       })
       .then(responseBody);
-    return data.data;
+    return data;
   } else {
     const { data } = await axios
-      .get<Lounge[]>(`${apiEndpoint}`, {
+      .get<Lounge[]>(`${apiEndpoint}${sortByTime}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
       })
       .then(responseBody);
 
-    return data.data;
+    return data;
   }
 };

@@ -15,7 +15,7 @@ import { useForm } from 'react-hook-form';
 import Modal from 'react-modal';
 import PureModal from 'react-pure-modal';
 import 'react-pure-modal/dist/react-pure-modal.min.css';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import DmMe from '../components/DmMe';
 
 import {
@@ -246,7 +246,8 @@ const Notification = () => {
                                                     src={
                                                       GET_BASE_URL_IMAGE +
                                                       '/disneyland/images/thumbs/' +
-                                                      obj.image
+                                                      obj.image +
+                                                      dTime
                                                     }
                                                     className='card-img-top img-fluid'
                                                     alt='img'
@@ -271,10 +272,6 @@ const Notification = () => {
                                                     dangerouslySetInnerHTML={{
                                                       __html: obj.chat_msg
                                                         ?.replace(
-                                                          'mousewait.com',
-                                                          'mousewait.xyz'
-                                                        )
-                                                        .replace(
                                                           '<p>',
                                                           '<span>'
                                                         )
@@ -475,7 +472,8 @@ const Notification = () => {
                                                     src={
                                                       GET_BASE_URL_IMAGE +
                                                       '/disneyland/images/thumbs/' +
-                                                      obj.image
+                                                      obj.image +
+                                                      dTime
                                                     }
                                                     className='card-img-top img-fluid'
                                                     alt='img'
@@ -529,10 +527,6 @@ const Notification = () => {
                                                     dangerouslySetInnerHTML={{
                                                       __html: obj.chat_msg
                                                         ?.replace(
-                                                          'mousewait.com',
-                                                          'mousewait.xyz'
-                                                        )
-                                                        .replace(
                                                           '<p>',
                                                           '<span>'
                                                         )
@@ -602,7 +596,8 @@ const Notification = () => {
                                                     src={
                                                       GET_BASE_URL_IMAGE +
                                                       '/disneyland/images/thumbs/' +
-                                                      obj.image
+                                                      obj.image +
+                                                      dTime
                                                     }
                                                     className='card-img-top img-fluid'
                                                     alt='img'
@@ -665,10 +660,6 @@ const Notification = () => {
                                                     dangerouslySetInnerHTML={{
                                                       __html: obj.chat_msg
                                                         ?.replace(
-                                                          'mousewait.com',
-                                                          'mousewait.xyz'
-                                                        )
-                                                        .replace(
                                                           '<p>',
                                                           '<span>'
                                                         )

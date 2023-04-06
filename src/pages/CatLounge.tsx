@@ -33,7 +33,7 @@ type SearchData = {
 const CatLounge = () => {
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
-
+  const { search } = useParams();
   const { landid } = useParams();
 
   const { items, stickyItem, status, sortByTime } = useSelector(selectLounges);
@@ -68,14 +68,28 @@ const CatLounge = () => {
   const [audienceSample, setAudienceSample] = useState(items); // set campaign as default
 
   useEffect(() => {
+    if (search) {
+      searchValue = search;
+    }
     setAudienceSample((prev) => [...prev, ...items]);
   }, [items]); // set the relation between redux campaign and local state
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    /*  if (currentPage == 1) {
+      window.scrollTo(0, 0);
+    } */
     dispatch(fetchStickyLounge({}));
-    dispatch(fetchCatLounges({ landid, currentPage }));
-  }, [landid, currentPage]);
+    dispatch(
+      fetchCatLounges({
+        landid,
+        sortType,
+        LoungeId,
+        currentPage,
+        searchValue,
+        shortByTime,
+      })
+    );
+  }, [landid, currentPage, shortByTime, search]);
 
   const handelInfiniteScroll = async () => {
     // console.log("scrollHeight" + document.documentElement.scrollHeight);

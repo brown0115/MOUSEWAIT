@@ -6,7 +6,7 @@ import { Placeholder } from '../components/Placeholder';
 import { selectLounges } from '../redux/lounges/selectors';
 import midBanner from '../assets/img/mid-banner-img.png';
 import { fetchTopMousewaiter } from '../redux/lounges/slice';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 const TopMousewaiter = (props: any) => {
   const dispatch = useAppDispatch();
   const { type } = useParams();
@@ -71,7 +71,8 @@ const TopMousewaiter = (props: any) => {
                                     src={
                                       GET_BASE_URL_IMAGE +
                                       '/disneyland/images/thumbs/' +
-                                      obj.image
+                                      obj.image +
+                                      dTime
                                     }
                                     className='com-imggg'
                                     style={{

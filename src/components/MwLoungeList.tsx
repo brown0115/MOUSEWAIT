@@ -13,7 +13,7 @@ import { useForm } from 'react-hook-form';
 import userEvent from '@testing-library/user-event';
 import { fetchLounges } from '../redux/lounges/slice';
 import { postLoungeFlag } from '../redux/lounges/slice';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 type MwLoungeListPropsType = {
@@ -105,7 +105,8 @@ export const MwLoungeList: React.FC<MwLoungeListPropsType> = ({ obj }) => {
                     src={
                       GET_BASE_URL_IMAGE +
                       '/disneyland/images/thumbs/' +
-                      obj?.chat?.user?.image
+                      obj?.chat?.user?.image +
+                      dTime
                     }
                     className='img-fluid'
                     alt='{obj.user?.user_name}'

@@ -7,7 +7,7 @@ import { Placeholder } from '../components/Placeholder';
 import { CommentBox } from '../components/CommentBox';
 import { fetchLoungeDetails } from '../redux/lounges/slice';
 import { selectLounges } from '../redux/lounges/selectors';
-import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import { useForm } from 'react-hook-form';
 import midBanner from '../assets/img/mid-banner-img.png';
 import { ToggleMenu } from '../components/ToggleMenu';
@@ -296,7 +296,8 @@ return ret;
                                     src={
                                       GET_BASE_URL_IMAGE +
                                       '/disneyland/images/thumbs/' +
-                                      obj.user.image
+                                      obj.user.image +
+                                      dTime
                                     }
                                     className='img-fluid'
                                     alt={obj.user.user_name}

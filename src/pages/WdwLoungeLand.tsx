@@ -66,7 +66,16 @@ const WdwLandLounge = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchStickyLoungeWdw({}));
-    dispatch(fetchCatLoungesWdw({ landid, currentPage }));
+    dispatch(
+      fetchCatLoungesWdw({
+        landid,
+        sortType,
+        LoungeId,
+        currentPage,
+        searchValue,
+        shortByTime,
+      })
+    );
   }, [landid]);
 
   const onSubmit = (data: any) => {

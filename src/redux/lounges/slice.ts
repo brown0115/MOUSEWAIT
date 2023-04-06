@@ -133,11 +133,19 @@ export type FetchHashLoungesTypeWdw = {
 };
 export type FetchCatLoungesType = {
   landid: any;
+  sortType: SortTypeParams;
+  LoungeId: number;
   currentPage: number;
+  searchValue: string;
+  shortByTime: string;
 };
 export type FetchCatLoungesTypeWdw = {
   landid: any;
+  sortType: SortTypeParams;
+  LoungeId: number;
   currentPage: number;
+  searchValue: string;
+  shortByTime: string;
 };
 
 export type FetchStickerLoungesType = {
@@ -531,8 +539,22 @@ export const fetchCatLounges = createAsyncThunk<
 >(
   'users/fetchLoungesCat',
 
-  async ({ landid, currentPage }) => {
-    return await getCatLoungesApi({ landid, currentPage });
+  async ({
+    landid,
+    sortType,
+    LoungeId,
+    currentPage,
+    searchValue,
+    shortByTime,
+  }) => {
+    return await getCatLoungesApi({
+      landid,
+      sortType,
+      LoungeId,
+      currentPage,
+      searchValue,
+      shortByTime,
+    });
   }
 );
 export const fetchCatLoungesWdw = createAsyncThunk<
@@ -541,8 +563,22 @@ export const fetchCatLoungesWdw = createAsyncThunk<
 >(
   'users/fetchLoungesCatWdw',
 
-  async ({ landid, currentPage }) => {
-    return await getCatLoungesWdwApi({ landid, currentPage });
+  async ({
+    landid,
+    sortType,
+    LoungeId,
+    currentPage,
+    searchValue,
+    shortByTime,
+  }) => {
+    return await getCatLoungesWdwApi({
+      landid,
+      sortType,
+      LoungeId,
+      currentPage,
+      searchValue,
+      shortByTime,
+    });
   }
 );
 
