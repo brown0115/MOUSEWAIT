@@ -23,6 +23,7 @@ import 'axios-progress-bar/dist/nprogress.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
+import { CommonPostMessage } from '../components/CommonPostMessage';
 type WDWLoungeListPropsType = {
   obj: any;
 };
@@ -272,7 +273,7 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
                   : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
-              <h6>{removeTags(obj.chat_msg)}</h6>
+              <CommonPostMessage myChat={obj.chat_msg} />
             </Link>
 
             <div className='chat-icon d-flex'>

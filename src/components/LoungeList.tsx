@@ -8,6 +8,7 @@ import { useAppDispatch } from '../redux/store';
 import { LikeButton } from '../components/LikeButton';
 import { ThankButton } from '../components/ThankButton';
 import { CommentButton } from '../components/CommentButton';
+import { CommonPostMessage } from '../components/CommonPostMessage';
 import { ToggleMenu } from '../components/ToggleMenu';
 import { selectLounges } from '../redux/lounges/selectors';
 import userEvent from '@testing-library/user-event';
@@ -326,12 +327,7 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
                   : '/disneyland/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
-              <h6>{removeTags(obj.chat_msg)}</h6>
-              {/*  <h6
-                dangerouslySetInnerHTML={{
-                  __html: formatText(obj.chat_msg),
-                }}
-              /> */}
+              <CommonPostMessage myChat={obj.chat_msg} />
             </Link>
 
             <div className='chat-icon d-flex'>

@@ -20,6 +20,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TagMe from './TagMe';
 import DmMe from './DmMe';
+import { CommonPostMessage } from '../components/CommonPostMessage';
 import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 type StickyPostPropsType = {
   obj: any;
@@ -340,7 +341,8 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
                 }
               >
                 {/*      <h6>{formatText(obj.chat_msg)}</h6> */}
-                <h6>{removeTags(obj.chat_msg)}</h6>
+                {/*     <h6>{removeTags(obj.chat_msg)}</h6> */}
+                <CommonPostMessage myChat={obj.chat_msg} />
               </Link>
 
               <div className='chat-icon d-flex'>

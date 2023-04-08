@@ -10,7 +10,7 @@ export const getDisnyworldLoungesApi = async ({
   shortByTime,
 }: FetchLoungesType) => {
   const responseBody = (response: AxiosResponse) => response.data;
-  localStorage.setItem('pagename', 'Disneyworld Lounge');
+  localStorage.setItem('pagename', 'Wdw Talk');
   let sorvalue = null;
   const token = localStorage.getItem('token');
   let sortByTime =

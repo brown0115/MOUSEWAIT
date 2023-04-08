@@ -11,6 +11,7 @@ import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import { useForm } from 'react-hook-form';
 import midBanner from '../assets/img/mid-banner-img.png';
 import { ToggleMenu } from '../components/ToggleMenuDisneyWorld';
+import { CommonPostMessage } from '../components/CommonPostMessage';
 import stickerImage from '../assets/img/stickers.jpg';
 import faceBookImage from '../assets/img/face-s.jpg';
 import pinImage from '../assets/img/face-s.jpg';
@@ -237,7 +238,7 @@ const WDWLandLoungeDetail = (props: any) => {
                           </div>
 
                           <div className='card-body '>
-                            <h6>{obj.chat_msg}</h6>
+                            <CommonPostMessage myChat={obj.chat_msg} />
 
                             {commentData.map((cmt: any, index: any) => (
                               <>

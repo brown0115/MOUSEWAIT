@@ -6,6 +6,7 @@ import qs from 'qs';
 import { Placeholder } from '../components/Placeholder';
 import { LikeButton } from '../components/LikeButton';
 import { CommentButton } from '../components/CommentButton';
+import { CommonPostMessage } from '../components/CommonPostMessage';
 import {
   fetchUserLounges,
   suscribeOrUnsuscribePost,
@@ -23,6 +24,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import { ThankButton } from '../components/ThankButton';
+
 const UserLounge = () => {
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
@@ -191,27 +193,6 @@ const UserLounge = () => {
   };
   //console.log(items);
 
-  function removeTags(string: any) {
-    let newstring = string
-      .replace(/<[^>]*>/g, ' ')
-      .replace(/\s{2,}/g, ' ')
-      .trim();
-    let content = newstring?.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
-    let hashtag;
-
-    return content?.map((word: any) => {
-      if (word.startsWith('#')) {
-        hashtag = word.replace('#', '');
-        return (
-          <Link to={`/disneyland/hash/${hashtag}`}>
-            <a style={{ color: 'blue', textDecoration: 'underline' }}>{word}</a>
-          </Link>
-        );
-      } else {
-        return word;
-      }
-    });
-  }
   return (
     <>
       {userId == 'null' ? (
@@ -493,7 +474,7 @@ const UserLounge = () => {
                                         '/Mousewait'
                                   }
                                 >
-                                  <h6>{removeTags(obj.chat_msg)}</h6>
+                                  <CommonPostMessage myChat={obj.chat_msg} />
                                 </Link>
 
                                 <div className='chat-icon d-flex'>

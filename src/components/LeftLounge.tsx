@@ -106,9 +106,7 @@ const LeftLounge = (props: any) => {
             </li>
 
             <li className='nav-item' onClick={closeSideBar}>
-              <Link to='/disneyland/lands/7/Disneyland-Talk/'>
-                Disneyland Talk
-              </Link>
+              <Link to='/disneyland/lounge/'>Disneyland Talk</Link>
             </li>
 
             <li className='nav-item' onClick={closeSideBar}>
@@ -173,7 +171,7 @@ const LeftLounge = (props: any) => {
               isLoading={isLoading}
             />
 
-            <li className='nav-item' onClick={closeSideBar}>
+            <li className='nav-item desk-li' onClick={closeSideBar}>
               <div className='nav-icon'>
                 <img src={Settings} className='img-fluid' alt='img' />
               </div>
@@ -220,9 +218,9 @@ const LeftLounge = (props: any) => {
 
   return (
     <div className='leftbar'>
-      {/*    <div className='backarrow' onClick={() => backMe()}>
+      <div className='backarrow' onClick={() => backMe()}>
         <i className='fa-solid fa-chevron-left'></i>
-      </div> */}
+      </div>
       <Menu right isOpen={isOpen} onOpen={handleIsOpen} onClose={handleIsOpen}>
         <SideBarLinks closeSideBar={closeSideBar} />
       </Menu>
