@@ -94,7 +94,7 @@ const WdwLeftLounge = (props: any) => {
               {/*       <div className='nav-icon'>
                     <img src={Disney} className='img-fluid' alt='img' />
                   </div> */}
-              <Link to='/disneyworld/lands/1/Wdw-Talk/'>Wdw Talk</Link>
+              <Link to='/disneyworld/lounge'>Wdw Talk</Link>
             </li>
 
             <li className='nav-item' onClick={closeSideBar}>

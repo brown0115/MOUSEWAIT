@@ -21,6 +21,7 @@ import faceBookImage from '../assets/img/face-s.jpg';
 import pinImage from '../assets/img/face-s.jpg';
 import { postLounge } from '../redux/lounges/slice';
 import cardmImage from '../assets/img/card-m-img.png';
+import { CommonPostMessage } from '../components/CommonPostMessage';
 type FormData = {
   chat_msg: string;
 };
@@ -232,7 +233,7 @@ const TagLandLounge = () => {
                               }
                             >
                               <div className='tag-msg'>
-                                <h6>{removeTags(obj.chat_msg)}</h6>
+                                <CommonPostMessage myChat={obj.chat_msg} />
                               </div>
                             </Link>
 

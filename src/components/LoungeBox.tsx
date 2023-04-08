@@ -289,7 +289,6 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
             <a style={{ marginLeft: '15px' }} href='javascript:void(0)'>
               Post to the Lounge
             </a>
-            {/*      <img src={Settings} className='img-fluid' alt='img' /> */}
           </div>
         </li>
       ) : (

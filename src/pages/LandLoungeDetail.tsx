@@ -8,6 +8,7 @@ import { CommentBox } from '../components/CommentBox';
 import { fetchLoungeDetails } from '../redux/lounges/slice';
 import { selectLounges } from '../redux/lounges/selectors';
 import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
+import { CommonPostMessage } from '../components/CommonPostMessage';
 import { useForm } from 'react-hook-form';
 import midBanner from '../assets/img/mid-banner-img.png';
 import { ToggleMenu } from '../components/ToggleMenu';
@@ -412,7 +413,7 @@ return ret;
                           </div>
 
                           <div className='card-body '>
-                            <h6>{removeTags(obj.chat_msg)}</h6>
+                            <CommonPostMessage myChat={obj.chat_msg} />
                             {commentData?.map((cmt: any, index: any) => (
                               <>
                                 <CommentList

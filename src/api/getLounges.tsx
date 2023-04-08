@@ -26,7 +26,7 @@ export const getAllLoungesApi = async ({
   /*   var parts = window.location.href.split('/mousewaitnew/');
   var lastSegment = parts.pop() || parts.pop();
   console.log(lastSegment); */
-  localStorage.setItem('pagename', 'Disneyland Lounge');
+  localStorage.setItem('pagename', 'Disneyland Talk');
   const token = localStorage.getItem('token');
 
   let sortByTime =

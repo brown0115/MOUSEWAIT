@@ -675,7 +675,7 @@
     left: 83%;
     right: 0;
     z-index: 9999;
-    display: none;
+    /* display: none; */
   }
   .plus-show-btn .plus-show i {
     transform: translateY(2px);
@@ -1009,6 +1009,9 @@
   }
   .ReactModal__Overlay {
     z-index: 9999;
+  }
+  .desk-li {
+    margin-top: 0rem !important;
   }
 }
 
