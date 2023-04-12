@@ -23,6 +23,7 @@ import DmMe from '../components/DmMe';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
+import { LoungeName } from '../components/LoungeName';
 import { ThankButton } from '../components/ThankButton';
 
 const UserLounge = () => {
@@ -51,6 +52,8 @@ const UserLounge = () => {
   const [totMousewRank, SetTotMousewRank] = useState<any | string>(null);
   const [overRank, SetOverRank] = useState<any | string>(null);
   const [userName, SetUserName] = useState<any | string>(null);
+  const [userImage, SetUserImage] = useState<any | string>(null);
+  const [userDesc, SetUserDesc] = useState<any | string>(null);
   const [isLoading, setIsLoading] = useState<any | string>(false);
   const [myData, SetMyData] = useState<any | string>([]);
   const [suscribeUnsuscribe, SetSuscribeUnsuscribe] = useState<any | string>(
@@ -99,6 +102,8 @@ const UserLounge = () => {
         SetTotMousewRank(res.payload[0]['user'].rank);
         SetOverRank(res.payload[0]['user'].totalpoints);
         SetUserName(res.payload[0]['user'].user_name);
+        SetUserImage(res.payload[0]['user'].image);
+        SetUserDesc(res.payload[0]['user'].user_description);
         SetSuscribeUnsuscribe(
           res.payload[0]['otherdetail'][0].suscribe_or_unsuscribe
         );
@@ -229,6 +234,20 @@ const UserLounge = () => {
                 </div>
                 <ToastContainer autoClose={3000} />
                 <div className='text-head text-center'>
+                  <div className='basic-info'>
+                    <img
+                      src={
+                        GET_BASE_URL_IMAGE +
+                        '/disneyland/images/thumbs/' +
+                        userImage +
+                        dTime
+                      }
+                      className='img-fluid my-profile-image'
+                      alt=''
+                    />
+                    <h6 className='mb-2'>{userDesc}</h6>
+                  </div>
+
                   <ul className='list-group list-group-flush'>
                     <li className=''> Member Since: {memberSince}</li>
                     <li className=''> Credits Purchased: {creditPurchased}</li>
@@ -309,6 +328,19 @@ const UserLounge = () => {
                 {/*-=====mobile-view start ======-*/}
                 <div className='top-text-m text-center p-2'>
                   <div className='top-mw text-center'>
+                    <div className='basic-info'>
+                      <img
+                        src={
+                          GET_BASE_URL_IMAGE +
+                          '/disneyland/images/thumbs/' +
+                          userImage +
+                          dTime
+                        }
+                        className='img-fluid my-profile-image'
+                        alt=''
+                      />
+                      <h6 className='mb-2'>{userDesc}</h6>
+                    </div>
                     <ul className='list-group list-group-flush'>
                       <li className=''> Member Since: {memberSince}</li>
                       <li className=''>
@@ -394,7 +426,10 @@ const UserLounge = () => {
                                       {items[0]['user']?.position} Quality #5
                                     </span>
 
-                                    <p>{converDate(obj.chat_time)}</p>
+                                    <LoungeName
+                                      Time={obj.chat_time}
+                                      Roomid={obj?.chat_room_id}
+                                    />
                                   </div>
                                 </div>
 

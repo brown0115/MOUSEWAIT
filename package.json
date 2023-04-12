@@ -57,6 +57,7 @@
     "react-linkify": "^1.0.0-alpha",
     "react-loader-spinner": "^5.3.4",
     "react-mentions": "^4.4.7",
+    "react-meta-tags": "^1.0.1",
     "react-modal": "^3.15.1",
     "react-notifications-component": "^4.0.1",
     "react-paginate": "^8.1.3",

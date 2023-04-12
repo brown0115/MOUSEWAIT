@@ -9,7 +9,7 @@ export const getALlTagists = async ({
   const responseBody = (response: AxiosResponse) => response.data;
   const ddd = tagData;
   const token = localStorage.getItem('token');
-  const apiEndpoint =
+  /*   const apiEndpoint =
     GET_BASE_URL + '/backend/api/v1/tagList?chat_id=' + LoungeId;
   const { data } = await axios
     .get<Lounge[]>(`${apiEndpoint}`, {
@@ -20,4 +20,29 @@ export const getALlTagists = async ({
     .then(responseBody);
 
   return data;
+ */
+
+  const apiEndpoint =
+    GET_BASE_URL + '/backend/api/v1/tagList?chat_id=' + LoungeId;
+
+  if (tagData != null) {
+    const { data } = await axios
+      .get<Lounge[]>(`${apiEndpoint}&keytag=${tagData}`, {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      })
+      .then(responseBody);
+    return data;
+  } else {
+    const { data } = await axios
+      .get<Lounge[]>(`${apiEndpoint}`, {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      })
+      .then(responseBody);
+
+    return data;
+  }
 };

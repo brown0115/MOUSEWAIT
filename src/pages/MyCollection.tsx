@@ -56,7 +56,7 @@ const MyCollection = () => {
   const [myData, SetMyData] = useState<any | string>([]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    //window.scrollTo(0, 0);
     dispatch(fetchMyCollection({ sortType, currentPage })).then((res: any) => {
       if (res.payload == undefined) {
         SetMyData((myCollectionItem as any).store);

@@ -11,6 +11,8 @@ import { Pagination } from '../components/Pagination';
 import { fetchPizzas } from '../redux/pizzas/slice';
 import { selectPizzas } from '../redux/pizzas/selectors';
 import { selectFilters } from '../redux/filter/selectors';
+// @ts-ignore
+import MetaTags from 'react-meta-tags';
 import {
   setCategoryId,
   setSortType,
@@ -106,6 +108,23 @@ const Home = () => {
     <>
       <div className='des-bg-h'>
         {/*===== MW-banner-sec Start =======*/}
+
+        <MetaTags>
+          <title>Mousewait</title>
+          <meta
+            name='description'
+            content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. If you have plans to visit the Disneyland Resort in the future, or are an Annual Passholder, this app is an absolute must.'
+          />
+          <meta property='og:title' content='Mousewait' />
+          <meta
+            property='og:image'
+            content='https://mousewait.com/static/media/MouseWait-img.fed12113160621608cfe.png'
+          />
+          <meta
+            property='og:description'
+            content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. '
+          />
+        </MetaTags>
         <div className='MW-banner-sec'>
           <div className='container'>
             <div className='wh-home'>
