@@ -219,8 +219,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                   style={{
                     fontFamily: 'Inter',
                     fontSize: '1rm',
-                    marginLeft: '1rem',
-                    marginRight: '1rem',
+
                     fontWeight: 400,
                     fontStyle: 'normal',
                     color: '#313237',
@@ -235,7 +234,6 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                 <br />
                 <Link
                   style={{
-                    marginLeft: '1rem',
                     marginRight: '.5rem',
                     color: '#000',
                     background: 'transparent',

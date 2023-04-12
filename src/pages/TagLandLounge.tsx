@@ -21,6 +21,7 @@ import faceBookImage from '../assets/img/face-s.jpg';
 import pinImage from '../assets/img/face-s.jpg';
 import { postLounge } from '../redux/lounges/slice';
 import cardmImage from '../assets/img/card-m-img.png';
+import { LoungeName } from '../components/LoungeName';
 import { CommonPostMessage } from '../components/CommonPostMessage';
 type FormData = {
   chat_msg: string;
@@ -178,7 +179,10 @@ const TagLandLounge = () => {
                                   Quality #5
                                 </span>
 
-                                <p>{converDate(obj.chat_time)}</p>
+                                <LoungeName
+                                  Time={obj.chat_time}
+                                  Roomid={obj?.chat_room_id}
+                                />
                               </div>
                             </div>
                             <div className='icon-img'>

@@ -93,21 +93,21 @@ export const TagMe: React.FC<TagMePropsType> = ({
 
   const onSubmit = (data: any) => {
     dispatch<any>(assignTagToPost(data)).then((res: any) => {
-      if (Page == 'Lounge') {
-        dispatch(
-          fetchLounges({
-            sortType,
-            LoungeId,
-            currentPage,
-            searchValue,
-            shortByTime,
-          })
-        );
-      } else {
-        navigate('/disneyland/lounge/');
-      }
+      window.location.reload();
     });
   };
+
+  const [searchTag, setAllSearcTag] = useState<any | String>();
+  async function search(key: any) {
+    setListsOfdatas(key);
+    if (key.length > 0) {
+      let LoungeId: any = chatId;
+      let tagData: any = key;
+      dispatch(fetchAllTaglists({ tagData, LoungeId })).then((res: any) => {
+        setAllSearcTag(res.payload);
+      });
+    }
+  }
 
   const [checked, setChecked] = useState<any | string>(false);
   return (
@@ -129,8 +129,13 @@ export const TagMe: React.FC<TagMePropsType> = ({
             >
               <DialogContent>
                 <form action='' onSubmit={handleSubmit(onSubmit)}>
-                  <input type='submit' />
-
+                  <input
+                    type='text'
+                    className='inp'
+                    placeholder='Search tag'
+                    onChange={(e) => search(e.target.value)}
+                  />
+                  <input className='tag-submit' type='submit' />
                   <div className='closebutton'>
                     <div className='buttondialog'>
                       <AiOutlineCloseCircle
@@ -141,33 +146,68 @@ export const TagMe: React.FC<TagMePropsType> = ({
                   </div>
                   <DialogContentText>
                     <ul className='list-group list-group-flush'>
-                      {TagDatas &&
-                        TagDatas.map((obj: any) => (
-                          <div
-                            style={{
-                              display: 'flex',
-                              paddingLeft: '8px',
-                              paddingTop: '5px',
-                            }}
-                          >
-                            <input
-                              // onChange ={()=>checktagged(obj.id) }
-                              style={{ marginRight: '9px' }}
-                              type='checkbox'
-                              defaultChecked={
-                                obj.gettagdata != '' ? true : false
-                              }
-                              value={obj.id}
-                              {...register('checkedId')}
-                            />
-                            <li>{obj.tags_name}</li>
-                            <input
-                              type='hidden'
-                              value={chatId}
-                              {...register('chatId')}
-                            />
-                          </div>
-                        ))}
+                      {searchTag == undefined ? (
+                        <>
+                          {TagDatas &&
+                            TagDatas.map((obj: any) => (
+                              <div
+                                style={{
+                                  display: 'flex',
+                                  paddingLeft: '8px',
+                                  paddingTop: '5px',
+                                }}
+                              >
+                                <input
+                                  // onChange ={()=>checktagged(obj.id) }
+                                  style={{ marginRight: '9px' }}
+                                  type='checkbox'
+                                  defaultChecked={
+                                    obj.gettagdata != '' ? true : false
+                                  }
+                                  value={obj.id}
+                                  {...register('checkedId')}
+                                />
+                                <li>{obj.tags_name}</li>
+                                <input
+                                  type='hidden'
+                                  value={chatId}
+                                  {...register('chatId')}
+                                />
+                              </div>
+                            ))}
+                        </>
+                      ) : (
+                        <>
+                          {' '}
+                          {searchTag &&
+                            searchTag.map((obj: any) => (
+                              <div
+                                style={{
+                                  display: 'flex',
+                                  paddingLeft: '8px',
+                                  paddingTop: '5px',
+                                }}
+                              >
+                                <input
+                                  // onChange ={()=>checktagged(obj.id) }
+                                  style={{ marginRight: '9px' }}
+                                  type='checkbox'
+                                  defaultChecked={
+                                    obj.gettagdata != '' ? true : false
+                                  }
+                                  value={obj.id}
+                                  {...register('checkedId')}
+                                />
+                                <li>{obj.tags_name}</li>
+                                <input
+                                  type='hidden'
+                                  value={chatId}
+                                  {...register('chatId')}
+                                />
+                              </div>
+                            ))}
+                        </>
+                      )}
                     </ul>
                   </DialogContentText>
                 </form>

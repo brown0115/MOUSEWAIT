@@ -2526,3 +2526,31 @@ textarea {
 .my-link {
   display: none;
 }
+.basic-info h6 {
+  color: #313237;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 !important;
+  line-height: 22px;
+  font-size: 1.1rem;
+}
+.my-profile-image {
+  width: 100px;
+  border-radius: 50%;
+  height: 100px;
+}
+
+.tag-submit {
+  background: #9bb8ef;
+  color: #fff;
+  border: 0;
+  border-radius: 0.4rem;
+}
+
+.comm-bo .small-c {
+  margin-right: 1rem;
+}
+.my-dis {
+  margin-left: 10px;
+  text-decoration: underline;
+}

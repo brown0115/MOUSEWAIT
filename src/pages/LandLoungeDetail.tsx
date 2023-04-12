@@ -258,6 +258,25 @@ return ret;
     });
   }
 
+  /*   useEffect(() => {
+    const keyDownHandler = (event) => {
+      console.log('User pressed: ', event.key);
+
+      if (event.key === 'Enter') {
+        event.preventDefault();
+
+     
+        handleSubmit();
+      }
+    };
+
+    document.addEventListener('keydown', keyDownHandler);
+
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler);
+    };
+  }, []); */
+
   return (
     <>
       <div className='mid-main'>

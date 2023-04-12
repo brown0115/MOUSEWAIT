@@ -9,6 +9,7 @@ import { LikeButton } from '../components/LikeButton';
 import { ThankButton } from '../components/ThankButton';
 import { CommentButton } from '../components/CommentButton';
 import { CommonPostMessage } from '../components/CommonPostMessage';
+import { LoungeName } from '../components/LoungeName';
 import { ToggleMenu } from '../components/ToggleMenu';
 import { selectLounges } from '../redux/lounges/selectors';
 import userEvent from '@testing-library/user-event';
@@ -206,8 +207,7 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
               <span>
                 {obj.user?.totalpoints} #{obj.user?.position} Quality #5
               </span>
-
-              <p>{converDate(obj.chat_time)}</p>
+              <LoungeName Time={obj.chat_time} Roomid={obj?.chat_room_id} />
             </div>
           </div>
 
