@@ -19,6 +19,7 @@ import {
 } from '../redux/lounges/slice';
 // @ts-ignore
 import { loadProgressBar } from 'axios-progress-bar';
+import { WdwLoungeName } from '../components/WdwLoungeName';
 import 'axios-progress-bar/dist/nprogress.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -178,7 +179,7 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
                 {obj.user?.totalpoints} #{obj.user?.position} Quality #5
               </span>
 
-              <p>{converDate(obj.chat_time)}</p>
+              <WdwLoungeName Time={obj.chat_time} Roomid={obj?.chat_room_id} />
             </div>
           </div>
 

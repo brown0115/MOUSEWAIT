@@ -15,6 +15,7 @@ import { ToggleMenu } from '../components/ToggleMenu';
 import stickerImage from '../assets/img/stickers.jpg';
 import faceBookImage from '../assets/img/face-s.jpg';
 import pinImage from '../assets/img/face-s.jpg';
+import { LoungeName } from '../components/LoungeName';
 import { Helmet } from 'react-helmet';
 
 import {
@@ -337,7 +338,10 @@ return ret;
                                   {obj.user.position} #{obj.user.totalpoints}{' '}
                                   Quality #{obj.user.rank}
                                 </span>
-                                <p>{converDate(obj.chat_time)}</p>
+                                <LoungeName
+                                  Time={obj.chat_time}
+                                  Roomid={obj?.chat_room_id}
+                                />
                               </div>
                             </div>
 

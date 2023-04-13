@@ -1,6 +1,5 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import JoditEditor from 'jodit-react';
 import { LoungeHeader } from './LoungeHeader';
 import { MobileLoungeHeader } from './MobileLoungeHeader';
 import { useForm } from 'react-hook-form';
@@ -77,11 +76,11 @@ function MwAdvanceEditor() {
                   onSubmit={handleSubmit(onSubmit)}
                 >
                   <div className='advance_editor'>
-                    <JoditEditor
+                    {/*      <JoditEditor
                       ref={editor}
                       value={getData.chat_msg}
                       onChange={onEditorStateChange}
-                    />
+                    /> */}
                   </div>
 
                   <div className='mid-container'>

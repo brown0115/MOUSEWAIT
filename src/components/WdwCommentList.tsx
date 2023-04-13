@@ -295,6 +295,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                       reply_id={''}
                       commnet_userid={cmt.commentuser.user_id}
                       type={'C'}
+                      page={'WL'}
                     />
                   </>
 
