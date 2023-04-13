@@ -15,6 +15,7 @@ import { CommonPostMessage } from '../components/CommonPostMessage';
 import stickerImage from '../assets/img/stickers.jpg';
 import faceBookImage from '../assets/img/face-s.jpg';
 import pinImage from '../assets/img/face-s.jpg';
+import { WdwLoungeName } from '../components/WdwLoungeName';
 import {
   postThankyou,
   postBookMark,
@@ -101,6 +102,8 @@ const WDWLandLoungeDetail = (props: any) => {
             reset();
             //console.log(res.payload.data.commentdata);
             let data: any = null;
+            let up = document.getElementsByClassName('ql-editor');
+            up[0].innerHTML = '';
             dispatch<any>(addSticker(data));
             SetCommentData(res.payload.data.commentdata);
 
@@ -184,7 +187,10 @@ const WDWLandLoungeDetail = (props: any) => {
                                   {obj.user.position} #{obj.user.totalpoints}{' '}
                                   Quality #{obj.user.rank}
                                 </span>
-                                <p>{converDate(obj.chat_time)}</p>
+                                <WdwLoungeName
+                                  Time={obj.chat_time}
+                                  Roomid={obj?.chat_room_id}
+                                />
                               </div>
                             </div>
 

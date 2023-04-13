@@ -16,6 +16,7 @@ type LikeCommentReplyPropsType = {
   reply_id: any;
   commnet_userid: number;
   type: string;
+  page: string;
 };
 
 export const LikeCommentReply: React.FC<LikeCommentReplyPropsType> = ({
@@ -25,6 +26,7 @@ export const LikeCommentReply: React.FC<LikeCommentReplyPropsType> = ({
   reply_id,
   commnet_userid,
   type,
+  page,
 }) => {
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
@@ -38,7 +40,8 @@ export const LikeCommentReply: React.FC<LikeCommentReplyPropsType> = ({
     comment_id: any,
     reply_id: any,
     commnet_userid: any,
-    type: any
+    type: any,
+    page: any
   ) => {
     /*     console.log(chat_id);
     console.log(countvalue);
@@ -57,6 +60,7 @@ export const LikeCommentReply: React.FC<LikeCommentReplyPropsType> = ({
           reply_id,
           commnet_userid,
           type,
+          page,
         })
       ).then((res: any) => {
         if (res.payload.data == 'Like registered') {
@@ -75,7 +79,15 @@ export const LikeCommentReply: React.FC<LikeCommentReplyPropsType> = ({
       <span
         style={{ cursor: 'pointer' }}
         onClick={() =>
-          onLike(chat_id, likeCount, comment_id, reply_id, commnet_userid, type)
+          onLike(
+            chat_id,
+            likeCount,
+            comment_id,
+            reply_id,
+            commnet_userid,
+            type,
+            page
+          )
         }
       >
         LIKE ({likeCount})

@@ -182,7 +182,7 @@ const Notification = () => {
   const closeDmBox = () => {
     setDmBox(false);
   };
-  console.log(myNotificationItem);
+  //console.log(myNotificationItem);
   return (
     <>
       <div className='mid-main'>
@@ -295,7 +295,13 @@ const Notification = () => {
                                                   {obj.rank} # {obj.position}
                                                 </span>
                                                 <br />
-                                                <span className='not-1 item-lisst'>
+                                                <span
+                                                  className='not-1 item-lisst'
+                                                  style={{
+                                                    marginLeft: '1rem',
+                                                    cursor: 'pointer',
+                                                  }}
+                                                >
                                                   <span
                                                     style={{
                                                       cursor: 'pointer',
@@ -394,28 +400,30 @@ const Notification = () => {
                                                         obj.user_id
                                                       }
                                                       type={'C'}
+                                                      page={'DL'}
                                                     />
                                                   </>
                                                   <span
-                                                    style={{
-                                                      cursor: 'pointer',
-                                                    }}
                                                     onClick={() =>
                                                       showReplyIcon(obj.chat_id)
                                                     }
                                                   >
                                                     Reply
                                                   </span>
-                                                  {loginuser ==
-                                                  obj.user?.user_id ? (
+                                                  {loginuser == obj?.user_id ? (
                                                     <>
-                                                      <span>Edit</span>
+                                                      {/*  <span>Edit</span> */}
                                                       <span
-                                                        onClick={() =>
-                                                          onRemove(
-                                                            obj.chat_reply_id
+                                                        onClick={(e) => {
+                                                          if (
+                                                            window.confirm(
+                                                              'Are you sure?'
+                                                            )
                                                           )
-                                                        }
+                                                            onRemove(
+                                                              obj.chat_reply_id
+                                                            );
+                                                        }}
                                                       >
                                                         Delete
                                                       </span>
@@ -428,6 +436,7 @@ const Notification = () => {
                                             </div>
                                           </div>
                                         </div>
+
                                         {/*      <CommentReply
                                           replyData={
                                             obj.comments[0].commentsreply
@@ -452,6 +461,13 @@ const Notification = () => {
                                         </div>
                                       </div>
                                     </div>
+                                    <CommentReply
+                                      replyData={[]}
+                                      replyShow={showReply}
+                                      chatId={obj.chat_id}
+                                      chat_reply_id={obj.chat_reply_id}
+                                      stickerData={stickerItems}
+                                    />
                                   </div>
                                 </div>
                               )}
@@ -632,7 +648,7 @@ const Notification = () => {
                                                     }}
                                                     to={`/disneyland/user/${obj.user_id}/mypost`}
                                                   >
-                                                    {obj.user?.user_name}
+                                                    {obj?.user_name}
                                                   </Link>
                                                   <br />
                                                   <span

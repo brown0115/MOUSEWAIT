@@ -290,6 +290,7 @@ export type LikeCommentReply = {
   reply_id: any;
   commnet_userid: any;
   type: any;
+  page: any;
 };
 export type WhoLikeCommentReply = {
   id: any;
@@ -1391,38 +1392,62 @@ export const postLoungeCommentWdw = createAsyncThunk<
 
 export const likeCommentReply = createAsyncThunk<Lounge[], LikeCommentReply>(
   'users/likeCommentReply',
-  async ({ chat_id, comment_id, reply_id, commnet_userid, type }, thunkAPI) => {
-    /*     console.log(chat_id);
-    console.log(comment_id);
-    console.log(reply_id);
-    console.log(commnet_userid);
-    console.log(type);
-    return false; */
+  async (
+    { chat_id, comment_id, reply_id, commnet_userid, type, page },
+    thunkAPI
+  ) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(
-        GET_BASE_URL + '/backend/api/v1/likeCommentAndReply',
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            chat_id,
-            comment_id,
-            reply_id,
-            commnet_userid,
-            type,
-          }),
-        }
-      );
-      let data = await response.json();
+      if (page == 'DL') {
+        const response = await fetch(
+          GET_BASE_URL + '/backend/api/v1/likeCommentAndReply',
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              chat_id,
+              comment_id,
+              reply_id,
+              commnet_userid,
+              type,
+            }),
+          }
+        );
+        let data = await response.json();
 
-      if (data.data) {
-        return { ...data };
+        if (data.data) {
+          return { ...data };
+        } else {
+          return thunkAPI.rejectWithValue(data.error);
+        }
       } else {
-        return thunkAPI.rejectWithValue(data.error);
+        const response = await fetch(
+          GET_BASE_URL + '/backend/api/v1/likeCommentAndReplyWdw',
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              chat_id,
+              comment_id,
+              reply_id,
+              commnet_userid,
+              type,
+            }),
+          }
+        );
+        let data = await response.json();
+
+        if (data.data) {
+          return { ...data };
+        } else {
+          return thunkAPI.rejectWithValue(data.error);
+        }
       }
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e.response.data);

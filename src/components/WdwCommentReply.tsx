@@ -15,7 +15,7 @@ import { selectLounges } from '../redux/lounges/selectors';
 
 import imageicon from '../assets/img/chart-icon1.png';
 import emojiicon from '../assets/img/chart-icon2.png';
-
+import { RichTextEditor } from '@mantine/rte';
 import imageiconh from '../assets/img/chart-icon1h.png';
 import emojiiconh from '../assets/img/chart-icon2h.png';
 import { EditBox } from '../components/EditBox';
@@ -74,6 +74,8 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
           reset();
           SetCommentData(res.payload.data.replydata);
           let data: any = null;
+          let up = document.getElementsByClassName('ql-editor');
+          up[0].innerHTML = '';
           dispatch<any>(addSticker(data));
           SetStickerSelection(null);
           // dispatch(fetchLoungeDetails({ LoungeId }))
@@ -93,13 +95,24 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
   const modules = {
     toolbar: false,
   };
-  useEffect(() => {
+  /*   useEffect(() => {
     register('chat_reply_msg', { required: true, minLength: 11 });
   }, [register]);
 
   const onEditorStateChange = (editorState: any) => {
     setValue('chat_reply_msg', editorState);
-  };
+  }; */
+
+  const [text, setText] = useState('');
+
+  useEffect(() => {
+    register('chat_reply_msg', { required: true, minLength: 11 });
+    setValue('chat_reply_msg', text);
+  }, [text]);
+
+  useEffect(() => {
+    setText(text.replace(/<p>|<\/p>/, '') + stickerPickItems);
+  }, [stickerPickItems]);
 
   const openSticker = () => {
     SetShowSticker(!showSticker);
@@ -133,18 +146,19 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
     SetEditBox(!editbox);
   };
 
-  const likeCommnetAndReply = (
+  /* const likeCommnetAndReply = (
     chat_id: any,
     comment_id: any,
     reply_id: any,
     commnet_userid: any,
-    type: any
+    type: any,
+    page: any
   ) => {
     if (token == null) {
       navigate('/disneyland/login');
     } else {
       console.log('like');
-      //dispatch(fetchMyTradeRequest({ sortType, currentPage }));
+
       dispatch<any>(
         likeCommentReply({
           chat_id,
@@ -152,13 +166,14 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
           reply_id,
           commnet_userid,
           type,
+          page,
         })
       ).then((res: any) => {
         window.location.reload();
         Notify(toast(res.payload.data.error));
       });
     }
-  };
+  }; */
 
   return (
     <>
@@ -171,13 +186,21 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
           >
             <div className='com-box-main'>
               <div className='com-box d-flex'>
-                <ReactQuill
+                {/*        <ReactQuill
                   theme='snow'
                   className='form-control'
                   modules={modules}
                   onChange={onEditorStateChange}
                   value={stickerSelection}
                   placeholder='Type your comment here...'
+                /> */}
+
+                <RichTextEditor
+                  id='rte'
+                  placeholder='Type your reply..'
+                  value={text}
+                  onChange={setText}
+                  controls={[[]]}
                 />
 
                 <input
@@ -277,7 +300,6 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
                   }}
                   dangerouslySetInnerHTML={{
                     __html: rep.chat_reply_msg
-                      .replace('mousewait.com', 'mousewait.xyz')
                       .replace('<p>', '<span>')
                       .replace('</p>', '</spam>')
                       .replace('<br>', ''),
@@ -328,6 +350,7 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
                       reply_id={rep.id}
                       commnet_userid={rep.replyuser.user_id}
                       type={'R'}
+                      page={'WL'}
                     />
                   </>
 

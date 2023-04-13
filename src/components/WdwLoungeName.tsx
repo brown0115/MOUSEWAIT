@@ -1,10 +1,13 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
-type LoungeNamePropsType = {
+type WdwLoungeNamePropsType = {
   Time: any;
   Roomid: any;
 };
 
-export const LoungeName: React.FC<LoungeNamePropsType> = ({ Time, Roomid }) => {
+export const WdwLoungeName: React.FC<WdwLoungeNamePropsType> = ({
+  Time,
+  Roomid,
+}) => {
   function converDate(datevalue: any) {
     const date = new Date(datevalue);
     const formattedDate = date.toLocaleDateString('en-US', {
@@ -21,19 +24,19 @@ export const LoungeName: React.FC<LoungeNamePropsType> = ({ Time, Roomid }) => {
       <div className='d-flex'>
         {' '}
         <p>{converDate(Time)}</p>{' '}
-        {Roomid == '7' ? (
+        {Roomid == '1' ? (
           <p className='my-dis'>
-            <Link to={`/disneyland/lounge`}>Disneyland-Talk</Link>
+            <Link to={`/disneyworld/lounge`}>Wdw-Talk</Link>
           </p>
-        ) : Roomid == '1' ? (
+        ) : Roomid == '2' ? (
           <p className='my-dis'>
-            <Link to={`/disneyland/lands/1/Disneyland-Real-Time/`}>
+            <Link to={`/disneyworld/lands/2/Wdw-Real-Time/`}>
               Disneyland-Real-Time
             </Link>
           </p>
-        ) : Roomid == null || Roomid == '0' ? (
+        ) : Roomid == null || Roomid != '1' || Roomid != '2' ? (
           <p className='my-dis'>
-            <Link to={`/disneyland/lands/0/the-hub/`}>The-Hub</Link>
+            <Link to={`/disneyworld/lands/0/the-hub/`}>The-Hub</Link>
           </p>
         ) : (
           <></>

@@ -193,6 +193,165 @@
 |-------------------------------------------------------------------|
 */
 @media screen and (min-width: 576px) and (max-width: 767.98px) {
+  .profile-container {
+    /* border: 2px solid red; */
+    margin-left: 12%;
+  }
+  .col-form-label-heading {
+    width: 100%;
+    font-weight: bolder;
+    margin-left: 13%;
+  }
+  .inputField {
+    display: block;
+  }
+  .form {
+    padding-right: 8px;
+    padding-left: 6px;
+  }
+  .profile_img {
+    margin-left: -50px;
+  }
+  .image-container {
+    flex-direction: column;
+    /* border: 2px solid red; */
+    width: 0;
+    margin-left: 30px;
+  }
+
+  .profile-btn-setting {
+    /* border: 2px solid green; */
+
+    margin-top: 20px;
+    /* border: 2px solid red; */
+    margin-left: -28px;
+  }
+  .taglistcard {
+    position: absolute;
+    right: 3%;
+    top: 30%;
+    background: #f5f5f5;
+    width: 15rem;
+    height: 35rem;
+    overflow-y: scroll;
+  }
+
+  .sidebar {
+    width: 280px;
+    min-height: 100vh;
+    box-shadow: 0px 4px 8px rgb(0 0 0 / 16%);
+    background-color: #fff;
+    position: fixed;
+    top: 55px;
+    height: 100vh;
+    overflow: scroll;
+    right: -100%;
+    z-index: 1100;
+    transition: 0.5s;
+  }
+  .sidebar.active {
+    right: 0;
+  }
+  .sd-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+  }
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: 0.5s;
+    opacity: 0;
+    visibility: hidden;
+  }
+  .sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .right-side-bar {
+    position: relative;
+    padding-bottom: 10px;
+    text-align: center;
+    /*    z-index: 999; */
+    /*  right: 55px;
+    top: 15px; */
+  }
+
+  .right-side-bar i {
+    background: #9bb8ef;
+    padding: 2px 5px;
+    border: 2px solid #00000078;
+    border-radius: 0.2rem;
+    color: #f24647;
+    font-size: 14px;
+  }
+  .bm-burger-button {
+    display: block;
+    position: fixed;
+    right: 8px;
+    top: 28px;
+  }
+  .mid-sec .banner-img {
+    position: fixed;
+    top: 0;
+  }
+  .mobile-right-bar {
+    display: block;
+  }
+  .msgs {
+    padding-top: 4rem;
+  }
+  .mobile-card-sec {
+    margin-top: 3.4rem;
+  }
+  .profile_footer {
+    display: inline-flex;
+  }
+  .top-trend {
+    padding-top: 4rem;
+    margin-bottom: -0.5rem;
+  }
+  .trending-t {
+    color: #000;
+  }
+  .mid-sec .Search-bar {
+    width: 90%;
+  }
+  .mwstore-mid-bg {
+    padding: 1rem 0rem 0rem 0rem;
+  }
+  .name-form {
+    padding: 1rem;
+  }
+  .mw-profile {
+    margin-top: 4rem !important;
+  }
+  .right-side-bar i {
+    display: inline-block;
+  }
+  .backarrow {
+    display: block;
+  }
+  .backarrow i {
+    position: fixed;
+    top: 1.8rem;
+    left: 3rem;
+    font-size: 1.4rem;
+    color: rgba(22, 23, 34, 0.3);
+    z-index: 9;
+  }
+  .ReactModal__Overlay {
+    z-index: 9999;
+  }
+  .desk-li {
+    margin-top: 0rem !important;
+  }
   .Mouse-Wait-sec .navbar-toggler .bar {
     box-shadow: 3px 3px 0 0 #ddd;
     color: #d0cfcf;
@@ -201,6 +360,7 @@
   }
   .bm-burger-button {
     display: block;
+    right: 2rem;
   }
   .listcheck {
     display: none;
@@ -259,8 +419,10 @@
     grid-template-columns: 1fr;
   }
   .leftbar {
-    display: none;
+    display: block;
+    margin-top: 0;
   }
+
   .mid-sec {
     padding: 0rem 0.3rem;
     margin: 0rem -30px;
@@ -345,10 +507,10 @@
     z-index: 9999;
   }
   .leftbar .navbar-collapse {
-    background: #eadcf5;
-    margin-left: -12rem;
+    background: #99b5e6;
+    margin-left: -13rem;
     padding-left: 1rem;
-    margin-top: 4.5rem;
+    margin-top: 0.9rem;
     margin-right: -0.8rem;
   }
   .leftbar .navbar .navbar-nav .nav-item {

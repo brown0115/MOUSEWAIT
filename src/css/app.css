@@ -2554,3 +2554,6 @@ textarea {
   margin-left: 10px;
   text-decoration: underline;
 }
+.my-dis a {
+  color: #000;
+}
