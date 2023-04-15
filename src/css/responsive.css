@@ -857,7 +857,7 @@
   }
 
   .leftbar .navbar .navbar-nav .last-li {
-    margin-top: 0rem;
+    margin-top: 1rem !important;
   }
   .leftbar .navbar-collapse {
     padding-top: 1rem;
@@ -930,7 +930,7 @@
 
   .leftbar .navbar-collapse {
     background: #99b5e6;
-    margin-left: -14rem;
+    margin-left: -16rem;
     padding-left: 1rem;
     margin-top: -0.5rem;
     margin-right: -0.8rem;
@@ -940,6 +940,30 @@
     right: -18px;
     top: 8px;
     z-index: 9999;
+  }
+  .leftbar .navbar .navbar-nav .nav-item a {
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    text-decoration: none;
+
+    /*   font-family: 'SF Compact Display'; */
+  }
+  .a-sortime {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    color: #363c47 !important;
+  }
+  .nav-item .nr a {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    color: #363c47 !important;
   }
   .dropdown {
     right: 0;
@@ -1012,6 +1036,18 @@
   .chat-input .btn {
     min-height: 0px;
     margin-right: 0px;
+  }
+  .nav-item .new-nr {
+    color: #363c47 !important;
+  }
+  .leftbar .navbar .navbar-nav .last-li a {
+    color: #363c47 !important;
+  }
+  .leftbar .navbar .navbar-nav .new-color-login-out a {
+    color: #363c47 !important;
+  }
+  .leftbar .navbar .navbar-nav .new-color-login-out .nav-icon img {
+    filter: brightness(0%);
   }
 }
 

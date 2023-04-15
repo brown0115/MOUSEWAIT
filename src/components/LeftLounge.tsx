@@ -145,14 +145,18 @@ const LeftLounge = (props: any) => {
               </li>
             )}
             <li className='nav-item' onClick={closeSideBar}>
-              <Link to='disneyworld/lounge'>WDW Talk</Link>
+              <Link className='new-nr' to='disneyworld/lounge'>
+                WDW Talk
+              </Link>
             </li>
 
             {loungeland == 'true' ? (
-              <li className='nav-item' onClick={closeSideBar}>
+              <li className='nav-item ' onClick={closeSideBar}>
                 <Link
                   className={
-                    location.pathname == '/loungeland/' ? 'selectmenu' : ''
+                    location.pathname == '/loungeland/'
+                      ? 'selectmenu new-nr'
+                      : 'new-nr'
                   }
                   to='/loungeland/'
                 >
@@ -175,7 +179,9 @@ const LeftLounge = (props: any) => {
               <div className='nav-icon'>
                 <img src={Settings} className='img-fluid' alt='img' />
               </div>
-              <Link to='disneyland/setting'>Settings</Link>
+              <Link className='new-nr' to='disneyland/setting'>
+                Settings
+              </Link>
             </li>
 
             {token != null && loginfrom == 'true' ? (
