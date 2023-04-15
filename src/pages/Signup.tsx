@@ -10,6 +10,9 @@ import { signupUser, usersSlice, clearState } from '../redux/users/slice';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createNull } from 'typescript';
+// @ts-ignore
+import MetaTags from 'react-meta-tags';
+
 type FormData = {
   username: string;
   email: string;
@@ -115,6 +118,22 @@ const Signup = () => {
   return (
     <>
       <>
+      <MetaTags>
+          <title>Signup  - Join The Magic! </title>
+          <meta
+            name='description'
+            content="Signup  - Join The Magic! "
+          />
+          <meta property='og:title' content='Signup  - Join The Magic!' />
+          
+          <meta
+            property='og:image'
+            content='https://mousewait.com/static/media/image.png'
+          />
+          <meta
+            property='og:description'
+            content='Signup  - Join The Magic!'/>
+        </MetaTags>
         <div className='des-bg'>
           {/*===== MW-banner-sec Start =======*/}
           <section className='MW-signpage'>
@@ -240,11 +259,12 @@ const Signup = () => {
                       Let's Go!
                     </button>
                     <h6>
-                      <Link to=''></Link>
-                      Forgot Username/Password?
+                    <Link to='/forgotpassword'>
+                          Forgot Username/Password?
+                        </Link>
                     </h6>
                     <h6>
-                      <Link to='/disneyland/login'>
+                      <Link to='/disneyland/login/'>
                         Login to Existing Account
                       </Link>
                     </h6>

@@ -205,7 +205,7 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
                 )}
               </h6>
               <span>
-                {obj.user?.totalpoints} #{obj.user?.position} Quality #5
+                {obj.user?.totalpoints} #{obj.user?.position} Quality #5{obj?.chat_room_id}
               </span>
               <LoungeName Time={obj.chat_time} Roomid={obj?.chat_room_id} />
             </div>

@@ -8,6 +8,10 @@ import blackLogo from '../assets/img/black.log.png';
 import { usersSelector } from '../redux/users/selectors';
 import { signinUser, usersSlice, clearState } from '../redux/users/slice';
 import { createNull } from 'typescript';
+// @ts-ignore
+import MetaTags from 'react-meta-tags';
+
+
 type FormData = {
   password: string;
   username: string;
@@ -60,6 +64,23 @@ const Login = () => {
   return (
     <>
       <>
+
+      <MetaTags>
+          <title>Login - Mousewait </title>
+          <meta
+            name='description'
+            content="login in the mouswait for access lounge "
+          />
+          <meta property='og:title' content='Login - Mousewait' />
+          
+          <meta
+            property='og:image'
+            content='https://mousewait.com/static/media/image.png'
+          />
+          <meta
+            property='og:description'
+            content='Login in the mousewait'/>
+        </MetaTags>
         <div className='des-bg'>
           {/*===== MW-banner-sec Start =======*/}
           <section className='MW-signpage'>

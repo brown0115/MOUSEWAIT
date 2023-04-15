@@ -14,6 +14,8 @@ import { useLocation } from 'react-router';
 import { useEffect, useRef, useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import RightLoungeBest from '../components/WdwRightLoungeBest';
+import { LoungeBox } from '../components/WdwLoungeBox';
+import { useForm } from 'react-hook-form';
 const WdwLeftLounge = (props: any) => {
   let navigate = useNavigate();
 
@@ -30,6 +32,14 @@ const WdwLeftLounge = (props: any) => {
   localStorage.getItem('token');
 
   const { items, totalPrice, totalCaunt } = useSelector(selectCart);
+  const [isLoading, setIsLoading] = useState<any | string>(false);
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormData>();
 
   // Set cart items to localStorage after second rerender
   useEffect(() => {
@@ -84,52 +94,30 @@ const WdwLeftLounge = (props: any) => {
               <i onClick={ToggleSidebar} className='fa fa-plus plus-i'></i>
             </div>
             <li className='nav-item' onClick={closeSideBar}>
-              {/*      <div className='nav-icon'>
-                <img src={star} className='img-fluid' alt='img' />
-              </div> */}
               <Link to='disneyland/notification'>Notifications</Link>
             </li>
 
             <li className='nav-item' onClick={closeSideBar}>
-              {/*       <div className='nav-icon'>
-                    <img src={Disney} className='img-fluid' alt='img' />
-                  </div> */}
               <Link to='/disneyworld/lounge'>Wdw Talk</Link>
             </li>
 
             <li className='nav-item' onClick={closeSideBar}>
-              {/*           <div className='nav-icon'>
-                    <img src={Real} className='img-fluid' alt='img' />
-                  </div> */}
               <Link to='/disneyworld/lands/2/Wdw-Real-Time/'>
                 Wdw Real-Time
               </Link>
             </li>
             <li className='nav-item' onClick={closeSideBar}>
-              {/*    <div className='nav-icon'>
-                    <img src={Hub} className='img-fluid' alt='img' />
-                  </div> */}
               <Link to='/disneyworld/lands/0/the-hub/'>The Hub</Link>
             </li>
 
             <li className='nav-item new-color' onClick={closeSideBar}>
-              {/*   <div className='nav-icon'>
-                <img src={MyMW} className='img-fluid' alt='img' />
-              </div> */}
-              {/*      <Link to={`/disneyland/user/myfav`} onClick={closeSideBar}> */}
               <Link to={`/disneyland/user/${userId}/mypost`}>MyMW</Link>
             </li>
 
             <li className='nav-item new-color' onClick={closeSideBar}>
-              {/* <div className='nav-icon'>
-                <img src={mws} className='img-fluid' alt='img' />
-              </div> */}
               <Link to='disneyland/mystore'>Sticker Store</Link>
             </li>
             <li className='nav-item new-color' onClick={closeSideBar}>
-              {/*      <div className='nav-icon'>
-                    <img src={Best} className='img-fluid' alt='img' />
-                  </div> */}
               <Link to='/disneyworld/d/L/most-viewed/'>Best of the Day</Link>
             </li>
 
@@ -149,18 +137,18 @@ const WdwLeftLounge = (props: any) => {
               </li>
             )}
             <li className='nav-item' onClick={closeSideBar}>
-              {/*               <div className='nav-icon'>
-                <img src={WDW} className='img-fluid' alt='img' />
-              </div> */}
-
-              <Link to='disneyland/lounge'>Disneyland</Link>
+              <Link className='new-nr' to='disneyland/lounge'>
+                Disneyland
+              </Link>
             </li>
 
             {loungeland == 'true' ? (
               <li className='nav-item' onClick={closeSideBar}>
                 <Link
                   className={
-                    location.pathname == '/loungeland/' ? 'selectmenu' : ''
+                    location.pathname == '/loungeland/'
+                      ? 'selectmenu new-nr'
+                      : 'new-nr'
                   }
                   to='/loungeland/'
                 >
@@ -171,11 +159,21 @@ const WdwLeftLounge = (props: any) => {
               <li></li>
             )}
 
-            <li className='nav-item last-li' onClick={closeSideBar}>
+            <LoungeBox
+              onSubmit={''}
+              register={register}
+              handleSubmit={handleSubmit}
+              setValue={setValue}
+              isLoading={isLoading}
+            />
+
+            <li className='nav-item' onClick={closeSideBar}>
               <div className='nav-icon'>
                 <img src={Settings} className='img-fluid' alt='img' />
               </div>
-              <Link to='disneyland/setting'>Settings</Link>
+              <Link className='new-nr' to='disneyland/setting'>
+                Settings
+              </Link>
             </li>
 
             {token != null && loginfrom == 'true' ? (
