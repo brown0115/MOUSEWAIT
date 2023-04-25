@@ -227,7 +227,11 @@ const LeftLounge = (props: any) => {
       <div className='backarrow' onClick={() => backMe()}>
         <i className='fa-solid fa-chevron-left'></i>
       </div>
-      <Menu right isOpen={isOpen} onOpen={handleIsOpen} onClose={handleIsOpen}>
+      <Menu 
+          right 
+          isOpen={isOpen} 
+          onOpen={handleIsOpen} 
+          onClose={handleIsOpen}>
         <SideBarLinks closeSideBar={closeSideBar} />
       </Menu>
 
