@@ -469,11 +469,11 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                       </div>
                       <span
                         onClick={(e) => {
-                          if (
-                            window.confirm(
-                              'This will remove post image Are you sure?'
-                            )
-                          )
+                          // if (
+                          //   window.confirm(
+                          //     'This will remove post image Are you sure?'
+                          //   )
+                          // )
                             removePostImage(LoungeId);
                         }}
                       >
@@ -505,11 +505,11 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                       </div>
                       <span
                         onClick={(e) => {
-                          if (
-                            window.confirm(
-                              'Do you want to Lock/Unlock this post?'
-                            )
-                          )
+                          // if (
+                          //   window.confirm(
+                          //     'Do you want to Lock/Unlock this post?'
+                          //   )
+                          // )
                             isLock(e, LoungeId, islock);
                         }}
                       >
@@ -523,11 +523,11 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                       </div>
                       <span
                         onClick={(e) => {
-                          if (
-                            window.confirm(
-                              'Do you want to Stick/Unstick this post?'
-                            )
-                          )
+                          // if (
+                          //   window.confirm(
+                          //     'Do you want to Stick/Unstick this post?'
+                          //   )
+                          // )
                             postStick(getStick, LoungeId);
                         }}
                       >
@@ -540,11 +540,11 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                       </div>
                       <span
                         onClick={(e) => {
-                          if (
-                            window.confirm(
-                              'Do you want to to make this post Bump?'
-                            )
-                          )
+                          // if (
+                          //   window.confirm(
+                          //     'Do you want to to make this post Bump?'
+                          //   )
+                          // )
                             isBump(e, LoungeId, 'up');
                         }}
                       >
@@ -557,11 +557,11 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                       </div>
                       <span
                         onClick={(e) => {
-                          if (
-                            window.confirm(
-                              'Do you want to to make this post Never Bump?'
-                            )
-                          )
+                          // if (
+                          //   window.confirm(
+                          //     'Do you want to to make this post Never Bump?'
+                          //   )
+                          // )
                             isBump(e, LoungeId, 'never');
                         }}
                       >
@@ -574,11 +574,11 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                       </div>
                       <span
                         onClick={(e) => {
-                          if (
-                            window.confirm(
-                              'Do you want to to make this post  Bump?'
-                            )
-                          )
+                          // if (
+                          //   window.confirm(
+                          //     'Do you want to to make this post  Bump?'
+                          //   )
+                          // )
                             isBump(e, LoungeId, 'auto');
                         }}
                       >
@@ -591,11 +591,11 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                       </div>
                       <span
                         onClick={(e) => {
-                          if (
-                            window.confirm(
-                              'Do you want to to make this post Bump?'
-                            )
-                          )
+                          // if (
+                          //   window.confirm(
+                          //     'Do you want to to make this post Bump?'
+                          //   )
+                          // )
                             isBump(e, LoungeId, 'down');
                         }}
                       >
