@@ -224,13 +224,8 @@ const UserLounge = () => {
             <div className='container'>
               <div className='mid-sec'>
                 <div className='banner-img'>
-                  <Link to='/disneyland/lounge/'>
-                    <img
-                      src={midBanner}
-                      className='img-fluid'
-                      alt='mid-banner-img'
-                    />
-                  </Link>
+                  <img src={midBanner} className='img-fluid' alt='mid-banner-img' />
+                  <Link to='/disneyland/lounge/' className="banner-logo"></Link>
                 </div>
                 <ToastContainer autoClose={3000} />
                 <div className='text-head text-center'>
