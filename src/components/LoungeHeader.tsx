@@ -26,9 +26,8 @@ export const LoungeHeader = () => {
   return (
     <>
       <div className='banner-img'>
-        <Link to='/disneyland/lounge/'>
-          <img src={midBanner} className='img-fluid' alt='mid-banner-img' />
-        </Link>
+        <img src={midBanner} className='img-fluid' alt='mid-banner-img' />
+        <Link to='/disneyland/lounge/' className="banner-logo"></Link>
       </div>
       <div className='top-trend'>
         <div className='text-head-trend text-center'>
