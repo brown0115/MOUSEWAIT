@@ -151,9 +151,7 @@ const Setting = () => {
                   className='img-fluid'
                   alt='mid-banner-img'
               />
-              <Link to='/disneyland/lounge/' className="banner-logo">
-                logo
-              </Link>
+              <Link to='/disneyland/lounge/' className="banner-logo"></Link>
             </div>
 
             {status === 'loading'

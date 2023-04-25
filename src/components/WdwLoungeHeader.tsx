@@ -27,9 +27,7 @@ export const LoungeHeader = () => {
     <>
       <div className='banner-img'>
         <img src={midBanner} className='img-fluid' alt='mid-banner-img' />
-        <Link to='/disneyworld/lounge/'  className="banner-logo">
-          logo
-        </Link>
+        <Link to='/disneyworld/lounge/'  className="banner-logo"></Link>
       </div>
       <div className='top-trend'>
         <div className='text-head-trend text-center'>
