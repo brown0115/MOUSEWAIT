@@ -214,6 +214,15 @@ textarea {
 /* ========================= */
 /**=========MouseWait Header CSS Start ==========**/
 
+.banner-img{
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.banner-img .banner-logo{
+  position: absolute;
+  bottom: 0;
+}
 .Mouse-Wait-sec {
   /*   background-color: #d8e5fc; */
   /* background: #f8f8f8c7; */
