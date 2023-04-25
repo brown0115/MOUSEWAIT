@@ -136,7 +136,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
         ? SetBookMark(true)
         : SetBookMark(false);
 
-      Notify(toast(res.payload.data[0].message));
+      // Notify(toast(res.payload.data[0].message));
       //res.payload[0].isbookmark?.status ==1 && SetBookMark(true)
     });
   };
@@ -150,7 +150,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
         : SetThankYou(false);
       SetThankData([]);
       SetThankData(res.payload.data[0].thankdata);
-      Notify(toast(res.payload.data[0].message));
+      // Notify(toast(res.payload.data[0].message));
 
       // res.payload[0].isthankyou?.status ==1 && SetThankYou(true)
     });
@@ -189,7 +189,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
     dispatch<any>(removeUserLounge({ ban_chat_id, RemoveType })).then(
       (res: any) => {
         window.location.reload();
-        Notify(toast(res.payload.data));
+        // Notify(toast(res.payload.data));
       }
     );
   };
@@ -202,7 +202,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
       dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
         // console.log(res)
         window.location.reload();
-        Notify(toast('Post Updated Successfully'));
+        // Notify(toast('Post Updated Successfully'));
       });
     } else {
       dispatch<any>(postLoungeFlag(data)).then((res: any) => {
@@ -278,7 +278,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
       } else {
         setIsLock('Lock');
       }
-      Notify(toast(res.payload.data));
+      // Notify(toast(res.payload.data));
     });
   };
 
