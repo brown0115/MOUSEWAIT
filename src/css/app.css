@@ -1813,6 +1813,10 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 
 .three-dots i {
   cursor: pointer;
+  font-size: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
 }
 
 a {
