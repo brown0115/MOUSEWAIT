@@ -29,7 +29,7 @@ import Emoji from 'react-emoji-render';
 type LoungeListPropsType = {
   obj: any;
 };
-
+// land real-time
 export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
   const dispatch = useAppDispatch();
   const {

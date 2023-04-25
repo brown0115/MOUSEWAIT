@@ -589,9 +589,6 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 .leftbar {
   margin-top: 14rem;
 }
-.leftbar .navbar {
-  position: fixed;
-}
 .leftbar .navbar .navbar-nav .nav-item {
   display: flex;
   margin: 0rem 0rem 0.7rem 1rem;
@@ -1834,6 +1831,10 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 
 .three-dots i {
   cursor: pointer;
+  font-size: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
 }
 
 a {
@@ -1942,8 +1943,8 @@ a:hover {
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: absolute;
-  width: 25px;
-  height: 22px;
+  width: 30px;
+  height: 25px;
   right: 0px;
   top: 20px;
   /*  border-radius: 0.2rem;
@@ -1956,9 +1957,8 @@ a:hover {
 .bm-burger-bars {
   /*  background: #373a47; */
   background: rgba(22, 23, 34, 0.3);
-  height: 10% !important;
-  width: 21px !important;
-  left: 4px !important;
+  height: 20% !important;
+  width: 30px !important;
   margin-top: 1px;
 }
 
@@ -1985,33 +1985,33 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
-  width: 0 !important;
+  width: 250px !important;
 }
-.bm-cross-button {
-  display: none !important;
-}
+/*.bm-cross-button {*/
+/*  display: none !important;*/
+/*}*/
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a47;
-  padding: 2.5em 1.5em 0;
+  background: #f3f3f3;
+  padding: 2em 1em 0;
   font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-  fill: #373a47;
-}
+/*.bm-morph-shape {*/
+/*  fill: #373a47;*/
+/*}*/
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: #b8b7ad;
-  padding: 0.8em;
+  /*color: #b8b7ad;*/
+  /*padding: 0.8em;*/
 }
 
 /* Individual item */
 .bm-item {
-  display: inline-block;
+  /*display: inline-block;*/
 }
 
 /* Styling of overlay */

@@ -340,10 +340,11 @@
   }
   .backarrow i {
     position: fixed;
-    top: 1.8rem;
+    top: 28px;
     left: 3rem;
-    font-size: 1.4rem;
-    color: rgba(22, 23, 34, 0.3);
+    font-size: 2rem;
+    color: rgba(22, 23, 34, 0.4);
+    width: 30px;
     z-index: 9;
   }
   .ReactModal__Overlay {
@@ -506,13 +507,7 @@
     top: 19px;
     z-index: 9999;
   }
-  .leftbar .navbar-collapse {
-    background: #99b5e6;
-    margin-left: -13rem;
-    padding-left: 1rem;
-    margin-top: 0.9rem;
-    margin-right: -0.8rem;
-  }
+
   .leftbar .navbar .navbar-nav .nav-item {
     display: flex;
     margin: 1rem 0rem 0.5rem 1rem;
@@ -557,6 +552,63 @@
 |-------------------------------------------------------------------|
 */
 @media screen and (min-width: 0px) and (max-width: 575.98px) {
+
+  .backarrow {
+    display: block;
+  }
+  .backarrow i {
+    position: fixed;
+    top: 18px;
+    left: 1rem;
+    font-size: 1.8rem;
+    color: rgba(22, 23, 34, 0.4);
+    width: 28px;
+    z-index: 9;
+  }
+  
+  .right-side-bar {
+    position: relative;
+    padding-bottom: 10px;
+    text-align: center;
+    /*    z-index: 999; */
+    /*  right: 55px;
+    top: 15px; */
+  }
+
+  .right-side-bar i {
+    background: #9bb8ef;
+    padding: 2px 5px;
+    border: 2px solid #00000078;
+    border-radius: 0.2rem;
+    color: #f24647;
+    font-size: 14px;
+  }
+  
+  .right-side-bar i {
+    display: inline-block;
+  }
+
+  .mobile-right-bar {
+    display: block;
+  }
+
+  .sidebar {
+    width: 280px;
+    min-height: 100vh;
+    box-shadow: 0px 4px 8px rgb(0 0 0 / 16%);
+    background-color: #fff;
+    position: fixed;
+    top: 55px;
+    height: 100vh;
+    overflow: scroll;
+    right: -100%;
+    z-index: 1100;
+    transition: 0.5s;
+  }
+  .sidebar.active {
+    right: 0;
+  }
+  
   .Mouse-Wait-sec .navbar-toggler .bar {
     box-shadow: 3px 3px 0 0 #ddd;
     color: #d0cfcf;
@@ -647,15 +699,7 @@
     position: relative;
     margin-top: 0px !important;
   }
-  .leftbar .navbar {
-    position: absolute;
-    z-index: 2;
-  }
-  .leftbar .navbar-collapse {
-    background: #eadcf5;
-    margin-left: -1rem;
-    padding-left: 1rem;
-  }
+
   .leftbar .navbar-toggler span i {
     color: #000;
     border: 2px solid #000;
@@ -918,9 +962,6 @@
     margin-bottom: 0.5rem;
   }
 
-  .leftbar .navbar {
-    right: 0px;
-  }
   .leftbar .navbar-toggler span i {
     color: #00000078;
     border: 2px solid #00000078;
@@ -928,13 +969,7 @@
     font-size: 0.8rem;
   }
 
-  .leftbar .navbar-collapse {
-    background: #99b5e6;
-    margin-left: -16rem;
-    padding-left: 1rem;
-    margin-top: -0.5rem;
-    margin-right: -0.8rem;
-  }
+
   .leftbar .navbar .navbar-toggler {
     position: absolute;
     right: -18px;
@@ -1095,22 +1130,6 @@
     overflow-y: scroll;
   }
 
-  .sidebar {
-    width: 280px;
-    min-height: 100vh;
-    box-shadow: 0px 4px 8px rgb(0 0 0 / 16%);
-    background-color: #fff;
-    position: fixed;
-    top: 55px;
-    height: 100vh;
-    overflow: scroll;
-    right: -100%;
-    z-index: 1100;
-    transition: 0.5s;
-  }
-  .sidebar.active {
-    right: 0;
-  }
   .sd-header {
     display: flex;
     align-items: center;
@@ -1132,37 +1151,17 @@
     opacity: 1;
     visibility: visible;
   }
-
-  .right-side-bar {
-    position: relative;
-    padding-bottom: 10px;
-    text-align: center;
-    /*    z-index: 999; */
-    /*  right: 55px;
-    top: 15px; */
-  }
-
-  .right-side-bar i {
-    background: #9bb8ef;
-    padding: 2px 5px;
-    border: 2px solid #00000078;
-    border-radius: 0.2rem;
-    color: #f24647;
-    font-size: 14px;
-  }
   .bm-burger-button {
     display: block;
     position: fixed;
-    right: 8px;
-    top: 16px;
+    right: 20px;
+    top: 14px;
   }
   .mid-sec .banner-img {
     position: fixed;
     top: 0;
   }
-  .mobile-right-bar {
-    display: block;
-  }
+
   .msgs {
     padding-top: 4rem;
   }
@@ -1190,20 +1189,6 @@
   }
   .mw-profile {
     margin-top: 4rem !important;
-  }
-  .right-side-bar i {
-    display: inline-block;
-  }
-  .backarrow {
-    display: block;
-  }
-  .backarrow i {
-    position: fixed;
-    top: 1.2rem;
-    left: 0.8rem;
-    font-size: 1.4rem;
-    color: rgba(22, 23, 34, 0.3);
-    z-index: 9;
   }
   .ReactModal__Overlay {
     z-index: 9999;
