@@ -185,9 +185,10 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
   const onRemove = (ban_chat_id: any, RemoveType: string) => {
     /*    console.log(RemoveType);
     console.log(ban_chat_id); */
+    // 2. remove action
     dispatch<any>(removeUserLounge({ ban_chat_id, RemoveType })).then(
       (res: any) => {
-        window.location.reload();
+        // window.location.reload();
         Notify(toast(res.payload.data));
       }
     );
@@ -345,7 +346,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                       </div>
                       <span
                         onClick={(e) => {
-                          if (window.confirm('Are You Sure?'))
+                          // if (window.confirm('Are You Sure?'))
                             onRemove(LoungeId, 'D');
                         }}
                       >
@@ -435,10 +436,11 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                   )}
                 </li>
 
+                {/* 1. --> remove title*/}
                 <li
                   className='nav-item'
                   onClick={(e) => {
-                    if (window.confirm('Are You Sure?'))
+                    // if (window.confirm('Are You Sure?'))
                       onRemove(LoungeId, 'P');
                   }}
                 >
