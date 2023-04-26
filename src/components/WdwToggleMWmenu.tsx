@@ -355,7 +355,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                       </div>
                       <span
                         onClick={(e) => {
-                          // if (window.confirm('Are You Sure?'))
+                          if (window.confirm('Are You Sure?'))
                             onRemove(LoungeId, 'D');
                         }}
                       >
@@ -448,7 +448,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                 <li
                   className='nav-item'
                   onClick={(e) => {
-                    // if (window.confirm('Are You Sure?'))
+                    if (window.confirm('Are You Sure?'))
                       onRemove(LoungeId, 'P');
                   }}
                 >
@@ -469,11 +469,11 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                       </div>
                       <span
                         onClick={(e) => {
-                          // if (
-                          //   window.confirm(
-                          //     'This will remove post image Are you sure?'
-                          //   )
-                          // )
+                          if (
+                            window.confirm(
+                              'This will remove post image Are you sure?'
+                            )
+                          )
                             removePostImage(LoungeId);
                         }}
                       >
