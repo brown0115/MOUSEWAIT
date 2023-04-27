@@ -218,6 +218,7 @@ textarea {
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .banner-img .banner-logo{
   position: absolute;
