@@ -531,21 +531,31 @@ return ret;
                           </div>
                         </div>
                       ))}
-                  <div className='search-comm-sec'>
-                    <CommentBox
-                      chatId={LoungeId}
-                      onSubmit={onSubmit}
-                      register={register}
-                      handleSubmit={handleSubmit}
-                      stickerData={stickerItems}
-                      setValue={setValue}
-                    />
-                  </div>
+               
                 </div>
               )}
             </div>
           </div>
         </div>
+
+        <div className='search-comm-sec des-main-sec fixed-bottom-bar' >
+            <div></div>
+            <div >
+              <div className='commentOutside'>
+                <CommentBox
+                  
+                  chatId={LoungeId}
+                  onSubmit={onSubmit}
+                  register={register}
+                  handleSubmit={handleSubmit}
+                  stickerData={stickerItems}
+                  setValue={setValue}
+                />
+              </div>
+            </div>
+            <div></div>
+          </div> 
+
       </div>
     </>
   );
