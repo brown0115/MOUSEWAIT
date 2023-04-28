@@ -41,10 +41,10 @@ export const ThankButton: React.FC<ThankButtonPropsType> = ({
     <>
       <ToastContainer autoClose={3000} />
       <span className='d-flex'>
-        <div className='co-icon' onClick={() => onThank(chatId, likeCount)}>
+        <div className='co-icon widerIcon' onClick={() => onThank(chatId, likeCount)}>
           <img src={myicon} className='img-fluid' />
         </div>
-        {likeCount}
+        <span className='widerIconText'>{likeCount}</span>
       </span>
     </>
   );
