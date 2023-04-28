@@ -2591,3 +2591,37 @@ textarea {
 .widerIconText{
   padding: 5px 0px;
 }
+
+.fixed-bottom-bar {
+  position: fixed;
+  bottom: -6px;
+  right: 0px;
+  display: grid;
+  grid-template-columns: 180px 4fr 1fr !important;
+  padding: 30px;
+  z-index: 9999;
+}
+
+.commentOutside{
+  width: 70%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .fixed-bottom-bar {
+    position: fixed;
+    bottom: -16px;
+    right: 0px;
+    display: grid;
+    grid-template-columns: 10px 1fr 10px !important;
+    padding: 20px;
+    z-index: 9999;
+    background: #e5e5e5;
+  }
+
+  .commentOutside{
+    width: 100%;
+    margin: auto;
+  }
+}
+
