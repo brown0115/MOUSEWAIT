@@ -90,9 +90,9 @@ const WdwLeftLounge = (props: any) => {
       <nav className='navbar navbar-expand-md'>
         <div className={`collapse navbar-collapse ${isOpen == true && 'show'}`}>
           <ul className='navbar-nav flex-column p-0 m-0'>
-            <div className='right-side-bar'>
+            {/* <div className='right-side-bar'>
               <i onClick={ToggleSidebar} className='fa fa-plus plus-i'></i>
-            </div>
+            </div> */}
             <li className='nav-item' onClick={closeSideBar}>
               <Link to='disneyland/notification'>Notifications</Link>
             </li>
@@ -211,8 +211,9 @@ const WdwLeftLounge = (props: any) => {
   };
   return (
     <div className='leftbar'>
-      <Menu right isOpen={isOpen} onOpen={handleIsOpen} onClose={handleIsOpen}>
-        <SideBarLinks closeSideBar={closeSideBar} />
+      <Menu id="mobileHamburger"  right isOpen={isOpen} onOpen={handleIsOpen} onClose={handleIsOpen}>
+        <SideBarLinks className='newMenuPadding' closeSideBar={closeSideBar} />
+        <RightLoungeBest />
       </Menu>
 
       <div className='listcheck'>
