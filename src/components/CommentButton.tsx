@@ -12,10 +12,10 @@ export const CommentButton: React.FC<CommentButtonPropsType> = ({
   return (
     <>
       <span className='d-flex'>
-        <div className='co-icon'>
+        <div className='co-icon widerIcon'>
           <img src={commentV} className='img-fluid' />
         </div>
-        {commentcount}
+        <span className='widerIconText'>{commentcount}</span>
       </span>
     </>
   );

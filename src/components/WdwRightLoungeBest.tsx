@@ -58,9 +58,9 @@ const RightLoungeBest = () => {
       {/*-mw-right-c section start -*/}
       <div className='mw-right-c rounded mt-3'>
         <div className='card-body'>
-          <h6 className='donate-h'>
+          {/* <h6 className='donate-h'>
             Your Donations Help Us Make MouseWait Better!
-          </h6>
+          </h6> */}
 
           {/* <div className='don-c text-center paypal-cc'>
             <form action='https://www.paypal.com/cgi-bin/webscr' method='post'>
