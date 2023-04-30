@@ -211,29 +211,31 @@ const WdwLeftLounge = (props: any) => {
   };
   return (
     <div className='leftbar'>
-      <Menu id="mobileHamburger"  right isOpen={isOpen} onOpen={handleIsOpen} onClose={handleIsOpen}>
-        <SideBarLinks className='newMenuPadding' closeSideBar={closeSideBar} />
-        <RightLoungeBest />
-      </Menu>
+      <div className='leftbarContainer'>
+        <Menu id="mobileHamburger"  right isOpen={isOpen} onOpen={handleIsOpen} onClose={handleIsOpen}>
+          <SideBarLinks className='newMenuPadding' closeSideBar={closeSideBar} />
+          <RightLoungeBest />
+        </Menu>
 
-      <div className='listcheck'>
-        <SideBarLinks closeSideBar={closeSideBar} />
-      </div>
-
-      <>
-        <div className='container-fluid mobile-right-bar'>
-          <div
-            className={`sidebar ${open == true ? 'active' : ''}`}
-            onClick={ToggleSidebar}
-          >
-            <RightLoungeBest />
-          </div>
-          <div
-            className={`sidebar-overlay ${open == true ? 'active' : ''}`}
-            onClick={ToggleSidebar}
-          ></div>
+        <div className='listcheck'>
+          <SideBarLinks closeSideBar={closeSideBar} />
         </div>
-      </>
+
+        <>
+          <div className='container-fluid mobile-right-bar'>
+            <div
+              className={`sidebar ${open == true ? 'active' : ''}`}
+              onClick={ToggleSidebar}
+            >
+              <RightLoungeBest />
+            </div>
+            <div
+              className={`sidebar-overlay ${open == true ? 'active' : ''}`}
+              onClick={ToggleSidebar}
+            ></div>
+          </div>
+        </>
+      </div>
     </div>
   );
 };
