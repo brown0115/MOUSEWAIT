@@ -2623,5 +2623,13 @@ textarea {
     width: 100%;
     margin: auto;
   }
+
+  .com-box-main .post-sec {
+    background: #fff;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    height: 100px;
+    overflow-y: auto;
+  }
 }
 
