@@ -994,6 +994,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   border-radius: 0.3rem;
   padding: 0.5rem;
 }
+
 /*===mid-post-sec start ==*/
 .card-post {
   width: 100%;
@@ -2058,6 +2059,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 .ql-editor p {
   display: flex !important;
+  flex-direction: column;
 }
 
 .item-lisst span {
@@ -2631,11 +2633,8 @@ textarea {
     margin: auto;
   }
 
-  .com-box-main .post-sec {
-    background: #fff;
-    border-radius: 0.3rem;
-    padding: 0.5rem;
-    height: 100px;
+  .com-box-main > .post-sec {
+    height: 200px;
     overflow-y: auto;
   }
 }
