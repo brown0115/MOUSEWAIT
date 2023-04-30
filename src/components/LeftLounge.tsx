@@ -221,38 +221,40 @@ const LeftLounge = (props: any) => {
 
   return (
     <div className='leftbar'>
-      <div className='backarrow' onClick={() => backMe()}>
-        <i className='fa-solid fa-chevron-left'></i>
-      </div>
-      <Menu 
-          id="mobileHamburger"
-          right 
-          isOpen={isOpen} 
-          onOpen={handleIsOpen} 
-          onClose={handleIsOpen}
-          >
-        <SideBarLinks className='newMenuPadding' closeSideBar={closeSideBar} />
-        <RightLoungeBest />
-      </Menu>
-      
-      <div className='listcheck'>
-        <SideBarLinks closeSideBar={closeSideBar} />
-      </div>
-
-      <>
-        <div className='container-fluid mobile-right-bar'>
-          <div
-            className={`sidebar ${open == true ? 'active' : ''}`}
-            onClick={ToggleSidebar}
-          >
-            <RightLoungeBest />
-          </div>
-          <div
-            className={`sidebar-overlay ${open == true ? 'active' : ''}`}
-            onClick={ToggleSidebar}
-          ></div>
+      <div className='leftbarContainer'>
+        <div className='backarrow' onClick={() => backMe()}>
+          <i className='fa-solid fa-chevron-left'></i>
         </div>
-      </>
+        <Menu 
+            id="mobileHamburger"
+            right 
+            isOpen={isOpen} 
+            onOpen={handleIsOpen} 
+            onClose={handleIsOpen}
+            >
+          <SideBarLinks className='newMenuPadding' closeSideBar={closeSideBar} />
+          <RightLoungeBest />
+        </Menu>
+        
+        <div className='listcheck'>
+          <SideBarLinks closeSideBar={closeSideBar} />
+        </div>
+
+        <>
+          <div className='container-fluid mobile-right-bar'>
+            <div
+              className={`sidebar ${open == true ? 'active' : ''}`}
+              onClick={ToggleSidebar}
+            >
+              <RightLoungeBest />
+            </div>
+            <div
+              className={`sidebar-overlay ${open == true ? 'active' : ''}`}
+              onClick={ToggleSidebar}
+            ></div>
+          </div>
+        </>
+      </div>
     </div>
   );
 };

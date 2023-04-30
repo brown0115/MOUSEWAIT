@@ -590,6 +590,12 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 .leftbar {
   margin-top: 14rem;
 }
+
+.leftbar .leftbarContainer {
+  position: fixed;
+  width: 180px;
+}
+
 .leftbar .navbar .navbar-nav .nav-item {
   display: flex;
   margin: 0rem 0rem 0.7rem 1rem;
@@ -2606,6 +2612,7 @@ textarea {
   width: 70%;
   margin: auto;
 }
+
 
 @media only screen and (max-width: 768px) {
   .fixed-bottom-bar {
