@@ -222,20 +222,6 @@ const LeftLounge = (props: any) => {
   return (
     <div className='leftbar'>
       <div className='leftbarContainer'>
-        <div className='backarrow' onClick={() => backMe()}>
-          <i className='fa-solid fa-chevron-left'></i>
-        </div>
-        <Menu 
-            id="mobileHamburger"
-            right 
-            isOpen={isOpen} 
-            onOpen={handleIsOpen} 
-            onClose={handleIsOpen}
-            >
-          <SideBarLinks className='newMenuPadding' closeSideBar={closeSideBar} />
-          <RightLoungeBest />
-        </Menu>
-        
         <div className='listcheck'>
           <SideBarLinks closeSideBar={closeSideBar} />
         </div>
@@ -254,6 +240,22 @@ const LeftLounge = (props: any) => {
             ></div>
           </div>
         </>
+      </div>
+
+      <div>
+        <div className='backarrow' onClick={() => backMe()}>
+          <i className='fa-solid fa-chevron-left'></i>
+        </div>
+        <Menu 
+            id="mobileHamburger"
+            right 
+            isOpen={isOpen} 
+            onOpen={handleIsOpen} 
+            onClose={handleIsOpen}
+            >
+          <SideBarLinks className='newMenuPadding' closeSideBar={closeSideBar} />
+          <RightLoungeBest />
+        </Menu>
       </div>
     </div>
   );
