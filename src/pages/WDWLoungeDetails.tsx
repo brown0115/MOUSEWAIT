@@ -96,7 +96,7 @@ const WDWLandLoungeDetail = (props: any) => {
   }
   
   function getWords(str: any) {
-    const result = str.split(/\s+/).slice(0, 5).join(' ');
+    const result = str.split("\.").slice(0, 1).join(' ');
     return result;
   }
 
