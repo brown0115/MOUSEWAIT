@@ -1564,6 +1564,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   font-weight: 400;
   font-size: 1rem;
   line-height: 20px;
+  margin-top: 7px;
 }
 
 .plus-show-btn {
@@ -2047,15 +2048,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 .mantine-RichTextEditor-root {
   width: 100%;
-  padding: 8px;
+  padding: 8px 0px 8px 8px;
   border-radius: 1.625rem;
-  height: 55px;
+  /* height: 55px; */
 }
 .ql-snow .ql-editor img {
   display: inline !important;
+  width: fit-content;
 }
 .ql-editor {
-  padding: 5px 0px !important;
+  padding: 5px 0px 0px 5px !important;
 }
 .ql-editor p {
   display: flex !important;

@@ -203,7 +203,7 @@ const WDWLandLoungeDetail = (props: any) => {
                             <>
                               <Helmet>
                                 <title property='og:title'>
-                                MouseWait Disneyworld - {getWords(obj.chat_msg)}
+                                {getWords(obj.chat_msg)} - Disneyworld Lounge
                                 </title>
                                 <meta
                                   property='og:description'

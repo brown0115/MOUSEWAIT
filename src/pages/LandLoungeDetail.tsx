@@ -347,7 +347,7 @@ return ret;
                             <>
                               <Helmet>
                                 <title property='og:title'>
-                                MouseWait Disneyland - {getWords(obj.chat_msg)}
+                                {getWords(obj.chat_msg)} - Disneyland Lounge
                                 </title>
                                 <meta
                                   property='og:description'
