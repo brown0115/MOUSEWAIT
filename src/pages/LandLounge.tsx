@@ -164,21 +164,21 @@ const LandLounge = () => {
   return (
     <>
      <MetaTags>
-          <title>Dinsney Land Lounge</title>
-          <meta
-            name='description'
-            content=""
-          />
-          <meta property='og:title' content='Mousewait' />
-          <meta
-            property='og:image'
-            content='https://mousewait.com/static/media/MouseWait-img.fed12113160621608cfe.png'
-          />
-          <meta
-            property='og:description'
-            content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. '
-          />
-        </MetaTags>
+        <title>MouseWait Disneyland Lounge</title>
+        <meta
+          name='description'
+          content=""
+        />
+        <meta property='og:title' content='Mousewait' />
+        <meta
+          property='og:image'
+          content='https://mousewait.com/static/media/MouseWait-img.fed12113160621608cfe.png'
+        />
+        <meta
+          property='og:description'
+          content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. '
+        />
+      </MetaTags>
       <div className='mid-main'>
         <div className='container'>
           <div className='mid-sec'>

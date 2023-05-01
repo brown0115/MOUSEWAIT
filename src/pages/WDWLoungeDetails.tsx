@@ -29,6 +29,7 @@ import {
 import cardmImage from '../assets/img/card-m-img.png';
 
 import { CommentList } from '../components/WdwCommentList';
+import { Helmet } from 'react-helmet';
 
 type FormData = {
   chat_msg: string;
@@ -92,6 +93,11 @@ const WDWLandLoungeDetail = (props: any) => {
       year: 'numeric',
     });
     return formattedDate;
+  }
+  
+  function getWords(str: any) {
+    const result = str.split(/\s+/).slice(0, 5).join(' ');
+    return result;
   }
 
   const onSubmit = (data: any) => {
@@ -193,6 +199,47 @@ const WDWLandLoungeDetail = (props: any) => {
                                 />
                               </div>
                             </div>
+
+                            <>
+                              <Helmet>
+                                <title property='og:title'>
+                                MouseWait Disneyworld - {getWords(obj.chat_msg)}
+                                </title>
+                                <meta
+                                  property='og:description'
+                                  content={obj.chat_msg}
+                                  name='description'
+                                />
+                                <meta
+                                  name='keywords'
+                                  content={getWords(obj.chat_msg)}
+                                />
+                                <meta
+                                  property='fb:app_id'
+                                  content='152066798153435'
+                                />
+                                <meta property='og:type' content='website' />
+                                <meta
+                                  property='og:site_name'
+                                  content='MouseWait'
+                                />
+                                {/* <meta
+                                  property='og:image'
+                                  content={
+                                    GET_BASE_URL_IMAGE +
+                                    '/disneyland/chat_images/' +
+                                    obj.chat_img
+                                  }
+                                />
+                                <meta
+                                  property='og:url'
+                                  content={
+                                    GET_BASE_URL_IMAGE +
+                                    `/disneyland/lands-talk/${obj.chat_id}/${obj.chat_msg}`
+                                  }
+                                /> */}
+                              </Helmet>
+                            </>
 
                             <div>
                               <ToggleMenu
