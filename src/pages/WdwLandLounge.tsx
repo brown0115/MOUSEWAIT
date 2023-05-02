@@ -144,10 +144,6 @@ const WdwLandLounge = () => {
     <>
       <MetaTags>
         <title>MouseWait Disneyworld Lounge</title>
-        <meta
-          name='description'
-          content=""
-        />
         <meta property='og:title' content='Mousewait' />
         <meta
           property='og:image'

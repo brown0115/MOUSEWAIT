@@ -165,19 +165,6 @@ const LandLounge = () => {
     <>
      <MetaTags>
         <title>MouseWait Disneyland Lounge</title>
-        <meta
-          name="description"
-          content="Easy-to-use online tool to quickly encrypt or decrypt text with a password."
-        />
-        <meta property="og:title" content="MouseWait" />
-        <meta
-          property="og:description"
-          content="Easy-to-use online tool to quickly encrypt or decrypt text with a password."
-        />
-        {/* <meta
-          name='description'
-          content=""
-        />
         <meta property='og:title' content='Mousewait' />
         <meta
           property='og:image'
@@ -186,7 +173,7 @@ const LandLounge = () => {
         <meta
           property='og:description'
           content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. '
-        /> */}
+        />
       </MetaTags>
       <div className='mid-main'>
         <div className='container'>

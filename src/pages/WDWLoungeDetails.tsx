@@ -223,7 +223,7 @@ const WDWLandLoungeDetail = (props: any) => {
                                   property='og:site_name'
                                   content='MouseWait'
                                 />
-                                {/* <meta
+                                <meta
                                   property='og:image'
                                   content={
                                     GET_BASE_URL_IMAGE +
@@ -237,7 +237,7 @@ const WDWLandLoungeDetail = (props: any) => {
                                     GET_BASE_URL_IMAGE +
                                     `/disneyland/lands-talk/${obj.chat_id}/${obj.chat_msg}`
                                   }
-                                /> */}
+                                />
                               </Helmet>
                             </>
 
