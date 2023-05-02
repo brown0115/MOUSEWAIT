@@ -18,6 +18,7 @@ function Tab(props: any) {
   const onAddSticker = (data: any) => {
     dispatch<any>(addSticker(data));
   };
+
   return (
     <div className={`tab-content`}>
       <div className='tab-pane fade active show'>
