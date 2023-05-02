@@ -171,6 +171,7 @@ p {
 html * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth !important;
 }
 a:hover {
   text-decoration: none;
@@ -589,6 +590,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 /*======== leftbar css start ======*/
 .leftbar {
   margin-top: 14rem;
+  z-index: 99999;
 }
 
 .leftbar .leftbarContainer {
@@ -630,10 +632,12 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 } */
 /*======== leftbar css end ======*/
 /*======== mid-sec css start ======*/
+
 .mid-sec {
   background-color: #e5e5e5;
   height: auto;
   min-height: 100vh;
+  margin-bottom: 130px !important;
 }
 .mid-sec .banner-img img {
   width: 100%;
@@ -993,6 +997,11 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   background: #fff;
   border-radius: 0.3rem;
   padding: 0.5rem;
+}
+
+.com-box-main > .post-sec {
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 /*===mid-post-sec start ==*/
@@ -2050,7 +2059,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
   width: 100%;
   padding: 8px 0px 8px 8px;
   border-radius: 1.625rem;
-  /* height: 55px; */
+  height: 55px;
+  overflow-y: auto;
 }
 .ql-snow .ql-editor img {
   display: inline !important;
@@ -2490,9 +2500,9 @@ textarea {
 }
 .ql-editor p {
   width: auto;
-  height: 38px;
-  overflow-y: scroll;
-  padding: 0px 75px 0px 10px !important;
+  /* height: 38px; */
+  /* overflow-y: scroll; */
+  padding: 0px 15px 0px 10px !important;
   color: #313237;
   font-family: 'Inter';
   font-style: normal;
@@ -2618,6 +2628,7 @@ textarea {
 }
 
 
+
 @media only screen and (max-width: 768px) {
   .fixed-bottom-bar {
     position: fixed;
@@ -2630,6 +2641,10 @@ textarea {
     background: #e5e5e5;
   }
 
+  .mid-sec {
+    margin-bottom: 110px !important;
+  }
+
   .commentOutside{
     width: 100%;
     margin: auto;
@@ -2639,5 +2654,6 @@ textarea {
     height: 200px;
     overflow-y: auto;
   }
+
 }
 

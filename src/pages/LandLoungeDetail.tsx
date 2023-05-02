@@ -39,9 +39,12 @@ type FormData = {
 const LandLoungeDetail = (props: any) => {
   const dispatch = useAppDispatch();
   const { LoungeId, url } = useParams();
-  const { itemDetail, status, stickerItems, commentDataList } =
+  const { itemDetail, status, stickerItems, commentDataList, myStoreItem } =
     useSelector(selectLounges);
 
+  useEffect(() => {
+    console.log("sticker1 => ", myStoreItem)
+  });
   const {
     register,
     setValue,
@@ -349,7 +352,19 @@ return ret;
                                 <title property='og:title'>
                                 {getWords(obj.chat_msg)} - Disneyland Lounge
                                 </title>
+                                
                                 <meta
+                                  name="description"
+                                  content="Easy-to-use online tool to quickly encrypt or decrypt text with a password."
+                                />
+                                <meta property="og:title" content="MouseWait" />
+                                <meta
+                                  property="og:description"
+                                  content="Easy-to-use online tool to quickly encrypt or decrypt text with a password."
+                                />
+                              </Helmet>
+                                
+                                {/* <meta
                                   property='og:description'
                                   content={obj.chat_msg}
                                   name='description'
@@ -381,8 +396,7 @@ return ret;
                                     GET_BASE_URL_IMAGE +
                                     `/disneyland/lands-talk/${obj.chat_id}/${obj.chat_msg}`
                                   }
-                                />
-                              </Helmet>
+                                /> */}
                             </>
 
                             <div>

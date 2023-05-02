@@ -50,10 +50,16 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
   useEffect(() => {
     register('chat_msg', { required: true, minLength: 11 });
     setValue('chat_msg', text);
+    let up = document.getElementsByClassName('mantine-RichTextEditor-root');
+    up[0].scrollTop = up[0].scrollHeight;
+    console.log("scroll: ", up[0].scrollHeight)
   }, [text]);
 
   useEffect(() => {
     setText(text.replace(/<p>|<\/p>/, '') + stickerPickItems);
+    let up = document.getElementsByClassName('mantine-RichTextEditor-root');
+    up[0].scrollTop = up[0].scrollHeight;
+    console.log("scroll: ", up[0].scrollHeight)
   }, [stickerPickItems]);
 
   /*   const onEditorStateChange = (editorState: any) => {
