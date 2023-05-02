@@ -110,10 +110,6 @@ const TagLandLounge = () => {
 
     <MetaTags>
         <title>Schmoozies - Disneyworld Lounge</title>
-        <meta
-          name='description'
-          content=""
-        />
         <meta property='og:title' content='Mousewait' />
         <meta
           property='og:image'
