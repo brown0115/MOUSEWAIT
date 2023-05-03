@@ -168,7 +168,7 @@ p {
 html * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth !important;
+  scroll-behavior: auto !important;
 }
 a:hover {
   text-decoration: none;
