@@ -59,7 +59,6 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
     setText(text.replace(/<p>|<\/p>/, '') + stickerPickItems);
     let up = document.getElementsByClassName('mantine-RichTextEditor-root');
     up[0].scrollTop = up[0].scrollHeight;
-    console.log("scroll: ", up[0].scrollHeight)
   }, [stickerPickItems]);
 
   /*   const onEditorStateChange = (editorState: any) => {

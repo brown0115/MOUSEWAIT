@@ -13,7 +13,7 @@ body {
   font-family: 'SF Compact Display', sans-serif;
   font-family: 'HK Grotesk', sans-serif;
   overflow-wrap: anywhere;
-  overscroll-behavior-inline: none;
+  /* overscroll-behavior-inline: none; */
 
   overflow-x: hidden;
 }
@@ -161,6 +161,9 @@ p {
 /* --------------------------------
  Additional Styles
 -------------------------------- */
+:root {
+  scroll-behavior: auto;
+}
 *,
 *::after,
 *::before {
@@ -171,7 +174,7 @@ p {
 html * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth !important;
+  scroll-behavior: auto !important;
 }
 a:hover {
   text-decoration: none;
