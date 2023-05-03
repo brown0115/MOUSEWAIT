@@ -496,7 +496,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                   </>
                 )}
 
-                {userRank > 84 ? (
+                {/* {userRank > 84 ? ( */}
                   <>
                     <li className='nav-item' onClick={openModal}>
                       <div className='nav-icon'>
@@ -505,9 +505,9 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                       <span>Flag/Report</span>
                     </li>
                   </>
-                ) : (
+                {/* ) : (
                   <></>
-                )}
+                )} */}
 
                 {/*      {loginuserid == '18' ||
                 loginuserid == '914' ||

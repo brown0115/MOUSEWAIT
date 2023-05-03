@@ -39,7 +39,7 @@ type FormData = {
 const LandLoungeDetail = (props: any) => {
   const dispatch = useAppDispatch();
   const { LoungeId, url } = useParams();
-  const { itemDetail, status, stickerItems, commentDataList } =
+  const { itemDetail, status, stickerItems, commentDataList, myStoreItem } =
     useSelector(selectLounges);
 
   const {
@@ -61,6 +61,8 @@ const LandLoungeDetail = (props: any) => {
 
   const [flagType, setFlagType] = useState<any | string>('C');
   const [flagAction, setFlagAction] = useState<any | string>('move-silent');
+
+  const editorRef = useRef(null);
 
   const user_id = localStorage.removeItem('userid');
   // const user_name = localStorage.removeItem('user_name');
@@ -215,7 +217,7 @@ return ret;
   }
 
   function getWords(str: any) {
-    const result = str.split(/\s+/).slice(0, 5).join(' ');
+    const result = str.split("\.").slice(0, 1).join(' ');
     return result;
   }
 
@@ -347,14 +349,21 @@ return ret;
                             <>
                               <Helmet>
                                 <title property='og:title'>
-                                MouseWait Disneyland - {getWords(obj.chat_msg)}
+                                {getWords(obj.chat_msg)} - Disneyland Lounge
                                 </title>
+                                
+                                <meta
+                                  name="description"
+                                  content={obj.chat_msg}
+                                />
+                                <meta property="og:title" content="MouseWait" />
+                                
                                 <meta
                                   property='og:description'
                                   content={obj.chat_msg}
                                   name='description'
-                                />
-                                <meta
+                                  />
+                                  <meta
                                   name='keywords'
                                   content={getWords(obj.chat_msg)}
                                 />
@@ -366,7 +375,14 @@ return ret;
                                 <meta
                                   property='og:site_name'
                                   content='MouseWait'
-                                />
+                                  />
+                                  <meta
+                                  property='og:url'
+                                  content={
+                                    GET_BASE_URL_IMAGE +
+                                    `/disneyland/lands-talk/${obj.chat_id}/${obj.chat_msg}`
+                                  }
+                                /> 
                                 <meta
                                   property='og:image'
                                   content={
@@ -375,15 +391,8 @@ return ret;
                                     obj.chat_img
                                   }
                                 />
-                                <meta
-                                  property='og:url'
-                                  content={
-                                    GET_BASE_URL_IMAGE +
-                                    `/disneyland/lands-talk/${obj.chat_id}/${obj.chat_msg}`
-                                  }
-                                />
-                              </Helmet>
-                            </>
+                            </Helmet>
+                          </>
 
                             <div>
                               <ToggleMenu

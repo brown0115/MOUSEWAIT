@@ -96,7 +96,7 @@ const WDWLandLoungeDetail = (props: any) => {
   }
   
   function getWords(str: any) {
-    const result = str.split(/\s+/).slice(0, 5).join(' ');
+    const result = str.split("\.").slice(0, 1).join(' ');
     return result;
   }
 
@@ -203,7 +203,7 @@ const WDWLandLoungeDetail = (props: any) => {
                             <>
                               <Helmet>
                                 <title property='og:title'>
-                                MouseWait Disneyworld - {getWords(obj.chat_msg)}
+                                {getWords(obj.chat_msg)} - Disneyworld Lounge
                                 </title>
                                 <meta
                                   property='og:description'
@@ -223,7 +223,7 @@ const WDWLandLoungeDetail = (props: any) => {
                                   property='og:site_name'
                                   content='MouseWait'
                                 />
-                                {/* <meta
+                                <meta
                                   property='og:image'
                                   content={
                                     GET_BASE_URL_IMAGE +
@@ -237,7 +237,7 @@ const WDWLandLoungeDetail = (props: any) => {
                                     GET_BASE_URL_IMAGE +
                                     `/disneyland/lands-talk/${obj.chat_id}/${obj.chat_msg}`
                                   }
-                                /> */}
+                                />
                               </Helmet>
                             </>
 
