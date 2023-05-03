@@ -23,11 +23,26 @@ export const LoungeHeader = () => {
 
     dispatch(setSortByTime({ SortTimeType }));
   };
+
+  const pageReload = () => {
+    window.scrollTo(0, 0);
+    window.location.reload();
+  }
   return (
     <>
       <div className='banner-img'>
-        <img src={midBanner} className='img-fluid' alt='mid-banner-img' />
-        <Link to='/disneyworld/lounge/'  className="banner-logo"></Link>
+        {
+          (window.location.pathname != '/disneyworld/lounge' && window.location.pathname != '/disneyworld/lounge/') ? 
+          <>
+            <img src={midBanner} className='img-fluid' alt='mid-banner-img' />
+            <Link to='/disneyworld/lounge' className="banner-logo"></Link>
+          </>
+          : 
+          <>
+            <img src={midBanner} className='img-fluid' alt='mid-banner-img' onClick={pageReload} style={{cursor: 'pointer'}}/>
+            {/* <Link to='/disneyland/lounge/' className="banner-logo" ></Link> */}
+          </>
+        }
       </div>
       <div className='top-trend'>
         <div className='text-head-trend text-center'>

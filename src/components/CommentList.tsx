@@ -226,7 +226,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                   dangerouslySetInnerHTML={{
                     __html: formattedMessage(cmt.chat_reply_msg)
                       .replace('<p>', '<span>')
-                      .replace('</p>', '</spam>')
+                      .replace('</p>', '</span>')
                       .replace('<br>', ''),
                   }}
                 ></span>

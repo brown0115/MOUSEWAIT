@@ -381,7 +381,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                   </>
                 )}
 
-                {userRank > 84 ? (
+                {/* {userRank > 84 ? ( */}
                   <>
                     <li className='nav-item' onClick={openModal}>
                       <div className='nav-icon'>
@@ -390,9 +390,9 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                       <span>Flag/Report</span>
                     </li>
                   </>
-                ) : (
+                {/* ) : (
                   <></>
-                )}
+                )} */}
 
                 {loginuserid == '18' ||
                 loginuserid == '914' ||
