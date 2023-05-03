@@ -2062,7 +2062,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   width: 100%;
   padding: 8px 0px 8px 8px;
   border-radius: 1.625rem;
-  height: 55px;
+  /* height: 55px; */
   overflow-y: auto;
 }
 .ql-snow .ql-editor img {

@@ -42,9 +42,6 @@ const LandLoungeDetail = (props: any) => {
   const { itemDetail, status, stickerItems, commentDataList, myStoreItem } =
     useSelector(selectLounges);
 
-  useEffect(() => {
-    console.log("sticker1 => ", myStoreItem)
-  });
   const {
     register,
     setValue,
@@ -64,6 +61,8 @@ const LandLoungeDetail = (props: any) => {
 
   const [flagType, setFlagType] = useState<any | string>('C');
   const [flagAction, setFlagAction] = useState<any | string>('move-silent');
+
+  const editorRef = useRef(null);
 
   const user_id = localStorage.removeItem('userid');
   // const user_name = localStorage.removeItem('user_name');
@@ -355,21 +354,16 @@ return ret;
                                 
                                 <meta
                                   name="description"
-                                  content="Easy-to-use online tool to quickly encrypt or decrypt text with a password."
+                                  content={obj.chat_msg}
                                 />
                                 <meta property="og:title" content="MouseWait" />
-                                <meta
-                                  property="og:description"
-                                  content="Easy-to-use online tool to quickly encrypt or decrypt text with a password."
-                                />
-                              </Helmet>
                                 
-                                {/* <meta
+                                <meta
                                   property='og:description'
                                   content={obj.chat_msg}
                                   name='description'
-                                />
-                                <meta
+                                  />
+                                  <meta
                                   name='keywords'
                                   content={getWords(obj.chat_msg)}
                                 />
@@ -381,7 +375,14 @@ return ret;
                                 <meta
                                   property='og:site_name'
                                   content='MouseWait'
-                                />
+                                  />
+                                  <meta
+                                  property='og:url'
+                                  content={
+                                    GET_BASE_URL_IMAGE +
+                                    `/disneyland/lands-talk/${obj.chat_id}/${obj.chat_msg}`
+                                  }
+                                /> 
                                 <meta
                                   property='og:image'
                                   content={
@@ -390,14 +391,8 @@ return ret;
                                     obj.chat_img
                                   }
                                 />
-                                <meta
-                                  property='og:url'
-                                  content={
-                                    GET_BASE_URL_IMAGE +
-                                    `/disneyland/lands-talk/${obj.chat_id}/${obj.chat_msg}`
-                                  }
-                                /> */}
-                            </>
+                            </Helmet>
+                          </>
 
                             <div>
                               <ToggleMenu

@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { CommentReply } from './CommentReply';
@@ -17,6 +17,7 @@ import { fetchUser } from '../redux/lounges/slice';
 import { useAppDispatch } from '../redux/store';
 import axios, { AxiosResponse } from 'axios';
 import { GET_BASE_URL } from '../constants/apiEndpoints';
+
 type CommenBoxPropsType = {
   chatId: any;
   onSubmit: any;
@@ -47,18 +48,30 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
 
   const [text, setText] = useState('');
 
+  const textRef = useRef(null);
+
   useEffect(() => {
     register('chat_msg', { required: true, minLength: 11 });
     setValue('chat_msg', text);
     let up = document.getElementsByClassName('mantine-RichTextEditor-root');
-    up[0].scrollTop = up[0].scrollHeight;
-    console.log("scroll: ", up[0].scrollHeight)
+    // up[0].scrollTop = up[0].scrollHeight;
+
+    let editor = (textRef.current  as any ).getEditor();
+    let cursorPos = editor.getSelection();
+    // console.log("cursorPos AfterChange=> ", stickerPickItems, cursorPos?.index);
+    
+    // console.log("flag", flag);
+      (textRef.current  as any ).getEditor().setSelection(text.length, 0);
+    // console.log("ref => ", (textRef.current  as any ).getEditor());
+    
   }, [text]);
 
+  
   useEffect(() => {
     setText(text.replace(/<p>|<\/p>/, '') + stickerPickItems);
+    
     let up = document.getElementsByClassName('mantine-RichTextEditor-root');
-    up[0].scrollTop = up[0].scrollHeight;
+    // up[0].scrollTop = up[0].scrollHeight;
   }, [stickerPickItems]);
 
   /*   const onEditorStateChange = (editorState: any) => {
@@ -129,7 +142,11 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
               mentions={mentions}
               value={text}
               onChange={setText}
-              controls={[[]]}
+              controls={[['bold', 'italic', 'underline', 'link', 'image'],
+              ['unorderedList', 'h1', 'h2', 'h3'],
+              ['sup', 'sub'],
+              ['alignLeft', 'alignCenter', 'alignRight'],]}
+              ref={textRef}
             />
 
             <input

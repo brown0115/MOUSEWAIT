@@ -142,6 +142,7 @@ const WdwLandLounge = () => {
 
   return (
     <>
+    
       <MetaTags>
         <title>MouseWait Disneyworld Lounge</title>
         <meta property='og:title' content='Mousewait' />
@@ -154,6 +155,7 @@ const WdwLandLounge = () => {
           content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. '
         />
       </MetaTags>
+
       <div className='mid-main'>
         <div className='container'>
           <div className='mid-sec'>
