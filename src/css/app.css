@@ -593,12 +593,16 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 /*======== leftbar css start ======*/
 .leftbar {
   margin-top: 14rem;
-  z-index: 99999;
+  z-index: 10000;
 }
 
 .leftbar .leftbarContainer {
   position: fixed;
   width: 180px;
+}
+
+.ReactModal__Overlay {
+  z-index: 10001;
 }
 
 .leftbar .navbar .navbar-nav .nav-item {
@@ -2630,8 +2634,6 @@ textarea {
   margin: auto;
 }
 
-
-
 @media only screen and (max-width: 768px) {
   .fixed-bottom-bar {
     position: fixed;
@@ -2645,7 +2647,7 @@ textarea {
   }
 
   .mid-sec {
-    margin-bottom: 110px !important;
+    margin-bottom: 310px !important;
   }
 
   .commentOutside{
