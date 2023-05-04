@@ -192,13 +192,13 @@
 | Medium devices (Mobiles, 768px)                                   | 
 |-------------------------------------------------------------------|
 */
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .plus-show-btn {
-    display: none !important;
+    display: flex !important;
   }
 
   .post_div { 
-    display: block;
+    display: block !important;
   }
 }
 
@@ -210,7 +210,7 @@
   .post_div { 
     display: none !important;
   }
-}
+} */
 
 @media screen and (min-width: 576px) and (max-width: 767.98px) {
   .profile-container {
