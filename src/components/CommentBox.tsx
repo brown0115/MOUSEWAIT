@@ -142,10 +142,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
               mentions={mentions}
               value={text}
               onChange={setText}
-              controls={[['bold', 'italic', 'underline', 'link', 'image'],
-              ['unorderedList', 'h1', 'h2', 'h3'],
-              ['sup', 'sub'],
-              ['alignLeft', 'alignCenter', 'alignRight'],]}
+              controls={[[]]}
               ref={textRef}
             />
 
