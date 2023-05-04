@@ -19,6 +19,9 @@ type LoungeBoxPropsType = {
   handleSubmit: any;
   setValue: any;
   isLoading: any;
+  onCloseMenu: any;
+  isVisible: any;
+  setVisible: any;
 };
 
 type ProgressBarProps = {
@@ -44,9 +47,12 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   register,
   handleSubmit,
   setValue,
+  onCloseMenu,
+  isVisible,
+  setVisible,
   //isLoading,
 }) => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(isVisible);
 
   const [land, setLand] = useState<number | string>('7');
 
@@ -62,10 +68,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   let subtitle: any;
 
   function openModal() {
-    if(isMobile) {
-      var btn_close = document.getElementById("mobileHamburger");
-      (btn_close as HTMLElement).style.transform = "translate3d(100%, 0px, 0px)";
-    }
+    onCloseMenu();
     setIsOpen(true);
   }
 
@@ -135,6 +138,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     setValue('chat_img', '');
     setValue('chat_msg', '');
     setIsOpen(false);
+    setVisible(false);
   }
 
   const onSubmit = (data: any) => {
