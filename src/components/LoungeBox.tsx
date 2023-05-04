@@ -60,7 +60,12 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   } = useForm<FormData>();
 
   let subtitle: any;
+
   function openModal() {
+    if(isMobile) {
+      var btn_close = document.getElementById("mobileHamburger");
+      (btn_close as HTMLElement).style.transform = "translate3d(100%, 0px, 0px)";
+    }
     setIsOpen(true);
   }
 
@@ -283,39 +288,21 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
       </Modal>
 
       {isMobile ? (
-        <>
-          <li className='nav-item last-li my-link post_div' onClick={openModal}>
-            <div className='nav-icon'>
-              <img src={Post} className='img-fluid' alt='img' />
-              <a style={{ marginLeft: '15px' }} href='javascript:void(0)'>
-                Post to the Lounge
-              </a>
-            </div>
-          </li>
-          
-          <div className='plus-show-btn' onClick={openModal}>
-            <button className='plus-show'>
-              <i className='fa fa-plus plus-i'></i>
-            </button>
+        <li className='nav-item last-li my-link' onClick={openModal}>
+          <div className='nav-icon'>
+            <img src={Post} className='img-fluid' alt='img' />
+            <a style={{ marginLeft: '15px' }} href='javascript:void(0)'>
+              Post to the Lounge
+            </a>
           </div>
-        </>
+        </li>
       ) : (
-        <>
-          <li className='nav-item last-li my-link post_div' onClick={openModal}>
-            <div className='nav-icon'>
-              <img src={Post} className='img-fluid' alt='img' />
-              <a style={{ marginLeft: '15px' }} href='javascript:void(0)'>
-                Post to the Lounge
-              </a>
-            </div>
-          </li>
-          
-          <div className='plus-show-btn' onClick={openModal}>
-            <button className='plus-show'>
-              <i className='fa fa-plus plus-i'></i>
-            </button>
-          </div>
-        </>
+        
+        <div className='plus-show-btn' onClick={openModal}>
+          <button className='plus-show'>
+            <i className='fa fa-plus plus-i'></i>
+          </button>
+        </div>
       )}
     </div>
   );
