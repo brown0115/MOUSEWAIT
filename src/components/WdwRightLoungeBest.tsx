@@ -354,7 +354,7 @@ const RightLoungeBest = () => {
             {/* best of the day */}
             <div className='mwr-Best-Week'>
               <a
-                href={`${window.location.origin}/${GET_URL_PART}/disneyworld/d/L/most-viewed`}
+                href={`${window.location.origin}/disneyworld/d/L/most-viewed`}
               >
                 <h2>Best of The Day</h2>
               </a>
@@ -394,7 +394,7 @@ const RightLoungeBest = () => {
             {/* best of the week */}
             <div className='mwr-Best-Week'>
               <a
-                href={`${window.location.origin}/${GET_URL_PART}/disneyworld/w/L/most-viewed`}
+                href={`${window.location.origin}/disneyworld/w/L/most-viewed`}
               >
                 <h2>Best of The Week</h2>
               </a>
@@ -434,7 +434,7 @@ const RightLoungeBest = () => {
             {/* best of the month */}
             <div className='mwr-Best-Week'>
               <a
-                href={`${window.location.origin}/${GET_URL_PART}/disneyworld/m/L/most-viewed`}
+                href={`${window.location.origin}/disneyworld/m/L/most-viewed`}
               >
                 <h2>Best of The Month</h2>
               </a>
