@@ -18,6 +18,9 @@ type LoungeBoxPropsType = {
   register: any;
   handleSubmit: any;
   setValue: any;
+  setVisible: any;
+  isVisible: any;
+  onCloseMenu: any;
   isLoading: any;
 };
 
@@ -44,15 +47,19 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   register,
   handleSubmit,
   setValue,
+  setVisible,
+  isVisible,
+  onCloseMenu
   //isLoading,
 }) => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(isVisible);
 
   const [land, setLand] = useState<number | string>('7');
 
   const [file, setFile] = useState<number | string>();
   const [imagePreviewUrl, setImagePreviewUrl] = useState<any>();
   const loungland = localStorage.getItem('loungeland');
+  const [text, setText] = useState('');
 
   const {
     reset,
@@ -61,6 +68,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
 
   let subtitle: any;
   function openModal() {
+    onCloseMenu();
     setIsOpen(true);
   }
 
@@ -129,6 +137,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     setImagePreviewUrl('');
     setValue('chat_img', '');
     setValue('chat_msg', '');
+    setVisible(false);
     setIsOpen(false);
   }
 
@@ -142,9 +151,11 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
       loadProgressBar();
 
       setIsLoading(true);
+      data['chat_msg'] = text;
+      
       dispatch<any>(postLounge(data)).then((res: any) => {
-        // navigate('/disneyland/lounge/');
         closeModal();
+        // navigate('/disneyland/lounge/');
         if (res.payload.data.message != undefined) {
           window.alert(res.payload.data.message);
         }
@@ -217,8 +228,11 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                   <textarea
                     rows={3}
                     cols={60}
+                    value={text}
+                    onChange={e => setText(e.target.value)}
                     placeholder='write a caption '
-                    {...register('chat_msg')}
+                    disabled={isLoading}
+                    // {...register('chat_msg')}
                   />
                   <input
                     type='hidden'
@@ -272,7 +286,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                       <CircularProgress />
                     ) : (
                       /*  <input className='MW-btn' type='Submit' value='Loading' /> */
-                      <input className='MW-btn' type='submit' value='Post' />
+                      <input className='MW-btn' type='submit' value='Post' style={{backgroundColor: text == '' ? '#d8cccc' : '#a0b7e9'}} disabled={text == '' || isLoading} />
                     )}
                   </div>
                 </div>

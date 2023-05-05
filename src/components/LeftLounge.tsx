@@ -81,6 +81,13 @@ const LeftLounge = (props: any) => {
   const srtvalue = localStorage.getItem('shortByTime');
   const dispatch = useAppDispatch();
 
+  const [closeHamburger, setCloseHamburger] = useState(false);
+
+  const onCloseHamburgerMenu = () => {
+    setCloseHamburger(true);
+    setOpen(false);
+  }
+
   useEffect(() => {
     srtvalue == null ? SetStTime(false) : SetStTime(srtvalue);
   }, [srtvalue]);
@@ -170,6 +177,9 @@ const LeftLounge = (props: any) => {
               handleSubmit={handleSubmit}
               setValue={setValue}
               isLoading={isLoading}
+              isVisible={closeHamburger}
+              setVisible={setCloseHamburger}
+              onCloseMenu={onCloseHamburgerMenu}
             />
 
             <li className='nav-item desk-li' onClick={closeSideBar}>
@@ -250,7 +260,7 @@ const LeftLounge = (props: any) => {
             id="mobileHamburger"
             right 
             isOpen={isOpen} 
-            onOpen={handleIsOpen} 
+            onOpen={handleIsOpen}
             onClose={handleIsOpen}
             >
           <SideBarLinks className='newMenuPadding' closeSideBar={closeSideBar} />

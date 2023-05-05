@@ -175,7 +175,10 @@ const WdwLandLounge = () => {
                       register={register}
                       handleSubmit={handleSubmit}
                       setValue={setValue}
+                      setVisible={() => {}}
+                      isVisible={false}
                       isLoading={isLoading}
+                      onCloseMenu={() => {}}
                     />
                   </div>
 
