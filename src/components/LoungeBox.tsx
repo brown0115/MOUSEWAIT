@@ -116,18 +116,21 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   useEffect(() => {
     setValue('chat_room_id', land);
   }, [land]);
+
+  
   const dispatch = useAppDispatch();
-  const [isLoading, setIsLoading] = useState<any | string>(false);
-  let sortType: any = null;
-  let LoungeId: any = null;
-  let currentPage: any = null;
-  let searchValue: any = null;
+  const [isLoadingPost, setIsLoadingPost] = useState<any | string>(false);
+  // let sortType: any = null;
+  // let LoungeId: any = null;
+  // let currentPage: any = null;
+  // let searchValue: any = null;
 
   const { items, status, sortByTime } = useSelector(selectLounges);
 
   const [shortByTime, setShortByTime] = useState<any | string>(
     localStorage.getItem('shortByTime')
   );
+
   useEffect(() => {
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
@@ -137,8 +140,8 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     setImagePreviewUrl('');
     setValue('chat_img', '');
     setValue('chat_msg', '');
-    setVisible(false);
-    setIsOpen(false);
+    // setVisible(false);
+    // setIsOpen(false);
   }
 
   const onSubmit = (data: any) => {
@@ -150,7 +153,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
       // setIsOpen(false);
       loadProgressBar();
 
-      setIsLoading(true);
+      setIsLoadingPost(true);
       data['chat_msg'] = text;
       
       dispatch<any>(postLounge(data)).then((res: any) => {
@@ -160,8 +163,8 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
           window.alert(res.payload.data.message);
         }
 
-        setIsLoading(false);
-        window.location.reload();
+        setIsLoadingPost(false);
+        // window.location.reload();
         /*      dispatch(
           fetchLounges({
             sortType,
@@ -231,7 +234,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                     value={text}
                     onChange={e => setText(e.target.value)}
                     placeholder='write a caption '
-                    disabled={isLoading}
+                    disabled={isLoadingPost}
                     // {...register('chat_msg')}
                   />
                   <input
@@ -282,11 +285,11 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                   <div className='mw-post text-center'>
                     <Link to='/disneyland/lounge'></Link>
 
-                    {isLoading == true ? (
+                    {isLoadingPost == true ? (
                       <CircularProgress />
                     ) : (
                       /*  <input className='MW-btn' type='Submit' value='Loading' /> */
-                      <input className='MW-btn' type='submit' value='Post' style={{backgroundColor: text == '' ? '#d8cccc' : '#0d6efd'}} disabled={text == '' || isLoading} />
+                      <input className='MW-btn' type='submit' value='Post' style={{backgroundColor: text == '' ? '#d8cccc' : '#0d6efd'}} disabled={text == '' || isLoadingPost} />
                     )}
                   </div>
                 </div>
