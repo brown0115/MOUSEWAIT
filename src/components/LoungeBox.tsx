@@ -20,8 +20,8 @@ type LoungeBoxPropsType = {
   setValue: any;
   setVisible: any;
   isVisible: any;
-  isLoading: any;
   onCloseMenu: any;
+  isLoading: any;
 };
 
 type ProgressBarProps = {
@@ -152,10 +152,10 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
 
       setIsLoading(true);
       data['chat_msg'] = text;
-      setText('');
+      
       dispatch<any>(postLounge(data)).then((res: any) => {
-        // navigate('/disneyland/lounge/');
         closeModal();
+        // navigate('/disneyland/lounge/');
         if (res.payload.data.message != undefined) {
           window.alert(res.payload.data.message);
         }
@@ -231,6 +231,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                     value={text}
                     onChange={e => setText(e.target.value)}
                     placeholder='write a caption '
+                    disabled={isLoading}
                     // {...register('chat_msg')}
                   />
                   <input
@@ -285,7 +286,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                       <CircularProgress />
                     ) : (
                       /*  <input className='MW-btn' type='Submit' value='Loading' /> */
-                      <input className='MW-btn' type='submit' value='Post' style={{backgroundColor: text == '' ? '#d8cccc' : '#a0b7e9'}} disabled={text == ''} />
+                      <input className='MW-btn' type='submit' value='Post' style={{backgroundColor: text == '' ? '#d8cccc' : '#a0b7e9'}} disabled={text == '' || isLoading} />
                     )}
                   </div>
                 </div>
