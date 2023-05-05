@@ -120,7 +120,10 @@ const LoungeLand = () => {
                       register={register}
                       handleSubmit={handleSubmit}
                       setValue={setValue}
+                      isVisible={false}
+                      setVisible={() => {}}
                       isLoading={isLoading}
+                      onCloseMenu={() => {}}
                     />
                   </div>
                   {/* */}

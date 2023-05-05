@@ -348,7 +348,9 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                 <>
                   {cmt.commentuser.user_id == loginuserid ? (
                     <span className='co-l'>
+
                       <span onClick={showEditBox}>EDIT</span>
+                      
                       <span onClick={() => {
                         if (window.confirm('Are You Sure?'))
                           onRemove(cmt.chat_reply_id)
