@@ -216,10 +216,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                     ref={inputFile}
                     className='fileInput'
                     type='file'
-                    value={text}
-                    onChange={e => setText(e.target.value)}
-                    disabled={isLoading}
-                    // onChange={(e) => handleImageChange(e)}
+                    onChange={(e) => handleImageChange(e)}
                   />
                 </div>
 
@@ -279,7 +276,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                       <CircularProgress />
                     ) : (
                       /*  <input className='MW-btn' type='Submit' value='Loading' /> */
-                      <input className='MW-btn' type='submit' value='Post' style={{backgroundColor: text == '' ? '#d8cccc' : '#a0b7e9'}} disabled={text == '' || isLoading} />
+                      <input className='MW-btn' type='submit' value='Post' style={{backgroundColor: text == '' ? '#d8cccc' : '#0d6efd'}} disabled={text == '' || isLoading} />
                     )}
                   </div>
                 </div>
