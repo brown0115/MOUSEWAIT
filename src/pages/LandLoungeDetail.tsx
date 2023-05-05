@@ -18,6 +18,9 @@ import pinImage from '../assets/img/face-s.jpg';
 import { LoungeName } from '../components/LoungeName';
 import { Helmet } from 'react-helmet';
 
+// @ts-ignore
+import MetaTags from 'react-meta-tags';
+
 import {
   postThankyou,
   postBookMark,
@@ -282,6 +285,21 @@ return ret;
 
   return (
     <>
+
+    <MetaTags>
+
+        <title></title>
+        <meta property='og:title' content='Mousewait' />
+        <meta
+          property='og:image'
+          content='https://mousewait.com/static/media/MouseWait-img.fed12113160621608cfe.png'
+        />
+        <meta
+          property='og:description'
+          content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. '
+        />
+      </MetaTags>
+
       <div className='mid-main'>
         <div className='container'>
           <div className='mid-sec'>

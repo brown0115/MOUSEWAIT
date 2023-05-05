@@ -16,6 +16,8 @@ import { selectLounges } from '../redux/lounges/selectors';
 import { usersSelector } from '../redux/users/selectors';
 import { useForm } from 'react-hook-form';
 
+import { Helmet } from 'react-helmet';
+
 import stickerImage from '../assets/img/stickers.jpg';
 import faceBookImage from '../assets/img/face-s.jpg';
 import pinImage from '../assets/img/face-s.jpg';
@@ -32,6 +34,7 @@ type FormData = {
 type SearchData = {
   searchValue: string;
 };
+
 
 const TagLandLounge = () => {
   const dispatch = useAppDispatch();
@@ -63,6 +66,11 @@ const TagLandLounge = () => {
   let LoungeId: any = null;
   let currentPage: any = null;
   let tagValue: any = null;
+
+  let myurl = window.location.href
+  .substring(window.location.href.lastIndexOf('tag/') + 4)
+  .replace(/([/~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g, ' ');
+  
 
   useEffect(() => {
     sortByTime != '' && setShortByTime(sortByTime);
@@ -105,11 +113,19 @@ const TagLandLounge = () => {
     return formattedDate;
   }
 
+  function getWords(str: any) {
+    const result = str.split("\.").slice(0, 1).join(' ').replaceAll("-", " ");
+    return result;
+  }
+
   return (
     <>
 
-    <MetaTags>
-        <title>Schmoozies - Disneyworld Lounge</title>
+      <MetaTags>
+        <meta
+          name='description'
+          content=""
+        />
         <meta property='og:title' content='Mousewait' />
         <meta
           property='og:image'
@@ -225,6 +241,12 @@ const TagLandLounge = () => {
                                 />
                               </div>
                             </Link>
+
+                            <Helmet>
+                              <title property='og:title'>
+                                {getWords(myurl)}
+                              </title>
+                            </Helmet>
 
                             <div className='chat-icon d-flex'>
                               <LikeButton
