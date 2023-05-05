@@ -42,6 +42,7 @@ const LeftLounge = (props: any) => {
     setValue,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm<FormData>();
 

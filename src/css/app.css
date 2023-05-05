@@ -2634,6 +2634,10 @@ textarea {
   margin: auto;
 }
 
+input:disabled {
+  background-color: #d8cccc;
+}
+
 @media only screen and (max-width: 768px) {
   .fixed-bottom-bar {
     position: fixed;
