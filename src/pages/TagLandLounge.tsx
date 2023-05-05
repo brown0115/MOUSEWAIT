@@ -23,6 +23,7 @@ import { postLounge } from '../redux/lounges/slice';
 import cardmImage from '../assets/img/card-m-img.png';
 import { LoungeName } from '../components/LoungeName';
 import { CommonPostMessage } from '../components/CommonPostMessage';
+import { Helmet } from 'react-helmet';
 
 // @ts-ignore
 import MetaTags from 'react-meta-tags';
@@ -65,6 +66,10 @@ const TagLandLounge = () => {
   let LoungeId: any = null;
   let currentPage: any = null;
   let tagValue: any = null;
+
+  let myurl = window.location.href
+    .substring(window.location.href.lastIndexOf('tag/') + 4)
+    .replace(/([/~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g, ' ');
 
   useEffect(() => {
     sortByTime != '' && setShortByTime(sortByTime);
@@ -129,11 +134,15 @@ const TagLandLounge = () => {
     });
   }
 
+  function getWords(str: any) {
+    const result = str.split("\.").slice(0, 1).join(' ').replaceAll("-", " ");
+    return result;
+  }
+
   return (
     <>
 
       <MetaTags>
-        <title>Schmoozies - Disneyland Lounge</title>
         <meta
           name='description'
           content=""
@@ -167,6 +176,7 @@ const TagLandLounge = () => {
                         <Placeholder key={index} />
                       ))
                     : tagItems?.map((obj) => (
+                        
                         <div className='card-m rounded card-m2'>
                           <div className='card-s-img justify-content-between d-flex'>
                             <div className='small-box d-flex'>
@@ -262,6 +272,12 @@ const TagLandLounge = () => {
                                 <CommonPostMessage myChat={obj.chat_msg} />
                               </div>
                             </Link>
+
+                            <Helmet>
+                              <title property='og:title'>
+                                {getWords(myurl)}
+                              </title>
+                            </Helmet>
 
                             <div className='chat-icon d-flex'>
                               <ThankButton
