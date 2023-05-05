@@ -68,7 +68,6 @@ const LandLounge = () => {
   const {
     register,
     setValue,
-    getValues,
     handleSubmit,
     reset,
     formState: { errors },
