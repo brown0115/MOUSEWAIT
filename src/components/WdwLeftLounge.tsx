@@ -48,6 +48,12 @@ const WdwLeftLounge = (props: any) => {
   }, [token]);
 
   const location = useLocation();
+  const [closeHamburger, setCloseHamburger] = useState(false);
+
+  const onCloseHamburgerMenu = () => {
+    setCloseHamburger(true);
+    setOpen(false);
+  }
 
   const onLogOut = () => {
     localStorage.removeItem('token');
@@ -165,6 +171,10 @@ const WdwLeftLounge = (props: any) => {
               handleSubmit={handleSubmit}
               setValue={setValue}
               isLoading={isLoading}
+              isVisible={closeHamburger}
+              setVisible={setCloseHamburger}
+              onCloseMenu={onCloseHamburgerMenu}
+              
             />
 
             <li className='nav-item' onClick={closeSideBar}>

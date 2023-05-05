@@ -154,6 +154,9 @@ const WdwCatLounge = () => {
                       register={register}
                       handleSubmit={handleSubmit}
                       setValue={setValue}
+                      isVisible={false}
+                      setVisible={() => {}}
+                      onCloseMenu={() => {}}
                       isLoading={isLoading}
                     />
                   </div>
