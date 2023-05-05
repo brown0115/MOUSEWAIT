@@ -232,7 +232,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                     value={text}
                     onChange={e => setText(e.target.value)}
                     disabled={isLoading}
-                    {...register('chat_msg')}
+                    // {...register('chat_msg')}
                   />
                   <input
                     type='hidden'
