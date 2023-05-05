@@ -12,17 +12,16 @@ import { selectLounges } from '../redux/lounges/selectors';
 import CircularProgress from '@mui/material/CircularProgress';
 import { isMobile } from 'react-device-detect';
 import Post from '../assets/img/h-p.png';
-import { getValue } from '@testing-library/user-event/dist/utils';
 // import ProgressBar from "@ramonak/react-progress-bar";
 type LoungeBoxPropsType = {
   onSubmit: any;
   register: any;
   handleSubmit: any;
   setValue: any;
+  setVisible: any;
+  isVisible: any;
   isLoading: any;
   onCloseMenu: any;
-  isVisible: any;
-  setVisible: any;
 };
 
 type ProgressBarProps = {
@@ -48,9 +47,9 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   register,
   handleSubmit,
   setValue,
-  onCloseMenu,
-  isVisible,
   setVisible,
+  isVisible,
+  onCloseMenu
   //isLoading,
 }) => {
   const [modalIsOpen, setIsOpen] = useState(isVisible);
@@ -60,7 +59,6 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   const [file, setFile] = useState<number | string>();
   const [imagePreviewUrl, setImagePreviewUrl] = useState<any>();
   const loungland = localStorage.getItem('loungeland');
-  const [text, setTextArea] = useState('');
 
   const {
     reset,
@@ -68,7 +66,6 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   } = useForm<FormData>();
 
   let subtitle: any;
-
   function openModal() {
     onCloseMenu();
     setIsOpen(true);
@@ -86,8 +83,6 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   const token = localStorage.getItem('token');
 
   const inputFile = useRef<HTMLInputElement | any>();
-
-  const formelement = document.querySelector('form');
 
   function handleImageChange(e: any) {
     e.preventDefault();
@@ -141,8 +136,8 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     setImagePreviewUrl('');
     setValue('chat_img', '');
     setValue('chat_msg', '');
-    setIsOpen(false);
     setVisible(false);
+    setIsOpen(false);
   }
 
   const onSubmit = (data: any) => {
@@ -230,8 +225,6 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                   <textarea
                     rows={3}
                     cols={60}
-                    // value={text}
-                    // onChange={e => setTextArea(e.target.value) }
                     placeholder='write a caption '
                     {...register('chat_msg')}
                   />
@@ -287,7 +280,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                       <CircularProgress />
                     ) : (
                       /*  <input className='MW-btn' type='Submit' value='Loading' /> */
-                      <input className='MW-btn' style={{backgroundColor: text == '' ? '#d8cccc' : '#9bb8ef', cursor: text == '' ? 'auto' : 'pointer'}} type='submit' value='Post' disabled={text == ''} ></input>
+                      <input className='MW-btn' type='submit' value='Post' />
                     )}
                   </div>
                 </div>
@@ -307,7 +300,6 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
           </div>
         </li>
       ) : (
-        
         <div className='plus-show-btn' onClick={openModal}>
           <button className='plus-show'>
             <i className='fa fa-plus plus-i'></i>
