@@ -52,7 +52,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   onCloseMenu
   //isLoading,
 }) => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(isVisible);
 
   const [land, setLand] = useState<number | string>('1');
 
@@ -149,7 +149,6 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
 
       setIsLoading(true);
       data['chat_msg'] = text;
-      setText('');
       dispatch<any>(postLoungeWdw(data)).then((res: any) => {
         // navigate('/disneyland/lounge/');
         closeModal();
@@ -217,10 +216,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                     ref={inputFile}
                     className='fileInput'
                     type='file'
-                    value={text}
-                    onChange={e => setText(e.target.value)}
-                    disabled={isLoading}
-                    // onChange={(e) => handleImageChange(e)}
+                    onChange={(e) => handleImageChange(e)}
                   />
                 </div>
 
@@ -230,8 +226,10 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                     rows={3}
                     cols={60}
                     placeholder='write a caption '
-
-                    {...register('chat_msg')}
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    disabled={isLoading}
+                    // {...register('chat_msg')}
                   />
                   <input
                     type='hidden'
@@ -278,7 +276,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                       <CircularProgress />
                     ) : (
                       /*  <input className='MW-btn' type='Submit' value='Loading' /> */
-                      <input className='MW-btn' type='submit' value='Post' style={{backgroundColor: text == '' ? '#d8cccc' : '#a0b7e9'}} disabled={text == ''} />
+                      <input className='MW-btn' type='submit' value='Post' style={{backgroundColor: text == '' ? '#d8cccc' : '#0d6efd'}} disabled={text == '' || isLoading} />
                     )}
                   </div>
                 </div>
