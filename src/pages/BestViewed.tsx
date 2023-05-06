@@ -74,7 +74,10 @@ const BestViewed = () => {
     <>
 
     <MetaTags>
-        <title>Best of the Day - MouseWait Disneyland</title>
+        {type == 'd'? <title>Best of the Day - MouseWait Disneyland</title>
+        : type == 'w' ? <title>Best of the Week - MouseWait Disneyland</title> : <title>Best of the Month - MouseWait Disneyland</title>
+        }
+        
         <meta
           name='description'
           content=""

@@ -25,6 +25,7 @@ export const getALlTagists = async ({
   const apiEndpoint =
     GET_BASE_URL + '/backend/api/v1/tagList?chat_id=' + LoungeId;
 
+    localStorage.setItem('pagename', 'TagPage');
   if (tagData != null) {
     const { data } = await axios
       .get<Lounge[]>(`${apiEndpoint}&keytag=${tagData}`, {

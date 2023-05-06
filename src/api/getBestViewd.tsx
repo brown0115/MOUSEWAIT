@@ -12,7 +12,13 @@ export const getBestViewdApi = async ({
   const apiEndpoint =
     GET_BASE_URL + '/backend/api/v1/bestoftheday?type=' + type;
   let searchByCategory = UserId > 0 ? `&category=${UserId}` : '';
-  localStorage.setItem('pagename', 'Best of the Day');
+  if(type == 'w')
+    localStorage.setItem('pagename', 'Best of the Week');
+  else if(type == 'm')
+    localStorage.setItem('pagename', 'Best of the Month');
+  else 
+    localStorage.setItem('pagename', 'Best of the day');
+
   const { data } = await axios
     .get<Lounge[]>(`${apiEndpoint}`)
     .then(responseBody);
