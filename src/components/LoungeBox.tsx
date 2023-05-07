@@ -147,8 +147,9 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     } else {
       //console.log(data);
 
+      setIsLoading(false);
       // setIsOpen(false);
-      loadProgressBar();
+      // loadProgressBar();
 
       setIsLoading(true);
       data['chat_msg'] = text;

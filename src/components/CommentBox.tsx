@@ -70,7 +70,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
   useEffect(() => {
     setText(text.replace(/<p>|<\/p>/, '') + stickerPickItems);
     
-    let up = document.getElementsByClassName('mantine-RichTextEditor-root');
+    // let up = document.getElementsByClassName('mantine-RichTextEditor-root');
     // up[0].scrollTop = up[0].scrollHeight;
   }, [stickerPickItems]);
 
