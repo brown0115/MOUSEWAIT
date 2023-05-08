@@ -21,7 +21,6 @@ import { slide as Menu } from 'react-burger-menu';
 import RightLoungeBest from '../components/RightLoungeBest';
 import { isMobile } from 'react-device-detect';
 import { LoungeBox } from '../components/LoungeBox';
-import { useForm } from 'react-hook-form';
 const LeftLounge = (props: any) => {
   let navigate = useNavigate();
 
@@ -37,17 +36,7 @@ const LeftLounge = (props: any) => {
 
   localStorage.getItem('token');
 
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>();
-
   const [isLoading, setIsLoading] = useState<any | string>(false);
-
-  const { items, totalPrice, totalCaunt } = useSelector(selectCart);
 
   // Set cart items to localStorage after second rerender
   useEffect(() => {
@@ -172,11 +161,6 @@ const LeftLounge = (props: any) => {
             )}
 
             <LoungeBox
-              onSubmit={''}
-              register={register}
-              handleSubmit={handleSubmit}
-              setValue={setValue}
-              isLoading={isLoading}
               isVisible={closeHamburger}
               setVisible={setCloseHamburger}
               onCloseMenu={onCloseHamburgerMenu}

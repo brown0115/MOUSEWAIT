@@ -40,13 +40,6 @@ const CatLounge = () => {
   const { landid } = useParams();
 
   const { items, stickyItem, status, sortByTime } = useSelector(selectLounges);
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>();
   const [shortByTime, setShortByTime] = useState<any | string>(
     localStorage.getItem('shortByTime')
   );
@@ -115,24 +108,6 @@ const CatLounge = () => {
     return () => window.removeEventListener('scroll', handelInfiniteScroll);
   }, []);
 
-  const onSubmit = (data: any) => {
-    setIsLoading(true);
-    dispatch<any>(postLounge(data)).then((res: any) => {
-      reset();
-      setIsLoading(false);
-
-      dispatch(
-        fetchLounges({
-          sortType,
-          LoungeId,
-          currentPage,
-          searchValue,
-          shortByTime,
-        })
-      );
-    });
-  };
-
   let myurl = window.location.href
         .substring(window.location.href.lastIndexOf(landid + '/') + 1)
         .replace(/([/~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\?\- ])+/g, ' ');
@@ -174,13 +149,8 @@ const CatLounge = () => {
                 <div className='content__items'>
                   <div>
                     <LoungeBox
-                      onSubmit={onSubmit}
-                      register={register}
-                      handleSubmit={handleSubmit}
-                      setValue={setValue}
                       isVisible={false}
                       setVisible={() => {}}
-                      isLoading={isLoading}
                       onCloseMenu={() => {}}
                     />
                   </div>
