@@ -75,6 +75,24 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
     SetStickerSelection(stickerPickItems.toString());
   }, [stickerPickItems]);
 
+  const textRef = useRef(null);
+
+  const onClickSticker = (data: any) => {
+    let editor = (textRef.current  as any ).getEditor();
+    var range = editor.getSelection();
+    let position = range ? range.index : editor.getLength()-1;
+    
+    var rte = document.getElementById('my-rich-text-editor'); // Replace with the ID of your Rich Text Editor
+    rte?.focus();
+    // var el= document.createElement("div");
+    // el.innerHTML = stickerPickItems.toString();
+    var imageSrc = data;
+    if(stickerPickItems.toString() != '') {
+      editor.insertEmbed(position, 'image', imageSrc);
+      editor.setSelection(position + 1, 0);
+    }
+  }
+
   if (editbox == true) {
     /*  console.log('9999');
     console.log(stickerSelection); */
@@ -152,6 +170,7 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
                     onChange={onEditorStateChange}
                     value={stickerSelection}
                     placeholder='Type your comment here...'
+                    ref={textRef}
                   />
 
                   <input
@@ -191,7 +210,7 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
           </div>
           {showSticker == true && (
             <div>
-              <StickerTabs tabData={stickerData} />
+              <StickerTabs tabData={stickerData} onClickSticker={onClickSticker}/>
             </div>
           )}{' '}
         </div>
