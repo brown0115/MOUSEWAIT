@@ -998,6 +998,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 .com-box-main .com-box {
   background-color: white;
   border-radius: 1.625rem;
+  border: 1px solid rgb(206, 212, 218);
 }
 
 .com-box-main .com-box .form-control {
@@ -2080,15 +2081,17 @@ Note: Beware of modifying this element as it can break the animations - you shou
   width: fit-content;
   margin-right: 5px;
   margin-left: 5px;
+  height: 30px;
+  margin-bottom: 0px !important;
 }
 .ql-editor {
   padding: 5px 0px 0px 5px !important;
 }
 
-.ql-editor p {
+/* .ql-editor p {
   display: flex !important;
-  /* flex-direction: column; */
-}
+  flex-direction: column;
+} */
 
 .item-lisst span {
   font-weight: 700;
