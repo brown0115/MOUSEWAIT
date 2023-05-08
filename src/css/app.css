@@ -994,6 +994,12 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   text-align: center;
   align-self: center;
 }
+
+.com-box-main .com-box {
+  background-color: white;
+  border-radius: 1.625rem;
+}
+
 .com-box-main .com-box .form-control {
   /* border-radius: 0px; */
   height: 53px;
@@ -1497,7 +1503,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 }
 
 .icon-ic {
-  margin-left: -4.5rem;
+  margin-left: 20px;
   position: relative;
 }
 .icon-ic0 {
@@ -1575,7 +1581,6 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 
 .quill > .ql-container > .ql-editor.ql-blank::before {
   color: #000;
-  /*  font-family: 'HK Grotesk'; */
   font-style: normal;
   font-weight: 400;
   font-size: 1rem;
@@ -2065,20 +2070,24 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .mantine-RichTextEditor-root {
   width: 100%;
   padding: 8px 0px 8px 8px;
-  border-radius: 1.625rem;
+  border-top-left-radius: 1.625rem;
+  border-bottom-left-radius: 1.625rem;
   height: 55px;
   overflow-y: auto;
 }
 .ql-snow .ql-editor img {
   display: inline !important;
   width: fit-content;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 .ql-editor {
   padding: 5px 0px 0px 5px !important;
 }
+
 .ql-editor p {
   display: flex !important;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 .item-lisst span {

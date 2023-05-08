@@ -56,16 +56,25 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
   } = useForm<FormData>();
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
-  const { stickerPickItems } = useSelector(selectLounges);
 
   const [commentData, SetCommentData] = useState<any | []>(replyData);
   const [showSticker, SetShowSticker] = useState<any | string>(false);
-  const [stickerSelection, SetStickerSelection] = useState<any | string>(null);
   const token = localStorage.getItem('token');
   const loginuserid = localStorage.getItem('user_id');
-  useEffect(() => {
-    SetStickerSelection(stickerPickItems.toString());
-  }, [stickerPickItems]);
+
+  const textRef = useRef(null);
+
+  const onClickSticker = (data: any) => {
+    let editor = (textRef.current  as any ).getEditor();
+    var range = editor.getSelection();
+    let position = range ? range.index : editor.getLength()-1;
+    
+    var rte = document.getElementById('my-rich-text-editor'); // Replace with the ID of your Rich Text Editor
+    rte?.focus();
+    var imageSrc = data;
+    editor.insertEmbed(position, 'image', imageSrc);
+    editor.setSelection(position + 1, 0);
+  }
 
   const onSubmit = (data: any) => {
     const chat_reply_msg = getValues('chat_reply_msg');
@@ -73,11 +82,7 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
       ? dispatch<any>(postLoungeCommentReplyWdw(data)).then((res: any) => {
           reset();
           SetCommentData(res.payload.data.replydata);
-          let data: any = null;
-          let up = document.getElementsByClassName('ql-editor');
-          up[0].innerHTML = '';
-          dispatch<any>(addSticker(data));
-          SetStickerSelection(null);
+          setText('');
           // dispatch(fetchLoungeDetails({ LoungeId }))
         })
       : alert('Please enter comment');
@@ -91,6 +96,7 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
     });
     return formattedDate;
   }
+
 
   const modules = {
     toolbar: false,
@@ -110,9 +116,6 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
     setValue('chat_reply_msg', text);
   }, [text]);
 
-  useEffect(() => {
-    setText(text.replace(/<p>|<\/p>/, '') + stickerPickItems);
-  }, [stickerPickItems]);
 
   const openSticker = () => {
     SetShowSticker(!showSticker);
@@ -201,6 +204,7 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
                   value={text}
                   onChange={setText}
                   controls={[[]]}
+                  ref={textRef}
                 />
 
                 <input
@@ -258,7 +262,7 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
           </form>
           {showSticker == true && (
             <div>
-              <StickerTabs tabData={stickerData} />
+              <StickerTabs tabData={stickerData} onClickSticker = {onClickSticker}/>
             </div>
           )}{' '}
         </div>
