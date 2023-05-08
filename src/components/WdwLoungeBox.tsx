@@ -18,6 +18,9 @@ type LoungeBoxPropsType = {
   register: any;
   handleSubmit: any;
   setValue: any;
+  setVisible: any;
+  isVisible: any;
+  onCloseMenu: any;
   isLoading: any;
 };
 
@@ -44,9 +47,12 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   register,
   handleSubmit,
   setValue,
+  setVisible,
+  isVisible,
+  onCloseMenu
   //isLoading,
 }) => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(isVisible);
 
   const [land, setLand] = useState<number | string>('1');
 
@@ -57,8 +63,11 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     formState: { errors },
   } = useForm<FormData>();
 
+  const [text, setText] = useState('');
+
   let subtitle: any;
   function openModal() {
+    onCloseMenu();
     setIsOpen(true);
   }
 
@@ -127,6 +136,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     setImagePreviewUrl('');
     setValue('chat_img', '');
     setValue('chat_msg', '');
+    setVisible(false);
     setIsOpen(false);
   }
 
@@ -138,6 +148,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
       loadProgressBar();
 
       setIsLoading(true);
+      data['chat_msg'] = text;
       dispatch<any>(postLoungeWdw(data)).then((res: any) => {
         // navigate('/disneyland/lounge/');
         closeModal();
@@ -215,7 +226,10 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                     rows={3}
                     cols={60}
                     placeholder='write a caption '
-                    {...register('chat_msg')}
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    disabled={isLoading}
+                    // {...register('chat_msg')}
                   />
                   <input
                     type='hidden'
@@ -262,7 +276,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                       <CircularProgress />
                     ) : (
                       /*  <input className='MW-btn' type='Submit' value='Loading' /> */
-                      <input className='MW-btn' type='submit' value='Post' />
+                      <input className='MW-btn' type='submit' value='Post' style={{backgroundColor: text == '' ? '#d8cccc' : '#0d6efd'}} disabled={text == '' || isLoading} />
                     )}
                   </div>
                 </div>

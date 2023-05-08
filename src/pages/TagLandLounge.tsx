@@ -23,6 +23,11 @@ import { postLounge } from '../redux/lounges/slice';
 import cardmImage from '../assets/img/card-m-img.png';
 import { LoungeName } from '../components/LoungeName';
 import { CommonPostMessage } from '../components/CommonPostMessage';
+import { Helmet } from 'react-helmet';
+
+// @ts-ignore
+import MetaTags from 'react-meta-tags';
+
 type FormData = {
   chat_msg: string;
 };
@@ -61,6 +66,10 @@ const TagLandLounge = () => {
   let LoungeId: any = null;
   let currentPage: any = null;
   let tagValue: any = null;
+
+  let myurl = window.location.href
+    .substring(window.location.href.lastIndexOf('tag/') + 4)
+    .replace(/([/~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g, ' ');
 
   useEffect(() => {
     sortByTime != '' && setShortByTime(sortByTime);
@@ -110,7 +119,6 @@ const TagLandLounge = () => {
       .trim();
     let content = newstring?.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
     let hashtag;
-
     return content?.map((word: any) => {
       if (word.startsWith('#')) {
         hashtag = word.replace('#', '');
@@ -125,8 +133,30 @@ const TagLandLounge = () => {
     });
   }
 
+  function getWords(str: any) {
+    const result = str.split("\.").slice(0, 1).join(' ').replaceAll("-", " ");
+    return result;
+  }
+
   return (
     <>
+
+      <MetaTags>
+        <meta
+          name='description'
+          content=""
+        />
+        <meta property='og:title' content='Mousewait' />
+        <meta
+          property='og:image'
+          content='https://mousewait.com/static/media/MouseWait-img.fed12113160621608cfe.png'
+        />
+        <meta
+          property='og:description'
+          content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. '
+        />
+      </MetaTags>
+
       <div className='mid-main'>
         <div className='container'>
           <div className='mid-sec'>
@@ -145,6 +175,7 @@ const TagLandLounge = () => {
                         <Placeholder key={index} />
                       ))
                     : tagItems?.map((obj) => (
+                        
                         <div className='card-m rounded card-m2'>
                           <div className='card-s-img justify-content-between d-flex'>
                             <div className='small-box d-flex'>
@@ -240,6 +271,12 @@ const TagLandLounge = () => {
                                 <CommonPostMessage myChat={obj.chat_msg} />
                               </div>
                             </Link>
+
+                            <Helmet>
+                              <title property='og:title'>
+                                {getWords(myurl)}
+                              </title>
+                            </Helmet>
 
                             <div className='chat-icon d-flex'>
                               <ThankButton

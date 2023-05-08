@@ -12,6 +12,8 @@ import {
   fetchDisneyWorldLounges,
   fetchStickyLoungeWdw,
 } from '../redux/lounges/slice';
+// @ts-ignore
+import MetaTags from 'react-meta-tags';
 import { selectLounges } from '../redux/lounges/selectors';
 import { usersSelector } from '../redux/users/selectors';
 import { useForm } from 'react-hook-form';
@@ -140,6 +142,20 @@ const WdwLandLounge = () => {
 
   return (
     <>
+    
+      <MetaTags>
+        <title>MouseWait Disneyworld Lounge</title>
+        <meta property='og:title' content='Mousewait' />
+        <meta
+          property='og:image'
+          content='https://mousewait.com/static/media/MouseWait-img.fed12113160621608cfe.png'
+        />
+        <meta
+          property='og:description'
+          content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. '
+        />
+      </MetaTags>
+
       <div className='mid-main'>
         <div className='container'>
           <div className='mid-sec'>
@@ -159,7 +175,10 @@ const WdwLandLounge = () => {
                       register={register}
                       handleSubmit={handleSubmit}
                       setValue={setValue}
+                      setVisible={() => {}}
+                      isVisible={false}
                       isLoading={isLoading}
+                      onCloseMenu={() => {}}
                     />
                   </div>
 

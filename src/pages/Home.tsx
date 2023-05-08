@@ -160,16 +160,16 @@ const Home = () => {
                           {' '}
                           iOS app
                         </a>{' '}
-                        or the <a href='disneyland/lounge'>web</a> (update
+                        or the <Link to='disneyland/lounge'>web</Link> (update
                         coming soon!)
                       </p>
                     </div>
                     <div className='mw-text text-center'>
                       <p>
                         Find the best food at Disneyland on our real-time{' '}
-                        <a href='disneyland/lounge' target='_blank'>
+                        <Link to='disneyland/lounge'>
                           Disneyland Food Blog!
-                        </a>
+                        </Link>
                       </p>
                     </div>
                     <div className='mw-text text-center'>
@@ -178,10 +178,8 @@ const Home = () => {
                       </a>
                     </div>
                     <div className='mw-text text-center'>
-                      <a href='disneyland/lounge'>
-                        Disneyland Real-Time Lounge
-                      </a>
-                      |<a href='disneyworld/lounge'>Disney World Lounge</a>
+                      <Link to='disneyland/lounge'>Disneyland Real-Time Lounge</Link>
+                      |<Link to='disneyworld/lounge'>Disney World Lounge</Link>
                     </div>
                   </div>
                 </div>

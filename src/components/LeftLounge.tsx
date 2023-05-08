@@ -81,6 +81,13 @@ const LeftLounge = (props: any) => {
   const srtvalue = localStorage.getItem('shortByTime');
   const dispatch = useAppDispatch();
 
+  const [closeHamburger, setCloseHamburger] = useState(false);
+
+  const onCloseHamburgerMenu = () => {
+    setCloseHamburger(true);
+    setOpen(false);
+  }
+
   useEffect(() => {
     srtvalue == null ? SetStTime(false) : SetStTime(srtvalue);
   }, [srtvalue]);
@@ -98,9 +105,6 @@ const LeftLounge = (props: any) => {
       <nav className='navbar navbar-expand-md'>
         <div className={`collapse navbar-collapse ${isOpen == true && 'show'}`}>
           <ul className='navbar-nav flex-column p-0 m-0'>
-            <div className='right-side-bar'>
-              <i onClick={ToggleSidebar} className='fa fa-plus plus-i'></i>
-            </div>
             <li className='nav-item' onClick={closeSideBar}>
               <Link to='disneyland/notification'>Notifications</Link>
             </li>
@@ -173,6 +177,9 @@ const LeftLounge = (props: any) => {
               handleSubmit={handleSubmit}
               setValue={setValue}
               isLoading={isLoading}
+              isVisible={closeHamburger}
+              setVisible={setCloseHamburger}
+              onCloseMenu={onCloseHamburgerMenu}
             />
 
             <li className='nav-item desk-li' onClick={closeSideBar}>
@@ -224,31 +231,42 @@ const LeftLounge = (props: any) => {
 
   return (
     <div className='leftbar'>
-      <div className='backarrow' onClick={() => backMe()}>
-        <i className='fa-solid fa-chevron-left'></i>
-      </div>
-      <Menu right isOpen={isOpen} onOpen={handleIsOpen} onClose={handleIsOpen}>
-        <SideBarLinks closeSideBar={closeSideBar} />
-      </Menu>
-
-      <div className='listcheck'>
-        <SideBarLinks closeSideBar={closeSideBar} />
-      </div>
-
-      <>
-        <div className='container-fluid mobile-right-bar'>
-          <div
-            className={`sidebar ${open == true ? 'active' : ''}`}
-            onClick={ToggleSidebar}
-          >
-            <RightLoungeBest />
-          </div>
-          <div
-            className={`sidebar-overlay ${open == true ? 'active' : ''}`}
-            onClick={ToggleSidebar}
-          ></div>
+      <div className='leftbarContainer'>
+        <div className='listcheck'>
+          <SideBarLinks closeSideBar={closeSideBar} />
         </div>
-      </>
+
+        <>
+          <div className='container-fluid mobile-right-bar'>
+            <div
+              className={`sidebar ${open == true ? 'active' : ''}`}
+              onClick={ToggleSidebar}
+            >
+              <RightLoungeBest />
+            </div>
+            <div
+              className={`sidebar-overlay ${open == true ? 'active' : ''}`}
+              onClick={ToggleSidebar}
+            ></div>
+          </div>
+        </>
+      </div>
+
+      <div>
+        <div className='backarrow' onClick={() => backMe()}>
+          <i className='fa-solid fa-chevron-left'></i>
+        </div>
+        <Menu 
+            id="mobileHamburger"
+            right 
+            isOpen={isOpen} 
+            onOpen={handleIsOpen}
+            onClose={handleIsOpen}
+            >
+          <SideBarLinks className='newMenuPadding' closeSideBar={closeSideBar} />
+          <RightLoungeBest />
+        </Menu>
+      </div>
     </div>
   );
 };

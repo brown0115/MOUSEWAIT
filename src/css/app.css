@@ -13,7 +13,7 @@ body {
   font-family: 'SF Compact Display', sans-serif;
   font-family: 'HK Grotesk', sans-serif;
   overflow-wrap: anywhere;
-  overscroll-behavior-inline: none;
+  /* overscroll-behavior-inline: none; */
 
   overflow-x: hidden;
 }
@@ -161,6 +161,9 @@ p {
 /* --------------------------------
  Additional Styles
 -------------------------------- */
+:root {
+  scroll-behavior: auto;
+}
 *,
 *::after,
 *::before {
@@ -171,6 +174,7 @@ p {
 html * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: auto !important;
 }
 a:hover {
   text-decoration: none;
@@ -213,6 +217,25 @@ textarea {
 }
 /* ========================= */
 /**=========MouseWait Header CSS Start ==========**/
+
+.banner-img{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.banner-img .banner-logo{
+  position: absolute;
+  bottom: 0;
+  width: 25vw;
+  height: 100%;
+}
+@media only screen and (max-width: 768px) {
+  .banner-img .banner-logo{
+    width: 32vw;
+    height: 100%;
+  }
+}
 
 .Mouse-Wait-sec {
   /*   background-color: #d8e5fc; */
@@ -570,10 +593,18 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 /*======== leftbar css start ======*/
 .leftbar {
   margin-top: 14rem;
+  z-index: 10000;
 }
-.leftbar .navbar {
+
+.leftbar .leftbarContainer {
   position: fixed;
+  width: 180px;
 }
+
+.ReactModal__Overlay {
+  z-index: 10001;
+}
+
 .leftbar .navbar .navbar-nav .nav-item {
   display: flex;
   margin: 0rem 0rem 0.7rem 1rem;
@@ -608,10 +639,12 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 } */
 /*======== leftbar css end ======*/
 /*======== mid-sec css start ======*/
+
 .mid-sec {
   background-color: #e5e5e5;
   height: auto;
   min-height: 100vh;
+  margin-bottom: 130px !important;
 }
 .mid-sec .banner-img img {
   width: 100%;
@@ -696,12 +729,11 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   margin-top: 0.5rem;
 }
 .chat-icon span .co-icon {
-  margin-right: 0.5rem;
   cursor: pointer;
 }
 
 .chat-icon span {
-  margin-right: 1rem;
+  margin-right: 5px;
   color: #000;
   /*  font-family: 'HK Grotesk'; */
   font-style: normal;
@@ -962,6 +994,12 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   text-align: center;
   align-self: center;
 }
+
+.com-box-main .com-box {
+  background-color: white;
+  border-radius: 1.625rem;
+}
+
 .com-box-main .com-box .form-control {
   /* border-radius: 0px; */
   height: 53px;
@@ -973,6 +1011,12 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   border-radius: 0.3rem;
   padding: 0.5rem;
 }
+
+.com-box-main > .post-sec {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
 /*===mid-post-sec start ==*/
 .card-post {
   width: 100%;
@@ -1459,7 +1503,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 }
 
 .icon-ic {
-  margin-left: -4.5rem;
+  margin-left: 20px;
   position: relative;
 }
 .icon-ic0 {
@@ -1537,11 +1581,11 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 
 .quill > .ql-container > .ql-editor.ql-blank::before {
   color: #000;
-  /*  font-family: 'HK Grotesk'; */
   font-style: normal;
   font-weight: 400;
   font-size: 1rem;
   line-height: 20px;
+  margin-top: 7px;
 }
 
 .plus-show-btn {
@@ -1816,6 +1860,10 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 
 .three-dots i {
   cursor: pointer;
+  font-size: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
 }
 
 a {
@@ -1924,8 +1972,8 @@ a:hover {
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: absolute;
-  width: 25px;
-  height: 22px;
+  width: 30px;
+  height: 25px;
   right: 0px;
   top: 20px;
   /*  border-radius: 0.2rem;
@@ -1938,9 +1986,8 @@ a:hover {
 .bm-burger-bars {
   /*  background: #373a47; */
   background: rgba(22, 23, 34, 0.3);
-  height: 10% !important;
-  width: 21px !important;
-  left: 4px !important;
+  height: 20% !important;
+  width: 30px !important;
   margin-top: 1px;
 }
 
@@ -1967,33 +2014,33 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
-  width: 0 !important;
+  width: 250px !important;
 }
-.bm-cross-button {
-  display: none !important;
-}
+/*.bm-cross-button {*/
+/*  display: none !important;*/
+/*}*/
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a47;
-  padding: 2.5em 1.5em 0;
+  background: #f3f3f3;
+  padding: 2em 1em 0;
   font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-  fill: #373a47;
-}
+/*.bm-morph-shape {*/
+/*  fill: #373a47;*/
+/*}*/
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: #b8b7ad;
-  padding: 0.8em;
+  /*color: #b8b7ad;*/
+  /*padding: 0.8em;*/
 }
 
 /* Individual item */
 .bm-item {
-  display: inline-block;
+  /*display: inline-block;*/
 }
 
 /* Styling of overlay */
@@ -2022,18 +2069,25 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 .mantine-RichTextEditor-root {
   width: 100%;
-  padding: 8px;
-  border-radius: 1.625rem;
+  padding: 8px 0px 8px 8px;
+  border-top-left-radius: 1.625rem;
+  border-bottom-left-radius: 1.625rem;
   height: 55px;
+  overflow-y: auto;
 }
 .ql-snow .ql-editor img {
   display: inline !important;
+  width: fit-content;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 .ql-editor {
-  padding: 5px 0px !important;
+  padding: 5px 0px 0px 5px !important;
 }
+
 .ql-editor p {
   display: flex !important;
+  /* flex-direction: column; */
 }
 
 .item-lisst span {
@@ -2462,9 +2516,9 @@ textarea {
 }
 .ql-editor p {
   width: auto;
-  height: 38px;
-  overflow-y: scroll;
-  padding: 0px 75px 0px 10px !important;
+  /* height: 38px; */
+  /* overflow-y: scroll; */
+  padding: 0px 15px 0px 10px !important;
   color: #313237;
   font-family: 'Inter';
   font-style: normal;
@@ -2557,3 +2611,67 @@ textarea {
 .my-dis a {
   color: #000;
 }
+
+#mobileHamburger .bm-menu{
+  padding: 2em 0em 0;
+}
+
+#mobileHamburger .bm-menu .navbar{
+  padding-left: 1rem;
+}
+
+.widerIcon{
+  padding: 5px 10px;
+}
+
+.widerIconText{
+  padding: 5px 0px;
+}
+
+.fixed-bottom-bar {
+  position: fixed;
+  bottom: -6px;
+  right: 0px;
+  display: grid;
+  grid-template-columns: 180px 4fr 1fr !important;
+  padding: 30px;
+  z-index: 9999;
+}
+
+.commentOutside{
+  width: 70%;
+  margin: auto;
+}
+
+input:disabled {
+  background-color: #d8cccc;
+}
+
+@media only screen and (max-width: 768px) {
+  .fixed-bottom-bar {
+    position: fixed;
+    bottom: -16px;
+    right: 0px;
+    display: grid;
+    grid-template-columns: 10px 1fr 10px !important;
+    padding: 20px;
+    z-index: 9999;
+    background: #e5e5e5;
+  }
+
+  .mid-sec {
+    margin-bottom: 310px !important;
+  }
+
+  .commentOutside{
+    width: 100%;
+    margin: auto;
+  }
+
+  .com-box-main > .post-sec {
+    height: 200px;
+    overflow-y: auto;
+  }
+
+}
+

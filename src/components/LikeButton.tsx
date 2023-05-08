@@ -35,10 +35,11 @@ export const LikeButton: React.FC<LikeButtonPropsType> = ({
     <>
       <ToastContainer autoClose={3000} />
       <span className='d-flex'>
-        <div className='co-icon' onClick={() => onLike(chatId, likeCount)}>
+        <div className='co-icon widerIcon' onClick={() => onLike(chatId, likeCount)}>
           <img src={likeV} className='img-fluid' />
         </div>
-        {likeCount}
+        <span className='widerIconText'>{likeCount}</span>
+        
       </span>
     </>
   );

@@ -188,10 +188,11 @@ export const MwLoungeList: React.FC<MwLoungeListPropsType> = ({ obj }) => {
               <Link to={`/disneyland/lands-talk/${obj?.mapping_url}`}>
                 <h6
                   dangerouslySetInnerHTML={{
-                    __html: obj?.chat?.chat_msg?.replace(
-                      'mousewait.com',
-                      'mousewait.xyz'
-                    ),
+                    __html: obj?.chat?.chat_msg
+                    // ?.replace(
+                      // 'mousewait.com',
+                      // 'mousewait.xyz'
+                    // ),
                   }}
                 />
               </Link>

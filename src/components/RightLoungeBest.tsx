@@ -85,16 +85,9 @@ const RightLoungeBest = () => {
       {/*-mw-right-c section start -*/}
       <div className='mw-right-c rounded mt-3'>
         <div className='card-body'>
-          <div className='right-side-bar'>
-            <i
-              onClick={ToggleSidebar}
-              className='fa fa-arrow-left'
-              aria-hidden='true'
-            ></i>
-          </div>
-          <h6 className='donate-h'>
+          {/* <h6 className='donate-h'>
             Your Donations Help Us Make MouseWait Better!
-          </h6>
+          </h6> */}
 
           {/* <div className='don-c text-center paypal-cc'>
             <form action='https://www.paypal.com/cgi-bin/webscr' method='post'>
@@ -283,7 +276,7 @@ const RightLoungeBest = () => {
               {bestDay.map((bitem: any) => (
                 <div className='bw-s best-day'>
                   <Link
-                    to={`/disneyland/lands-talk/${bitem.mapping_url.GET_MINI_DATA?.replace(
+                    to={`/disneyland/lands-talk/${bitem.mapping_url?.replace(
                       /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
                       '-'
                     )}`}
