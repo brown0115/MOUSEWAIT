@@ -18,6 +18,9 @@ import 'react-pure-modal/dist/react-pure-modal.min.css';
 import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import DmMe from '../components/DmMe';
 
+// @ts-ignore
+import MetaTags from 'react-meta-tags';
+
 import {
   fetchMyNotification,
   postThankyou,
@@ -185,6 +188,19 @@ const Notification = () => {
   //console.log(myNotificationItem);
   return (
     <>
+      <MetaTags>
+        <title>My Notifications</title>
+        <meta property='og:title' content='Mousewait' />
+        <meta
+          property='og:image'
+          content='https://mousewait.com/static/media/MouseWait-img.fed12113160621608cfe.png'
+        />
+        <meta
+          property='og:description'
+          content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. '
+        />
+      </MetaTags>
+
       <div className='mid-main'>
         <div className='container'>
           <div className='mid-sec mwstore-page-bg'>

@@ -288,7 +288,6 @@ return ret;
 
     <MetaTags>
 
-        <title></title>
         <meta property='og:title' content='Mousewait' />
         <meta
           property='og:image'

@@ -276,7 +276,7 @@ const RightLoungeBest = () => {
               {bestDay.map((bitem: any) => (
                 <div className='bw-s best-day'>
                   <Link
-                    to={`/disneyland/lands-talk/${bitem.mapping_url.GET_MINI_DATA?.replace(
+                    to={`/disneyland/lands-talk/${bitem.mapping_url?.replace(
                       /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
                       '-'
                     )}`}

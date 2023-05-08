@@ -119,7 +119,6 @@ const TagLandLounge = () => {
       .trim();
     let content = newstring?.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
     let hashtag;
-
     return content?.map((word: any) => {
       if (word.startsWith('#')) {
         hashtag = word.replace('#', '');

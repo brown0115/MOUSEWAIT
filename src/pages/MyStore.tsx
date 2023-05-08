@@ -18,6 +18,10 @@ import 'react-tabs/style/react-tabs.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+
+// @ts-ignore
+import MetaTags from 'react-meta-tags';
+
 const MyStore = () => {
   const dispatch = useAppDispatch();
   const { myStoreItem, status } = useSelector(selectLounges);
@@ -95,6 +99,20 @@ console.log(myStoreItem) */
 
   return (
     <>
+
+    <MetaTags>
+        <title>Mousewait Store</title>
+        <meta property='og:title' content='Mousewait' />
+        <meta
+          property='og:image'
+          content='https://mousewait.com/static/media/MouseWait-img.fed12113160621608cfe.png'
+        />
+        <meta
+          property='og:description'
+          content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. '
+        />
+      </MetaTags>
+
       <div className='mid-main'>
         <div className='container'>
           <div className='mid-sec mwstore-page-bg'>

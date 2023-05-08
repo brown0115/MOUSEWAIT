@@ -11,11 +11,18 @@ import { selectLounges } from '../redux/lounges/selectors';
 import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
 type StickerTabPropsType = {
   tabData: any;
+  onClickSticker: any;
 };
 
 function Tab(props: any) {
   const dispatch = useAppDispatch();
   const onAddSticker = (data: any) => {
+    props.onClick(
+      GET_BASE_URL_IMAGE +
+      '/disneyland/images/products_thumbnail/' +
+      data
+    );
+    
     dispatch<any>(addSticker(data));
   };
 
@@ -61,7 +68,7 @@ function Navigation(props: any) {
   );
 }
 
-export const StickerTabs: React.FC<StickerTabPropsType> = ({ tabData }) => {
+export const StickerTabs: React.FC<StickerTabPropsType> = ({ tabData, onClickSticker }) => {
   const [activeTabId, setActiveTab] = useState(tabData[0].id);
 
   const activeTab = useMemo(
@@ -78,7 +85,7 @@ export const StickerTabs: React.FC<StickerTabPropsType> = ({ tabData }) => {
             onNavClick={setActiveTab}
             activeTabId={activeTabId}
           />
-          <Tab tab={activeTab} />
+          <Tab tab={activeTab} onClick={onClickSticker}/>
         </div>
       </div>
     </div>
