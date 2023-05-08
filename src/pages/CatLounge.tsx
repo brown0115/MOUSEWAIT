@@ -133,12 +133,17 @@ const CatLounge = () => {
     });
   };
 
+  let myurl = window.location.href
+        .substring(window.location.href.lastIndexOf(landid + '/') + 1)
+        .replace(/([/~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\?\- ])+/g, ' ');
+
+
   // land real-time
   // console.log(items);
   return (
     <>
     <MetaTags>
-      <title>Disneyland Real Time</title>
+      <title>{myurl}</title>
       <meta
         name='description'
         content=""

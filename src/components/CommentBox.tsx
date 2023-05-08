@@ -42,9 +42,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
 }) => {
   // const { register, setValue, handleSubmit,getValues, formState: { errors } } = useForm<FormData>();
   const [showSticker, SetShowSticker] = useState<any | string>(false);
-  const [stickerSelection, SetStickerSelection] = useState<any | string>(null);
   const token = localStorage.getItem('token');
-  const { stickerPickItems } = useSelector(selectLounges);
 
   const [text, setText] = useState('');
 
@@ -53,31 +51,22 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
   useEffect(() => {
     register('chat_msg', { required: true, minLength: 11 });
     setValue('chat_msg', text);
-    let up = document.getElementsByClassName('mantine-RichTextEditor-root');
-    // up[0].scrollTop = up[0].scrollHeight;
-
-    let editor = (textRef.current  as any ).getEditor();
-    let cursorPos = editor.getSelection();
-    // console.log("cursorPos AfterChange=> ", stickerPickItems, cursorPos?.index);
-    
-    // console.log("flag", flag);
-      (textRef.current  as any ).getEditor().setSelection(text.length, 0);
-    // console.log("ref => ", (textRef.current  as any ).getEditor());
-    
   }, [text]);
 
   
-  useEffect(() => {
-    setText(text.replace(/<p>|<\/p>/, '') + stickerPickItems);
-    
-    let up = document.getElementsByClassName('mantine-RichTextEditor-root');
-    // up[0].scrollTop = up[0].scrollHeight;
-  }, [stickerPickItems]);
+  const onClickSticker = (data: any) => {
 
-  /*   const onEditorStateChange = (editorState: any) => {
-    setValue('chat_msg', editorState);
-  };
- */
+    let editor = (textRef.current  as any ).getEditor();
+    var range = editor.getSelection();
+    let position = range ? range.index : editor.getLength()-1;
+    
+    var rte = document.getElementById('my-rich-text-editor'); // Replace with the ID of your Rich Text Editor
+    rte?.focus();
+    var imageSrc = data;
+    editor.insertEmbed(position, 'image', imageSrc);
+    editor.setSelection(position + 1, 0);
+  }
+
   let navigate = useNavigate();
   const openSticker = () => {
     if (token == null) {
@@ -162,7 +151,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
       </form>
       {showSticker == true && (
         <div>
-          <StickerTabs tabData={stickerData} />
+          <StickerTabs tabData={stickerData} onClickSticker={onClickSticker}/>
         </div>
       )}
     </div>
