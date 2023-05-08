@@ -1504,7 +1504,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 }
 
 .icon-ic {
-  margin-left: 20px;
+  margin-left: 15px;
   position: relative;
 }
 .icon-ic0 {
@@ -2657,7 +2657,7 @@ input:disabled {
     right: 0px;
     display: grid;
     grid-template-columns: 10px 1fr 10px !important;
-    padding: 20px;
+    padding: 20px 0px;
     z-index: 9999;
     background: #e5e5e5;
   }
