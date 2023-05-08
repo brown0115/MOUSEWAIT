@@ -146,13 +146,12 @@ const Setting = () => {
         <div className='container'>
           <div className='mid-sec'>
             <div className='banner-img'>
-              <Link to='/disneyland/lounge/'>
-                <img
+              <img
                   src={midBanner}
                   className='img-fluid'
                   alt='mid-banner-img'
-                />
-              </Link>
+              />
+              <Link to='/disneyland/lounge/' className="banner-logo"></Link>
             </div>
 
             {status === 'loading'

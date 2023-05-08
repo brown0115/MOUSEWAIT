@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { CommentReply } from './CommentReply';
@@ -17,6 +17,7 @@ import { fetchUser } from '../redux/lounges/slice';
 import { useAppDispatch } from '../redux/store';
 import axios, { AxiosResponse } from 'axios';
 import { GET_BASE_URL } from '../constants/apiEndpoints';
+
 type CommenBoxPropsType = {
   chatId: any;
   onSubmit: any;
@@ -41,25 +42,31 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
 }) => {
   // const { register, setValue, handleSubmit,getValues, formState: { errors } } = useForm<FormData>();
   const [showSticker, SetShowSticker] = useState<any | string>(false);
-  const [stickerSelection, SetStickerSelection] = useState<any | string>(null);
   const token = localStorage.getItem('token');
-  const { stickerPickItems } = useSelector(selectLounges);
 
   const [text, setText] = useState('');
+
+  const textRef = useRef(null);
 
   useEffect(() => {
     register('chat_msg', { required: true, minLength: 11 });
     setValue('chat_msg', text);
   }, [text]);
 
-  useEffect(() => {
-    setText(text.replace(/<p>|<\/p>/, '') + stickerPickItems);
-  }, [stickerPickItems]);
+  
+  const onClickSticker = (data: any) => {
 
-  /*   const onEditorStateChange = (editorState: any) => {
-    setValue('chat_msg', editorState);
-  };
- */
+    let editor = (textRef.current  as any ).getEditor();
+    var range = editor.getSelection();
+    let position = range ? range.index : editor.getLength()-1;
+    
+    var rte = document.getElementById('my-rich-text-editor'); // Replace with the ID of your Rich Text Editor
+    rte?.focus();
+    var imageSrc = data;
+    editor.insertEmbed(position, 'image', imageSrc);
+    editor.setSelection(position + 1, 0);
+  }
+
   let navigate = useNavigate();
   const openSticker = () => {
     if (token == null) {
@@ -125,6 +132,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
               value={text}
               onChange={setText}
               controls={[[]]}
+              ref={textRef}
             />
 
             <input
@@ -143,7 +151,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
       </form>
       {showSticker == true && (
         <div>
-          <StickerTabs tabData={stickerData} />
+          <StickerTabs tabData={stickerData} onClickSticker={onClickSticker}/>
         </div>
       )}
     </div>

@@ -146,7 +146,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
 
   const onSubmit = (data: any) => {
     dispatch<any>(postLoungeFlag(data)).then((res: any) => {
-      Notify(toast(res.payload.data[0].error));
+      // Notify(toast(res.payload.data[0].error));
     });
   };
 
@@ -155,7 +155,6 @@ export const CommentList: React.FC<CommentListPropsType> = ({
     dispatch<any>(removeUserLounge({ ban_chat_id, RemoveType })).then(
       (res: any) => {
         window.location.reload();
-        Notify(toast('Comment Removed'));
       }
     );
   };
@@ -227,7 +226,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                   dangerouslySetInnerHTML={{
                     __html: formattedMessage(cmt.chat_reply_msg)
                       .replace('<p>', '<span>')
-                      .replace('</p>', '</spam>')
+                      .replace('</p>', '</span>')
                       .replace('<br>', ''),
                   }}
                 ></span>
@@ -349,8 +348,14 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                 <>
                   {cmt.commentuser.user_id == loginuserid ? (
                     <span className='co-l'>
+
                       <span onClick={showEditBox}>EDIT</span>
-                      <span onClick={() => onRemove(cmt.chat_reply_id)}>
+                      
+                      <span onClick={() => {
+                        if (window.confirm('Are You Sure?'))
+                          onRemove(cmt.chat_reply_id)
+                        }}
+                      >
                         DELETE
                       </span>
                     </span>

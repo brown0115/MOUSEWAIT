@@ -67,17 +67,16 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
     SetStickerSelection(stickerPickItems.toString());
   }, [stickerPickItems]);
 
+  const textRef = useRef(null);
+
+
   const onSubmit = (data: any) => {
     const chat_reply_msg = getValues('chat_reply_msg');
     chat_reply_msg != ''
       ? dispatch<any>(postLoungeCommentReply(data)).then((res: any) => {
           reset();
           SetCommentData(res.payload.data.replydata);
-          let data: any = null;
-          let up = document.getElementsByClassName('ql-editor');
-          up[0].innerHTML = '';
-          dispatch<any>(addSticker(data));
-          SetStickerSelection(null);
+          setText('');
           // dispatch(fetchLoungeDetails({ LoungeId }))
         })
       : alert('Please enter reply');
@@ -106,13 +105,22 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
     setValue('chat_reply_msg', editorState);
   }; */
 
-  useEffect(() => {
-    setText(text.replace(/<p>|<\/p>/, '') + stickerPickItems);
-  }, [stickerPickItems]);
-
   const openSticker = () => {
     SetShowSticker(!showSticker);
   };
+
+  const onClickSticker = (data: any) => {
+    let editor = (textRef.current  as any ).getEditor();
+    var range = editor.getSelection();
+    let position = range ? range.index : editor.getLength()-1;
+    
+    var rte = document.getElementById('my-rich-text-editor'); // Replace with the ID of your Rich Text Editor
+    rte?.focus();
+    var imageSrc = data;
+    editor.insertEmbed(position, 'image', imageSrc);
+    editor.setSelection(position + 1, 0);
+  }
+
   function converDate(datevalue: any) {
     const date = new Date(datevalue);
     const formattedDate = date.toLocaleDateString('en-US', {
@@ -208,6 +216,7 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
                   value={text}
                   onChange={setText}
                   controls={[[]]}
+                  ref={textRef}
                 />
                 <input
                   type='hidden'
@@ -264,7 +273,7 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
           </form>
           {showSticker == true && (
             <div>
-              <StickerTabs tabData={stickerData} />
+              <StickerTabs tabData={stickerData} onClickSticker = {onClickSticker}/>
             </div>
           )}{' '}
         </div>

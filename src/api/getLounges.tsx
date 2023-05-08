@@ -34,6 +34,7 @@ export const getAllLoungesApi = async ({
       ? `?page=${currentPage}&sortordefault=ww`
       : `?page=${currentPage}`;
 
+  // remove endpoint
   const apiEndpoint = GET_BASE_URL + `/backend/api/v1/home`;
 
   if (searchValue != null) {

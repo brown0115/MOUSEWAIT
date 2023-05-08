@@ -26,6 +26,9 @@ import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import { LoungeName } from '../components/LoungeName';
 import { ThankButton } from '../components/ThankButton';
 
+// @ts-ignore
+import MetaTags from 'react-meta-tags';
+
 const UserLounge = () => {
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
@@ -200,6 +203,20 @@ const UserLounge = () => {
 
   return (
     <>
+
+      <MetaTags>
+        <title>MyMW</title>
+        <meta property='og:title' content='Mousewait' />
+        <meta
+          property='og:image'
+          content='https://mousewait.com/static/media/MouseWait-img.fed12113160621608cfe.png'
+        />
+        <meta
+          property='og:description'
+          content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. '
+        />
+      </MetaTags>
+
       {userId == 'null' ? (
         <div className='mid-main'>
           <div className='container'>
@@ -224,13 +241,8 @@ const UserLounge = () => {
             <div className='container'>
               <div className='mid-sec'>
                 <div className='banner-img'>
-                  <Link to='/disneyland/lounge/'>
-                    <img
-                      src={midBanner}
-                      className='img-fluid'
-                      alt='mid-banner-img'
-                    />
-                  </Link>
+                  <img src={midBanner} className='img-fluid' alt='mid-banner-img' />
+                  <Link to='/disneyland/lounge/' className="banner-logo"></Link>
                 </div>
                 <ToastContainer autoClose={3000} />
                 <div className='text-head text-center'>

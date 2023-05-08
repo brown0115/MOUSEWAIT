@@ -22,6 +22,8 @@ import stickerImage from '../assets/img/stickers.jpg';
 
 import { postLoungeWdw } from '../redux/lounges/slice';
 
+// @ts-ignore
+import MetaTags from 'react-meta-tags';
 type FormData = {
   chat_msg: string;
 };
@@ -135,6 +137,23 @@ const WdwCatLounge = () => {
   //console.log(items);
   return (
     <>
+      <MetaTags>
+        <title>Wdw Real Time</title>
+        <meta
+          name='description'
+          content=""
+        />
+        <meta property='og:title' content='Mousewait' />
+        <meta
+          property='og:image'
+          content='https://mousewait.com/static/media/MouseWait-img.fed12113160621608cfe.png'
+        />
+        <meta
+          property='og:description'
+          content='MouseWait provides a wealth of information for both casual and frequent visitors to the Disneyland Resort. It does exactly what it claims and more, and it does it extremely well. '
+        />
+      </MetaTags>
+      
       <div className='mid-main'>
         <div className='container'>
           <div className='mid-sec'>
@@ -154,6 +173,9 @@ const WdwCatLounge = () => {
                       register={register}
                       handleSubmit={handleSubmit}
                       setValue={setValue}
+                      isVisible={false}
+                      setVisible={() => {}}
+                      onCloseMenu={() => {}}
                       isLoading={isLoading}
                     />
                   </div>

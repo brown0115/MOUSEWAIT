@@ -58,9 +58,9 @@ const RightLoungeBest = () => {
       {/*-mw-right-c section start -*/}
       <div className='mw-right-c rounded mt-3'>
         <div className='card-body'>
-          <h6 className='donate-h'>
+          {/* <h6 className='donate-h'>
             Your Donations Help Us Make MouseWait Better!
-          </h6>
+          </h6> */}
 
           {/* <div className='don-c text-center paypal-cc'>
             <form action='https://www.paypal.com/cgi-bin/webscr' method='post'>
@@ -354,7 +354,7 @@ const RightLoungeBest = () => {
             {/* best of the day */}
             <div className='mwr-Best-Week'>
               <a
-                href={`${window.location.origin}/${GET_URL_PART}/disneyworld/d/L/most-viewed`}
+                href={`${window.location.origin}/disneyworld/d/L/most-viewed`}
               >
                 <h2>Best of The Day</h2>
               </a>
@@ -394,7 +394,7 @@ const RightLoungeBest = () => {
             {/* best of the week */}
             <div className='mwr-Best-Week'>
               <a
-                href={`${window.location.origin}/${GET_URL_PART}/disneyworld/w/L/most-viewed`}
+                href={`${window.location.origin}/disneyworld/w/L/most-viewed`}
               >
                 <h2>Best of The Week</h2>
               </a>
@@ -434,7 +434,7 @@ const RightLoungeBest = () => {
             {/* best of the month */}
             <div className='mwr-Best-Week'>
               <a
-                href={`${window.location.origin}/${GET_URL_PART}/disneyworld/m/L/most-viewed`}
+                href={`${window.location.origin}/disneyworld/m/L/most-viewed`}
               >
                 <h2>Best of The Month</h2>
               </a>
