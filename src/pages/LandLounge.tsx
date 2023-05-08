@@ -18,9 +18,6 @@ import {
 import MetaTags from 'react-meta-tags';
 
 import { selectLounges } from '../redux/lounges/selectors';
-import { usersSelector } from '../redux/users/selectors';
-import { useForm } from 'react-hook-form';
-import Modal from 'react-modal';
 
 import stickerImage from '../assets/img/stickers.jpg';
 
@@ -46,18 +43,6 @@ type ProgressbarProps = {
   trailWidth: number;
   trailColor: '#363636';
 };
-// const Progressbar: React.FunctionComponent<ProgressbarProps> = ({
-//   input,
-//   pathWidth,
-//   pathColor,
-//   trailColor,
-//   trailWidth,
-//   textStyle,
-
-// })=>{
-//   console.log('how aee you')
-
-// }
 
 const LandLounge = () => {
   const dispatch = useAppDispatch();
@@ -66,19 +51,12 @@ const LandLounge = () => {
   const { search } = useParams();
 
   const { items, stickyItem, status, sortByTime } = useSelector(selectLounges);
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>();
   const [shortByTime, setShortByTime] = useState<any | string>(
     localStorage.getItem('shortByTime')
   );
 
   const [showPopup, setShowPopup] = useState<any | string>(true);
-  const [isLoading, setIsLoading] = useState<any | string>(false);
+
 
   let subtitle: any;
 
@@ -203,23 +181,12 @@ const LandLounge = () => {
                 <div className='content__items'>
                   <div>
                     <LoungeBox
-                      onSubmit={''}
-                      register={register}
-                      handleSubmit={handleSubmit}
-                      setValue={setValue}
                       setVisible={() => {}}
                       isVisible={false}
-                      isLoading={isLoading}
                       onCloseMenu={() => {}}
                     />
                   </div>
-
-                  {/*             {status === 'loading'
-                    ? [...new Array(9)]?.map((_, index) => (
-                        <Placeholder key={index} />
-                      ))
-                    : items?.map((obj) => <LoungeList obj={obj} />)} */}
-
+                  
                   {status === 'loading' ? (
                     [...new Array(9)]?.map((_, index) => (
                       <Placeholder key={index} />

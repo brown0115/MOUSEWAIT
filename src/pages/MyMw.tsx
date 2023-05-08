@@ -74,19 +74,7 @@ const MyMw = () => {
     loadProgressBar();
     dispatch(fetchMyFav({ sortType, UserId, currentPage }));
   }, [shortByTime, search]);
-
-  /* const onSubmit = (data:any) => {
-
-  setIsLoading(true);
-   dispatch<any> (postLounge(data)).then((res:any) => {
-   reset()
-   setIsLoading(false);
-   loadProgressBar();
-   dispatch(fetchMyFav({ sortType, LoungeId, currentPage, searchValue,shortByTime,UserId }))
-   });
-  };
- */
-
+  
   return (
     <>
       <div className='mid-main'>

@@ -12,20 +12,13 @@ import { selectLounges } from '../redux/lounges/selectors';
 import CircularProgress from '@mui/material/CircularProgress';
 import { isMobile } from 'react-device-detect';
 import Post from '../assets/img/h-p.png';
+import { getValue } from '@testing-library/user-event/dist/utils';
+import { BiWindows } from 'react-icons/bi';
 // import ProgressBar from "@ramonak/react-progress-bar";
 type LoungeBoxPropsType = {
-  onSubmit: any;
-  register: any;
-  handleSubmit: any;
-  setValue: any;
   setVisible: any;
   isVisible: any;
   onCloseMenu: any;
-  isLoading: any;
-};
-
-type ProgressBarProps = {
-  completed: number;
 };
 
 Modal.setAppElement('#root');
@@ -44,13 +37,9 @@ const customStyles = {
 };
 
 export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
-  register,
-  handleSubmit,
-  setValue,
   setVisible,
   isVisible,
   onCloseMenu
-  //isLoading,
 }) => {
   const [modalIsOpen, setIsOpen] = useState(isVisible);
 
@@ -61,25 +50,15 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   const loungland = localStorage.getItem('loungeland');
   const [text, setText] = useState('');
 
-  const {
-    reset,
-    formState: { errors },
-  } = useForm<FormData>();
-
   let subtitle: any;
   function openModal() {
     onCloseMenu();
     setIsOpen(true);
   }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = '#f00';
-  }
-
   let navigate = useNavigate();
 
-  // const { register, setValue, handleSubmit,getValues, formState: { errors } } = useForm<FormData>();
+  const { register, setValue, getValues, formState: {  errors } } = useForm<{'chat_img': any, 'chat_room_id': any, 'chat_msg': any}>({defaultValues: {'chat_img': '', 'chat_room_id': '', 'chat_msg': ''}});
 
   const token = localStorage.getItem('token');
 
@@ -109,25 +88,19 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     inputFile.current.click();
   };
 
-  // const hide = ()=>{
-  //   setIsOpen(false)
-  // }
-
   useEffect(() => {
     setValue('chat_room_id', land);
   }, [land]);
+
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState<any | string>(false);
-  let sortType: any = null;
-  let LoungeId: any = null;
-  let currentPage: any = null;
-  let searchValue: any = null;
 
   const { items, status, sortByTime } = useSelector(selectLounges);
 
   const [shortByTime, setShortByTime] = useState<any | string>(
     localStorage.getItem('shortByTime')
   );
+  
   useEffect(() => {
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
@@ -141,54 +114,35 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     setIsOpen(false);
   }
 
-  const onSubmit = (data: any) => {
+  const onPostClick = () => {
     if (token == null) {
       navigate('/disneyland/login');
     } else {
-      //console.log(data);
-
-      setIsLoading(false);
-      // setIsOpen(false);
-      // loadProgressBar();
-
       setIsLoading(true);
-      data['chat_msg'] = text;
+      var data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': text, 'chat_img': getValues('chat_img')}
       
       dispatch<any>(postLounge(data)).then((res: any) => {
+        setIsLoading(false)
         closeModal();
-        // navigate('/disneyland/lounge/');
         if (res.payload.data.message != undefined) {
           window.alert(res.payload.data.message);
         }
-
-        setIsLoading(false);
-        // window.location.reload();
-        /*      dispatch(
-          fetchLounges({
-            sortType,
-            LoungeId,
-            currentPage,
-            searchValue,
-            shortByTime,
-          })
-        ); */
+        // setStickyItem
+        window.location.reload();        
       });
     }
-  };
-
+    setIsLoading(true);
+  }
   return (
     <div>
       <Modal
         isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel='Example Modal'
       >
         <form
           className='space-y-6'
-          onSubmit={handleSubmit(onSubmit)}
-          method='POST'
         >
           <div className='row'>
             <div className='box-t-1'>
@@ -237,12 +191,12 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                   />
                   <input
                     type='hidden'
-                    setValue={land}
+                    // setValue={land}
                     {...register('chat_room_id')}
                   />
                   <input
                     type='hidden'
-                    setValue={file}
+                    // setValue={file}
                     {...register('chat_img')}
                   />
                   <div className='box-li'>
@@ -287,7 +241,9 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                       <CircularProgress />
                     ) : (
                       /*  <input className='MW-btn' type='Submit' value='Loading' /> */
-                      <input className='MW-btn' type='submit' value='Post' style={{backgroundColor: text == '' ? '#d8cccc' : '#0d6efd'}} disabled={text == '' || isLoading} />
+                      <input className='MW-btn' type='button' value="Post" style={{backgroundColor: text == '' ? '#d8cccc' : '#0d6efd'}} disabled={text == '' || isLoading} 
+                      onClick={onPostClick}
+                      />
                     )}
                   </div>
                 </div>
