@@ -4,6 +4,7 @@ import { Lounge } from '../redux/lounges/types';
 import { GET_BASE_URL } from '../constants/apiEndpoints';
 export const getCatLoungesWdwApi = async ({
   landid,
+  landname,
   sortType,
   LoungeId,
   currentPage,
@@ -18,11 +19,11 @@ export const getCatLoungesWdwApi = async ({
       ? `?page=${currentPage}&sortordefault=ww`
       : `?page=${currentPage}`;
 
-  let myurl = window.location.href
-    .substring(window.location.href.lastIndexOf(landid + '/') + 1)
-    .replace(/([/~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g, ' ');
+  let pagename = landname
+    .replace(/([/~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\?\- ])+/g, ' ');
 
-  localStorage.setItem('pagename', myurl);
+  if(landid == '4') localStorage.setItem('pagename', 'Wdw LoungeLand');
+  else localStorage.setItem('pagename', landname);
 
   const apiEndpoint =
     GET_BASE_URL + `/backend/api/v1/disneyworldHome/` + landid;

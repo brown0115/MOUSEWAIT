@@ -38,6 +38,7 @@ const CatLounge = () => {
   let navigate = useNavigate();
   const { search } = useParams();
   const { landid } = useParams();
+  const { landname } = useParams();
 
   const { items, stickyItem, status, sortByTime } = useSelector(selectLounges);
   const [shortByTime, setShortByTime] = useState<any | string>(
@@ -78,6 +79,7 @@ const CatLounge = () => {
     dispatch(
       fetchCatLounges({
         landid,
+        landname,
         sortType,
         LoungeId,
         currentPage,
@@ -118,7 +120,7 @@ const CatLounge = () => {
   return (
     <>
     <MetaTags>
-      <title>{myurl}</title>
+      <title>{ landname }</title>
       <meta
         name='description'
         content=""

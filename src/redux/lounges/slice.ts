@@ -133,6 +133,7 @@ export type FetchHashLoungesTypeWdw = {
 };
 export type FetchCatLoungesType = {
   landid: any;
+  landname: any;
   sortType: SortTypeParams;
   LoungeId: number;
   currentPage: number;
@@ -141,6 +142,7 @@ export type FetchCatLoungesType = {
 };
 export type FetchCatLoungesTypeWdw = {
   landid: any;
+  landname: any;
   sortType: SortTypeParams;
   LoungeId: number;
   currentPage: number;
@@ -542,6 +544,7 @@ export const fetchCatLounges = createAsyncThunk<
 
   async ({
     landid,
+    landname,
     sortType,
     LoungeId,
     currentPage,
@@ -550,6 +553,7 @@ export const fetchCatLounges = createAsyncThunk<
   }) => {
     return await getCatLoungesApi({
       landid,
+      landname,
       sortType,
       LoungeId,
       currentPage,
@@ -566,6 +570,7 @@ export const fetchCatLoungesWdw = createAsyncThunk<
 
   async ({
     landid,
+    landname,
     sortType,
     LoungeId,
     currentPage,
@@ -574,6 +579,7 @@ export const fetchCatLoungesWdw = createAsyncThunk<
   }) => {
     return await getCatLoungesWdwApi({
       landid,
+      landname,
       sortType,
       LoungeId,
       currentPage,

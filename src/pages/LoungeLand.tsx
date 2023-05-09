@@ -61,12 +61,16 @@ const LoungeLand = () => {
   const handleLoginClick = () => {
     setShowPopup(!showPopup);
   };
+  
+  const landname = '';
+
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchStickyLounge({}));
     dispatch(
       fetchCatLounges({
         landid,
+        landname,
         sortType,
         LoungeId,
         currentPage,

@@ -37,6 +37,7 @@ const WdwCatLounge = () => {
   let navigate = useNavigate();
 
   const { landid } = useParams();
+  const { landname } = useParams();
   const { search } = useParams();
   const { items, stickyItem, status, sortByTime } = useSelector(selectLounges);
   const {
@@ -86,6 +87,7 @@ const WdwCatLounge = () => {
     dispatch(
       fetchCatLoungesWdw({
         landid,
+        landname,
         sortType,
         LoungeId,
         currentPage,
