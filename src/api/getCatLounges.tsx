@@ -4,6 +4,7 @@ import { Lounge } from '../redux/lounges/types';
 import { GET_BASE_URL } from '../constants/apiEndpoints';
 export const getCatLoungesApi = async ({
   landid,
+  landname,
   sortType,
   LoungeId,
   currentPage,
@@ -32,10 +33,9 @@ export const getCatLoungesApi = async ({
     if (landid == 3) {
       localStorage.setItem('pagename', 'LoungeLand');
     } else {
-      let myurl = window.location.href
-        .substring(window.location.href.lastIndexOf(landid + '/') + 1)
-        .replace(/([/~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g, ' ');
-      localStorage.setItem('pagename', myurl);
+      let pagename = landname
+        .replace(/([/~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\?\- ])+/g, ' ');
+      localStorage.setItem('pagename', pagename);
     }
 
     const { data } = await axios
