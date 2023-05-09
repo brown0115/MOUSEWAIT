@@ -189,18 +189,9 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
           >
             <div className='com-box-main'>
               <div className='com-box d-flex'>
-                {/*        <ReactQuill
-                  theme='snow'
-                  className='form-control'
-                  modules={modules}
-                  onChange={onEditorStateChange}
-                  value={stickerSelection}
-                  placeholder='Type your comment here...'
-                /> */}
-
                 <RichTextEditor
                   id='rte'
-                  placeholder='Type your reply..'
+                  placeholder='Add your magic...'
                   value={text}
                   onChange={setText}
                   controls={[[]]}
