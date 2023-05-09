@@ -127,7 +127,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
           <div className='com-box d-flex'>
             <RichTextEditor
               id='rte'
-              placeholder='Add your magic and @ to tag user..'
+              placeholder='Add your magic...'
               mentions={mentions}
               value={text}
               onChange={setText}

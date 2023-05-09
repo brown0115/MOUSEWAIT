@@ -169,7 +169,7 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
                     modules={modules}
                     onChange={onEditorStateChange}
                     value={stickerSelection}
-                    placeholder='Type your comment here...'
+                    placeholder='Add your magic...'
                     ref={textRef}
                   />
 
