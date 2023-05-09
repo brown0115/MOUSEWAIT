@@ -29,7 +29,7 @@ function Tab(props: any) {
   return (
     <div className={`tab-content`}>
       <div className='tab-pane fade active show'>
-        {props.tab.getemojidata.map((item: any, index: any) => (
+        {props.tab?.getemojidata.map((item: any, index: any) => (
           <img
             key={index}
             onClick={() => onAddSticker(item.product_image)}
@@ -52,12 +52,12 @@ function Navigation(props: any) {
     <div className='post-sec'>
       <ul className={`nav nav-pills`}>
         {props.tabs.map((item: any) => (
-          <li key={item.id} className={`nav-item`}>
+          <li key={item?.id} className={`nav-item`}>
             <span
               className={`nav-link ${
-                props.activeTabId === item.id ? 'active' : ''
+                props.activeTabId === item?.id ? 'active' : ''
               }`}
-              onClick={() => props.onNavClick(item.id)}
+              onClick={() => props.onNavClick(item?.id)}
             >
               {item.emoji_category_name}
             </span>
@@ -69,10 +69,10 @@ function Navigation(props: any) {
 }
 
 export const StickerTabs: React.FC<StickerTabPropsType> = ({ tabData, onClickSticker }) => {
-  const [activeTabId, setActiveTab] = useState(tabData[0].id);
+  const [activeTabId, setActiveTab] = useState(tabData[0]?.id);
 
   const activeTab = useMemo(
-    () => tabData.find((tab: any) => tab.id === activeTabId),
+    () => tabData.find((tab: any) => tab?.id === activeTabId),
     [activeTabId, tabData]
   );
 
