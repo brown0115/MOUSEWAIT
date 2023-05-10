@@ -152,16 +152,11 @@ export const CommentList: React.FC<CommentListPropsType> = ({
     });
   };
 
-  const [RemoveType, setRemoveType] = useState<any | string>('C');
+  const [RemoveType, setRemoveType] = useState<any | string>('W');
   const onRemove = (ban_chat_id: any) => {
-    console.log('remove');
-    return false;
     dispatch<any>(removeUserLounge({ ban_chat_id, RemoveType })).then(
       (res: any) => {
-        console.log(res);
-        return false;
         window.location.reload();
-        Notify(toast('Comment Removed'));
       }
     );
   };
@@ -206,7 +201,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
     <>
       <>
         <div>
-          <div className='comm-bo d-flex flex-row' key={cmt.chat_id}>
+          <div className='comm-bo d-flex flex-row' key={cmt.chat_reply_id}>
             <div className='small-c'>
               <a href=''>
                 <img
@@ -359,7 +354,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                 )} */}
 
                 <>
-                  {cmt.commentuser.user_id == loginuserid ? (
+                  {/* {cmt.commentuser.user_id == loginuserid ? (
                     <span className='co-l'>
                       <span onClick={showEditBox}>EDIT</span>
                       <span onClick={() => onRemove(cmt.chat_reply_id)}>
@@ -367,7 +362,24 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                       </span>
                     </span>
                   ) : (
+                    <></> */}
+
+                    {cmt.commentuser.user_id == loginuserid ? (
+                    <span className='co-l'>
+
+                      <span onClick={showEditBox}>EDIT</span>
+                      
+                      <span onClick={() => {
+                        if (window.confirm('Are You Sure?'))
+                          onRemove(cmt.chat_reply_id)
+                        }}
+                      >
+                        DELETE
+                      </span>
+                    </span>
+                  ) : (
                     <></>
+
                   )}
                 </>
               </p>
@@ -442,7 +454,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
           <EditBox
             replyData={''}
             id={''}
-            chatId={cmt.chat_id}
+            chatId={cmt.chat_reply_id}
             chat_reply_id={cmt.chat_reply_id}
             chat_reply_msg={cmt.chat_reply_msg}
             stickerData={stickerData}
@@ -453,7 +465,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
           <CommentReply
             replyData={cmt.commentsreply}
             replyShow={showReply}
-            chatId={cmt.chat_id}
+            chatId={cmt.chat_reply_id}
             chat_reply_id={cmt.chat_reply_id}
             stickerData={stickerData}
           />

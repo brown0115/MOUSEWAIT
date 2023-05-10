@@ -63,6 +63,7 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
     toolbar: false,
   };
 
+
   const { stickerPickItems } = useSelector(selectLounges);
 
   //const [commentData, SetCommentData] = useState<any | []>(replyData);
