@@ -55,14 +55,12 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
     setValue,
     handleSubmit,
     reset,
-    getValues,
     formState: { errors },
   } = useForm<FormData>();
   const dispatch = useAppDispatch();
   const modules = {
     toolbar: false,
   };
-
 
   const { stickerPickItems } = useSelector(selectLounges);
 
@@ -85,29 +83,16 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
     
     var rte = document.getElementById('my-rich-text-editor'); // Replace with the ID of your Rich Text Editor
     rte?.focus();
-    // var el= document.createElement("div");
-    // el.innerHTML = stickerPickItems.toString();
     var imageSrc = data;
-    if(stickerPickItems.toString() != '') {
-      editor.insertEmbed(position, 'image', imageSrc);
-      editor.setSelection(position + 1, 0);
-    }
+    editor.insertEmbed(position, 'image', imageSrc);
+    editor.setSelection(position + 1, 0);
   }
 
   if (editbox == true) {
-    /*  console.log('9999');
-    console.log(stickerSelection); */
     if (stickerSelection == '') {
       SetStickerSelection(chat_reply_msg);
     }
   }
-
-  const onEditorStateChange = (editorState: any) => {
-    /*  console.log(editorState);
-    console.log(chat_reply_msg); */
-    //if(editorState == '')
-    setValue('chat_reply_msg', editorState);
-  };
 
   const openSticker = () => {
     SetShowSticker(!showSticker);
@@ -117,22 +102,17 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
   const [Notify, setIsNotify] = useState<any | string>();
 
   const onSubmit = (data: any) => {
-    const chat_reply_msg = getValues('chat_reply_msg');
-    /* console.log(chat_reply_msg);
-    return false; */
-    chat_reply_msg != ''
+
+    data['chat_reply_msg'] = stickerSelection;
+    console.log('data' , data);
+    
+     /* return false; */
+     stickerSelection != ''
       ? dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
           reset();
           SetStickerSelection(null);
           window.location.reload();
           Notify(toast('Updated Successfully'));
-          // console.log(res);
-          //dispatch(fetchLoungeDetails({ LoungeId }));
-          /*    reset();
-          SetCommentData(res.payload.data.replydata);
-          let data: any = null;
-          dispatch<any>(addSticker(data));
-          SetStickerSelection(null); */
         })
       : alert('Please enter comment');
   };
@@ -168,7 +148,7 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
                     theme='snow'
                     className='form-control'
                     modules={modules}
-                    onChange={onEditorStateChange}
+                    onChange={SetStickerSelection}
                     value={stickerSelection}
                     placeholder='Add your magic...'
                     ref={textRef}

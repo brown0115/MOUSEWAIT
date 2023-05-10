@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../redux/store';
 import {
   postLoungeCommentReply,
-  removeUserLounge,
+  removeUserLoungeWdw,
   wholikeCommentReply,
   likeCommentReply,
 } from '../redux/lounges/slice';
@@ -152,9 +152,9 @@ export const CommentList: React.FC<CommentListPropsType> = ({
     });
   };
 
-  const [RemoveType, setRemoveType] = useState<any | string>('W');
+  const [RemoveType, setRemoveType] = useState<any | string>('C');
   const onRemove = (ban_chat_id: any) => {
-    dispatch<any>(removeUserLounge({ ban_chat_id, RemoveType })).then(
+    dispatch<any>(removeUserLoungeWdw({ ban_chat_id, RemoveType })).then(
       (res: any) => {
         window.location.reload();
       }
