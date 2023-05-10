@@ -354,8 +354,7 @@ const Notification = () => {
                                                               color: 'red',
                                                             }}
                                                           >
-                                                            You Are Reporting
-                                                            comment
+                                                            Report
                                                           </h6>
 
                                                           <div

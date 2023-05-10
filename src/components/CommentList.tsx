@@ -384,7 +384,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                   <h6
                     style={{ fontSize: '1rm', fontWeight: 400, color: 'red' }}
                   >
-                    You Are Reporting Comment
+                    Report
                   </h6>
                   <div className='close-p' onClick={closeModal}>
                     <i className='fa fa-close my-b' />
