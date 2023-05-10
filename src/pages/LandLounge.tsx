@@ -247,6 +247,15 @@ const LandLounge = () => {
                   ) : (
                     <>{localStorage.setItem('loungeland', '')}</>
                   )}
+                  {assignMenu.length > 0 ? (
+                    assignMenu.map((item: any) =>
+                      item.rights_id == '14'
+                        ? localStorage.setItem('club333', 'true')
+                        : ''
+                    )
+                  ) : (
+                    <>{localStorage.setItem('club333', '')}</>
+                  )}
                 </div>
               )}
             </div>

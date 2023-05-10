@@ -48,6 +48,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   const [file, setFile] = useState<number | string>();
   const [imagePreviewUrl, setImagePreviewUrl] = useState<any>();
   const loungland = localStorage.getItem('loungeland');
+  const club333 = localStorage.getItem('club333');
   const [text, setText] = useState('');
 
   let subtitle: any;
@@ -228,6 +229,19 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                           onClick={() => setLand('3')}
                         >
                           LOUNGΞLAND{' '}
+                        </li>
+                      ) : (
+                        <></>
+                      )}
+
+                      {club333 != '' ? (
+                        <li
+                          style={
+                            land == 3 ? { backgroundColor: '#9BB8EF' } : {}
+                          }
+                          onClick={() => setLand('3')}
+                        >
+                          club333{' '}
                         </li>
                       ) : (
                         <></>
