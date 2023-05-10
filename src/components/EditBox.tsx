@@ -148,11 +148,11 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
           >
             {type === 'C' ? (
               <h6 style={{ textAlign: 'center', color: 'red' }}>
-                You Are Editing Comment
+                Edit
               </h6>
             ) : (
               <h6 style={{ textAlign: 'center', color: 'red' }}>
-                You Are Editing Reply
+                Edit
               </h6>
             )}
 

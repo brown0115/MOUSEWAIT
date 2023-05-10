@@ -1684,7 +1684,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 }
 
 .mw-post .MW-btn {
-  background: #a0b7e9;
+  background: rgb(13, 110, 253);
   line-height: 1.5rem;
   border-radius: 0.6rem;
   color: #fff;
