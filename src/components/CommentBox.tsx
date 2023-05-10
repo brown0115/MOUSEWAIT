@@ -115,7 +115,6 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
     []
   );
 
-  // console.log(text);
   return (
     <div>
       <form

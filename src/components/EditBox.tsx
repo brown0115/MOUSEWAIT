@@ -70,9 +70,6 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
   //const [edittype, SetEditType] = useState<any | string>('C');
   const token = localStorage.getItem('token');
   const loginuserid = localStorage.getItem('user_id');
-  useEffect(() => {
-    SetStickerSelection(stickerPickItems.toString());
-  }, [stickerPickItems]);
 
   const textRef = useRef(null);
 
@@ -103,9 +100,7 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
 
   const onSubmit = (data: any) => {
 
-    data['chat_reply_msg'] = stickerSelection;
-    console.log('data' , data);
-    
+    data['chat_reply_msg'] = stickerSelection;    
      /* return false; */
      stickerSelection != ''
       ? dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
