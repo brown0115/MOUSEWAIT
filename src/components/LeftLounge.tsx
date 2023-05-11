@@ -154,7 +154,7 @@ const LeftLounge = (props: any) => {
                   }
                   to='/loungeland/'
                 >
-                  LOUNGΞLAND
+                  LOUNGE.LAND
                 </Link>
               </li>
             ) : (

@@ -236,7 +236,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                           }
                           onClick={() => setLand('3')}
                         >
-                          LOUNGE LAND{' '}
+                          LOUNGE.LAND{' '}
                         </li>
                       ) : (
                         <></>
