@@ -1624,6 +1624,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   outline: none;
   position: relative;
   box-shadow: 2px 2px 3px #999;
+  margin: auto;
 }
 
 .close-p {
@@ -1644,6 +1645,8 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 }
 .boxwidth {
   width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 .box-t-1 {
   background: #f5f5f5;
