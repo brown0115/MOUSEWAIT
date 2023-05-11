@@ -122,8 +122,10 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     } else {
       setIsLoading(true);
       var data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': text, 'chat_img': getValues('chat_img')}
-      if(land == '5' || land == '6') {
-        data['chat_room_id'] = parseInt(land) - 4;
+      console.log('wwwland', land)
+      if(land == 5 || land == 6) {
+        console.log('wwwland', land)
+        data['chat_room_id'] = land - 2;
         dispatch<any>(postLoungeWdw(data)).then((res: any) => {
           setIsLoading(false)
           closeModal();
