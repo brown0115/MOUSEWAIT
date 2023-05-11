@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Placeholder } from '../components/Placeholder';
 import { LoungeHeader } from '../components/WdwLoungeHeader';
-import { LoungeBox } from '../components/WdwLoungeBox';
+import { LoungeBox } from '../components/LoungeBox';
 import { LoungeList } from '../components/LoungeList';
 import { MobileLoungeHeader } from '../components/WdwMobileLoungeHeader';
 import {
@@ -122,24 +122,6 @@ const WdwLandLounge = () => {
     return () => window.removeEventListener('scroll', handelInfiniteScroll);
   }, []);
 
-  const onSubmit = (data: any) => {
-    setIsLoading(true);
-    dispatch<any>(postLoungeWdw(data)).then((res: any) => {
-      reset();
-      setIsLoading(false);
-      loadProgressBar();
-      dispatch(
-        fetchDisneyWorldLounges({
-          sortType,
-          LoungeId,
-          currentPage,
-          searchValue,
-          shortByTime,
-        })
-      );
-    });
-  };
-
   return (
     <>
     
@@ -171,13 +153,8 @@ const WdwLandLounge = () => {
                 <div className='content__items'>
                   <div>
                     <LoungeBox
-                      onSubmit={onSubmit}
-                      register={register}
-                      handleSubmit={handleSubmit}
-                      setValue={setValue}
                       setVisible={() => {}}
                       isVisible={false}
-                      isLoading={isLoading}
                       onCloseMenu={() => {}}
                     />
                   </div>

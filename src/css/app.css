@@ -1706,6 +1706,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   padding: 0.6rem 1rem;
   display: inline-flex;
   margin-right: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .select {

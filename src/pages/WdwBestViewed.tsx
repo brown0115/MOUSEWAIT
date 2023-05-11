@@ -5,18 +5,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Placeholder } from '../components/Placeholder';
 import { LoungeHeader } from '../components/WdwLoungeHeader';
-import { LoungeBox } from '../components/WdwLoungeBox';
 import { WDWLoungeList } from '../components/WDWLoungeList';
 import { MobileLoungeHeader } from '../components/WdwMobileLoungeHeader';
 import { fetchBestViewdWdw } from '../redux/lounges/slice';
 import { selectLounges } from '../redux/lounges/selectors';
 import { usersSelector } from '../redux/users/selectors';
-import { useForm } from 'react-hook-form';
-import Modal from 'react-modal';
-
-import stickerImage from '../assets/img/stickers.jpg';
-
-import { postLounge } from '../redux/lounges/slice';
 
 // @ts-ignore
 import MetaTags from 'react-meta-tags';

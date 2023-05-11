@@ -14,7 +14,7 @@ import { useLocation } from 'react-router';
 import { useEffect, useRef, useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import RightLoungeBest from '../components/WdwRightLoungeBest';
-import { LoungeBox } from '../components/WdwLoungeBox';
+import { LoungeBox } from '../components/LoungeBox';
 import { useForm } from 'react-hook-form';
 const WdwLeftLounge = (props: any) => {
   let navigate = useNavigate();
@@ -184,15 +184,9 @@ const WdwLeftLounge = (props: any) => {
             )}
 
             <LoungeBox
-              onSubmit={''}
-              register={register}
-              handleSubmit={handleSubmit}
-              setValue={setValue}
-              isLoading={isLoading}
               isVisible={closeHamburger}
               setVisible={setCloseHamburger}
               onCloseMenu={onCloseHamburgerMenu}
-              
             />
 
             <li className='nav-item' onClick={closeSideBar}>

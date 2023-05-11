@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import { loadProgressBar } from 'axios-progress-bar';
 import 'axios-progress-bar/dist/nprogress.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { postLounge, fetchLounges } from '../redux/lounges/slice';
+import { postLounge, postLoungeWdw, fetchLounges } from '../redux/lounges/slice';
 import Modal from 'react-modal';
 import { useAppDispatch } from '../redux/store';
 import { useForm } from 'react-hook-form';
@@ -14,6 +14,7 @@ import { isMobile } from 'react-device-detect';
 import Post from '../assets/img/h-p.png';
 import { getValue } from '@testing-library/user-event/dist/utils';
 import { BiWindows } from 'react-icons/bi';
+
 // import ProgressBar from "@ramonak/react-progress-bar";
 type LoungeBoxPropsType = {
   setVisible: any;
@@ -121,16 +122,27 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     } else {
       setIsLoading(true);
       var data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': text, 'chat_img': getValues('chat_img')}
-      
-      dispatch<any>(postLounge(data)).then((res: any) => {
-        setIsLoading(false)
-        closeModal();
-        if (res.payload.data.message != undefined) {
-          window.alert(res.payload.data.message);
-        }
-        // setStickyItem
-        window.location.reload();        
-      });
+      if(land == '5' || land == '6') {
+        data['chat_room_id'] = parseInt(land) - 4;
+        dispatch<any>(postLoungeWdw(data)).then((res: any) => {
+          setIsLoading(false)
+          closeModal();
+          if (res.payload.data.message != undefined) {
+            window.alert(res.payload.data.message);
+          }
+          window.location.reload();
+        });
+      }
+      else {
+        dispatch<any>(postLounge(data)).then((res: any) => {
+          setIsLoading(false)
+          closeModal();
+          if (res.payload.data.message != undefined) {
+            window.alert(res.payload.data.message);
+          }
+          window.location.reload();        
+        });
+      }
     }
     setIsLoading(true);
   }
@@ -208,7 +220,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                         style={land == 1 ? { backgroundColor: '#9BB8EF' } : {}}
                         onClick={() => setLand('1')}
                       >
-                        REALTIME TALK
+                        DISNEYLAND REALTIME
                       </li>
                       <li
                         style={land == 0 ? { backgroundColor: '#9BB8EF' } : {}}
@@ -224,7 +236,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                           }
                           onClick={() => setLand('3')}
                         >
-                          LOUNGΞLAND{' '}
+                          LOUNGE.LAND{' '}
                         </li>
                       ) : (
                         <></>
@@ -237,11 +249,25 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                           }
                           onClick={() => setLand('4')}
                         >
-                          club333{' '}
+                          CLUE.333{' '}
                         </li>
                       ) : (
                         <></>
                       )}
+
+                      <li
+                        style={land == 5 ? { backgroundColor: '#9BB8EF' } : {}}
+                        onClick={() => setLand('5')}
+                      >
+                        WDW TALK
+                      </li>
+                      <li
+                        style={land == 6 ? { backgroundColor: '#9BB8EF' } : {}}
+                        onClick={() => setLand('6')}
+                      >
+                        WDW REALTIME
+                      </li>
+
                     </ul>
                   </div>
                   <div className='mw-post text-center'>
