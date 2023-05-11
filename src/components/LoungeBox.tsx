@@ -237,9 +237,9 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                       {club333 != '' ? (
                         <li
                           style={
-                            land == 3 ? { backgroundColor: '#9BB8EF' } : {}
+                            land == 4 ? { backgroundColor: '#9BB8EF' } : {}
                           }
-                          onClick={() => setLand('3')}
+                          onClick={() => setLand('4')}
                         >
                           club333{' '}
                         </li>
