@@ -171,7 +171,7 @@ const LeftLounge = (props: any) => {
                   }
                   to='/club333/'
                 >
-                  Club 333
+                  CLUB 333
                 </Link>
               </li>
             ) : (

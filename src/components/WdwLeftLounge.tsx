@@ -176,7 +176,7 @@ const WdwLeftLounge = (props: any) => {
                   }
                   to='/club333/'
                 >
-                  club 333
+                  CLUB 333
                 </Link>
               </li>
             ) : (
