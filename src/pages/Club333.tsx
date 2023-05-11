@@ -40,6 +40,7 @@ const Club333 = () => {
   const landid = '4';
   const { search } = useParams();
   const { items, stickyItem, status, sortByTime } = useSelector(selectLounges);
+  const token = localStorage.getItem('token');
   const [shortByTime, setShortByTime] = useState<any | string>(
     localStorage.getItem('shortByTime')
   );
@@ -55,10 +56,18 @@ const Club333 = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
 
   const handleLoginClick = () => {
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+    
     setShowPopup(!showPopup);
   };
   

@@ -47,7 +47,8 @@ const LoungeLand = () => {
   const [showPopup, setShowPopup] = useState<any | string>(true);
   const [isLoading, setIsLoading] = useState<any | string>(false);
   let subtitle: any;
-
+  const token = localStorage.getItem('token');
+  
   let sortType: any = null;
   let LoungeId: any = null;
   //let currentPage: any = null;
@@ -55,10 +56,19 @@ const LoungeLand = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
 
   const handleLoginClick = () => {
+
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
     setShowPopup(!showPopup);
   };
   
