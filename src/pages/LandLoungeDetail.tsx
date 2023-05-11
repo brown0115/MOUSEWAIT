@@ -181,7 +181,8 @@ return ret;
     if (token != null) {
       const chat_msg = getValues('chat_msg');
 
-      chat_msg != ''
+      console.log('chat_msg', chat_msg)
+      chat_msg != '<p><br></p>' && chat_msg != ''
         ? dispatch<any>(postLoungeComment(data)).then((res: any) => {
             if (res.payload.message != undefined) {
               window.alert(res.payload.message);

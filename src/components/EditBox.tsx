@@ -100,9 +100,10 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
 
   const onSubmit = (data: any) => {
 
-    data['chat_reply_msg'] = stickerSelection;    
+    data['chat_reply_msg'] = stickerSelection; 
+    console.log('stickerSelection', stickerSelection);   
      /* return false; */
-     stickerSelection != ''
+     stickerSelection != '<p><br></p>' && stickerSelection != ''
       ? dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
           reset();
           SetStickerSelection(null);

@@ -22,7 +22,7 @@ export const getCatLoungesWdwApi = async ({
   let pagename = landname
     .replace(/([/~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\?\- ])+/g, ' ');
 
-  if(landid == '4') localStorage.setItem('pagename', 'Wdw LoungeLand');
+  if(landid == '5') localStorage.setItem('pagename', 'Wdw LoungeLand');
   else localStorage.setItem('pagename', landname);
 
   const apiEndpoint =

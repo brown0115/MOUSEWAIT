@@ -49,7 +49,6 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
   const textRef = useRef(null);
 
   useEffect(() => {
-    register('chat_msg', { required: true, minLength: 11 });
     setValue('chat_msg', text);
   }, [text]);
 

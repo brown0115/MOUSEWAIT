@@ -26,13 +26,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { removeUserLounge } from '../redux/lounges/slice';
 import { LikeCommentReply } from '../components/LikeCommentReply';
 import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
-import { CommentReplyBox } from '../components/CommentReplyBox';
 
-type CommentReplyPropsType = {
+type CommentReplyBoxPropsType = {
   replyData: any;
-  replyShow: boolean;
-  chatId: any;
-  chat_reply_id: any;
   stickerData: any;
 };
 type FormData = {
@@ -41,12 +37,9 @@ type FormData = {
   chat_reply_id: number;
 };
 
-export const CommentReply: React.FC<CommentReplyPropsType> = ({
+export const CommentReplyBox: React.FC<CommentReplyBoxPropsType> = ({
   replyData,
-  replyShow,
-  chatId,
-  chat_reply_id,
-  stickerData,
+  stickerData
 }) => {
   const {
     register,
@@ -57,31 +50,17 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
     formState: { errors },
   } = useForm<FormData>();
   const dispatch = useAppDispatch();
-  let navigate = useNavigate();
   const { stickerPickItems } = useSelector(selectLounges);
 
   const [commentData, SetCommentData] = useState<any | []>(replyData);
   const [showSticker, SetShowSticker] = useState<any | string>(false);
   const [stickerSelection, SetStickerSelection] = useState<any | string>(null);
-  const token = localStorage.getItem('token');
   const loginuserid = localStorage.getItem('user_id');
   useEffect(() => {
     SetStickerSelection(stickerPickItems.toString());
   }, [stickerPickItems]);
 
   const textRef = useRef(null);
-
-
-  const onSubmit = (data: any) => {
-    const chat_reply_msg = getValues('chat_reply_msg');
-    chat_reply_msg != '' && chat_reply_msg != '<p><br></p>'
-      ? dispatch<any>(postLoungeCommentReply(data)).then((res: any) => {
-          reset();
-          SetCommentData(res.payload.data.replydata);
-          setText('');
-        })
-      : alert('Please enter reply');
-  };
 
   function converTime(datevalue: any) {
     const date = new Date(datevalue);
@@ -162,58 +141,120 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
   };
 
   return (
-    <>
-      {replyShow == true && (
-        <div>
-          <form
-            className='space-y-6'
-            onSubmit={handleSubmit(onSubmit)}
-            method='POST'
-          >
-            <div className='com-box-main'>
-              <div className='com-box d-flex'>
-                <RichTextEditor
-                  id='rte'
-                  placeholder='Add your magic...'
-                  value={text}
-                  onChange={setText}
-                  controls={[[]]}
-                  ref={textRef}
-                />
-                <input
-                  type='hidden'
-                  readOnly={true}
-                  {...register('chat_id')}
-                  defaultValue={chatId}
-                />
-                <input
-                  type='hidden'
-                  readOnly={true}
-                  {...register('chat_reply_id')}
-                  defaultValue={chat_reply_id}
-                />
+    <>      
+      <div className='mid-comm-s mid-comm-s2'>
+        <div className='comm-bo d-flex'>
+          <div className='small-c'>
+            <a href=''>
+              <img
+                style={{
+                  verticalAlign: 'middle',
+                  height: '35px',
+                  width: '35px',
+                  borderRadius: '50%',
+                }}
+                src={
+                  GET_BASE_URL_IMAGE +
+                  '/disneyland/images/thumbs/' +
+                  replyData.replyuser.image
+                }
+                className='com-imggg'
+              />
+            </a>
+          </div>
+          <div className='comm-c d-flex'>
+            <p className='commentlist' style={{ marginTop: '-1rem' }}>
+              <span
+                style={{
+                  fontFamily: 'Inter',
+                  fontSize: '1rm',
 
-                <div className='icon-ic d-flex'>
-                  <div className='icon-ic0' onClick={handleSubmit(onSubmit)}>
-                  </div>
-                  <div className='icon-ic1' onClick={openSticker}>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-          
-          {showSticker == true && (
-            <div>
-              <StickerTabs tabData={stickerData} onClickSticker = {onClickSticker}/>
-            </div>
-          )}{' '}
+                  marginTop: '-1rem',
+                  fontWeight: 400,
+                  fontStyle: 'normal',
+                  color: '#313237',
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: formattedMessage(replyData.chat_reply_msg)
+                    .replace('<p>', '<span>')
+                    .replace('</p>', '</spam>')
+                    .replace('<br>', ''),
+                }}
+              ></span>
+
+              <br />
+              <Link
+                style={{
+                  marginRight: '.5rem',
+                  color: '#000',
+                }}
+                to={`/disneyland/user/${replyData.replyuser?.user_id}/mypost`}
+              >
+                {replyData.replyuser?.user_name}
+              </Link>
+
+              <span className='com-tt'>
+                <span>{replyData.replyuser?.rank}</span>
+                <span
+                  style={{
+                    marginLeft: '.5rem',
+                  }}
+                >
+                  #{replyData.replyuser?.position}
+                </span>
+
+                <span
+                  style={{
+                    marginLeft: '.5rem',
+                    marginRight: '1rem',
+                    fontSize: 'smaller',
+                  }}
+                >
+                  {converDate(replyData?.chat_reply_date)}
+                </span>
+              </span>
+              <br />
+              <span className='co-l'>
+                <span>FLAG</span>
+
+                <>
+                  <LikeCommentReply
+                    likecount={replyData.no_of_likes}
+                    chat_id={replyData.chat_id}
+                    comment_id={replyData.chat_reply_id}
+                    reply_id={replyData.id}
+                    commnet_userid={replyData.replyuser.user_id}
+                    type={'R'}
+                    page={'DL'}
+                  />
+                </>
+
+              </span>
+
+              <>
+                {replyData.replyuser.user_id == loginuserid ? (
+                  <span className='co-l'>
+                    <span onClick={showEditBox}>EDIT</span>
+                    <span onClick={() => onRemove(replyData.id)}>DELETE</span>
+                  </span>
+                ) : (
+                  <></>
+                )}
+              </>
+            </p>
+          </div>
         </div>
-      )}
-      {
-        commentData.map((rep: any, index2: any) => (
-          <CommentReplyBox replyData={rep} key={index2} stickerData={stickerData}></CommentReplyBox>
-      ))}
+        <EditBox
+          replyData={''}
+          id={replyData.id}
+          chatId={replyData.chat_id}
+          chat_reply_id={replyData.chat_reply_id}
+          chat_reply_msg={replyData.chat_reply_msg}
+          stickerData={stickerData}
+          editbox={editbox}
+          type={'R'}
+        />
+      </div>
     </>
   );
 };
