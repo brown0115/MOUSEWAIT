@@ -1987,6 +1987,38 @@ a:hover {
   max-height: 2rem;
 }
 
+.tagUserItem {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+}
+
+.tagUserItem button {
+  border-radius: 40px;
+  display: flex;
+  height: 100%;
+}
+
+.tagUserItem button img {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  border-color: green;
+  border-width: 1px;
+}
+
+.tagUserItem button div {
+  align-items: center;
+  margin: 6px;
+}
+
+.tagUserList {
+  overflow-y: auto;
+  width: 250px;
+  height: 40px;
+}
+
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
   /*  background: #373a47; */
