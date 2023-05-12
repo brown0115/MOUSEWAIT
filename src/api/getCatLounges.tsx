@@ -31,7 +31,7 @@ export const getCatLoungesApi = async ({
     return data;
   } else {
     if (landid == 3) {
-      localStorage.setItem('pagename', 'LoungeLand');
+      localStorage.setItem('pagename', 'lounge.land');
     }
     else if(landid == 4) 
       localStorage.setItem('pagename', 'CLUB 333');
