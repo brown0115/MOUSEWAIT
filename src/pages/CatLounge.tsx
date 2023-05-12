@@ -45,6 +45,7 @@ const CatLounge = () => {
     localStorage.getItem('shortByTime')
   );
 
+  const token = localStorage.getItem('token');
   const [showPopup, setShowPopup] = useState<any | string>(true);
   const [isLoading, setIsLoading] = useState<any | string>(false);
   let subtitle: any;
@@ -55,6 +56,11 @@ const CatLounge = () => {
   let searchValue: any = null;
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
+
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
 
@@ -65,6 +71,12 @@ const CatLounge = () => {
   const [audienceSample, setAudienceSample] = useState(items); // set campaign as default
 
   useEffect(() => {
+
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
+
     if (search) {
       searchValue = search;
     }
@@ -75,6 +87,12 @@ const CatLounge = () => {
     /*  if (currentPage == 1) {
       window.scrollTo(0, 0);
     } */
+
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
+
     dispatch(fetchStickyLounge({}));
     dispatch(
       fetchCatLounges({
@@ -106,6 +124,12 @@ const CatLounge = () => {
   };
 
   useEffect(() => {
+
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
+
     window.addEventListener('scroll', handelInfiniteScroll);
     return () => window.removeEventListener('scroll', handelInfiniteScroll);
   }, []);

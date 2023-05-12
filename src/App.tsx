@@ -51,6 +51,11 @@ const LoungeLand = lazy(
   () => import(/* webpackChunkName: "LandLounge" */ './pages/LoungeLand')
 );
 
+const Club333 = lazy(
+  () => import(/* webpackChunkName: "LandLounge" */ './pages/Club333')
+);
+
+
 const Chat = lazy(
   () => import(/* webpackChunkName: "LandLounge" */ './pages/Chat')
 );
@@ -127,6 +132,15 @@ const App = () => {
             element={
               <Suspense fallback={<div>"Loading ..."</div>}>
                 <LoungeLand />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path='/club333'
+            element={
+              <Suspense fallback={<div>"Loading ..."</div>}>
+                <Club333 />
               </Suspense>
             }
           />

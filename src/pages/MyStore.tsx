@@ -37,6 +37,11 @@ const MyStore = () => {
   let searchValue: any = null;
 
   useEffect(() => {
+    
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
     window.scrollTo(0, 0);
     dispatch(fetchMyStore({ sortType, currentPage }));
     // dispatch(fetchMyHistory({ sortType,  currentPage }))
@@ -58,11 +63,17 @@ const MyStore = () => {
     //UserName: string;
   };
   useEffect(() => {
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
+
     setValue('Id', Id);
   }, [Id]);
 
   let navigate = useNavigate();
   const myStoreBuy = (Id: any) => {
+
     if (token == null) {
       navigate('/disneyland/login');
     } else {
@@ -72,6 +83,11 @@ const MyStore = () => {
   };
 
   const onSubmit = (data: any) => {
+
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
     window.scrollTo(0, 0);
     dispatch(fetchMyStore({ sortType, currentPage }));
     setModal(false);

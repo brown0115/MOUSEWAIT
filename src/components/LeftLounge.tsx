@@ -28,6 +28,7 @@ const LeftLounge = (props: any) => {
   const [userId, setUserId] = useState(localStorage.getItem('user_id') as any);
   const loginfrom = localStorage.getItem('loginfrom');
   const loungeland = localStorage.getItem('loungeland');
+  const club333 = localStorage.getItem('club333');
   const [showMenu, setShowMenu] = useState<any | string>(false);
 
   const menuclick = () => {
@@ -153,7 +154,24 @@ const LeftLounge = (props: any) => {
                   }
                   to='/loungeland/'
                 >
-                  LOUNGΞLAND
+                  LOUNGE.LAND
+                </Link>
+              </li>
+            ) : (
+              <li></li>
+            )}
+
+            {club333 == 'true' ? (
+              <li className='nav-item ' onClick={closeSideBar}>
+                <Link
+                  className={
+                    location.pathname == '/club333/'
+                      ? 'selectmenu new-nr'
+                      : 'new-nr'
+                  }
+                  to='/club333/'
+                >
+                  CLUB 333
                 </Link>
               </li>
             ) : (

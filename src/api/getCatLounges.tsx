@@ -32,7 +32,10 @@ export const getCatLoungesApi = async ({
   } else {
     if (landid == 3) {
       localStorage.setItem('pagename', 'LoungeLand');
-    } else {
+    }
+    else if(landid == 4) 
+      localStorage.setItem('pagename', 'CLUB 333');
+    else {
       let pagename = landname
         .replace(/([/~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\?\- ])+/g, ' ');
       localStorage.setItem('pagename', pagename);
