@@ -33,7 +33,6 @@ export const ThankButtonWdw: React.FC<ThankButtonWdwPropsType> = ({
       res.payload.data[0].message == 'Removed' && SetLikeCount(countvalue - 1);
       res.payload.data[0].message == 'Added' && SetMyIcon(likeB);
       res.payload.data[0].message == 'Removed' && SetMyIcon(likeV);
-      Notify(toast(res.payload.data[0].message));
     });
   };
 
