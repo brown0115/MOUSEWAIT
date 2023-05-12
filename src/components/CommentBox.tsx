@@ -45,11 +45,14 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
   const token = localStorage.getItem('token');
 
   const [text, setText] = useState('');
+  const [ filterUser, setFilterUser ] = useState([]);
 
   const textRef = useRef(null);
 
   useEffect(() => {
     setValue('chat_msg', text);
+    if(text == '' || text == '<p><br></p>') 
+      setFilterUser([]);
   }, [text]);
 
   
@@ -104,6 +107,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
                   item.value.toLowerCase().includes(searchTerm.toLowerCase())
               );
 
+              setFilterUser(includesSearchTerm);
               renderList(includesSearchTerm);
             });
 
@@ -116,6 +120,17 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
 
   return (
     <div>
+      {
+        filterUser.map((item, index) => {
+          return (
+            <>
+              <div className="tagUserList">
+                {item['value']} {item['image']}
+              </div>
+            </>
+          )
+        })
+      }
       <form
         className='space-y-6'
         onSubmit={handleSubmit(onSubmit)}
