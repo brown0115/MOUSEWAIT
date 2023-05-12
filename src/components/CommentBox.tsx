@@ -47,12 +47,10 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
   const token = localStorage.getItem('token');
 
   const [text, setText] = useState('');
-  const [ filterUser, setFilterUser ] = useState([]);
-
+  
   const textRef = useRef(null);
   
-  const [ moveCursor, setMoveCursor ] = useState(0);
-
+  const [ filterUser, setFilterUser ] = useState([]);
   const [ searchText, setSearchText ] = useState('');
 
   useEffect(() => {
