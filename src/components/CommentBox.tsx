@@ -139,13 +139,6 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
     var newText = editor.getText(0, position-searchText.length) + item['value'] + oldText;
     editor.setText(newText);
     editor.setSelection(position + item['value'].length - searchText.length, 0);
-    // var rte = document.getElementById('my-rich-text-editor'); // Replace with the ID of your Rich Text Editor
-    // rte?.focus();
-    // setText(newText);
-
-    // newText = text.substring(0, index) + '@' + item['value'] + text.substring(index+oldText.length);
-    // setText(newText);
-    // console.log('text', newText)
   }
 
   return (
