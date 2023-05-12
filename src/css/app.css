@@ -1687,7 +1687,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 }
 
 .mw-post .MW-btn {
-  background: rgb(13, 110, 253);
+  background: #a0b7e9;
   line-height: 1.5rem;
   border-radius: 0.6rem;
   color: #fff;
@@ -1977,7 +1977,7 @@ a:hover {
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: absolute;
-  width: 30px;
+  width: 50px;
   height: 25px;
   right: 0px;
   top: 20px;
