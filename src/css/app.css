@@ -2017,7 +2017,9 @@ a:hover {
   overflow-y: auto;
   overflow-x: hidden;
   width: 250px;
-  height: 40px;
+  max-height: 200px;
+  border: 1px blue;
+  background-color: white;
 }
 
 /* Color/shape of burger icon bars */
