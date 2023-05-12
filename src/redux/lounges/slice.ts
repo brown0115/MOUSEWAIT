@@ -102,7 +102,7 @@ const initialState: LoungesSliceState = {
 export type FetchLoungesType = {
   sortType: SortTypeParams;
   LoungeId: number;
-  currentPage: number;
+  currentPage: any;
   searchValue: string;
   shortByTime: string;
 };
