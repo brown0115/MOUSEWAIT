@@ -44,33 +44,23 @@ const LoungeLand = () => {
     localStorage.getItem('shortByTime')
   );
 
-  const [showPopup, setShowPopup] = useState<any | string>(true);
-  const [isLoading, setIsLoading] = useState<any | string>(false);
-  let subtitle: any;
   const token = localStorage.getItem('token');
-  
+  const loungeland = localStorage.getItem('loungeland');
+
   let sortType: any = null;
   let LoungeId: any = null;
   //let currentPage: any = null;
   let searchValue: any = null;
 
   const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
-    if (token == null) {
+    if (token == null || loungeland != 'true' ) {
       navigate('/disneyland/login');
     }
 
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
-
-  const handleLoginClick = () => {
-
-    if (token == null) {
-      navigate('/disneyland/login');
-    }
-
-    setShowPopup(!showPopup);
-  };
   
   const landname = '';
 
@@ -90,7 +80,6 @@ const LoungeLand = () => {
     );
   }, [landid, currentPage, shortByTime, search]);
 
-  // console.log(items);
   return (
     <>
       <MetaTags>

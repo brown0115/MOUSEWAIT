@@ -58,9 +58,6 @@ const LandLounge = () => {
 
   const [showPopup, setShowPopup] = useState<any | string>(true);
 
-
-  let subtitle: any;
-
   let sortType: any = null;
   let LoungeId: any = null;
   // let currentPage: any = null;
@@ -73,10 +70,6 @@ const LandLounge = () => {
 
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
-
-  const handleLoginClick = () => {
-    setShowPopup(!showPopup);
-  };
 
   const [audienceSample, setAudienceSample] = useState(items); // set campaign as default
 
@@ -106,8 +99,6 @@ const LandLounge = () => {
     );
   };
 
-  //console.log(myData);
-
   useEffect(() => {
     if (token == null) {
       navigate('/disneyland/login');
@@ -133,9 +124,7 @@ const LandLounge = () => {
   }, []);
 
   const handelInfiniteScroll = async () => {
-    // console.log("scrollHeight" + document.documentElement.scrollHeight);
-    // console.log("innerHeight" + window.innerHeight);
-    // console.log("scrollTop" + document.documentElement.scrollTop);
+
     try {
       if (
         window.innerHeight + document.documentElement.scrollTop + 1 >=
@@ -182,16 +171,7 @@ const LandLounge = () => {
 
             <LoungeHeader />
             <MobileLoungeHeader />
-
-            <div id='progressbarContainer'>
-              {/* {
-               isLoading==false? <div className="progress" style={{borderRadius:"10px"  ,width:"80%" ,marginLeft:"12%" , marginBottom:"10px"}}>
-               <label htmlFor="progressbar" >40%</label>
-               <progress id='progress-bar' value='40' max='100' style={{ width:"100%", borderRadius:"20px"  , }}> </progress>
-               </div> :""
-              } */}
-            </div>
-
+            
             <div className='mid-card-sec'>
               {status === 'error' ? (
                 <div className='content__error-info'>
