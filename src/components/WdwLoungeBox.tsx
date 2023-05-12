@@ -200,11 +200,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                   />
                 ) : (
                   <p>
-                    Earn MouseWait Credits and help the community by posting
-                    quality family- friendly content to the Lounge. Please only
-                    post Disney related pictures that you own -- NO GOOGLED
-                    PICS! <br />
-                    Thank You!
+                    📷👨‍👩‍👧‍👦💰👍 Hey there! <br/>Share your Disney pics in the Lounge and earn MouseWait Credits! 👍📷😍 Just make sure they're family-friendly, and please don't post Googled pictures unless they're related to a news story.<br></br>🚫🔍 Thanks for being a part of our magical community! 🏰✨👸
                   </p>
                 )}
 

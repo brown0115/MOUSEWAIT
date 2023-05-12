@@ -21,7 +21,7 @@ export default function LoungeLayout() {
             <div className='des-main-sec'>
               {/* ===leftbar start=== */}
               {pathArray[1] === 'loungeland' ||
-              pathArray[1] === 'disneyland' ? (
+              pathArray[1] === 'disneyland' || pathArray[1] === 'club333' ? (
                 <LeftLounge />
               ) : (
                 <WdwLeftLounge />

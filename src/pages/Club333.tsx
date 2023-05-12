@@ -33,19 +33,23 @@ type SearchData = {
   searchValue: string;
 };
 
-const LoungeLand = () => {
+const Club333 = () => {
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
 
-  const landid = '3';
+  const landid = '4';
   const { search } = useParams();
   const { items, stickyItem, status, sortByTime } = useSelector(selectLounges);
+  const token = localStorage.getItem('token');
+  const club333 = localStorage.getItem('club333');
+
   const [shortByTime, setShortByTime] = useState<any | string>(
     localStorage.getItem('shortByTime')
   );
 
-  const token = localStorage.getItem('token');
-  const loungeland = localStorage.getItem('loungeland');
+  const [showPopup, setShowPopup] = useState<any | string>(true);
+  const [isLoading, setIsLoading] = useState<any | string>(false);
+  let subtitle: any;
 
   let sortType: any = null;
   let LoungeId: any = null;
@@ -53,14 +57,21 @@ const LoungeLand = () => {
   let searchValue: any = null;
 
   const [currentPage, setCurrentPage] = useState(1);
-
   useEffect(() => {
-    if (token == null || loungeland != 'true' ) {
+    if (token == null || club333 != 'true') {
       navigate('/disneyland/login');
     }
 
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
+
+  const handleLoginClick = () => {
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
+    setShowPopup(!showPopup);
+  };
   
   const landname = '';
 
@@ -80,10 +91,11 @@ const LoungeLand = () => {
     );
   }, [landid, currentPage, shortByTime, search]);
 
+  // console.log(items);
   return (
     <>
       <MetaTags>
-        <title>LoungeLand</title>
+        <title>Club 333</title>
         <meta property='og:title' content='Mousewait' />
         <meta
           property='og:image'
@@ -139,4 +151,4 @@ const LoungeLand = () => {
   );
 };
 
-export default LoungeLand;
+export default Club333;

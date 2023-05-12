@@ -69,11 +69,14 @@ const LandLoungeDetail = (props: any) => {
 
   const user_id = localStorage.removeItem('userid');
   // const user_name = localStorage.removeItem('user_name');
-  const onClickIcon = () => {
-    SetShowIcon(!showIcon);
-  };
+
   let navigate = useNavigate();
   useEffect(() => {
+
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
     window.scrollTo(0, 0);
 
     dispatch(fetchLoungeDetails({ LoungeId })).then((res: any) => {
