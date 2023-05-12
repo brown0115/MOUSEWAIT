@@ -141,8 +141,8 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
   }
 
   return (
-    <div>
-      <div className="tagUserList">
+    <div style={{'position': 'relative'}}>
+      <div className="tagUserList" style={{'position': 'absolute', 'bottom': '60px'}}>
         {
           filterUser.map((item, index) => {
             return (

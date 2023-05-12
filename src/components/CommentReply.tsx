@@ -212,13 +212,14 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
     editor.setText(newText);
     editor.setSelection(position + item['value'].length - searchText.length, 0);
   }
-  
+
   return (
     <>
       {replyShow == true && (
-        <div>
+        <div style={{position: 'relative'}}>
 
-          <div className="tagUserList">
+          <div className="tagUserList" style={{'position': 'absolute', 'bottom': '60px'}}>
+
           {
             filterUser.map((item, index) => {
               return (

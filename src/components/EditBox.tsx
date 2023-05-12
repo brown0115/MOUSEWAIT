@@ -177,7 +177,7 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
           <div
             className='editbox'
             style={{
-              padding: '10px',
+              padding: '10px', 'position': 'relative'
             }}
           >
             {type === 'C' ? (
@@ -191,7 +191,8 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
             )}
 
             
-            <div className="tagUserList">
+            <div className="tagUserList" style={{'position': 'absolute', 'bottom': '60px'}}>
+
               {
                 filterUser.map((item, index) => {
                   return (
