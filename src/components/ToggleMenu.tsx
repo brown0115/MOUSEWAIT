@@ -151,6 +151,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
 
   // remove post from view particular user not delete
   const onRemove = (ban_chat_id: any, RemoveType: string) => {
+    return;
     if (token == null) {
       navigate('/disneyland/login');
     } else {
@@ -162,7 +163,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
           Notify(toast(res.payload.data));
         }
       );
-
+      
       dispatch(
         fetchLounges({
           sortType,
@@ -180,12 +181,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
     if (token == null) {
       navigate('/disneyland/login');
     } else {
-      //console.log('0000000000000')
-      //console.log(LoungeId)
       dispatch<any>(postBookMark({ LoungeId })).then((res: any) => {
-        //reset()
-        //console.log(res.payload.data[0].message);
-        //console.log('kkkkk000');
 
         res.payload.data[0].message == 'Added'
           ? SetBookMark(true)

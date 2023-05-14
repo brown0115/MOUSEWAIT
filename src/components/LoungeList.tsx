@@ -102,40 +102,9 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
       dispatch<any>(postLoungeFlag(data)).then((res: any) => {
         window.confirm(res.payload.data[0].error);
         window.location.reload();
-        // Notify(toast(res.payload.data[0].error));
-        /*    reset();
-        setIsLoading(false);
-        loadProgressBar();
-        dispatch(
-          fetchLounges({
-            sortType,
-            LoungeId,
-            currentPage,
-            searchValue,
-            shortByTime,
-          })
-        ); */
       });
     }
   };
-
-  /*   const formatText = (text: any) => {
-    let content = text?.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
-    let hashtag;
-
-    return content?.map((word: any) => {
-      if (word.startsWith('#')) {
-        hashtag = word.replace('#', '');
-        return (
-          <Link to={`/disneyland/hash/${hashtag}`}>
-            <a style={{ color: 'blue', textDecoration: 'underline' }}>{word}</a>
-          </Link>
-        );
-      } else {
-        return word;
-      }
-    });
-  }; */
 
   function removeTags(string: any) {
     let newstring = string
@@ -216,6 +185,7 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
               {/*  {console.log(obj.user.user_id)}
         {console.log(obj.isthankyou?.user_id)} */}
             </>
+            
             <ToggleMenu
               onSubmit={onSubmit}
               register={register}
@@ -237,7 +207,7 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
               }
               editType={obj.user?.user_id == user ? true : false}
               chat_reply_msg={obj.chat_msg}
-              pageName={'Lounge'}
+              pageName={'sdfsdf'}
               lock={obj.islock == '0' ? 'Lock' : 'UnLock'}
               chatRoomId={obj.chat_room_id}
               getStick={obj.checksticky == null ? 'Stick' : 'UnStick'}
@@ -308,14 +278,6 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
 
           <div>
             <Link
-              /*          to={
-                obj.mapping_url != ''
-                  ? `/disneyland/lands-talk/${obj.mapping_url.replace(
-                      /([~!@#$%^&*()_+=`{}\[\]\|\\:;'<>,.\? ])+/g,
-                      '-'
-                    )}`
-                  : `/disneyland/lands-talk/${obj.chat_id}/Mousewait`
-              } */
 
               to={
                 obj.mapping_url

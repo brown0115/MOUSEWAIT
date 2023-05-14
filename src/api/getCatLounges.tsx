@@ -13,8 +13,7 @@ export const getCatLoungesApi = async ({
 }: FetchCatLoungesType) => {
   const responseBody = (response: AxiosResponse) => response.data;
   const token = localStorage.getItem('token');
-
-  console.log('aaaaaaaa', LoungeId);
+  
   let sorvalue = null;
   let sortByTime =
     shortByTime == 'true'

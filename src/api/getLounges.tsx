@@ -33,7 +33,7 @@ export const getAllLoungesApi = async ({
   // else if(currentPage == 4)
   //   localStorage.setItem('pagename', 'CLUB333');
   // else
-  //   localStorage.setItem('pagename', 'Disneyland Talk');
+  localStorage.setItem('pagename', 'Disneyland Talk');
   
   const token = localStorage.getItem('token');
 
