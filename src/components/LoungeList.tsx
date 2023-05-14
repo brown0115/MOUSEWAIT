@@ -207,7 +207,7 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
               }
               editType={obj.user?.user_id == user ? true : false}
               chat_reply_msg={obj.chat_msg}
-              pageName={'sdfsdf'}
+              pageName={'Lounge'}
               lock={obj.islock == '0' ? 'Lock' : 'UnLock'}
               chatRoomId={obj.chat_room_id}
               getStick={obj.checksticky == null ? 'Stick' : 'UnStick'}

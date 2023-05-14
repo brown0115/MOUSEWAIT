@@ -23,6 +23,12 @@ export type loginType = {
   loginfrom: string;
 };
 
+export type ResetPasswordType = {
+  user_id: any;
+  resetkey: any;
+  user_pass: any;
+};
+
 export type changePassType = {
   password_old: string;
   password_new: string;
@@ -45,6 +51,7 @@ export type verifyEmailType = {
 export type chatSend = {
   user_message: string;
 };
+
 
 export const signinUser = createAsyncThunk<User[], loginType>(
   'users/signinUser',
@@ -84,6 +91,34 @@ export const signinUser = createAsyncThunk<User[], loginType>(
     } catch (e: any) {
       console.log('Error', e.response.data);
       return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
+
+
+export const resetPassword = createAsyncThunk<User[], ResetPasswordType>(
+  'users/resetPassword',
+  async ({ user_id, resetkey, user_pass }) => {
+    try {
+      const response = await fetch(
+        GET_BASE_URL + '/backend/api/v1/auth/resetPassword',
+        {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id,
+            resetkey,
+            user_pass,
+          }),
+        }
+      );
+      let data = await response.json();
+      return { ...data };
+    } catch (e: any) {
+      console.log('Error', e.response.data);
     }
   }
 );
@@ -334,6 +369,25 @@ export const usersSlice = createSlice({
       return state;
     });
     builder.addCase(signinUser.rejected, (state, action) => {
+      state.isFetching = false;
+      state.isSuccess = false;
+      state.isError = true;
+      state.errorMessage = action.payload as any;
+    });
+    
+    builder.addCase(resetPassword.pending, (state) => {
+      state.isFetching = true;
+    });
+    builder.addCase(resetPassword.fulfilled, (state, action) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isError = false;
+      state.isLoggedIn = true;
+
+      state.errorMessage = action.payload as any;
+      return state;
+    });
+    builder.addCase(resetPassword.rejected, (state, action) => {
       state.isFetching = false;
       state.isSuccess = false;
       state.isError = true;

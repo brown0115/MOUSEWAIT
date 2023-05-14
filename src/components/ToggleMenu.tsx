@@ -16,6 +16,7 @@ import {
   removeImageOverPost,
   fetchUserMenu,
   postSubscribeFromLounge,
+  fetchCatLounges,
 } from '../redux/lounges/slice';
 import { fetchLoungeDetails } from '../redux/lounges/slice';
 import { useSelector } from 'react-redux';
@@ -151,7 +152,6 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
 
   // remove post from view particular user not delete
   const onRemove = (ban_chat_id: any, RemoveType: string) => {
-    return;
     if (token == null) {
       navigate('/disneyland/login');
     } else {
@@ -164,15 +164,32 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
         }
       );
       
-      dispatch(
-        fetchLounges({
+      if(chatRoomId == 3 || chatRoomId == 4) {
+        fetchCatLounges({
+          landid: chatRoomId,
+          landname: pageName,
           sortType,
           LoungeId,
           currentPage,
           searchValue,
           shortByTime,
         })
-      );
+      }
+      else {
+
+        dispatch(
+          fetchLounges({
+            sortType,
+            LoungeId,
+            currentPage,
+            searchValue,
+            shortByTime,
+          })
+        );
+        
+      }
+
+      window.location.reload();
     }
   };
 

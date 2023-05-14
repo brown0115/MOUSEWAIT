@@ -135,7 +135,7 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
   const [RemoveType, setRemoveType] = useState<any | string>('R');
   const onRemove = (ban_chat_id: any) => {
     return false;
-    dispatch<any>(removeUserLounge({ ban_chat_id, RemoveType })).then(
+    dispatch<any>(removeUserLounge  ({ ban_chat_id, RemoveType })).then(
       (res: any) => {
         window.location.reload();
         Notify(toast('Comment Removed'));
