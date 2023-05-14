@@ -64,9 +64,6 @@ const LandLounge = () => {
   let searchValue: any = null;
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
-    if (token == null) {
-      navigate('/disneyland/login');
-    }
 
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
@@ -100,10 +97,6 @@ const LandLounge = () => {
   };
 
   useEffect(() => {
-    if (token == null) {
-      navigate('/disneyland/login');
-    }
-
     loadDataOnlyOnce(); // this will fire only on first render
   }, [shortByTime, search, currentPage]);
 
@@ -111,11 +104,6 @@ const LandLounge = () => {
   const loginuserid = localStorage.getItem('user_id');
   const [assignMenu, SetAssignMenu] = useState<any | string>([]);
   useEffect(() => {
-
-    if (token == null) {
-      navigate('/disneyland/login');
-    }
-
 
     dispatch(fetchUserMenu({ loginuserid })).then((res: any) => {
       // console.log(res);
@@ -138,11 +126,6 @@ const LandLounge = () => {
   };
 
   useEffect(() => {
-
-    if (token == null) {
-      navigate('/disneyland/login');
-    }
-
 
     window.addEventListener('scroll', handelInfiniteScroll);
     return () => window.removeEventListener('scroll', handelInfiniteScroll);
