@@ -57,10 +57,6 @@ const CatLounge = () => {
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
 
-    if (token == null) {
-      navigate('/disneyland/login');
-    }
-
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
 
@@ -72,11 +68,6 @@ const CatLounge = () => {
 
   useEffect(() => {
 
-    if (token == null) {
-      navigate('/disneyland/login');
-    }
-
-
     if (search) {
       searchValue = search;
     }
@@ -87,11 +78,6 @@ const CatLounge = () => {
     /*  if (currentPage == 1) {
       window.scrollTo(0, 0);
     } */
-
-    if (token == null) {
-      navigate('/disneyland/login');
-    }
-
 
     dispatch(fetchStickyLounge({}));
     dispatch(
@@ -124,11 +110,6 @@ const CatLounge = () => {
   };
 
   useEffect(() => {
-
-    if (token == null) {
-      navigate('/disneyland/login');
-    }
-
 
     window.addEventListener('scroll', handelInfiniteScroll);
     return () => window.removeEventListener('scroll', handelInfiniteScroll);
