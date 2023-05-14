@@ -161,7 +161,7 @@ export const MovePost: React.FC<MovePostPropsType> = ({
                           }
                           onClick={() => setLand('1')}
                         >
-                          REALTIME TALK
+                          DISNEYLAND REAL-TIME
                         </li>
                         <li
                           className='mt-1'

@@ -38,6 +38,7 @@ const MyMw = () => {
   const UserIdLogin = localStorage.getItem('user_id');
   //alert(UserId)
   const { items, status, sortByTime } = useSelector(selectLounges);
+  const token = localStorage.getItem('token');
   const {
     register,
     setValue,
@@ -60,6 +61,12 @@ const MyMw = () => {
   let searchValue: any = null;
   let UserId: any = UserIdLogin;
   useEffect(() => {
+
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
+
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
 
@@ -67,6 +74,11 @@ const MyMw = () => {
     setShowPopup(!showPopup);
   };
   useEffect(() => {
+
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
     window.scrollTo(0, 0);
     if (search) {
       searchValue = search;

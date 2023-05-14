@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Placeholder } from '../components/Placeholder';
 import { LoungeHeader } from '../components/WdwLoungeHeader';
-import { LoungeBox } from '../components/WdwLoungeBox';
+import { LoungeBox } from '../components/LoungeBox';
 import { WDWLoungeList } from '../components/WDWLoungeList';
 import { MobileLoungeHeader } from '../components/MobileLoungeHeader';
 import {
@@ -171,14 +171,9 @@ const WdwCatLounge = () => {
                 <div className='content__items'>
                   <div>
                     <LoungeBox
-                      onSubmit={onSubmit}
-                      register={register}
-                      handleSubmit={handleSubmit}
-                      setValue={setValue}
                       isVisible={false}
                       setVisible={() => {}}
                       onCloseMenu={() => {}}
-                      isLoading={isLoading}
                     />
                   </div>
                   {/* */}

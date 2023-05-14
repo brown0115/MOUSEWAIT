@@ -27,9 +27,6 @@ const Header = () => {
     <section className='Mouse-Wait-sec'>
       <nav className='navbar navbar-expand-lg'>
         <div className='container'>
-          <Link to='/' className='navbar-brand'>
-            <img src={Logo} className='img-fluid' alt='MouseWait-logo' />
-          </Link>
 
           {/*    <button
             className='navbar-toggler'

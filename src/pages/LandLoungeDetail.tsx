@@ -69,11 +69,14 @@ const LandLoungeDetail = (props: any) => {
 
   const user_id = localStorage.removeItem('userid');
   // const user_name = localStorage.removeItem('user_name');
-  const onClickIcon = () => {
-    SetShowIcon(!showIcon);
-  };
+
   let navigate = useNavigate();
   useEffect(() => {
+
+    if (token == null) {
+      navigate('/disneyland/login');
+    }
+
     window.scrollTo(0, 0);
 
     dispatch(fetchLoungeDetails({ LoungeId })).then((res: any) => {
@@ -181,7 +184,8 @@ return ret;
     if (token != null) {
       const chat_msg = getValues('chat_msg');
 
-      chat_msg != ''
+      console.log('chat_msg', chat_msg)
+      chat_msg != '<p><br></p>' && chat_msg != ''
         ? dispatch<any>(postLoungeComment(data)).then((res: any) => {
             if (res.payload.message != undefined) {
               window.alert(res.payload.message);

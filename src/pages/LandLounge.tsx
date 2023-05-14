@@ -54,11 +54,9 @@ const LandLounge = () => {
   const [shortByTime, setShortByTime] = useState<any | string>(
     localStorage.getItem('shortByTime')
   );
+  const token = localStorage.getItem('token');
 
   const [showPopup, setShowPopup] = useState<any | string>(true);
-
-
-  let subtitle: any;
 
   let sortType: any = null;
   let LoungeId: any = null;
@@ -66,12 +64,9 @@ const LandLounge = () => {
   let searchValue: any = null;
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
+
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
-
-  const handleLoginClick = () => {
-    setShowPopup(!showPopup);
-  };
 
   const [audienceSample, setAudienceSample] = useState(items); // set campaign as default
 
@@ -101,8 +96,6 @@ const LandLounge = () => {
     );
   };
 
-  //console.log(myData);
-
   useEffect(() => {
     loadDataOnlyOnce(); // this will fire only on first render
   }, [shortByTime, search, currentPage]);
@@ -111,6 +104,7 @@ const LandLounge = () => {
   const loginuserid = localStorage.getItem('user_id');
   const [assignMenu, SetAssignMenu] = useState<any | string>([]);
   useEffect(() => {
+
     dispatch(fetchUserMenu({ loginuserid })).then((res: any) => {
       // console.log(res);
       SetAssignMenu(res.payload);
@@ -118,9 +112,7 @@ const LandLounge = () => {
   }, []);
 
   const handelInfiniteScroll = async () => {
-    // console.log("scrollHeight" + document.documentElement.scrollHeight);
-    // console.log("innerHeight" + window.innerHeight);
-    // console.log("scrollTop" + document.documentElement.scrollTop);
+
     try {
       if (
         window.innerHeight + document.documentElement.scrollTop + 1 >=
@@ -134,6 +126,7 @@ const LandLounge = () => {
   };
 
   useEffect(() => {
+
     window.addEventListener('scroll', handelInfiniteScroll);
     return () => window.removeEventListener('scroll', handelInfiniteScroll);
   }, []);
@@ -161,16 +154,7 @@ const LandLounge = () => {
 
             <LoungeHeader />
             <MobileLoungeHeader />
-
-            <div id='progressbarContainer'>
-              {/* {
-               isLoading==false? <div className="progress" style={{borderRadius:"10px"  ,width:"80%" ,marginLeft:"12%" , marginBottom:"10px"}}>
-               <label htmlFor="progressbar" >40%</label>
-               <progress id='progress-bar' value='40' max='100' style={{ width:"100%", borderRadius:"20px"  , }}> </progress>
-               </div> :""
-              } */}
-            </div>
-
+            
             <div className='mid-card-sec'>
               {status === 'error' ? (
                 <div className='content__error-info'>
@@ -246,6 +230,15 @@ const LandLounge = () => {
                     )
                   ) : (
                     <>{localStorage.setItem('loungeland', '')}</>
+                  )}
+                  {assignMenu.length > 0 ? (
+                    assignMenu.map((item: any) =>
+                      item.rights_id == '14'
+                        ? localStorage.setItem('club333', 'true')
+                        : ''
+                    )
+                  ) : (
+                    <>{localStorage.setItem('club333', '')}</>
                   )}
                 </div>
               )}

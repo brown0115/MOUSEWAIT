@@ -1624,6 +1624,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   outline: none;
   position: relative;
   box-shadow: 2px 2px 3px #999;
+  margin: auto;
 }
 
 .close-p {
@@ -1644,6 +1645,8 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 }
 .boxwidth {
   width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 .box-t-1 {
   background: #f5f5f5;
@@ -1706,6 +1709,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   padding: 0.6rem 1rem;
   display: inline-flex;
   margin-right: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .select {
@@ -1973,7 +1977,7 @@ a:hover {
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: absolute;
-  width: 30px;
+  width: 50px;
   height: 25px;
   right: 0px;
   top: 20px;
@@ -1981,6 +1985,41 @@ a:hover {
   border: 2px solid #00000078;
   background-color: #fff; */
   max-height: 2rem;
+}
+
+.tagUserItem {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+}
+
+.tagUserItem button {
+  border-radius: 40px;
+  display: flex;
+  height: 100%;
+}
+
+.tagUserItem button img {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  border-color: green;
+  border-width: 1px;
+}
+
+.tagUserItem button div {
+  align-items: center;
+  margin: 6px;
+}
+
+.tagUserList {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 250px;
+  max-height: 200px;
+  border: 1px blue;
+  background-color: white;
 }
 
 /* Color/shape of burger icon bars */

@@ -14,7 +14,7 @@ import { useLocation } from 'react-router';
 import { useEffect, useRef, useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import RightLoungeBest from '../components/WdwRightLoungeBest';
-import { LoungeBox } from '../components/WdwLoungeBox';
+import { LoungeBox } from '../components/LoungeBox';
 import { useForm } from 'react-hook-form';
 const WdwLeftLounge = (props: any) => {
   let navigate = useNavigate();
@@ -23,6 +23,7 @@ const WdwLeftLounge = (props: any) => {
   const [userId, setUserId] = useState(localStorage.getItem('user_id') as any);
   const loginfrom = localStorage.getItem('loginfrom');
   const loungeland = localStorage.getItem('loungeland');
+  const club333 = localStorage.getItem('club333');
   const [showMenu, setShowMenu] = useState<any | string>(false);
 
   const menuclick = () => {
@@ -158,7 +159,24 @@ const WdwLeftLounge = (props: any) => {
                   }
                   to='/loungeland/'
                 >
-                  LOUNGΞLAND
+                  LOUNGE.LAND
+                </Link>
+              </li>
+            ) : (
+              <li></li>
+            )}
+
+            {club333 == 'true' ? (
+              <li className='nav-item' onClick={closeSideBar}>
+                <Link
+                  className={
+                    location.pathname == '/club333/'
+                      ? 'selectmenu new-nr'
+                      : 'new-nr'
+                  }
+                  to='/club333/'
+                >
+                  CLUB 333
                 </Link>
               </li>
             ) : (
@@ -166,15 +184,9 @@ const WdwLeftLounge = (props: any) => {
             )}
 
             <LoungeBox
-              onSubmit={''}
-              register={register}
-              handleSubmit={handleSubmit}
-              setValue={setValue}
-              isLoading={isLoading}
               isVisible={closeHamburger}
               setVisible={setCloseHamburger}
               onCloseMenu={onCloseHamburgerMenu}
-              
             />
 
             <li className='nav-item' onClick={closeSideBar}>

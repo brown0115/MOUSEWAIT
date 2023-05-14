@@ -10,6 +10,7 @@ import { signinUser, usersSlice, clearState } from '../redux/users/slice';
 import { createNull } from 'typescript';
 // @ts-ignore
 import MetaTags from 'react-meta-tags';
+import Logo from "../assets/img/MouseWait.png";
 
 
 type FormData = {
@@ -93,11 +94,14 @@ const Login = () => {
                 ) : (
                   <div className='Sign-bg'>
                     <div className='Mw-Sign text-center'>
-                      <img
-                        src={blackLogo}
-                        className='img-fluid'
-                        alt='MouseWait-logo'
-                      />
+                      <Link to='/disneyland/lounge'>
+                        <img
+                            src={blackLogo}
+                            className='img-fluid'
+                            alt='MouseWait-logo'
+                        />
+                      </Link>
+                      
                       <h3>Welcome Back</h3>
                     </div>
 

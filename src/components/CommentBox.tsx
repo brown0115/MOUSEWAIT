@@ -17,6 +17,8 @@ import { fetchUser } from '../redux/lounges/slice';
 import { useAppDispatch } from '../redux/store';
 import axios, { AxiosResponse } from 'axios';
 import { GET_BASE_URL } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+
 
 type CommenBoxPropsType = {
   chatId: any;
@@ -45,17 +47,23 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
   const token = localStorage.getItem('token');
 
   const [text, setText] = useState('');
-
+  
   const textRef = useRef(null);
+  
+  const [ filterUser, setFilterUser ] = useState([]);
+  const [ searchText, setSearchText ] = useState('');
 
   useEffect(() => {
-    register('chat_msg', { required: true, minLength: 11 });
     setValue('chat_msg', text);
-  }, [text]);
+    console.log('text', text)
+    if(text == '' || text == '<p><br></p>') 
+      setFilterUser([]);
+  
+    }, [text]);
 
   
   const onClickSticker = (data: any) => {
-
+    setFilterUser([]);
     let editor = (textRef.current  as any ).getEditor();
     var range = editor.getSelection();
     let position = range ? range.index : editor.getLength()-1;
@@ -65,6 +73,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
     var imageSrc = data;
     editor.insertEmbed(position, 'image', imageSrc);
     editor.setSelection(position + 1, 0);
+
   }
 
   let navigate = useNavigate();
@@ -89,14 +98,18 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
   const mentions = useMemo(
     () => ({
       allowedChars: /^[A-Za-z\-sÅÄÖåäö]*$/,
-      mentionDenotationChars: ['@', '#'],
+      mentionDenotationChars: ['@', '#', ' '],
       source: (
         searchTerm: any,
         renderList: any,
         mentionChar: any,
         callback: any
       ) => {
-        if (searchTerm.length > 0) {
+        setSearchText(searchTerm);
+        console.log('searchTerm', searchTerm)
+        if(mentionChar == ' ')
+          setFilterUser([]);
+        else if (searchTerm.length > 0) {
           axios
             .get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + searchTerm)
             .then((response: any) => {
@@ -105,6 +118,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
                   item.value.toLowerCase().includes(searchTerm.toLowerCase())
               );
 
+              setFilterUser(includesSearchTerm);
               renderList(includesSearchTerm);
             });
 
@@ -115,9 +129,48 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
     []
   );
 
-  // console.log(text);
+  const onChangeFilterUser = (item: any) => {
+
+    let editor = (textRef.current  as any ).getEditor();
+    var range = editor.getSelection();
+    let position = range ? range.index : editor.getLength()-1;
+    var oldText = editor.getText(position);
+    var newText = editor.getText(0, position-searchText.length) + item['value'] + oldText;
+    editor.setText(newText);
+    editor.setSelection(position + item['value'].length - searchText.length, 0);
+  }
+
   return (
-    <div>
+    <div style={{'position': 'relative'}}>
+      <div className="tagUserList" style={{'position': 'absolute', 'bottom': '60px'}}>
+        {
+          filterUser.map((item, index) => {
+            return (
+              <>
+              <div className="tagUserItem">
+                <button onClick={() => onChangeFilterUser(item)}>
+                  <div>
+                    <img
+                      style={{ verticalAlign: 'middle' }}
+                      src={
+                        GET_BASE_URL_IMAGE +
+                        '/disneyland/images/thumbs/' +
+                        item['image']
+                      }
+                      className='com-imggg'
+                    />
+                  </div>
+                  
+                  <div>
+                    {item['value']}
+                  </div>
+                </button>
+              </div>
+              </>
+            )
+          })
+        }
+      </div>
       <form
         className='space-y-6'
         onSubmit={handleSubmit(onSubmit)}

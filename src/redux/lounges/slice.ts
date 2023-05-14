@@ -102,7 +102,7 @@ const initialState: LoungesSliceState = {
 export type FetchLoungesType = {
   sortType: SortTypeParams;
   LoungeId: number;
-  currentPage: number;
+  currentPage: any;
   searchValue: string;
   shortByTime: string;
 };
@@ -777,15 +777,7 @@ export const postLoungeWdw = createAsyncThunk<Lounge[], PostWdwLoungesType>(
           }),
         }
       );
-      /*       let data = await response.json();
-      if (data.sucess) {
-        return { ...data };
-      } else {
-        return thunkAPI.rejectWithValue(data.error);
-      }
-    } catch (e: any) {
-      return thunkAPI.rejectWithValue(e.response.data);
-    } */
+      
       let data = await response.json();
       return { ...data };
     } catch (e: any) {
