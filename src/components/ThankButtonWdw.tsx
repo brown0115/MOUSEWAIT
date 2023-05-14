@@ -28,12 +28,16 @@ export const ThankButtonWdw: React.FC<ThankButtonWdwPropsType> = ({
     getThankYou == true ? likeB : likeV
   );
   const onLike = (LoungeId: any, countvalue: number) => {
+    const token = localStorage.getItem('token');
+    if(token == null){
+      window.alert("Please login from the Me tab in the MouseWait App, or the menu icon on the top right, thanks!");
+      return;
+    }
     dispatch<any>(postThankyouWdw({ LoungeId })).then((res: any) => {
       res.payload.data[0].message == 'Added' && SetLikeCount(countvalue + 1);
       res.payload.data[0].message == 'Removed' && SetLikeCount(countvalue - 1);
       res.payload.data[0].message == 'Added' && SetMyIcon(likeB);
       res.payload.data[0].message == 'Removed' && SetMyIcon(likeV);
-      Notify(toast(res.payload.data[0].message));
     });
   };
 
