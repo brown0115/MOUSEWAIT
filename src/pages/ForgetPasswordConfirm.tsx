@@ -113,7 +113,7 @@ const ForgetPasswordConfirm = () => {
                         />
                       </Link>
                       
-                      <h3>Forget Password Confirm</h3>
+                      <h3>Enter your new password</h3>
                     </div>
 
                     {error && (
@@ -187,7 +187,7 @@ const ForgetPasswordConfirm = () => {
                         />
                       </Link>
                       
-                      <h3>Forget Password Confirm</h3>
+                      <h3>Enter your new password</h3>
                     </div>
 
                     <p style={{textAlign: 'center', fontSize: '20px'}}>Your password has been reset.</p>
