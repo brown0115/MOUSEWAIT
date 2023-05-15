@@ -1,212 +1,472 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { CommentReply } from './CommentReply';
-import stickerImage from '../assets/img/stickers.jpg';
-import { useForm } from 'react-hook-form';
-import { StickerTabs } from '../components/StickerTabs';
-import ReactQuill from 'react-quill';
-import { selectLounges } from '../redux/lounges/selectors';
-import imageicon from '../assets/img/chart-icon1.png';
-import emojiicon from '../assets/img/chart-icon2.png';
-import { MentionsInput, Mention } from 'react-mentions';
-import imageiconh from '../assets/img/chart-icon1h.png';
-import emojiiconh from '../assets/img/chart-icon2h.png';
-import { RichTextEditor } from '@mantine/rte';
-import { fetchUser } from '../redux/lounges/slice';
+import { CommentReply } from '../components/CommentReply';
+import { EditBox } from '../components/EditBox';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../redux/store';
+import {
+  postLoungeCommentReply,
+  removeUserLounge,
+  wholikeCommentReply,
+  likeCommentReply,
+} from '../redux/lounges/slice';
+import { selectLounges } from '../redux/lounges/selectors';
+import Modal from 'react-modal';
+import { useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { fetchLounges, postLoungeFlag } from '../redux/lounges/slice';
+import { createModuleDeclaration } from 'typescript';
+import { LikeCommentReply } from '../components/LikeCommentReply';
+
 import axios, { AxiosResponse } from 'axios';
 import { GET_BASE_URL } from '../constants/apiEndpoints';
 import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
 
-
-type CommenBoxPropsType = {
+type CommentListPropsType = {
   chatId: any;
-  onSubmit: any;
-  register: any;
-  handleSubmit: any;
-  setValue: any;
+  cmt: any;
+  replyShow: false;
   stickerData: any;
 };
-
 type FormData = {
-  chat_msg: string;
-  chat_id: number;
+  ReasonForReport: string;
+  LoungeId: number;
+  Type: string;
 };
-
-export const CommentBox: React.FC<CommenBoxPropsType> = ({
+export const CommentList: React.FC<CommentListPropsType> = ({
   chatId,
-  onSubmit,
-  register,
-  handleSubmit,
-  setValue,
+  cmt,
+  replyShow,
   stickerData,
 }) => {
-  // const { register, setValue, handleSubmit,getValues, formState: { errors } } = useForm<FormData>();
-  const [showSticker, SetShowSticker] = useState<any | string>(false);
-  const token = localStorage.getItem('token');
-
-  const [text, setText] = useState('');
-  
-  const textRef = useRef(null);
-  
-  const [ filterUser, setFilterUser ] = useState([]);
-  const [ searchText, setSearchText ] = useState('');
-
-  useEffect(() => {
-    setValue('chat_msg', text);
-    console.log('text', text)
-    if(text == '' || text == '<p><br></p>') 
-      setFilterUser([]);
-  
-    }, [text]);
-
-  
-  const onClickSticker = (data: any) => {
-    setFilterUser([]);
-    let editor = (textRef.current  as any ).getEditor();
-    var range = editor.getSelection();
-    let position = range ? range.index : editor.getLength()-1;
-    
-    var rte = document.getElementById('my-rich-text-editor'); // Replace with the ID of your Rich Text Editor
-    rte?.focus();
-    var imageSrc = data;
-    editor.insertEmbed(position, 'image', imageSrc);
-    editor.setSelection(position + 1, 0);
-
-  }
-
+  const dispatch = useAppDispatch();
   let navigate = useNavigate();
-  const openSticker = () => {
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  const [showReply, SetShowReply] = useState<any | string>(replyShow);
+  const [editbox, SetEditBox] = useState<any | string>(false);
+
+  function converDate(datevalue: any) {
+    const date = new Date(datevalue);
+    const formattedDate = date.toLocaleDateString('en-US', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    });
+    return formattedDate;
+  }
+  function converTime(datevalue: any) {
+    const date = new Date(datevalue);
+    const formattedDate = date.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+    });
+    return formattedDate;
+  }
+  const token = localStorage.getItem('token');
+  const loginuserid = localStorage.getItem('user_id');
+  //console.log(token);
+  const showReplyIcon = () => {
     if (token == null) {
       navigate('/disneyland/login');
     } else {
-      SetShowSticker(!showSticker);
+      SetShowReply(!showReply);
+    }
+  };
+  const showEditBox = () => {
+    SetEditBox(!editbox);
+  };
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  let subtitle: any;
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      width: '100%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      background: '#F5F5F5',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
+  let sortType: any = null;
+  //let LoungeId: any = null;
+  let currentPage: any = null;
+  let searchValue: any = null;
+  const [Type, setFlagType] = useState<string>('R');
+  const [LoungeId, setLoungeId] = useState<number | any>('');
+
+  const { items, status, sortByTime } = useSelector(selectLounges);
+  const [shortByTime, setShortByTime] = useState<any | string>(
+    localStorage.getItem('shortByTime')
+  );
+  const [Notify, setIsNotify] = useState<any | string>();
+
+  const myGift = (Id: any) => {
+    if (token == null) {
+      navigate('/disneyland/login');
+    } else {
+      setIsOpen(true);
+      setLoungeId(Id);
     }
   };
 
-  const dispatch = useAppDispatch();
-  const [people, SetPeople] = useState<any | string>([]);
+  useEffect(() => {
+    sortByTime != '' && setShortByTime(sortByTime);
+  }, [sortByTime]);
 
-  const tags = [
-    { id: 1, value: 'JavaScript' },
-    { id: 2, value: 'TypeScript' },
-    { id: 3, value: 'Ruby' },
-    { id: 3, value: 'Python' },
-  ];
+  useEffect(() => {
+    setValue('Type', Type);
+  }, [Type]);
 
-  const mentions = useMemo(
-    () => ({
-      allowedChars: /^[A-Za-z\-sÅÄÖåäö]*$/,
-      mentionDenotationChars: ['@', '#', ' '],
-      source: (
-        searchTerm: any,
-        renderList: any,
-        mentionChar: any,
-        callback: any
-      ) => {
-        setSearchText(searchTerm);
-        console.log('searchTerm', searchTerm)
-        if(mentionChar == ' ')
-          setFilterUser([]);
-        else if (searchTerm.length > 0) {
-          axios
-            .get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + searchTerm)
-            .then((response: any) => {
-              const includesSearchTerm = response.data.data.filter(
-                (item: any) =>
-                  item.value.toLowerCase().includes(searchTerm.toLowerCase())
-              );
+  useEffect(() => {
+    setValue('LoungeId', LoungeId);
+  }, [LoungeId]);
 
-              setFilterUser(includesSearchTerm);
-              renderList(includesSearchTerm);
-            });
+  const onSubmit = (data: any) => {
+    dispatch<any>(postLoungeFlag(data)).then((res: any) => {
+      // Notify(toast(res.payload.data[0].error));
+    });
+  };
 
-          const list = mentionChar === '@' ? people : tags;
-        }
-      },
-    }),
-    []
-  );
+  const [RemoveType, setRemoveType] = useState<any | string>('C');
+  const onRemove = (ban_chat_id: any) => {
+    dispatch<any>(removeUserLounge({ ban_chat_id, RemoveType })).then(
+      (res: any) => {
+        window.location.reload();
+      }
+    );
+  };
 
-  const onChangeFilterUser = (item: any) => {
+  const [likeuserlist, setLikeUserList] = useState<any | string>(false);
+  const [likeuserdata, setLikeUserData] = useState<any | string>([]);
+  const showUser = (id: any) => {
+    setLikeUserList(true);
+    dispatch<any>(wholikeCommentReply({ id })).then((res: any) => {
+      console.log(res);
+      setLikeUserData([res.payload.data]);
+    });
+  };
+  /*   const hideUser = (id: any) => {
+    setLikeUserList(false);
+    dispatch<any>(wholikeCommentReply({ id })).then((res: any) => {
+      setLikeUserData([]);
+      //console.log(res);
+    });
+  }; */
 
-    let editor = (textRef.current  as any ).getEditor();
-    var range = editor.getSelection();
-    let position = range ? range.index : editor.getLength()-1;
-    var oldText = editor.getText(position);
-    var newText = editor.getText(0, position-searchText.length) + item['value'] + oldText;
-    editor.setText(newText);
-    editor.setSelection(position + item['value'].length - searchText.length, 0);
-  }
+  const formattedMessage = (message: string) => {
+    var domParser = new DOMParser();
+    var doc = domParser.parseFromString(message, 'text/html');
+    var msg = doc.body.innerText;
+
+    let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
+    
+    let newarr = [];
+    replacemsg?.map((val) => {
+      val.length > 0 && axios
+        .get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + val)
+        .then((response: any) => {
+          console.log('docs', response.data.data)
+      });
+    })
+    // var links = doc.querySelectorAll('.mention');
+    // links.forEach(function (linkTag: any) {
+    //   var aTag = document.createElement('a');
+    //   aTag.href = `../../user/${linkTag.dataset.id}/mypost`;
+
+    //   aTag.style.color = '#0000EE';
+    //   aTag.style.marginRight = '3px';
+    //   aTag.innerHTML = linkTag.innerHTML;
+    //   linkTag.parentNode.replaceChild(aTag, linkTag);
+    // });
+    return doc.body.innerHTML;
+  };
 
   return (
-    <div style={{'position': 'relative'}}>
-      <div className="tagUserList" style={{'position': 'absolute', 'bottom': '60px'}}>
-        {
-          filterUser.map((item, index) => {
-            return (
-              <>
-              <div className="tagUserItem">
-                <button onClick={() => onChangeFilterUser(item)}>
-                  <div>
-                    <img
-                      style={{ verticalAlign: 'middle' }}
-                      src={
-                        GET_BASE_URL_IMAGE +
-                        '/disneyland/images/thumbs/' +
-                        item['image']
-                      }
-                      className='com-imggg'
+    <>
+      <>
+        <div>
+          <div className='comm-bo d-flex flex-row' key={cmt.chat_id}>
+            <div className='small-c'>
+              <a href=''>
+                <img
+                  style={{ verticalAlign: 'middle' }}
+                  src={
+                    GET_BASE_URL_IMAGE +
+                    '/disneyland/images/thumbs/' +
+                    cmt.commentuser.image
+                  }
+                  className='com-imggg'
+                />
+              </a>
+            </div>
+            <ToastContainer autoClose={3000} />
+            <div className='comm-c d-flex' style={{ marginTop: '0px' }}>
+              <p className='commentlist'>
+                <span
+                  style={{
+                    fontFamily: 'Inter',
+                    fontSize: '1rm',
+
+                    fontWeight: 400,
+                    fontStyle: 'normal',
+                    color: '#313237',
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: formattedMessage(cmt.chat_reply_msg)
+                      .replace('<p>', '<span>')
+                      .replace('</p>', '</span>')
+                      .replace('<br>', ''),
+                  }}
+                ></span>
+                <br />
+                <Link
+                  style={{
+                    marginRight: '.5rem',
+                    color: '#000',
+                    background: 'transparent',
+                  }}
+                  to={`/disneyland/user/${cmt.commentuser?.user_id}/mypost`}
+                >
+                  {cmt.commentuser?.user_name}
+                </Link>
+
+                <span className='com-tt'>
+                  <span>{cmt.commentuser?.rank}</span>
+                  <span
+                    style={{
+                      marginLeft: '.5rem',
+                    }}
+                  >
+                    #{cmt.commentuser?.position}
+                  </span>
+                  <span
+                    style={{
+                      marginLeft: '.5rem',
+                      marginRight: '1rem',
+                      fontSize: 'smaller',
+                    }}
+                  >
+                    {converDate(cmt?.chat_reply_date)}
+                  </span>
+                </span>
+
+                {/*        <small className='co-s' style={{ marginRight: '.5rem' }}>
+                  {converDate(cmt.chat_reply_date)}
+                </small> */}
+                <br />
+                <span className='co-l'>
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => myGift(cmt.chat_reply_id)}
+                  >
+                    FLAG
+                  </span>
+
+                  <>
+                    <LikeCommentReply
+                      likecount={cmt.no_of_likes}
+                      chat_id={cmt.chat_id}
+                      comment_id={cmt.chat_reply_id}
+                      reply_id={''}
+                      commnet_userid={cmt.commentuser.user_id}
+                      type={'C'}
+                      page={'DL'}
                     />
-                  </div>
-                  
-                  <div>
-                    {item['value']}
-                  </div>
-                </button>
-              </div>
-              </>
-            )
-          })
-        }
-      </div>
-      <form
-        className='space-y-6'
-        onSubmit={handleSubmit(onSubmit)}
-        method='POST'
-      >
-        <div className='com-box-main'>
-          <div className='com-box d-flex'>
-            <RichTextEditor
-              id='rte'
-              placeholder='Add your magic...'
-              mentions={mentions}
-              value={text}
-              onChange={setText}
-              controls={[[]]}
-              ref={textRef}
-            />
+                  </>
 
-            <input
-              type='hidden'
-              readOnly={true}
-              {...register('chat_id')}
-              defaultValue={chatId}
-            />
+                  {/*             <span
+                    style={{ cursor: 'pointer' }}
+                    onMouseEnter={() => showUser(cmt.chat_reply_id)}
+                    onClick={() =>
+                      likeCommnetAndReply(
+                        cmt.chat_id,
+                        cmt.chat_reply_id,
+                        '',
+                        cmt.commentuser.user_id,
+                        'C'
+                      )
+                    }
+                  >
+                    LIKE{' '}
+                    {cmt.no_of_likes > 0 ? <>({cmt.no_of_likes}) </> : <></>}
+                  </span> */}
 
-            <div className='icon-ic d-flex'>
-              <div className='icon-ic0' onClick={handleSubmit(onSubmit)}></div>
-              <div className='icon-ic1' onClick={openSticker}></div>
+                  <span style={{ cursor: 'pointer' }} onClick={showReplyIcon}>
+                    REPLY
+                  </span>
+                </span>
+
+                {/*  {likeuserlist == true ? (
+                  <div className='pro-card-s'>
+                    <div className='card'>
+                      <div className='card-header text-center'>
+                        <h6>MouseWaiters who Liked this:</h6>
+                      </div>
+
+                      {likeuserdata.map((product: any) => {
+                        return (
+                          <div
+                            className='pro-img text-center'
+                            style={{ display: 'flex', padding: '0.5rem' }}
+                          >
+                            <img
+                              src={
+                                'https://mousewait.xyz/disneyland/chat_images/' +
+                                product.user?.image
+                              }
+                              style={{
+                                height: '50px',
+                                width: '50px',
+                                borderRadius: '50%',
+                              }}
+                              alt='image'
+                            />
+                            <h6 style={{ padding: '1rem' }}>
+                              {product?.user?.user_name}
+                            </h6>
+                          </div>
+                        );
+                      })} 
+                    </div>
+                  </div>
+                ) : (
+                  <></>
+                )} */}
+
+                <>
+                  {cmt.commentuser.user_id == loginuserid ? (
+                    <span className='co-l'>
+
+                      <span onClick={showEditBox}>EDIT</span>
+                      
+                      <span onClick={() => {
+                        if (window.confirm('Are You Sure?'))
+                          onRemove(cmt.chat_reply_id)
+                        }}
+                      >
+                        DELETE
+                      </span>
+                    </span>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              </p>
             </div>
           </div>
+
+          <Modal
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel='Example Modal'
+          >
+            <form
+              className='space-y-6'
+              onSubmit={handleSubmit(onSubmit)}
+              method='POST'
+            >
+              <div className='row'>
+                <div className='box-t-1'>
+                  <h6
+                    style={{ fontSize: '1rm', fontWeight: 400, color: 'red' }}
+                  >
+                    Report
+                  </h6>
+                  <div className='close-p' onClick={closeModal}>
+                    <i className='fa fa-close my-b' />
+                  </div>
+                  <div className='boxwidth'>
+                    <div className='box-ttt'>
+                      {/* <label for="story" class="w-50 m-auto justify-content-start">Tell us your story</label> */}
+                      <textarea
+                        rows={3}
+                        cols={60}
+                        placeholder='write reason for reporting'
+                        {...register('ReasonForReport')}
+                      />
+                      <input
+                        type='hidden'
+                        /*    setValue={Type} */
+                        {...register('Type')}
+                      />
+                      <input
+                        type='hidden'
+                        /* setValue={LoungeId} */
+                        {...register('LoungeId')}
+                      />
+                      <div className='mw-post text-center'>
+                        <input className='MW-btn' type='Submit' value='Post' />
+                        {/* {isLoading == true ? (
+                          <input
+                            className='MW-btn'
+                            type='Submit'
+                            value='Posting'
+                          />
+                        ) 
+                        : (
+                          <input
+                            className='MW-btn'
+                            type='Submit'
+                            value='Post'
+                          />
+                        )} */}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </Modal>
+
+          <EditBox
+            replyData={''}
+            id={''}
+            chatId={cmt.chat_id}
+            chat_reply_id={cmt.chat_reply_id}
+            chat_reply_msg={cmt.chat_reply_msg}
+            stickerData={stickerData}
+            editbox={editbox}
+            type={'C'}
+          />
+
+          <CommentReply
+            replyData={cmt.commentsreply}
+            replyShow={showReply}
+            chatId={cmt.chat_id}
+            chat_reply_id={cmt.chat_reply_id}
+            stickerData={stickerData}
+          />
         </div>
-      </form>
-      {showSticker == true && (
-        <div>
-          <StickerTabs tabData={stickerData} onClickSticker={onClickSticker}/>
-        </div>
-      )}
-    </div>
+      </>
+    </>
   );
 };
