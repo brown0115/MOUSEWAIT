@@ -99,7 +99,7 @@ const ForgotPassword = () => {
 
                       <h3 style={name}>Forgot Password?</h3>
                       <p style={paragraph}>
-                        Enter your register mail address to reset your Password
+                        Enter your email address to reset your password
                       </p>
 
                       {sucess === true ? (

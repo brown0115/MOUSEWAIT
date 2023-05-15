@@ -741,11 +741,11 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
             <div className='box-t-1'>
               {onedit != '' ? (
                 <h6 style={{ fontSize: '1rm', fontWeight: 400, color: 'red' }}>
-                  You Are Editing Post
+                  Edit
                 </h6>
               ) : (
                 <h6 style={{ fontSize: '1rm', fontWeight: 400, color: 'red' }}>
-                  You Are Reporting Post
+                  Report
                 </h6>
               )}
 

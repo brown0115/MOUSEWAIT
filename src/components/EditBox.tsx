@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -19,6 +19,10 @@ import 'react-quill/dist/quill.snow.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { removeUserLounge } from '../redux/lounges/slice';
+
+import axios, { AxiosResponse } from 'axios';
+import { GET_BASE_URL } from '../constants/apiEndpoints';
+import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
 
 type EditBoxPropsType = {
   replyData: any;
@@ -55,58 +59,82 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
     setValue,
     handleSubmit,
     reset,
-    getValues,
     formState: { errors },
   } = useForm<FormData>();
   const dispatch = useAppDispatch();
+
+  const mentions = useMemo(
+    () => ({
+      allowedChars: /^[A-Za-z\-sÅÄÖåäö_]*$/,
+      mentionDenotationChars: ['@', '#', ' '],
+      source: (
+        searchTerm: any,
+        renderList: any,
+        mentionChar: any,
+        callback: any
+      ) => {
+        setSearchText(searchTerm);
+        console.log('searchTerm', searchTerm)
+        if(mentionChar == ' ')
+          setFilterUser([]);
+        else if (searchTerm.length > 0) {
+          axios
+            .get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + searchTerm)
+            .then((response: any) => {
+              const includesSearchTerm = response.data.data.filter(
+                (item: any) =>
+                  item.value.toLowerCase().includes(searchTerm.toLowerCase())
+              );
+
+              setFilterUser(includesSearchTerm);
+              renderList(includesSearchTerm);
+            });
+
+        }
+      },
+    }),
+    []
+  );
+
   const modules = {
+    mention: mentions,
     toolbar: false,
   };
-
-  const { stickerPickItems } = useSelector(selectLounges);
-
   //const [commentData, SetCommentData] = useState<any | []>(replyData);
   const [showSticker, SetShowSticker] = useState<any | string>(false);
   const [stickerSelection, SetStickerSelection] = useState<any | string>('');
   //const [edittype, SetEditType] = useState<any | string>('C');
   const token = localStorage.getItem('token');
   const loginuserid = localStorage.getItem('user_id');
-  useEffect(() => {
-    SetStickerSelection(stickerPickItems.toString());
-  }, [stickerPickItems]);
 
   const textRef = useRef(null);
+  const [ filterUser, setFilterUser ] = useState([]);
+  const [ searchText, setSearchText ] = useState('');
 
   const onClickSticker = (data: any) => {
+    setFilterUser([]);
+
     let editor = (textRef.current  as any ).getEditor();
     var range = editor.getSelection();
     let position = range ? range.index : editor.getLength()-1;
     
     var rte = document.getElementById('my-rich-text-editor'); // Replace with the ID of your Rich Text Editor
     rte?.focus();
-    // var el= document.createElement("div");
-    // el.innerHTML = stickerPickItems.toString();
     var imageSrc = data;
-    if(stickerPickItems.toString() != '') {
-      editor.insertEmbed(position, 'image', imageSrc);
-      editor.setSelection(position + 1, 0);
-    }
+    editor.insertEmbed(position, 'image', imageSrc);
+    editor.setSelection(position + 1, 0);
   }
 
+  useEffect(() => {
+    if(stickerSelection == '' || stickerSelection == '<p><br></p>') 
+      setFilterUser([]);
+  }, [stickerSelection])
+
   if (editbox == true) {
-    /*  console.log('9999');
-    console.log(stickerSelection); */
     if (stickerSelection == '') {
       SetStickerSelection(chat_reply_msg);
     }
   }
-
-  const onEditorStateChange = (editorState: any) => {
-    /*  console.log(editorState);
-    console.log(chat_reply_msg); */
-    //if(editorState == '')
-    setValue('chat_reply_msg', editorState);
-  };
 
   const openSticker = () => {
     SetShowSticker(!showSticker);
@@ -116,25 +144,31 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
   const [Notify, setIsNotify] = useState<any | string>();
 
   const onSubmit = (data: any) => {
-    const chat_reply_msg = getValues('chat_reply_msg');
-    /* console.log(chat_reply_msg);
-    return false; */
-    chat_reply_msg != ''
+
+    data['chat_reply_msg'] = stickerSelection; 
+    console.log('stickerSelection', stickerSelection);   
+     /* return false; */
+     stickerSelection != '<p><br></p>' && stickerSelection != ''
       ? dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
           reset();
           SetStickerSelection(null);
           window.location.reload();
           Notify(toast('Updated Successfully'));
-          // console.log(res);
-          //dispatch(fetchLoungeDetails({ LoungeId }));
-          /*    reset();
-          SetCommentData(res.payload.data.replydata);
-          let data: any = null;
-          dispatch<any>(addSticker(data));
-          SetStickerSelection(null); */
         })
       : alert('Please enter comment');
   };
+
+ 
+  const onChangeFilterUser = (item: any) => {
+
+    let editor = (textRef.current  as any ).getEditor();
+    var range = editor.getSelection();
+    let position = range ? range.index : editor.getLength()-1;
+    var oldText = editor.getText(position);
+    var newText = editor.getText(0, position-searchText.length) + item['value'] + oldText;
+    editor.setText(newText);
+    editor.setSelection(position + item['value'].length - searchText.length, 0);
+  }
 
   return (
     <>
@@ -143,31 +177,62 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
           <div
             className='editbox'
             style={{
-              padding: '10px',
+              padding: '10px', 'position': 'relative'
             }}
           >
             {type === 'C' ? (
               <h6 style={{ textAlign: 'center', color: 'red' }}>
-                You Are Editing Comment
+                Edit
               </h6>
             ) : (
               <h6 style={{ textAlign: 'center', color: 'red' }}>
-                You Are Editing Reply
+                Edit
               </h6>
-            )}
+            )}           
 
             <form
               className='space-y-6'
               onSubmit={handleSubmit(onSubmit)}
               method='POST'
             >
-              <div className='com-box-main'>
+              <div className='com-box-main' style={{position: 'relative'}}>
+
+                <div className="tagUserList" style={{'position': 'absolute', 'bottom': '60px'}}>
+                  {
+                    filterUser.map((item, index) => {
+                      return (
+                        <>
+                        <div className="tagUserItem">
+                          <button onClick={() => onChangeFilterUser(item)}>
+                            <div>
+                              <img
+                                style={{ verticalAlign: 'middle' }}
+                                src={
+                                  GET_BASE_URL_IMAGE +
+                                  '/disneyland/images/thumbs/' +
+                                  item['image']
+                                }
+                                className='com-imggg'
+                              />
+                            </div>
+                            
+                            <div>
+                              {item['value']}
+                            </div>
+                          </button>
+                        </div>
+                        </>
+                      )
+                    })
+                  }
+                  </div>
+
                 <div className='com-box d-flex'>
                   <ReactQuill
                     theme='snow'
                     className='form-control'
                     modules={modules}
-                    onChange={onEditorStateChange}
+                    onChange={SetStickerSelection}
                     value={stickerSelection}
                     placeholder='Add your magic...'
                     ref={textRef}

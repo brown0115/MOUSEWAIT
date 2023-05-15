@@ -26,7 +26,15 @@ export const getAllLoungesApi = async ({
   /*   var parts = window.location.href.split('/mousewaitnew/');
   var lastSegment = parts.pop() || parts.pop();
   console.log(lastSegment); */
+
+  // console.log('currentpage', currentPage);
+  // if(currentPage == 3)
+  //   localStorage.setItem('pagename', 'lounge.land');
+  // else if(currentPage == 4)
+  //   localStorage.setItem('pagename', 'CLUB333');
+  // else
   localStorage.setItem('pagename', 'Disneyland Talk');
+  
   const token = localStorage.getItem('token');
 
   let sortByTime =

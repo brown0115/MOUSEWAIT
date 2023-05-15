@@ -16,6 +16,7 @@ import {
   removeImageOverPost,
   fetchUserMenu,
   postSubscribeFromLounge,
+  fetchCatLounges,
 } from '../redux/lounges/slice';
 import { fetchLoungeDetails } from '../redux/lounges/slice';
 import { useSelector } from 'react-redux';
@@ -162,16 +163,33 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
           Notify(toast(res.payload.data));
         }
       );
-
-      dispatch(
-        fetchLounges({
+      
+      if(chatRoomId == 3 || chatRoomId == 4) {
+        fetchCatLounges({
+          landid: chatRoomId,
+          landname: pageName,
           sortType,
           LoungeId,
           currentPage,
           searchValue,
           shortByTime,
         })
-      );
+      }
+      else {
+
+        dispatch(
+          fetchLounges({
+            sortType,
+            LoungeId,
+            currentPage,
+            searchValue,
+            shortByTime,
+          })
+        );
+        
+      }
+
+      window.location.reload();
     }
   };
 
@@ -180,12 +198,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
     if (token == null) {
       navigate('/disneyland/login');
     } else {
-      //console.log('0000000000000')
-      //console.log(LoungeId)
       dispatch<any>(postBookMark({ LoungeId })).then((res: any) => {
-        //reset()
-        //console.log(res.payload.data[0].message);
-        //console.log('kkkkk000');
 
         res.payload.data[0].message == 'Added'
           ? SetBookMark(true)
@@ -788,11 +801,11 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
             <div className='box-t-1'>
               {onedit != '' ? (
                 <h6 style={{ fontSize: '1rm', fontWeight: 400, color: 'red' }}>
-                  You Are Editing Post
+                  Edit
                 </h6>
               ) : (
                 <h6 style={{ fontSize: '1rm', fontWeight: 400, color: 'red' }}>
-                  You Are Reporting Post
+                  Report
                 </h6>
               )}
 

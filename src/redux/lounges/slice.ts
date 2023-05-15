@@ -102,7 +102,7 @@ const initialState: LoungesSliceState = {
 export type FetchLoungesType = {
   sortType: SortTypeParams;
   LoungeId: number;
-  currentPage: number;
+  currentPage: any;
   searchValue: string;
   shortByTime: string;
 };
@@ -1342,6 +1342,7 @@ export const postLoungeComment = createAsyncThunk<Lounge[], PostLoungeComment>(
           }),
         }
       );
+
       let data: any = await response.json();
 
       if (data.data.success) {
@@ -1487,19 +1488,6 @@ export const postLoungeCommentEdit = createAsyncThunk<
     { chat_reply_msg, chat_id, chat_reply_id, type, id, Type, LoungeId },
     thunkAPI
   ) => {
-    /*     console.log(chat_reply_msg);
-    console.log(chat_id);
-    console.log(chat_reply_id);
-    console.log(type);
-    console.log(id);
-    console.log(Type);
-    console.log(LoungeId);
-
-    
-    console.log(chat_id);
-    console.log(type); 
-
-    return false; */
 
     if (LoungeId == undefined) {
     } else {

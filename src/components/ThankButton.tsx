@@ -29,6 +29,11 @@ export const ThankButton: React.FC<ThankButtonPropsType> = ({
     getThankYou == true ? likeB : likeV
   );
   const onThank = (LoungeId: any, countvalue: number) => {
+    const token = localStorage.getItem('token');
+    if(token == null){
+      window.alert("Please login from the Me tab in the MouseWait App, or the menu icon on the top right, thanks!");
+      return;
+    }
     dispatch<any>(postThankyou({ LoungeId })).then((res: any) => {
       res.payload.data[0].message == 'Added' && SetLikeCount(countvalue + 1);
       res.payload.data[0].message == 'Removed' && SetLikeCount(countvalue - 1);

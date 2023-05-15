@@ -18,7 +18,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { fetchLounges, postLoungeFlag } from '../redux/lounges/slice';
 import { createModuleDeclaration } from 'typescript';
 import { LikeCommentReply } from '../components/LikeCommentReply';
+
+import axios, { AxiosResponse } from 'axios';
+import { GET_BASE_URL } from '../constants/apiEndpoints';
 import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+
 type CommentListPropsType = {
   chatId: any;
   cmt: any;
@@ -179,17 +183,28 @@ export const CommentList: React.FC<CommentListPropsType> = ({
   const formattedMessage = (message: string) => {
     var domParser = new DOMParser();
     var doc = domParser.parseFromString(message, 'text/html');
-    var links = doc.querySelectorAll('.mention');
-    links.forEach(function (linkTag: any) {
-      var aTag = document.createElement('a');
-      // aTag.href = `https://mousewait.xyz/mousewaitnew/disneyland/user/${linkTag.dataset.id}/mypost`;
-      aTag.href = `../../user/${linkTag.dataset.id}/mypost`;
+    var msg = doc.body.innerText;
 
-      aTag.style.color = '#0000EE';
-      aTag.style.marginRight = '3px';
-      aTag.innerHTML = linkTag.innerHTML;
-      linkTag.parentNode.replaceChild(aTag, linkTag);
-    });
+    let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
+    
+    let newarr = [];
+    replacemsg?.map((val) => {
+      val.length > 0 && axios
+        .get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + val)
+        .then((response: any) => {
+          console.log('docs', response.data.data)
+      });
+    })
+    // var links = doc.querySelectorAll('.mention');
+    // links.forEach(function (linkTag: any) {
+    //   var aTag = document.createElement('a');
+    //   aTag.href = `../../user/${linkTag.dataset.id}/mypost`;
+
+    //   aTag.style.color = '#0000EE';
+    //   aTag.style.marginRight = '3px';
+    //   aTag.innerHTML = linkTag.innerHTML;
+    //   linkTag.parentNode.replaceChild(aTag, linkTag);
+    // });
     return doc.body.innerHTML;
   };
 
@@ -384,7 +399,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                   <h6
                     style={{ fontSize: '1rm', fontWeight: 400, color: 'red' }}
                   >
-                    You Are Reporting Comment
+                    Report
                   </h6>
                   <div className='close-p' onClick={closeModal}>
                     <i className='fa fa-close my-b' />

@@ -2,30 +2,31 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAppDispatch } from '../redux/store';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import blackLogo from '../assets/img/black.log.png';
 import { usersSelector } from '../redux/users/selectors';
-import { signinUser, usersSlice, clearState } from '../redux/users/slice';
+import { signinUser, usersSlice, clearState, resetPassword } from '../redux/users/slice';
 import { createNull } from 'typescript';
 // @ts-ignore
 import MetaTags from 'react-meta-tags';
 import Logo from "../assets/img/MouseWait.png";
+import { stringify } from 'querystring';
+import { Center } from '@mantine/core';
 
 
 type FormData = {
-  password: string;
-  username: string;
+  user_pass: string;
+  user_pass1: string;
   loginfrom: string;
 };
 
-const Login = () => {
+const ForgetPasswordConfirm = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
   const {
     register,
-    setValue,
     handleSubmit,
     reset,
     formState: { errors },
@@ -34,11 +35,22 @@ const Login = () => {
   const [sucess, SetSucess] = useState<any | null>(null);
   const [showAlert, SetShowAlert] = useState<any | null>(false);
   const { isFetching, isSuccess, isError, errorMessage } =
-    useSelector(usersSelector);
+  useSelector(usersSelector);
+  const params = new URLSearchParams(useLocation().search);
+  const [isReset, setIsReset] = useState(false);
+
   const onSubmit = (data: any) => {
-    dispatch<any>(signinUser(data)).then((res: any) => {
-      // console.log(res);
-    });
+    console.log('userid', params.get('uid'))
+    console.log('resetkey', params.get('resetkey'))
+
+    if(data['user_pass'] != data['user_pass1'])
+      SetError('Password Incorrect!');
+    else {
+      var info = {user_id: params.get('uid'), resetkey: params.get('resetkey'), user_pass: data['user_pass']};
+      dispatch<any>(resetPassword(info)).then((res: any) => {
+        setIsReset(true);
+      });
+    }
   };
 
   useEffect(() => {
@@ -49,7 +61,6 @@ const Login = () => {
       SetError(null);
       SetShowAlert(true);
       reset();
-      navigate('/disneyland/lounge/');
     }
     if (isError) {
       console.log('error');
@@ -61,13 +72,12 @@ const Login = () => {
   }, [isSuccess, isError, errorMessage]);
 
   const accessfrom = localStorage.getItem('access');
-  console.log(accessfrom);
   return (
     <>
       <>
 
       <MetaTags>
-          <title>Login - Mousewait </title>
+          <title> Mousewait Password Reset </title>
           <meta
             name='description'
             content="login in the mouswait for access lounge "
@@ -89,9 +99,10 @@ const Login = () => {
               <div className='row'>
                 {accessfrom === 'app' ? (
                   <div className='alert alert-danger' role='alert'>
-                    Please Login from me tab
+                    Please Reset Password from me tab
                   </div>
-                ) : (
+                ) : 
+                  !isReset ? (
                   <div className='Sign-bg'>
                     <div className='Mw-Sign text-center'>
                       <Link to='/disneyland/lounge'>
@@ -102,7 +113,7 @@ const Login = () => {
                         />
                       </Link>
                       
-                      <h3>Welcome Back</h3>
+                      <h3>Enter your new password</h3>
                     </div>
 
                     {error && (
@@ -123,14 +134,14 @@ const Login = () => {
                       <div className='sign-from'>
                         <div className='form-floating mb-3'>
                           <input
-                            type='email'
+                            type='password'
                             className='form-control'
                             id='floatingInput'
-                            placeholder='mw-email'
-                            {...register('username')}
+                            placeholder='Password'
+                            {...register('user_pass')}
                           />
                           <label htmlFor='floatingInput'>
-                            <i className='fas fa-user' /> Username
+                            <i className='fas fa-user' /> Password
                           </label>
                         </div>
                         <div className='form-floating'>
@@ -138,11 +149,11 @@ const Login = () => {
                             type='password'
                             className='form-control'
                             id='floatingPassword'
-                            placeholder='Password'
-                            {...register('password')}
+                            placeholder='Password Confirm'
+                            {...register('user_pass1')}
                           />
                           <label htmlFor='floatingPassword'>
-                            <i className='fas fa-lock' /> Password
+                            <i className='fas fa-lock' /> Password Confirm
                           </label>
                         </div>
                         <input
@@ -161,19 +172,38 @@ const Login = () => {
                         onClick={handleSubmit(onSubmit)}
                         className='MW-btn'
                       >
-                        Let's Go!
+                        Reset Password
                       </button>
-                      <h6>
-                        <Link to='/forgotpassword'>
-                          Forgot Username/Password?
-                        </Link>
-                      </h6>
-                      <h6>
-                        <Link to='/signup'>Create New Account</Link>
-                      </h6>
                     </div>
                   </div>
-                )}
+                  ) : (
+                  <div>
+                    <div className='Mw-Sign text-center'>
+                      <Link to='/disneyland/lounge'>
+                        <img
+                            src={blackLogo}
+                            className='img-fluid'
+                            alt='MouseWait-logo'
+                        />
+                      </Link>
+                      
+                      <h3>Enter your new password</h3>
+                    </div>
+
+                    <p style={{textAlign: 'center', fontSize: '20px'}}>Your password has been reset.</p>
+                    
+                    <div className='sign-btn text-center'>
+                      <button
+                        type='button'
+                        onClick={() => navigate('/disneyland/login/')}
+                        className='MW-btn'
+                      >
+                        Login
+                      </button>
+                    </div>
+                  </div>
+                  )
+                }
                 <div></div>
               </div>
             </div>
@@ -184,4 +214,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgetPasswordConfirm;
