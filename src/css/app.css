@@ -1687,7 +1687,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 }
 
 .mw-post .MW-btn {
-  background: rgb(13, 110, 253);
+  background: #a0b7e9;
   line-height: 1.5rem;
   border-radius: 0.6rem;
   color: #fff;
@@ -1977,7 +1977,7 @@ a:hover {
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: absolute;
-  width: 30px;
+  width: 50px;
   height: 25px;
   right: 0px;
   top: 20px;
@@ -1985,6 +1985,41 @@ a:hover {
   border: 2px solid #00000078;
   background-color: #fff; */
   max-height: 2rem;
+}
+
+.tagUserItem {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+}
+
+.tagUserItem button {
+  border-radius: 40px;
+  display: flex;
+  height: 100%;
+}
+
+.tagUserItem button img {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  border-color: green;
+  border-width: 1px;
+}
+
+.tagUserItem button div {
+  align-items: center;
+  margin: 6px;
+}
+
+.tagUserList {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 250px;
+  max-height: 200px;
+  border: 1px blue;
+  background-color: white;
 }
 
 /* Color/shape of burger icon bars */

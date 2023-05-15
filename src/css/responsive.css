@@ -1174,7 +1174,8 @@
   .bm-burger-button {
     display: block;
     position: fixed;
-    right: 20px;
+    /* right: 20px; */
+    width: 50px;
     top: 14px;
   }
   .mid-sec .banner-img {

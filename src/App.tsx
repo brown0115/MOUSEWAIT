@@ -40,6 +40,7 @@ import WDWLoungeDetails from './pages/WDWLoungeDetails';
 import MwAdvanceEditor from './components/MwAdvanceEditor';
 import WdwAdvanceEditor from './components/WdwAdvanceEditor';
 import ChatPage from './pages/ChatPage';
+import ForgetPasswordConfirm from './pages/ForgetPasswordConfirm';
 //import LoungeLandWdw from './pages/WdwLoungeLand';
 
 // lazy loading (Split bundle on chunks and download them if needed)
@@ -112,6 +113,7 @@ const App = () => {
         <Route element={<MainLayout />}>
           <Route path='/signup' element={<Signup />} />
           <Route path='/forgotpassword' element={<ForgotPassword />} />
+          <Route path='/forgotpassword/confirm' element={<ForgetPasswordConfirm />} />
           <Route path='/disneyland/login' element={<Login />} />
           <Route path='/disneyworld/mystore' element={<MyStore />} />
 
