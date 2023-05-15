@@ -171,7 +171,7 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
 
   const mentions = useMemo(
     () => ({
-      allowedChars: /^[A-Za-z\-sÅÄÖåäö]*$/,
+      allowedChars: /^[A-Za-z\-sÅÄÖåäö_]*$/,
       mentionDenotationChars: ['@', '#', ' '],
       source: (
         searchTerm: any,
@@ -217,7 +217,7 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
     <>
       {replyShow == true && (
         <div >
-          
+
           <form
             className='space-y-6'
             onSubmit={handleSubmit(onSubmit)}
