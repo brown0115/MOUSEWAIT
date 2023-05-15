@@ -189,20 +189,25 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
                 <Link to={`/disneyland/user/${obj.user?.user_id}/mypost`}>
                   {obj.user?.user_name}
                 </Link>
-                {obj?.user.getuserlogodetail?.speciallogo.image != null ? (
-                  <img
-                    src={
-                      GET_BASE_URL_IMAGE +
-                      '/images/user_special_logos/' +
-                      obj?.user.getuserlogodetail?.speciallogo.image
-                    }
-                    className='card-img-top'
-                    alt='img'
-                    style={{ height: '10px', width: 'auto', marginLeft: '2px' }}
-                  />
-                ) : (
-                  <></>
-                )}
+
+                {
+                  obj?.user.getuserlogodetails.map((logoDetailObj: any) => (
+                      logoDetailObj?.speciallogo.image != null ? (
+                          <img
+                              src={
+                                  GET_BASE_URL_IMAGE +
+                                  '/images/user_special_logos/' +
+                                  logoDetailObj?.speciallogo.image
+                              }
+                              className='card-img-top'
+                              alt='img'
+                              style={{ height: '10px', width: 'auto', marginLeft: '2px' }}
+                          />
+                      ) : (
+                          <></>
+                      )
+                  ))
+                }
               </h6>
               <span>
                 {obj.user?.totalpoints} #{obj.user?.position} Quality #5{obj?.chat_room_id}
