@@ -2631,9 +2631,9 @@ textarea {
   font-size: 1.1rem;
 }
 .my-profile-image {
-  width: 100px;
+  width: 180px;
   border-radius: 50%;
-  height: 100px;
+  height: 180px;
 }
 
 .tag-submit {

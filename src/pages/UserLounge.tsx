@@ -57,6 +57,7 @@ const UserLounge = () => {
   const [userName, SetUserName] = useState<any | string>(null);
   const [userImage, SetUserImage] = useState<any | string>(null);
   const [userDesc, SetUserDesc] = useState<any | string>(null);
+  const [userLogoDetails, SetUserLogoDetails] = useState<any | string>([]);
   const [isLoading, setIsLoading] = useState<any | string>(false);
   const [myData, SetMyData] = useState<any | string>([]);
   const [suscribeUnsuscribe, SetSuscribeUnsuscribe] = useState<any | string>(
@@ -107,6 +108,7 @@ const UserLounge = () => {
         SetUserName(res.payload[0]['user'].user_name);
         SetUserImage(res.payload[0]['user'].image);
         SetUserDesc(res.payload[0]['user'].user_description);
+        SetUserLogoDetails(res.payload[0]['user'].getuserlogodetails);
         SetSuscribeUnsuscribe(
           res.payload[0]['otherdetail'][0].suscribe_or_unsuscribe
         );
@@ -257,6 +259,28 @@ const UserLounge = () => {
                       className='img-fluid my-profile-image'
                       alt=''
                     />
+                    <div className="d-flex justify-content-center">
+                      {
+                        userLogoDetails.map((logoDetailObj: any) =>(
+                            <div>
+                              {logoDetailObj?.speciallogo.image != null ? (
+                                  <img
+                                      src={
+                                          GET_BASE_URL_IMAGE +
+                                          '/images/user_special_logos/' +
+                                          logoDetailObj?.speciallogo.image
+                                      }
+                                      className='card-img-top'
+                                      alt='img'
+                                      style={{ height: '10px', width: 'auto', marginLeft: '2px' }}
+                                  />
+                              ) : (
+                                  <></>
+                              )}
+                            </div>
+                        ))
+                      }
+                    </div>
                     <h6 className='mb-2'>{userDesc}</h6>
                   </div>
 
@@ -351,6 +375,28 @@ const UserLounge = () => {
                         className='img-fluid my-profile-image'
                         alt=''
                       />
+                      <div className="d-flex justify-content-center">
+                        {
+                          userLogoDetails.map((logoDetailObj: any) =>(
+                              <div>
+                                {logoDetailObj?.speciallogo.image != null ? (
+                                    <img
+                                        src={
+                                            GET_BASE_URL_IMAGE +
+                                            '/images/user_special_logos/' +
+                                            logoDetailObj?.speciallogo.image
+                                        }
+                                        className='card-img-top'
+                                        alt='img'
+                                        style={{ height: '10px', width: 'auto', marginLeft: '2px' }}
+                                    />
+                                ) : (
+                                    <></>
+                                )}
+                              </div>
+                          ))
+                        }
+                      </div>
                       <h6 className='mb-2'>{userDesc}</h6>
                     </div>
                     <ul className='list-group list-group-flush'>
