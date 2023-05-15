@@ -21,29 +21,60 @@ import { slide as Menu } from 'react-burger-menu';
 import RightLoungeBest from '../components/RightLoungeBest';
 import { isMobile } from 'react-device-detect';
 import { LoungeBox } from '../components/LoungeBox';
+
+import {
+  fetchLounges,
+  fetchUserMenu,
+  fetchStickyLounge,
+} from '../redux/lounges/slice';
+
+
 const LeftLounge = (props: any) => {
   let navigate = useNavigate();
 
-  const [token, setToken] = useState(localStorage.getItem('token') as any);
-  const [userId, setUserId] = useState(localStorage.getItem('user_id') as any);
-  const loginfrom = localStorage.getItem('loginfrom');
-  const loungeland = localStorage.getItem('loungeland');
-  const club333 = localStorage.getItem('club333');
+  const [ token, setToken] = useState(localStorage.getItem('token') as any);
+  const [ userId, setUserId] = useState(localStorage.getItem('user_id') as any);
+  const [ loginfrom, setLoginFrom] = useState(localStorage.getItem('loginfrom'));
+  const [ loungeland, setLoungeLand ] = useState(localStorage.getItem('loungeland'));
+  const [ club333, setClub333 ] = useState(localStorage.getItem('club333'));
   const [showMenu, setShowMenu] = useState<any | string>(false);
-
-  const menuclick = () => {
-    setShowMenu(!showMenu);
-  };
 
   localStorage.getItem('token');
 
   const [isLoading, setIsLoading] = useState<any | string>(false);
+  const [assignMenu, SetAssignMenu] = useState<any | string>([]);
 
   // Set cart items to localStorage after second rerender
   useEffect(() => {
     setToken(localStorage.getItem('token') as any);
     setUserId(localStorage.getItem('user_id') as any);
-  }, [token]);
+    
+    setLoginFrom(localStorage.getItem('loginfrom'));
+
+    if(assignMenu.length > 0) {
+      assignMenu.map((item: any) => {
+        if( item.rights_id == '13' )
+           localStorage.setItem('loungeland', 'true');
+      })
+    }
+
+    if(assignMenu.length > 0) {
+      assignMenu.map((item: any) => {
+        if( item.rights_id == '14' )
+           localStorage.setItem('club333', 'true');
+      })
+    }
+
+    setClub333(localStorage.getItem('club333'));
+    setLoungeLand(localStorage.getItem('loungeland'));
+  }, [token, assignMenu]);
+
+  useEffect(() => {
+
+    dispatch(fetchUserMenu({ loginuserid: userId })).then((res: any) => {
+      SetAssignMenu(res.payload);
+    });
+  }, []);
 
   const location = useLocation();
 

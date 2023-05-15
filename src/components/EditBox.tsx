@@ -65,7 +65,7 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
 
   const mentions = useMemo(
     () => ({
-      allowedChars: /^[A-Za-z\-sÅÄÖåäö]*$/,
+      allowedChars: /^[A-Za-z\-sÅÄÖåäö_]*$/,
       mentionDenotationChars: ['@', '#', ' '],
       source: (
         searchTerm: any,

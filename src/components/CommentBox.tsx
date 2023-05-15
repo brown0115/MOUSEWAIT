@@ -97,7 +97,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
 
   const mentions = useMemo(
     () => ({
-      allowedChars: /^[A-Za-z\-sÅÄÖåäö]*$/,
+      allowedChars: /^[A-Za-z\-sÅÄÖåäö_]*$/,
       mentionDenotationChars: ['@', '#', ' '],
       source: (
         searchTerm: any,
