@@ -216,46 +216,46 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
   return (
     <>
       {replyShow == true && (
-        <div style={{position: 'relative'}}>
-
-          <div className="tagUserList" style={{'position': 'absolute', 'bottom': '60px'}}>
-
-          {
-            filterUser.map((item, index) => {
-              return (
-                <>
-                <div className="tagUserItem">
-                  <button onClick={() => onChangeFilterUser(item)}>
-                    <div>
-                      <img
-                        style={{ verticalAlign: 'middle' }}
-                        src={
-                          GET_BASE_URL_IMAGE +
-                          '/disneyland/images/thumbs/' +
-                          item['image']
-                        }
-                        className='com-imggg'
-                      />
-                    </div>
-                    
-                    <div>
-                      {item['value']}
-                    </div>
-                  </button>
-                </div>
-                </>
-              )
-            })
-          }
-        </div>
-
-      
+        <div >
+          
           <form
             className='space-y-6'
             onSubmit={handleSubmit(onSubmit)}
             method='POST'
           >
-            <div className='com-box-main'>
+            <div className='com-box-main' style={{position: 'relative'}}>
+
+              <div className="tagUserList" style={{'position': 'absolute', 'bottom': '60px'}}>
+
+                {
+                  filterUser.map((item, index) => {
+                    return (
+                      <>
+                      <div className="tagUserItem">
+                        <button onClick={() => onChangeFilterUser(item)}>
+                          <div>
+                            <img
+                              style={{ verticalAlign: 'middle' }}
+                              src={
+                                GET_BASE_URL_IMAGE +
+                                '/disneyland/images/thumbs/' +
+                                item['image']
+                              }
+                              className='com-imggg'
+                            />
+                          </div>
+                          
+                          <div>
+                            {item['value']}
+                          </div>
+                        </button>
+                      </div>
+                      </>
+                    )
+                  })
+                }
+              </div>
+
               <div className='com-box d-flex'>
                 <RichTextEditor
                   id='rte'
