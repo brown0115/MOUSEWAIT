@@ -12,6 +12,7 @@ import { createNull } from 'typescript';
 import MetaTags from 'react-meta-tags';
 import Logo from "../assets/img/MouseWait.png";
 import { stringify } from 'querystring';
+import { Center } from '@mantine/core';
 
 
 type FormData = {
@@ -36,6 +37,7 @@ const ForgetPasswordConfirm = () => {
   const { isFetching, isSuccess, isError, errorMessage } =
   useSelector(usersSelector);
   const params = new URLSearchParams(useLocation().search);
+  const [isReset, setIsReset] = useState(false);
 
   const onSubmit = (data: any) => {
     console.log('userid', params.get('uid'))
@@ -46,10 +48,7 @@ const ForgetPasswordConfirm = () => {
     else {
       var info = {user_id: params.get('uid'), resetkey: params.get('resetkey'), user_pass: data['user_pass']};
       dispatch<any>(resetPassword(info)).then((res: any) => {
-        var user = res['payload']['data'];
-        var login = {username: user['user_name'], password: data['user_pass'], loginfrom: data['loginfrom']}
-        dispatch<any>(signinUser(login)).then((res: any) => {
-        });
+        setIsReset(true);
       });
     }
   };
@@ -62,7 +61,6 @@ const ForgetPasswordConfirm = () => {
       SetError(null);
       SetShowAlert(true);
       reset();
-      navigate('/disneyland/lounge/');
     }
     if (isError) {
       console.log('error');
@@ -103,7 +101,8 @@ const ForgetPasswordConfirm = () => {
                   <div className='alert alert-danger' role='alert'>
                     Please Reset Password from me tab
                   </div>
-                ) : (
+                ) : 
+                  !isReset ? (
                   <div className='Sign-bg'>
                     <div className='Mw-Sign text-center'>
                       <Link to='/disneyland/lounge'>
@@ -177,7 +176,34 @@ const ForgetPasswordConfirm = () => {
                       </button>
                     </div>
                   </div>
-                )}
+                  ) : (
+                  <div>
+                    <div className='Mw-Sign text-center'>
+                      <Link to='/disneyland/lounge'>
+                        <img
+                            src={blackLogo}
+                            className='img-fluid'
+                            alt='MouseWait-logo'
+                        />
+                      </Link>
+                      
+                      <h3>Forget Password Confirm</h3>
+                    </div>
+
+                    <p style={{textAlign: 'center', fontSize: '20px'}}>Your password has been reset.</p>
+                    
+                    <div className='sign-btn text-center'>
+                      <button
+                        type='button'
+                        onClick={() => navigate('/disneyland/login/')}
+                        className='MW-btn'
+                      >
+                        Login
+                      </button>
+                    </div>
+                  </div>
+                  )
+                }
                 <div></div>
               </div>
             </div>
