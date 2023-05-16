@@ -55,7 +55,6 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
 
   useEffect(() => {
     setValue('chat_msg', text);
-    console.log('text', text)
     if(text == '' || text == '<p><br></p>') 
       setFilterUser([]);
   

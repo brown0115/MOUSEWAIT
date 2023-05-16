@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import qs from 'qs';
 import { Placeholder } from '../components/Placeholder';
 import { CommentBox } from '../components/CommentBox';
-import { fetchLoungeDetails } from '../redux/lounges/slice';
+import { fetchLoungeDetails, postLoungeCommentEdit } from '../redux/lounges/slice';
 import { selectLounges } from '../redux/lounges/selectors';
 import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import { CommonPostMessage } from '../components/CommonPostMessage';
@@ -17,6 +17,7 @@ import faceBookImage from '../assets/img/face-s.jpg';
 import pinImage from '../assets/img/face-s.jpg';
 import { LoungeName } from '../components/LoungeName';
 import { Helmet } from 'react-helmet';
+import { ToastContainer, toast } from 'react-toastify';
 
 // @ts-ignore
 import MetaTags from 'react-meta-tags';
@@ -179,8 +180,25 @@ return ret;
    
    };
  */
+   const [Notify, setIsNotify] = useState<any | string>();
 
-  const onSubmit = (data: any) => {
+
+  const onSubmit = (data: any ) => {
+  if (data.chat_reply_msg != undefined) {
+    dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
+      reset();
+      window.location.reload();
+      Notify(toast('Post Updated Successfully'));
+    });
+  } else {
+    dispatch<any>(postLoungeFlag(data)).then((res: any) => {
+      window.confirm(res.payload.data[0].error);
+      window.location.reload();
+    });
+  }
+   }
+
+  const onSubmit1 = (data: any) => {
     if (token != null) {
       const chat_msg = getValues('chat_msg');
 
@@ -575,7 +593,7 @@ return ret;
                 <CommentBox
                   
                   chatId={LoungeId}
-                  onSubmit={onSubmit}
+                  onSubmit={onSubmit1}
                   register={register}
                   handleSubmit={handleSubmit}
                   stickerData={stickerItems}
