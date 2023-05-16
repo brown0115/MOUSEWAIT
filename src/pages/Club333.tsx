@@ -53,7 +53,6 @@ const Club333 = () => {
 
   let sortType: any = null;
   let LoungeId: any = null;
-  //let currentPage: any = null;
   let searchValue: any = null;
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -91,7 +90,6 @@ const Club333 = () => {
     );
   }, [landid, currentPage, shortByTime, search]);
 
-  // console.log(items);
   return (
     <>
       <MetaTags>

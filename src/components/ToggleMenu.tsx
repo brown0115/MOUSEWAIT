@@ -150,6 +150,22 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
 
+  
+
+  const onBookMark = (LoungeId: any) => {
+    if (token == null) {
+      navigate('/disneyland/login');
+    } else {
+      dispatch<any>(postBookMark({ LoungeId })).then((res: any) => {
+
+        res.payload.data[0].message == 'Added'
+          ? SetBookMark(true)
+          : SetBookMark(false);
+        Notify(toast(res.payload.data[0].message));
+      });
+    }
+  };
+
   // remove post from view particular user not delete
   const onRemove = (ban_chat_id: any, RemoveType: string) => {
     if (token == null) {
@@ -159,7 +175,6 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
       // console.log(RemoveType);
       dispatch<any>(removeUserLounge({ ban_chat_id, RemoveType })).then(
         (res: any) => {
-          //console.log(res);
           Notify(toast(res.payload.data));
         }
       );
@@ -193,25 +208,13 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
     }
   };
 
-  //bookmark a post
-  const onBookMark = (LoungeId: any) => {
-    if (token == null) {
-      navigate('/disneyland/login');
-    } else {
-      dispatch<any>(postBookMark({ LoungeId })).then((res: any) => {
-
-        res.payload.data[0].message == 'Added'
-          ? SetBookMark(true)
-          : SetBookMark(false);
-        Notify(toast(res.payload.data[0].message));
-        //res.payload[0].isbookmark?.status ==1 && SetBookMark(true)
-      });
-    }
-  };
-
   const [modalIsOpen, setIsOpen] = useState(false);
 
   let navigate = useNavigate();
+  // for user tags
+  let tagData: any = null;
+  const [AllTagData, setAllTagData] = useState<any | String>();
+  const [TagList, setTagList] = useState<any | String>(false);
   let subtitle: any;
   function openModal() {
     if (token == null) {
@@ -247,10 +250,10 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
     setFlagType('P');
   };
 
-  // for user tags
-  let tagData: any = null;
-  const [AllTagData, setAllTagData] = useState<any | String>();
-  const [TagList, setTagList] = useState<any | String>(false);
+  const closeTagMe = () => {
+    setTagList(false);
+  };
+
   const openTagdata = () => {
     if (token == null) {
       navigate('/disneyland/login');
@@ -262,9 +265,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
     }
   };
 
-  const closeTagMe = () => {
-    setTagList(false);
-  };
+ 
 
   //Dm Box
 
