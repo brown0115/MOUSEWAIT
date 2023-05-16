@@ -66,7 +66,7 @@ const LoungeLand = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fetchStickyLounge({}));
+    // dispatch(fetchStickyLounge({}));
     dispatch(
       fetchCatLounges({
         landid,
