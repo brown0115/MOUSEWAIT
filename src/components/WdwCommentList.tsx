@@ -148,7 +148,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
     console.log('flag');
     return false;
     dispatch<any>(postLoungeFlag(data)).then((res: any) => {
-      Notify(toast(res.payload.data[0].error));
+      // Notify(toast(res.payload.data[0].error));
     });
   };
 

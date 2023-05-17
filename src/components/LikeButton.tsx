@@ -27,7 +27,7 @@ export const LikeButton: React.FC<LikeButtonPropsType> = ({
 
       res.payload.data[0].message == 'Added' && SetLikeCount(countvalue + 1);
       res.payload.data[0].message == 'Removed' && SetLikeCount(countvalue - 1);
-      Notify(toast(res.payload.data[0].message));
+      // Notify(toast(res.payload.data[0].message));
     });
   };
 

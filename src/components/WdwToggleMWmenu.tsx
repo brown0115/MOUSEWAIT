@@ -207,7 +207,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
     } else {
       dispatch<any>(postLoungeFlagWdw(data)).then((res: any) => {
         setIsOpen(false);
-        Notify(toast(res.payload.data[0].error));
+        // Notify(toast(res.payload.data[0].error));
         //reset();
         /*     dispatch(
           fetchLounges({

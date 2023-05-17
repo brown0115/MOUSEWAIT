@@ -64,11 +64,11 @@ export const LikeCommentReply: React.FC<LikeCommentReplyPropsType> = ({
         })
       ).then((res: any) => {
         if (res.payload.data == 'Like registered') {
-          console.log(likeCount);
+          // console.log(likeCount);
           SetLikeCount(countvalue + 1);
-          console.log(likeCount);
+          // console.log(likeCount);
         } else {
-          Notify(toast(res.payload.data));
+          // Notify(toast(res.payload.data));
         }
       });
     }

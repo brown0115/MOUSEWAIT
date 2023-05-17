@@ -114,7 +114,7 @@ const MyCollection = () => {
     setModal(false);
     dispatch<any>(postMyGift(data)).then((res: any) => {
       //console.log(res)
-      Notify(toast(res.payload.data.message));
+      // Notify(toast(res.payload.data.message));
     });
   };
 

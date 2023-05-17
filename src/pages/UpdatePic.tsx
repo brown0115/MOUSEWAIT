@@ -71,7 +71,7 @@ function Updatepic() {
     setIsLoading(true);
     dispatch<any>(updateprofile(file)).then((res: any) => {
       setIsLoading(false);
-      Notify(toast(res.payload.data));
+      // Notify(toast(res.payload.data));
     });
   };
 

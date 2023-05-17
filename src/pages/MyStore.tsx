@@ -92,7 +92,7 @@ const MyStore = () => {
     dispatch(fetchMyStore({ sortType, currentPage }));
     setModal(false);
     dispatch<any>(postMyStore(data)).then((res: any) => {
-      Notify(toast(res.payload.data));
+      // Notify(toast(res.payload.data));
     });
   };
 

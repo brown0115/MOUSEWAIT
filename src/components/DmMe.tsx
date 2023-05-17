@@ -101,7 +101,7 @@ export const DmMe: React.FC<DmMePropsType> = ({
 
         // dispatch(fetchusermessages({user_id}));
         navigate('/disneyland/myConversation/' + user_id);
-        Notify(toast(res.payload.data));
+        // Notify(toast(res.payload.data));
         setNavState(true);
       });
     }

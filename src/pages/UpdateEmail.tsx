@@ -60,7 +60,7 @@ function UpdateEmail() {
       // console.log(res);
 
       window.location.reload();
-      Notify(toast(res.payload));
+      // Notify(toast(res.payload));
     });
   };
 

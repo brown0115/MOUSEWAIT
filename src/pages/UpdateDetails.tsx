@@ -57,7 +57,7 @@ function UpdateDetails() {
 
   const onSubmit = (data: any) => {
     dispatch<any>(updateprofile(data)).then((res: any) => {
-      Notify(toast(res.payload));
+      // Notify(toast(res.payload));
     });
   };
 

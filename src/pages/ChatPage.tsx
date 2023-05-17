@@ -45,7 +45,7 @@ const ChatPage = () => {
 
         setValue('user_text_message', '');
       });
-      Notify(toast(res.payload.data));
+      // Notify(toast(res.payload.data));
     });
   };
 

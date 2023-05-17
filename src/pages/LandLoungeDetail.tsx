@@ -188,7 +188,7 @@ return ret;
     dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
       reset();
       window.location.reload();
-      Notify(toast('Post Updated Successfully'));
+      // Notify(toast('Post Updated Successfully'));
     });
   } else {
     dispatch<any>(postLoungeFlag(data)).then((res: any) => {

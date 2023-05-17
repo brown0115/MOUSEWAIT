@@ -75,7 +75,7 @@ const MyTradeRequest = () => {
     dispatch<any>(removeTrade({ tid })).then((res: any) => {
       //console.log(res)
     });
-    Notify(toast('Reject'));
+    // Notify(toast('Reject'));
   };
 
   const tradeAccept = (tid: any) => {
@@ -84,7 +84,7 @@ const MyTradeRequest = () => {
     dispatch<any>(acceptTrade({ tid })).then((res: any) => {
       //console.log(res)
     });
-    Notify(toast('Accept'));
+    // Notify(toast('Accept'));
   };
 
   return (
