@@ -74,9 +74,9 @@ const LandLoungeDetail = (props: any) => {
   let navigate = useNavigate();
   useEffect(() => {
 
-    if (token == null) {
-      navigate('/disneyland/login');
-    }
+    // if (token == null) {
+    //   navigate('/disneyland/login');
+    // }
 
     window.scrollTo(0, 0);
 
