@@ -168,6 +168,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
 
   // remove post from view particular user not delete
   const onRemove = (ban_chat_id: any, RemoveType: string) => {
+    console.log('ban_chat_id', ban_chat_id)
     if (token == null) {
       navigate('/disneyland/login');
     } else {
@@ -176,6 +177,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
       dispatch<any>(removeUserLounge({ ban_chat_id, RemoveType })).then(
         (res: any) => {
           // Notify(toast(res.payload.data));
+          window.location.reload();
         }
       );
       
@@ -204,7 +206,6 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
         
       }
 
-      window.location.reload();
     }
   };
 

@@ -31,7 +31,7 @@ export const WdwLoungeName: React.FC<WdwLoungeNamePropsType> = ({
         ) : Roomid == '2' ? (
           <p className='my-dis'>
             <Link to={`/disneyworld/lands/2/Wdw-Real-Time/`}>
-              Disneyland-Real-Time
+              Wdw-Real-Time
             </Link>
           </p>
         ) : Roomid == null || Roomid != '1' || Roomid != '2' ? (

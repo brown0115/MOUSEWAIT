@@ -12,6 +12,7 @@ import {
   fetchAllTaglists,
   lockPostWdw,
   bumpPostWdw,
+  fetchCatLoungesWdw,
   stickPostWdw,
   removeImageOverPostWdw,
   fetchUserMenu,
@@ -151,15 +152,14 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
 
   // remove post from view particular user not delete
   const onRemove = (ban_chat_id: any, RemoveType: string) => {
+    console.log('id', ban_chat_id, RemoveType)
     if (token == null) {
       navigate('/disneyland/login');
     } else {
       window.confirm('Are you sure?');
-      // console.log(RemoveType);
       dispatch<any>(removeUserLoungeWdw({ ban_chat_id, RemoveType })).then(
         (res: any) => {
-          //console.log(res);
-          // Notify(toast(res.payload.data));
+          window.location.reload();
         }
       );
 
@@ -172,6 +172,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
           shortByTime,
         })
       );
+      
     }
   };
 

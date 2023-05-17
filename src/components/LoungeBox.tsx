@@ -123,9 +123,9 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
       setIsLoading(true);
       var data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': text, 'chat_img': getValues('chat_img')}
       console.log('wwwland', land)
-      if(land == 5 || land == 6) {
-        console.log('wwwland', land)
-        data['chat_room_id'] = land - 2;
+      if(land == 5 || land == 6 || land == 10) {
+        if(land == 10) data['chat_room_id'] = 0;
+        else data['chat_room_id'] = land - 4;
         dispatch<any>(postLoungeWdw(data)).then((res: any) => {
           setIsLoading(false)
           closeModal();
@@ -228,7 +228,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                         style={land == 0 ? { backgroundColor: '#9BB8EF' } : {}}
                         onClick={() => setLand('0')}
                       >
-                        THE HUB{' '}
+                        LAND HUB{' '}
                       </li>
 
                       {loungland != '' ? (
@@ -268,6 +268,13 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                         onClick={() => setLand('6')}
                       >
                         WDW REALTIME
+                      </li>
+
+                      <li
+                        style={land == 10 ? { backgroundColor: '#9BB8EF' } : {}}
+                        onClick={() => setLand('10')}
+                      >
+                        WDW HUB{' '}
                       </li>
 
                     </ul>
