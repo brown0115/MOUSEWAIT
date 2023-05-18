@@ -185,27 +185,27 @@ export const CommentList: React.FC<CommentListPropsType> = ({
 
   useEffect(() => {
 
-    var domParser = new DOMParser();
-    var doc = domParser.parseFromString(formatedMsg, 'text/html');
-    var msg = doc.body.innerText;
+    // var domParser = new DOMParser();
+    // var doc = domParser.parseFromString(formatedMsg, 'text/html');
+    // var msg = doc.body.innerText;
     
-    let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
-    async function convert()
-    {
-      for(const val of replacemsg ?? []) {
-        if(val.length > 0) {
-          let response = await axios.get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + val)
-          if(response.data.data.length > 0) {
-            let id = response.data.data[0].id;
-            let htmltext = "<a href='/../../user/" + id + "/mypost'>" + val + "</a>";
-            msg = msg.replace('@' + val, htmltext);
-            console.log('aaaaaaaaaaa')
-          }
-        } 
-      }
-      console.log('bbbbbbbbb')
-    }
-    convert();
+    // let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
+    // async function convert()
+    // {
+    //   for(const val of replacemsg ?? []) {
+    //     if(val.length > 0) {
+    //       let response = await axios.get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + val)
+    //       if(response.data.data.length > 0) {
+    //         let id = response.data.data[0].id;
+    //         let htmltext = "<a href='/../../user/" + id + "/mypost'>" + val + "</a>";
+    //         msg = msg.replace('@' + val, htmltext);
+    //         console.log('aaaaaaaaaaa')
+    //       }
+    //     } 
+    //   }
+    //   console.log('bbbbbbbbb')
+    // }
+    // convert();
   }, [cmt.chat_chat_reply_msg]);
   
   // const formattedMessage = async (message: string) => {

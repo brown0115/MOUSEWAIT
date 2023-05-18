@@ -154,7 +154,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
               return (
                 <>
                 <div className="tagUserItem">
-                  <button onClick={() => onChangeFilterUser(item)}>
+                  <div onClick={() => onChangeFilterUser(item)} className="button">
                     <div>
                       <img
                         style={{ verticalAlign: 'middle' }}
@@ -170,7 +170,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
                     <div>
                       {item['value']}
                     </div>
-                  </button>
+                  </div>
                 </div>
                 </>
               )

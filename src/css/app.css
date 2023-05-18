@@ -1979,13 +1979,13 @@ a:hover {
   height: 40px;
 }
 
-.tagUserItem button {
+.tagUserItem .button {
   border-radius: 40px;
   display: flex;
   height: 100%;
 }
 
-.tagUserItem button img {
+.tagUserItem .button img {
   width: 25px;
   height: 25px;
   margin-right: 10px;
@@ -1993,7 +1993,7 @@ a:hover {
   border-width: 1px;
 }
 
-.tagUserItem button div {
+.tagUserItem .button div {
   align-items: center;
   margin: 6px;
 }
