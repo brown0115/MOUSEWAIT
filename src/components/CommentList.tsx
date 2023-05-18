@@ -22,6 +22,7 @@ import { LikeCommentReply } from '../components/LikeCommentReply';
 import axios, { AxiosResponse } from 'axios';
 import { GET_BASE_URL } from '../constants/apiEndpoints';
 import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import { COMPLETIONSTATEMENT_TYPES } from '@babel/types';
 
 type CommentListPropsType = {
   chatId: any;
@@ -165,48 +166,70 @@ export const CommentList: React.FC<CommentListPropsType> = ({
 
   const [likeuserlist, setLikeUserList] = useState<any | string>(false);
   const [likeuserdata, setLikeUserData] = useState<any | string>([]);
-  const showUser = (id: any) => {
-    setLikeUserList(true);
-    dispatch<any>(wholikeCommentReply({ id })).then((res: any) => {
-      console.log(res);
-      setLikeUserData([res.payload.data]);
-    });
-  };
-  /*   const hideUser = (id: any) => {
-    setLikeUserList(false);
-    dispatch<any>(wholikeCommentReply({ id })).then((res: any) => {
-      setLikeUserData([]);
-      //console.log(res);
-    });
-  }; */
 
-  const formattedMessage = (message: string) => {
+  const [formatedMsg, setFormatedMsg] = useState(cmt.chat_reply_msg);
+
+  useEffect(() => {
+
     var domParser = new DOMParser();
-    var doc = domParser.parseFromString(message, 'text/html');
+    var doc = domParser.parseFromString(formatedMsg, 'text/html');
     var msg = doc.body.innerText;
-
-    // let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
     
-    // let newarr = [];
-    // replacemsg?.map((val) => {
-    //   val.length > 0 && axios
-    //     .get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + val)
-    //     .then((response: any) => {
-    //       console.log('docs', response.data.data)
-    //   });
-    // })
-    var links = doc.querySelectorAll('.mention');
-    links.forEach(function (linkTag: any) {
-      var aTag = document.createElement('a');
-      aTag.href = `../../user/${linkTag.dataset.id}/mypost`;
+    let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
+    async function convert()
+    {
+      for(const val of replacemsg ?? []) {
+        if(val.length > 0) {
+          let response = await axios.get(GET_BASE_URL + '/backend/api/v1/getUserId?name=' + val)
+          if(response.data.data.length > 0) {
+            let id = response.data.data[0].id;
+            let htmltext = "<a href='/disneyland/user/" + id + "/mypost'>@" + val + "</a>";
+            msg = msg.replace('@' + val, htmltext);
+          }
+        } 
+      }
+      setFormatedMsg(msg)
+    }
+    convert();
+  }, [cmt.chat_reply_msg]);
+  
+  // const formattedMessage = async (message: string) => {
+  //   var domParser = new DOMParser();
+  //   var doc = domParser.parseFromString(message, 'text/html');
+  //   var msg = doc.body.innerText;
+  //   let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
+    
+  //   {
+  //       await replacemsg?.map((val) => {
+  //       val.length > 0 && axios
+  //         .get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + val)
+  //         .then((response: any) => {
+  //           if(response.data.data.length > 0) {
+  //             let id = response.data.data[0].id;
+  //             let htmltext = "<a href='/../../user/" + id + "/mypost'>" + val + "</a>";
+  //             msg = msg.replace('@' + val, htmltext);
+  //             console.log('aaaaaaaa', msg)
+  //           }
+  //       });
 
-      aTag.style.color = '#0000EE';
-      aTag.style.marginRight = '3px';
-      aTag.innerHTML = linkTag.innerHTML;
-      linkTag.parentNode.replaceChild(aTag, linkTag);
-    });
-    return doc.body.innerHTML;
-  };
+  //     })
+  //   }
+    
+    // setFormatedMsg(msg)
+    // console.log('bbbbbbbbbb', msg)
+    // return msg;
+    // var links = doc.querySelectorAll('.mention');
+    // links.forEach(function (linkTag: any) {
+    //   var aTag = document.createElement('a');
+    //   aTag.href = `../../user/${linkTag.dataset.id}/mypost`;
+
+    //   aTag.style.color = '#0000EE';
+    //   aTag.style.marginRight = '3px';
+    //   aTag.innerHTML = linkTag.innerHTML;
+    //   linkTag.parentNode.replaceChild(aTag, linkTag);
+    // });
+    // console.log('aaaaaa', msgtext)
+    // return "<p>asdf</p>";
 
   return (
     <>
@@ -239,7 +262,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                     color: '#313237',
                   }}
                   dangerouslySetInnerHTML={{
-                    __html: formattedMessage(cmt.chat_reply_msg)
+                    __html: formatedMsg
                       .replace('<p>', '<span>')
                       .replace('</p>', '</span>')
                       .replace('<br>', ''),
