@@ -86,10 +86,11 @@ export const TagMe: React.FC<TagMePropsType> = ({
   }, [sortByTime]);
 
   const onSubmit = () => {
-    console.log('onSubmit', optionSelected);
-    // dispatch<any>(assignTagToPost(data)).then((res: any) => {
-    //   window.location.reload();
-    // });
+    let data = {chatId: chatId, checkedId: optionSelected.map((val: any) => val.value)};
+    // console.log('onSubmit', data);
+    dispatch<any>(assignTagToPost(data)).then((res: any) => {
+      window.location.reload();
+    });
   };
 
   const [searchTag, setAllSearcTag] = useState<any | String>();
@@ -160,6 +161,7 @@ export const TagMe: React.FC<TagMePropsType> = ({
                   components={{
                     Option
                   }}
+                  menuIsOpen = {true}
                   onChange={(selected: any) => setOptionSelected(selected)}
                   // allowSelectAll={true}
                   value={optionSelected}
