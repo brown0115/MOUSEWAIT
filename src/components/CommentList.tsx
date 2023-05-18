@@ -166,47 +166,32 @@ export const CommentList: React.FC<CommentListPropsType> = ({
 
   const [likeuserlist, setLikeUserList] = useState<any | string>(false);
   const [likeuserdata, setLikeUserData] = useState<any | string>([]);
-  const showUser = (id: any) => {
-    setLikeUserList(true);
-    dispatch<any>(wholikeCommentReply({ id })).then((res: any) => {
-      console.log(res);
-      setLikeUserData([res.payload.data]);
-    });
-  };
-  /*   const hideUser = (id: any) => {
-    setLikeUserList(false);
-    dispatch<any>(wholikeCommentReply({ id })).then((res: any) => {
-      setLikeUserData([]);
-      //console.log(res);
-    });
-  }; */
 
   const [formatedMsg, setFormatedMsg] = useState(cmt.chat_reply_msg);
 
   useEffect(() => {
 
-    // var domParser = new DOMParser();
-    // var doc = domParser.parseFromString(formatedMsg, 'text/html');
-    // var msg = doc.body.innerText;
+    var domParser = new DOMParser();
+    var doc = domParser.parseFromString(formatedMsg, 'text/html');
+    var msg = doc.body.innerText;
     
-    // let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
-    // async function convert()
-    // {
-    //   for(const val of replacemsg ?? []) {
-    //     if(val.length > 0) {
-    //       let response = await axios.get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + val)
-    //       if(response.data.data.length > 0) {
-    //         let id = response.data.data[0].id;
-    //         let htmltext = "<a href='/../../user/" + id + "/mypost'>" + val + "</a>";
-    //         msg = msg.replace('@' + val, htmltext);
-    //         console.log('aaaaaaaaaaa')
-    //       }
-    //     } 
-    //   }
-    //   console.log('bbbbbbbbb')
-    // }
-    // convert();
-  }, [cmt.chat_chat_reply_msg]);
+    let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
+    async function convert()
+    {
+      for(const val of replacemsg ?? []) {
+        if(val.length > 0) {
+          let response = await axios.get(GET_BASE_URL + '/backend/api/v1/getUserId?name=' + val)
+          if(response.data.data.length > 0) {
+            let id = response.data.data[0].id;
+            let htmltext = "<a href='/disneyland/user/" + id + "/mypost'>@" + val + "</a>";
+            msg = msg.replace('@' + val, htmltext);
+          }
+        } 
+      }
+      setFormatedMsg(msg)
+    }
+    convert();
+  }, [cmt.chat_reply_msg]);
   
   // const formattedMessage = async (message: string) => {
   //   var domParser = new DOMParser();
@@ -278,9 +263,9 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                   }}
                   dangerouslySetInnerHTML={{
                     __html: formatedMsg
-                      // .replace('<p>', '<span>')
-                      // .replace('</p>', '</span>')
-                      // .replace('<br>', ''),
+                      .replace('<p>', '<span>')
+                      .replace('</p>', '</span>')
+                      .replace('<br>', ''),
                   }}
                 ></span>
                 <br />

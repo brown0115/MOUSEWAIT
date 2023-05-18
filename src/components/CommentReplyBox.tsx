@@ -26,6 +26,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { removeUserLounge } from '../redux/lounges/slice';
 import { LikeCommentReply } from '../components/LikeCommentReply';
 import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
+import axios, { AxiosResponse } from 'axios';
+import { GET_BASE_URL } from '../constants/apiEndpoints';
+
 
 type CommentReplyBoxPropsType = {
   replyData: any;
@@ -123,22 +126,48 @@ export const CommentReplyBox: React.FC<CommentReplyBoxPropsType> = ({
     SetEditBox(!editbox);
   };
 
-  const formattedMessage = (message: string) => {
-    var domParser = new DOMParser();
-    var doc = domParser.parseFromString(message, 'text/html');
-    var links = doc.querySelectorAll('.mention');
-    links.forEach(function (linkTag: any) {
-      var aTag = document.createElement('a');
-      // aTag.href = `https://mousewait.xyz/mousewaitnew/disneyland/user/${linkTag.dataset.id}/mypost`;
-      aTag.href = `../../user/${linkTag.dataset.id}/mypost`;
+  // const formattedMessage = (message: string) => {
+  //   var domParser = new DOMParser();
+  //   var doc = domParser.parseFromString(message, 'text/html');
+  //   var links = doc.querySelectorAll('.mention');
+  //   links.forEach(function (linkTag: any) {
+  //     var aTag = document.createElement('a');
+  //     // aTag.href = `https://mousewait.xyz/mousewaitnew/disneyland/user/${linkTag.dataset.id}/mypost`;
+  //     aTag.href = `../../user/${linkTag.dataset.id}/mypost`;
 
-      aTag.style.color = '#0000EE';
-      aTag.style.marginRight = '3px';
-      aTag.innerHTML = linkTag.innerHTML;
-      linkTag.parentNode.replaceChild(aTag, linkTag);
-    });
-    return doc.body.innerHTML;
-  };
+  //     aTag.style.color = '#0000EE';
+  //     aTag.style.marginRight = '3px';
+  //     aTag.innerHTML = linkTag.innerHTML;
+  //     linkTag.parentNode.replaceChild(aTag, linkTag);
+  //   });
+  //   return doc.body.innerHTML;
+  // };
+
+  const [formatedMsg, setFormatedMsg] = useState(replyData.chat_reply_msg);
+
+  useEffect(() => {
+
+    var domParser = new DOMParser();
+    var doc = domParser.parseFromString(formatedMsg, 'text/html');
+    var msg = doc.body.innerText;
+    
+    let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
+    async function convert()
+    {
+      for(const val of replacemsg ?? []) {
+        if(val.length > 0) {
+          let response = await axios.get(GET_BASE_URL + '/backend/api/v1/getUserId?name=' + val)
+          if(response.data.data.length > 0) {
+            let id = response.data.data[0].id;
+            let htmltext = "<a href='/disneyland/user/" + id + "/mypost'>@" + val + "</a>";
+            msg = msg.replace('@' + val, htmltext);
+          }
+        } 
+      }
+      setFormatedMsg(msg)
+    }
+    convert();
+  }, [replyData.chat_reply_msg]);
 
   return (
     <>      
@@ -175,7 +204,7 @@ export const CommentReplyBox: React.FC<CommentReplyBoxPropsType> = ({
                   color: '#313237',
                 }}
                 dangerouslySetInnerHTML={{
-                  __html: formattedMessage(replyData.chat_reply_msg)
+                  __html: formatedMsg
                     .replace('<p>', '<span>')
                     .replace('</p>', '</spam>')
                     .replace('<br>', ''),
