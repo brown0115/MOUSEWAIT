@@ -185,26 +185,26 @@ export const CommentList: React.FC<CommentListPropsType> = ({
     var doc = domParser.parseFromString(message, 'text/html');
     var msg = doc.body.innerText;
 
-    let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
+    // let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
     
-    let newarr = [];
-    replacemsg?.map((val) => {
-      val.length > 0 && axios
-        .get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + val)
-        .then((response: any) => {
-          console.log('docs', response.data.data)
-      });
-    })
-    // var links = doc.querySelectorAll('.mention');
-    // links.forEach(function (linkTag: any) {
-    //   var aTag = document.createElement('a');
-    //   aTag.href = `../../user/${linkTag.dataset.id}/mypost`;
+    // let newarr = [];
+    // replacemsg?.map((val) => {
+    //   val.length > 0 && axios
+    //     .get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + val)
+    //     .then((response: any) => {
+    //       console.log('docs', response.data.data)
+    //   });
+    // })
+    var links = doc.querySelectorAll('.mention');
+    links.forEach(function (linkTag: any) {
+      var aTag = document.createElement('a');
+      aTag.href = `../../user/${linkTag.dataset.id}/mypost`;
 
-    //   aTag.style.color = '#0000EE';
-    //   aTag.style.marginRight = '3px';
-    //   aTag.innerHTML = linkTag.innerHTML;
-    //   linkTag.parentNode.replaceChild(aTag, linkTag);
-    // });
+      aTag.style.color = '#0000EE';
+      aTag.style.marginRight = '3px';
+      aTag.innerHTML = linkTag.innerHTML;
+      linkTag.parentNode.replaceChild(aTag, linkTag);
+    });
     return doc.body.innerHTML;
   };
 

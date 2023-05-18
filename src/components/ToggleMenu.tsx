@@ -131,7 +131,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
           : SetThankYou(false);
         SetThankData([]);
         SetThankData(res.payload.data[0].thankdata);
-        Notify(toast(res.payload.data[0].message));
+        // Notify(toast(res.payload.data[0].message));
         // res.payload[0].isthankyou?.status ==1 && SetThankYou(true)
       });
     }
@@ -161,13 +161,14 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
         res.payload.data[0].message == 'Added'
           ? SetBookMark(true)
           : SetBookMark(false);
-        Notify(toast(res.payload.data[0].message));
+        // Notify(toast(res.payload.data[0].message));
       });
     }
   };
 
   // remove post from view particular user not delete
   const onRemove = (ban_chat_id: any, RemoveType: string) => {
+    console.log('ban_chat_id', ban_chat_id)
     if (token == null) {
       navigate('/disneyland/login');
     } else {
@@ -175,7 +176,8 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
       // console.log(RemoveType);
       dispatch<any>(removeUserLounge({ ban_chat_id, RemoveType })).then(
         (res: any) => {
-          Notify(toast(res.payload.data));
+          // Notify(toast(res.payload.data));
+          window.location.reload();
         }
       );
       
@@ -204,7 +206,6 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
         
       }
 
-      window.location.reload();
     }
   };
 
@@ -307,7 +308,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
       } else {
         setIsLock('Lock');
       }
-      Notify(toast(res.payload.data));
+      // Notify(toast(res.payload.data));
     });
   };
 

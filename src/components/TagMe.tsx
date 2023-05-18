@@ -7,28 +7,21 @@ import { MdMessage } from 'react-icons/md';
 import { selectLounges } from '../redux/lounges/selectors';
 import axios, { AxiosResponse } from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-
-import {
-  AiOutlineTag,
-  AiOutlineCloseCircle,
-  AiOutlineMessage,
-} from 'react-icons/ai';
+import { CheckBoxSelection, Inject, MultiSelectComponent } from '@syncfusion/ej2-react-dropdowns';
 import {
   Dialog,
-  DialogTitle,
   DialogContent,
-  DialogContentText,
   DialogActions,
-  Button,
 } from '@mui/material';
 
 import {
   fetchAllTaglists,
-  sendDmMessage,
   assignTagToPost,
-  fetchLounges,
-  fetchUserLounges,
 } from '../redux/lounges/slice';
+
+import { components } from "react-select";
+import { default as ReactSelect } from "react-select";
+import { type } from 'os';
 
 type TagMePropsType = {
   isOpen: any;
@@ -37,6 +30,22 @@ type TagMePropsType = {
   chatId: any;
   Page: any;
 };
+
+const Option = (props: any) => {
+  return (
+    <div>
+      <components.Option {...props}>
+        <input
+          type="checkbox"
+          checked={props.isSelected}
+          onChange={() => null}
+        />{" "}
+        <label>{props.label}</label>
+      </components.Option>
+    </div>
+  );
+};
+
 
 export const TagMe: React.FC<TagMePropsType> = ({
   isOpen,
@@ -48,19 +57,14 @@ export const TagMe: React.FC<TagMePropsType> = ({
   type FormData = {
     checkedId: any;
     chatId: any;
-    // sender_id: any;
-    // sender_user_name: String;
   };
   let navigate = useNavigate();
   const {
     register,
-    setValue,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<FormData>();
 
-  const [TagList, setTagLists] = useState<any | string>('');
   const [closeToggle, setCloseToggle] = useState<any | String>(isClosed);
 
   const closeTagToggle = () => {
@@ -71,17 +75,7 @@ export const TagMe: React.FC<TagMePropsType> = ({
   let tagData: any = null;
 
   const [ListsOfdata, setListsOfdatas] = useState<any | String>(TagDatas);
-
-  const checktagged = (id: any) => {
-    // let checked = e.target.checked
-    // console.log(checked)
-    //console.log(id);
-  };
   const { sortByTime } = useSelector(selectLounges);
-  let sortType: any = null;
-  let currentPage: any = null;
-  let searchValue: any = null;
-  let LoungeId: any = null;
 
   const [shortByTime, setShortByTime] = useState<any | string>(
     localStorage.getItem('shortByTime')
@@ -91,25 +85,47 @@ export const TagMe: React.FC<TagMePropsType> = ({
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = () => {
+    let data = {chatId: chatId, checkedId: optionSelected.map((val: any) => val.value)};
+    // console.log('onSubmit', data);
     dispatch<any>(assignTagToPost(data)).then((res: any) => {
       window.location.reload();
     });
   };
 
   const [searchTag, setAllSearcTag] = useState<any | String>();
-  async function search(key: any) {
-    setListsOfdatas(key);
-    if (key.length > 0) {
-      let LoungeId: any = chatId;
-      let tagData: any = key;
-      dispatch(fetchAllTaglists({ tagData, LoungeId })).then((res: any) => {
-        setAllSearcTag(res.payload);
-      });
-    }
+  
+  const [ allTagList, setAllTagList ] = useState([]);
+  type optionType = {
+    value: any,
+    label: any; 
   }
 
-  const [checked, setChecked] = useState<any | string>(false);
+  const [ optionSelected, setOptionSelected ] = useState<Array<optionType>>([]);
+
+  useEffect( () => {
+    let LoungeId: any = chatId;
+    let tagData: any = null;
+    let preSelectList: any = [];
+
+    dispatch(fetchAllTaglists({ tagData, LoungeId })).then((res: any) => {
+      const transformedOptions = res.payload.map((option: any) => {
+          if(isOpen && option.gettagdata.length != 0) {
+            preSelectList = [...preSelectList, {value: option['id'], label: option['tags_name']}];
+          }
+          return {
+           value: option['id'],
+           label: option['tags_name'],
+          }
+        }
+      );
+      setOptionSelected(preSelectList);
+      setAllTagList(transformedOptions);
+    });
+  }, [isOpen])
+
+  const fields = {value: 'id', text: 'tags_name'};
+
   return (
     <div>
       {isOpen == true && (
@@ -128,89 +144,29 @@ export const TagMe: React.FC<TagMePropsType> = ({
               onClose={isClosed}
             >
               <DialogContent>
-                <form action='' onSubmit={handleSubmit(onSubmit)}>
-                  <input
-                    type='text'
-                    className='inp'
-                    placeholder='Search tag'
-                    onChange={(e) => search(e.target.value)}
-                  />
-                  <input className='tag-submit' type='submit' />
-                  <div className='closebutton'>
-                    <div className='buttondialog'>
-                      <AiOutlineCloseCircle
-                        className='icon'
-                        onClick={closeTagToggle}
-                      />
-                    </div>
-                  </div>
-                  <DialogContentText>
-                    <ul className='list-group list-group-flush'>
-                      {searchTag == undefined ? (
-                        <>
-                          {TagDatas &&
-                            TagDatas.map((obj: any) => (
-                              <div
-                                style={{
-                                  display: 'flex',
-                                  paddingLeft: '8px',
-                                  paddingTop: '5px',
-                                }}
-                              >
-                                <input
-                                  // onChange ={()=>checktagged(obj.id) }
-                                  style={{ marginRight: '9px' }}
-                                  type='checkbox'
-                                  defaultChecked={
-                                    obj.gettagdata != '' ? true : false
-                                  }
-                                  value={obj.id}
-                                  {...register('checkedId')}
-                                />
-                                <li>{obj.tags_name}</li>
-                                <input
-                                  type='hidden'
-                                  value={chatId}
-                                  {...register('chatId')}
-                                />
-                              </div>
-                            ))}
-                        </>
-                      ) : (
-                        <>
-                          {' '}
-                          {searchTag &&
-                            searchTag.map((obj: any) => (
-                              <div
-                                style={{
-                                  display: 'flex',
-                                  paddingLeft: '8px',
-                                  paddingTop: '5px',
-                                }}
-                              >
-                                <input
-                                  // onChange ={()=>checktagged(obj.id) }
-                                  style={{ marginRight: '9px' }}
-                                  type='checkbox'
-                                  defaultChecked={
-                                    obj.gettagdata != '' ? true : false
-                                  }
-                                  value={obj.id}
-                                  {...register('checkedId')}
-                                />
-                                <li>{obj.tags_name}</li>
-                                <input
-                                  type='hidden'
-                                  value={chatId}
-                                  {...register('chatId')}
-                                />
-                              </div>
-                            ))}
-                        </>
-                      )}
-                    </ul>
-                  </DialogContentText>
-                </form>
+
+                <input type="button" value="Submit" onClick={onSubmit}></input>
+                <span
+                  className="d-inline-block"
+                  data-toggle="popover"
+                  data-trigger="focus"
+                  data-content="Please selecet account(s)"
+                  style={{width: '100%'}}
+                >
+                <ReactSelect
+                  options={allTagList}
+                  isMulti
+                  closeMenuOnSelect={false}
+                  hideSelectedOptions={false}
+                  components={{
+                    Option
+                  }}
+                  menuIsOpen = {true}
+                  onChange={(selected: any) => setOptionSelected(selected)}
+                  // allowSelectAll={true}
+                  value={optionSelected}
+                />
+              </span>
               </DialogContent>
               <DialogActions></DialogActions>
             </Dialog>

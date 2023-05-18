@@ -109,7 +109,7 @@ const Notification = () => {
     dispatch<any>(removeUserLounge({ ban_chat_id, RemoveType })).then(
       (res: any) => {
         window.location.reload();
-        Notify(toast('Comment Removed'));
+        // Notify(toast('Comment Removed'));
       }
     );
   };
@@ -158,14 +158,14 @@ const Notification = () => {
       reset();
       setIsOpen(false);
       console.log(res);
-      Notify(toast(res.payload.data[0].error));
+      // Notify(toast(res.payload.data[0].error));
     });
   };
 
   const deleteConversion = (e: any, msg_id: any) => {
     dispatch<any>(deleteConversionMessage({ msg_id })).then((res: any) => {
       dispatch(fetchMyNotification({ sortType, currentPage }));
-      Notify(toast(res.payload.data));
+      // Notify(toast(res.payload.data));
     });
   };
 

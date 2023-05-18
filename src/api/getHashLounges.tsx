@@ -14,9 +14,10 @@ export const getHashLoungesApi = async ({
   localStorage.setItem('pagename', 'My Hash');
   let sorvalue = null;
 
+  const user_id = localStorage.getItem('user_id');
   let sortByTime = shortByTime == 'true' ? `&sortordefault=ww` : '';
   const apiEndpoint =
-    GET_BASE_URL + `/backend/api/v1/hash?hash=${tagValue}` + sortByTime;
+    GET_BASE_URL + `/backend/api/v1/hash?user_id=${user_id}&hash=${tagValue}` + sortByTime;
 
   const { data } = await axios
     .get<Lounge[]>(`${apiEndpoint}`)

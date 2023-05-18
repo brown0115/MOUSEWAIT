@@ -113,7 +113,7 @@ export const CommentReplyBox: React.FC<CommentReplyBoxPropsType> = ({
     dispatch<any>(removeUserLounge({ ban_chat_id, RemoveType })).then(
       (res: any) => {
         window.location.reload();
-        Notify(toast('Comment Removed'));
+        // Notify(toast('Comment Removed'));
       }
     );
   };

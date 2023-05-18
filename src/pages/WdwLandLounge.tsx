@@ -102,9 +102,6 @@ const WdwLandLounge = () => {
   }, [shortByTime, search, currentPage]);
 
   const handelInfiniteScroll = async () => {
-    // console.log("scrollHeight" + document.documentElement.scrollHeight);
-    // console.log("innerHeight" + window.innerHeight);
-    // console.log("scrollTop" + document.documentElement.scrollTop);
     try {
       if (
         window.innerHeight + document.documentElement.scrollTop + 1 >=
@@ -158,16 +155,6 @@ const WdwLandLounge = () => {
                       onCloseMenu={() => {}}
                     />
                   </div>
-
-                  {/* */}
-
-                  {/*         {status === 'loading'
-                    ? [...new Array(9)]?.map((_, index) => (
-                        <Placeholder key={index} />
-                      ))
-                    : items?.map((obj) => <WDWLoungeList obj={obj} />)}
-               
-                */}
 
                   {status === 'loading' ? (
                     [...new Array(9)]?.map((_, index) => (

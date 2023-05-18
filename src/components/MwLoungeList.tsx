@@ -68,7 +68,7 @@ export const MwLoungeList: React.FC<MwLoungeListPropsType> = ({ obj }) => {
     setIsLoading(true);
     dispatch<any>(postLoungeFlag(data)).then((res: any) => {
       //console.log(res.payload.data[0].error);
-      Notify(toast(res.payload.data[0].error));
+      // Notify(toast(res.payload.data[0].error));
 
       reset();
       setIsLoading(false);

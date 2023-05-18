@@ -95,7 +95,7 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
       dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
         reset();
         window.location.reload();
-        Notify(toast('Post Updated Successfully'));
+        // Notify(toast('Post Updated Successfully'));
       });
     } else {
       setIsLoading(true);

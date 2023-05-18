@@ -89,12 +89,12 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
       dispatch<any>(postLoungeCommentEditWdw(data)).then((res: any) => {
         reset();
         window.location.reload();
-        Notify(toast('Post Updated Successfully'));
+        // Notify(toast('Post Updated Successfully'));
       });
     } else {
       setIsLoading(true);
       dispatch<any>(postLoungeFlag(data)).then((res: any) => {
-        Notify(toast(res.payload.data[0].error));
+        // Notify(toast(res.payload.data[0].error));
         reset();
         setIsLoading(false);
         loadProgressBar();

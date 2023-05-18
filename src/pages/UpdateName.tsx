@@ -96,7 +96,7 @@ function UpdateName() {
       // const userName = localStorage.setItem('user_name',uname);
       // console.log(userName)
       window.location.reload();
-      Notify(toast(res.payload.data));
+      // Notify(toast(res.payload.data));
     });
   };
 

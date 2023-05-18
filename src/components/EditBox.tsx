@@ -153,7 +153,7 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
           reset();
           SetStickerSelection(null);
           window.location.reload();
-          Notify(toast('Updated Successfully'));
+          // Notify(toast('Updated Successfully'));
         })
       : alert('Please enter comment');
   };
