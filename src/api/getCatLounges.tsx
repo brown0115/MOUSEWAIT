@@ -14,12 +14,13 @@ export const getCatLoungesApi = async ({
   const responseBody = (response: AxiosResponse) => response.data;
   const token = localStorage.getItem('token');
   
+  const user_id = localStorage.getItem('user_id');
   let sorvalue = null;
   let sortByTime =
     shortByTime == 'true'
       ? `?page=${currentPage}&sortordefault=ww`
       : `?page=${currentPage}`;
-  const apiEndpoint = GET_BASE_URL + `/backend/api/v1/home/` + landid;
+  const apiEndpoint = GET_BASE_URL + `/backend/api/v1/home/` + landid + `/` + user_id;
 
   if (searchValue != null) {
     const { data } = await axios
