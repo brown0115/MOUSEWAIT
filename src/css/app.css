@@ -2016,6 +2016,9 @@ a:hover {
   margin-top: 1px;
 }
 
+.tagDialog .MuiPaper-root {
+  width: 500px !important;
+}
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
@@ -2682,4 +2685,3 @@ input:disabled {
   }
 
 }
-
