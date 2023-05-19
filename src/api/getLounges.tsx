@@ -12,27 +12,7 @@ export const getAllLoungesApi = async ({
   const responseBody = (response: AxiosResponse) => response.data;
 
   let sorvalue = null;
-  // let apiEndpoint = "https://mousewait.xyz/mousewaitnew/backend/api/v1/home";
-
-  // if(shortByTime=='true'){
-  //   alert('dfdsfsdad');
-  //   sorvalue='ww'
-  //    apiEndpoint = "https://mousewait.xyz/mousewaitnew/backend/api/v1/home?sortordefault="+sorvalue;
-
-  // }
-  // else{
-
-  // }
-  /*   var parts = window.location.href.split('/mousewaitnew/');
-  var lastSegment = parts.pop() || parts.pop();
-  console.log(lastSegment); */
-
-  // console.log('currentpage', currentPage);
-  // if(currentPage == 3)
-  //   localStorage.setItem('pagename', 'lounge.land');
-  // else if(currentPage == 4)
-  //   localStorage.setItem('pagename', 'CLUB333');
-  // else
+  
   localStorage.setItem('pagename', 'Disneyland Talk');
   
   const token = localStorage.getItem('token');
@@ -42,8 +22,9 @@ export const getAllLoungesApi = async ({
       ? `?page=${currentPage}&sortordefault=ww`
       : `?page=${currentPage}`;
 
+  const user_id = localStorage.getItem('user_id');
   // remove endpoint
-  const apiEndpoint = GET_BASE_URL + `/backend/api/v1/home`;
+  const apiEndpoint = GET_BASE_URL + `/backend/api/v1/home/` + user_id;
 
   if (searchValue != null) {
     const { data } = await axios

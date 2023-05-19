@@ -18,18 +18,7 @@ export const Search = () => {
   } = useForm<SearchData>();
 
   let navigate = useNavigate();
-
-  // const pagename = localStorage.getItem('pagename');
-  // console.log('pagename', pagename);
-  //lounge.land
-  //CLUB 333
-  //Disneyland Real Time
-  //Disneyland Talk
-  //the hub
-
-  // Optimization the search field. Update setSerchValue after same time.
   const onSearch = (data: any) => {
-    //navigate('/disneyland/search/post/' + data.searchValue);
     if(data.searchValue == '')
       return;
     if (window.location.href.indexOf('disneyland') > -1) {
