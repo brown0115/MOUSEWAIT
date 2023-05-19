@@ -85,6 +85,9 @@ const LandLounge = () => {
     }
     loadProgressBar();
     dispatch(fetchStickyLounge({}));
+
+    
+    console.log('search lounge', LoungeId, currentPage)
     dispatch(
       fetchLounges({
         sortType,

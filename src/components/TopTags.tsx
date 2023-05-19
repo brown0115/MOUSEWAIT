@@ -27,7 +27,7 @@ export const TopTags: React.FC<TopImgesPropsType> = ({ chatId, gettagged }) => {
                     .replace(/\s+/g, '-')
                     .toLowerCase()}/`}
                 >
-                  {obj.gettagged[0].tags_name}
+                  {obj.gettagged[0]?.tags_name}
                 </Link>
               </li>
             ))}
