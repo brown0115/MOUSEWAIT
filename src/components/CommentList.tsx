@@ -23,6 +23,7 @@ import axios, { AxiosResponse } from 'axios';
 import { GET_BASE_URL } from '../constants/apiEndpoints';
 import { GET_BASE_URL_IMAGE } from '../constants/apiEndpoints';
 import { COMPLETIONSTATEMENT_TYPES } from '@babel/types';
+import { format } from 'path';
 
 type CommentListPropsType = {
   chatId: any;
@@ -173,7 +174,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
 
     var domParser = new DOMParser();
     var doc = domParser.parseFromString(formatedMsg, 'text/html');
-    var msg = doc.body.innerText;
+    var msg = doc.body.innerHTML;
     
     let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
     async function convert()
@@ -188,6 +189,8 @@ export const CommentList: React.FC<CommentListPropsType> = ({
           }
         } 
       }
+      doc.body.innerHTML = msg;
+      // console.log('formatedMsg', msg)
       setFormatedMsg(msg)
     }
     convert();
