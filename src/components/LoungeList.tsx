@@ -160,7 +160,7 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
                 </Link>
 
                 {
-                  obj?.user.getuserlogodetails.map((logoDetailObj: any) => (
+                  obj?.user.getuserlogodetails?.map((logoDetailObj: any) => (
                       logoDetailObj?.speciallogo.image != null ? (
                           <img
                               src={
