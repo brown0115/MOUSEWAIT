@@ -109,7 +109,6 @@ const LandLounge = () => {
   useEffect(() => {
 
     dispatch(fetchUserMenu({ loginuserid })).then((res: any) => {
-      // console.log(res);
       SetAssignMenu(res.payload);
     });
   }, []);
@@ -242,6 +241,15 @@ const LandLounge = () => {
                     )
                   ) : (
                     <>{localStorage.setItem('club333', '')}</>
+                  )}
+                  {assignMenu.length > 0 ? (
+                    assignMenu.map((item: any) =>
+                      item.rights_id == '15'
+                        ? localStorage.setItem('editor', 'true')
+                        : ''
+                    )
+                  ) : (
+                    <>{localStorage.setItem('editor', '')}</>
                   )}
                 </div>
               )}

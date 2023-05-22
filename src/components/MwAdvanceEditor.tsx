@@ -29,6 +29,7 @@ function MwAdvanceEditor() {
   const dispatch = useAppDispatch();
   const editor = useRef(null);
   let navigate = useNavigate();
+  const post_editor = localStorage.getItem('editor');
   const [content, setcontent] = useState('');
 
   const { LoungeId } = useParams();
@@ -44,10 +45,7 @@ function MwAdvanceEditor() {
 
   useEffect(() => {
 
-  if(!(loginuserid == '18' ||
-    loginuserid == '914' ||
-    loginuserid == '38' ||
-    loginuserid == '46770' ))
+  if(!post_editor)
     {
       navigate('/disneyland/login');
     }

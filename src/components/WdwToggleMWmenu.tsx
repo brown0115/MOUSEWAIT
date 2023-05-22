@@ -84,6 +84,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
   const [modalIsOpen, setIsOpen] = useState(false);
   const [LoungeIdd, setLoungeIdd] = useState(LoungeId);
   const [Type, setFlagType] = useState<any | string>('C');
+  const post_editor = localStorage.getItem('editor');
   const [defaultcontent, setdefaultcontent] = useState<any | string>(
     chat_reply_msg
   );
@@ -485,20 +486,22 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                   <></>
                 )}
 
+                {post_editor && 
+                  <li className='nav-item'>
+                    <div className='nav-icon'>
+                      <BiMessageDots></BiMessageDots>
+                    </div>
+                    <span onClick={openComposeEditor}>
+                      Edit With Composer
+                    </span>
+                  </li>
+                }
+
                 {loginuserid == '18' ||
                 loginuserid == '914' ||
                 loginuserid == '38' ||
                 loginuserid == '46770' ? (
                   <>
-                    <li className='nav-item'>
-                      <div className='nav-icon'>
-                        <BiMessageDots></BiMessageDots>
-                      </div>
-                      <span onClick={openComposeEditor}>
-                        Edit With Composer
-                      </span>
-                    </li>
-
                     <li className='nav-item'>
                       <div className='nav-icon'>
                         <i className='fa fa-life-ring' />
