@@ -7,9 +7,9 @@ type CommonPostMessagePropsType = {
 
 function removeTags(string: any) {
   let newstring = string
-    .replace(/<[^>]*>/g, ' ')
-    .replace(/\s{2,}/g, ' ')
-    .trim();
+    ?.replace(/<[^>]*>/g, ' ')
+    ?.replace(/\s{2,}/g, ' ')
+    ?.trim();
   let content = newstring?.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
   let hashtag;
 
