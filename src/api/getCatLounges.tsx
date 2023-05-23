@@ -20,11 +20,11 @@ export const getCatLoungesApi = async ({
     shortByTime == 'true'
       ? `?page=${currentPage}&sortordefault=ww`
       : `?page=${currentPage}`;
-  const apiEndpoint = GET_BASE_URL + `/backend/api/v1/home/` + landid + `/` + user_id;
+  const apiEndpoint = GET_BASE_URL + `/backend/api/v1/home/` + landid;
 
   if (searchValue != null) {
     const { data } = await axios
-      .get<Lounge[]>(`${apiEndpoint}/search/post/${searchValue}${sortByTime}`, {
+      .get<Lounge[]>(`${apiEndpoint}/search/post/${searchValue}${sortByTime}&user_id=${user_id}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -44,7 +44,7 @@ export const getCatLoungesApi = async ({
     }
 
     const { data } = await axios
-      .get<Lounge[]>(`${apiEndpoint}${sortByTime}`)
+      .get<Lounge[]>(`${apiEndpoint}${sortByTime}&user_id=${user_id}`)
       .then(responseBody);
     return data;
   }
