@@ -2658,6 +2658,13 @@ input:disabled {
   background-color: #d8cccc;
 }
 
+.no-permission {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  font-weight: bold;
+}
+
 @media only screen and (max-width: 768px) {
   .fixed-bottom-bar {
     position: fixed;
