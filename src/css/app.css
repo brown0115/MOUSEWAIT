@@ -2658,6 +2658,16 @@ input:disabled {
   background-color: #d8cccc;
 }
 
+.advance_editor textarea {
+  padding: 10px;
+  max-width: 100%;
+  line-height: 25px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px #999;
+  font-family: 'Inter';
+}
+
 @media only screen and (max-width: 768px) {
   .fixed-bottom-bar {
     position: fixed;

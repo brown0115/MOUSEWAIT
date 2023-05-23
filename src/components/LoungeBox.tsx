@@ -122,7 +122,6 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     } else {
       setIsLoading(true);
       var data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': text, 'chat_img': getValues('chat_img')}
-      console.log('wwwland', land)
       if(land == 5 || land == 6 || land == 10) {
         if(land == 10) data['chat_room_id'] = 0;
         else data['chat_room_id'] = land - 4;

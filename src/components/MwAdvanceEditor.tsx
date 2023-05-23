@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../redux/store';
 import { fetchByComposerEditor, composerPost } from '../redux/lounges/slice';
 import { RiContactsBookLine } from 'react-icons/ri';
+import RichTextEditor from '@mantine/rte';
+import { getValue } from '@testing-library/user-event/dist/utils';
 
 function MwAdvanceEditor() {
   type FormData = {
@@ -24,6 +26,7 @@ function MwAdvanceEditor() {
     setValue,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm<FormData>();
   const dispatch = useAppDispatch();
@@ -39,6 +42,7 @@ function MwAdvanceEditor() {
   const [getData, SetGetData] = useState<any | []>([]);
   const loadDataOnlyOnce = () => {
     dispatch(fetchByComposerEditor({ LoungeId })).then((res: any) => {
+      setValue('edit_chat_msg', res.payload[0].chat_msg)
       SetGetData(res.payload[0]);
     });
   };
@@ -62,14 +66,27 @@ function MwAdvanceEditor() {
   };
 
   const onSubmit = (data: any) => {
-    /*   console.log(data);
-    return false; */
-    dispatch<any>(composerPost(data)).then((res: any) => {
-      /*  console.log(res);
-      return false; */
+    var sendData = {chat_id: data.chat_id, edit_chat_msg: data.edit_chat_msg, chat_img: getValues('file')}
+    dispatch<any>(composerPost(sendData)).then((res: any) => {
       navigate('/disneyland/lounge/');
+      // window.location.reload();
     });
   };
+
+  function handleImageChange(e: any) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    if (file.type.match('image.*')) {
+      reader.onloadend = () => {
+        let result = reader.result;
+        setValue('file', result);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
 
   return (
     <div>
@@ -88,16 +105,23 @@ function MwAdvanceEditor() {
                   onSubmit={handleSubmit(onSubmit)}
                 >
                   <div className='advance_editor'>
-                    {/*      <JoditEditor
+                    {/* <textarea
                       ref={editor}
                       value={getData.chat_msg}
                       onChange={onEditorStateChange}
                     /> */}
+                    
+                    <textarea
+                      rows={3}
+                      cols={60}
+                      placeholder='write a caption '
+                      {...register('edit_chat_msg')}
+                    />
                   </div>
 
                   <div className='mid-container'>
                     <div className='choosefile'>
-                      <input type='file' {...register('file')} />
+                      <input type='file' onChange={(e) => handleImageChange(e)} />
                     </div>
                     <div className='youtubelink'>
                       <label htmlFor='youtube link'>Youtube Video link:</label>
@@ -124,7 +148,7 @@ function MwAdvanceEditor() {
                       {...register('chat_id')}
                     />
 
-                    <input type='hidden' {...register('edit_chat_msg')} />
+                    {/* <input type='hidden' {...register('edit_chat_msg')} /> */}
 
                     <div className='fullpicsize'>
                       <label className='input_label' htmlFor='fullpicsize'>

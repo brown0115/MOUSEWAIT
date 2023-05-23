@@ -418,6 +418,7 @@ export type SuscribeUnsbPost = {
 export type ComposerPost = {
   edit_chat_msg: any;
   chat_id: any;
+  chat_img: any;
 };
 export type ComposerPostWdw = {
   edit_chat_msg: any;
@@ -2139,7 +2140,7 @@ export const postSubscribeFromLounge = createAsyncThunk<
 
 export const composerPost = createAsyncThunk<Lounge[], ComposerPost>(
   'users/sendMovePost',
-  async ({ chat_id, edit_chat_msg }, thunkAPI) => {
+  async ({ chat_id, edit_chat_msg, chat_img }, thunkAPI) => {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(
@@ -2153,6 +2154,7 @@ export const composerPost = createAsyncThunk<Lounge[], ComposerPost>(
           body: JSON.stringify({
             chat_id,
             edit_chat_msg,
+            chat_img,
           }),
         }
       );
