@@ -2658,6 +2658,13 @@ input:disabled {
   background-color: #d8cccc;
 }
 
+.no-permission {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  font-weight: bold;
+}
+
 .advance_editor textarea {
   padding: 10px;
   max-width: 100%;

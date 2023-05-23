@@ -48,17 +48,8 @@ function MwAdvanceEditor() {
   };
 
   useEffect(() => {
-
-  if(!post_editor)
-    {
-      navigate('/disneyland/login');
-    }
-    else {
-      window.scrollTo(0, 0);
-      loadDataOnlyOnce(); // this will fire only on first render
-    }
-
-    
+    window.scrollTo(0, 0);
+    loadDataOnlyOnce(); // this will fire only on first render    
   }, []);
 
   const onEditorStateChange = (editorState: any) => {
@@ -97,99 +88,106 @@ function MwAdvanceEditor() {
             <MobileLoungeHeader />
             {/*-=====mobile-view start ======-*/}
 
-            <div className='mwstore-mid-bg'>
-              <section className='editor'>
-                <form
-                  action=''
-                  style={{ paddingTop: '13px' }}
-                  onSubmit={handleSubmit(onSubmit)}
-                >
-                  <div className='advance_editor'>
-                    {/* <textarea
-                      ref={editor}
-                      value={getData.chat_msg}
-                      onChange={onEditorStateChange}
-                    /> */}
-                    
-                    <textarea
-                      rows={3}
-                      cols={60}
-                      placeholder='write a caption '
-                      {...register('edit_chat_msg')}
-                    />
-                  </div>
-
-                  <div className='mid-container'>
-                    <div className='choosefile'>
-                      <input type='file' onChange={(e) => handleImageChange(e)} />
-                    </div>
-                    <div className='youtubelink'>
-                      <label htmlFor='youtube link'>Youtube Video link:</label>
-                      <br />
+            { post_editor == 'true' ? (
+              <div className='mwstore-mid-bg'>
+                <section className='editor'>
+                  <form
+                    action=''
+                    style={{ paddingTop: '13px' }}
+                    onSubmit={handleSubmit(onSubmit)}
+                  >
+                    <div className='advance_editor'>
+                      {/* <textarea
+                        ref={editor}
+                        value={getData.chat_msg}
+                        onChange={onEditorStateChange}
+                      /> */}
+                      
                       <textarea
-                        style={{
-                          border: '1px solid grey',
-                          width: '70%',
-                          marginTop: '1rem',
-                          borderRadius: '5px',
-                        }}
-                        // rows={3}
-
-                        {...register('youtubelink')}
-                        placeholder='Youtube Link'
-                        // defaultValue={chat_reply_msg}
-                        /* {...register("Type")} {...register("LoungeId")} */
+                        rows={3}
+                        cols={60}
+                        placeholder='write a caption '
+                        {...register('edit_chat_msg')}
                       />
                     </div>
 
-                    <input
-                      type='hidden'
-                      defaultValue={LoungeId}
-                      {...register('chat_id')}
-                    />
+                    <div className='mid-container'>
+                      <div className='choosefile'>
+                        <input type='file' onChange={(e) => handleImageChange(e)} />
+                      </div>
+                      <div className='youtubelink'>
+                        <label htmlFor='youtube link'>Youtube Video link:</label>
+                        <br />
+                        <textarea
+                          style={{
+                            border: '1px solid grey',
+                            width: '70%',
+                            marginTop: '1rem',
+                            borderRadius: '5px',
+                          }}
+                          // rows={3}
 
+<<<<<<< HEAD
                     {/* <input type='hidden' {...register('edit_chat_msg')} /> */}
+=======
+                          {...register('youtubelink')}
+                          placeholder='Youtube Link'
+                          // defaultValue={chat_reply_msg}
+                          /* {...register("Type")} {...register("LoungeId")} */
+                        />
+                      </div>
+>>>>>>> develop
 
-                    <div className='fullpicsize'>
-                      <label className='input_label' htmlFor='fullpicsize'>
-                        Full Size Picture
-                      </label>{' '}
-                      &nbsp; &nbsp;&nbsp; &nbsp;
-                      <input type='file' id='' {...register('fullsizepic')} />
+                      <input
+                        type='hidden'
+                        defaultValue={LoungeId}
+                        {...register('chat_id')}
+                      />
+
+                      {/* <input type='hidden' {...register('edit_chat_msg')} /> */}
+
+                      <div className='fullpicsize'>
+                        <label className='input_label' htmlFor='fullpicsize'>
+                          Full Size Picture
+                        </label>{' '}
+                        &nbsp; &nbsp;&nbsp; &nbsp;
+                        <input type='file' id='' {...register('fullsizepic')} />
+                      </div>
+                      <div className='mediumpicsize'>
+                        <label className='input_label' htmlFor='mediumpicsize'>
+                          Medium Size Picture
+                        </label>
+                        <input type='file' id='' {...register('mediumsizepic')} />
+                      </div>
+                      <div className='ThumbnailPicture'>
+                        <label className='input_label' htmlFor='ThumbnailPicture'>
+                          Thumbnail Picture
+                        </label>{' '}
+                        &nbsp; &nbsp;
+                        <input type='file' id='' {...register('thumbnailfile')} />
+                      </div>
+                      <select
+                        style={{ width: '50%', marginBottom: '8px' }}
+                        className='form-select form-select-sm'
+                        aria-label='.form-select-sm example'
+                        {...register('selectbar')}
+                      >
+                        <option selected>Open this select menu</option>
+                        <option value='one'>One</option>
+                        <option value='two'>Two</option>
+                        <option value='three'>Three</option>
+                      </select>
+                      <div className='submit' style={{ margin: '1rem 30%' }}>
+                        <button type='submit' className='btn btn-primary'>
+                          Post
+                        </button>
+                      </div>
                     </div>
-                    <div className='mediumpicsize'>
-                      <label className='input_label' htmlFor='mediumpicsize'>
-                        Medium Size Picture
-                      </label>
-                      <input type='file' id='' {...register('mediumsizepic')} />
-                    </div>
-                    <div className='ThumbnailPicture'>
-                      <label className='input_label' htmlFor='ThumbnailPicture'>
-                        Thumbnail Picture
-                      </label>{' '}
-                      &nbsp; &nbsp;
-                      <input type='file' id='' {...register('thumbnailfile')} />
-                    </div>
-                    <select
-                      style={{ width: '50%', marginBottom: '8px' }}
-                      className='form-select form-select-sm'
-                      aria-label='.form-select-sm example'
-                      {...register('selectbar')}
-                    >
-                      <option selected>Open this select menu</option>
-                      <option value='one'>One</option>
-                      <option value='two'>Two</option>
-                      <option value='three'>Three</option>
-                    </select>
-                    <div className='submit' style={{ margin: '1rem 30%' }}>
-                      <button type='submit' className='btn btn-primary'>
-                        Post
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </section>
-            </div>
+                  </form>
+                </section>
+              </div>
+            ) : <div className='no-permission'><div>Sorry <br></br> You don't have permission to access this page</div></div>
+            }
           </div>
         </div>
       </div>

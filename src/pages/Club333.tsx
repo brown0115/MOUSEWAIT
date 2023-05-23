@@ -57,7 +57,7 @@ const Club333 = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
-    if (token == null || club333 != 'true') {
+    if (token == null) {
       navigate('/disneyland/login');
     }
 
@@ -110,38 +110,44 @@ const Club333 = () => {
           <div className='mid-sec'>
             <LoungeHeader />
             <MobileLoungeHeader />
-            <div className='mid-card-sec'>
-              {status === 'error' ? (
-                <div className='content__error-info'>
-                  <h2>Error</h2>
-                  <p>Please try to open the page later.</p>
-                </div>
-              ) : (
-                <div className='content__items'>
-                  <div>
-                    <LoungeBox
-                      isVisible={false}
-                      setVisible={() => {}}
-                      onCloseMenu={() => {}}
-                    />
-                  </div>
-                  {/* */}
-                  {status === 'loading' ? (
-                    [...new Array(9)]?.map((_, index) => (
-                      <Placeholder key={index} />
-                    ))
-                  ) : stickyItem[0] != null ? (
-                    <StickyPost obj={stickyItem[0]} mybutton={true} />
-                  ) : (
-                    ''
-                  )}
 
-                  {items.map((e) =>
-                    e.checksticky === null ? <LoungeList obj={e} /> : ''
+            {
+              club333 == 'true' ? (
+                <div className='mid-card-sec'>
+                  {status === 'error' ? (
+                    <div className='content__error-info'>
+                      <h2>Error</h2>
+                      <p>Please try to open the page later.</p>
+                    </div>
+                  ) : (
+                    <div className='content__items'>
+                      <div>
+                        <LoungeBox
+                          isVisible={false}
+                          setVisible={() => {}}
+                          onCloseMenu={() => {}}
+                        />
+                      </div>
+                      {/* */}
+                      {status === 'loading' ? (
+                        [...new Array(9)]?.map((_, index) => (
+                          <Placeholder key={index} />
+                        ))
+                      ) : stickyItem[0] != null ? (
+                        <StickyPost obj={stickyItem[0]} mybutton={true} />
+                      ) : (
+                        ''
+                      )}
+
+                      {items.map((e) =>
+                        e.checksticky === null ? <LoungeList obj={e} /> : ''
+                      )}
+                    </div>
                   )}
                 </div>
-              )}
-            </div>
+              )
+              : <div className='no-permission'><div>Sorry <br></br> You don't have permission to access this page</div></div>
+            }
           </div>
         </div>
       </div>

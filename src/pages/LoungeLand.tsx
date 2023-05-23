@@ -55,7 +55,7 @@ const LoungeLand = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    if (token == null || loungeland != 'true' ) {
+    if (token == null) {
       navigate('/disneyland/login');
     }
 
@@ -100,7 +100,9 @@ const LoungeLand = () => {
           <div className='mid-sec'>
             <LoungeHeader />
             <MobileLoungeHeader />
-            <div className='mid-card-sec'>
+
+            { loungeland == 'true' ? (
+              <div className='mid-card-sec'>
               {status === 'error' ? (
                 <div className='content__error-info'>
                   <h2>Error</h2>
@@ -131,7 +133,9 @@ const LoungeLand = () => {
                   )}
                 </div>
               )}
-            </div>
+              </div>
+            ) : <div className='no-permission'><div>Sorry <br></br> You don't have permission to access this page</div></div>
+            }
           </div>
         </div>
       </div>
