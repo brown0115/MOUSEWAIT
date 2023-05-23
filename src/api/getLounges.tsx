@@ -24,11 +24,11 @@ export const getAllLoungesApi = async ({
 
   const user_id = localStorage.getItem('user_id');
   // remove endpoint
-  const apiEndpoint = GET_BASE_URL + `/backend/api/v1/home/` + user_id;
+  const apiEndpoint = GET_BASE_URL + `/backend/api/v1/home`;
 
   if (searchValue != null) {
     const { data } = await axios
-      .get<Lounge[]>(`${apiEndpoint}/search/post/${searchValue}${sortByTime}`, {
+      .get<Lounge[]>(`${apiEndpoint}/search/post/${searchValue}${sortByTime}&user_id=${user_id}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -37,7 +37,7 @@ export const getAllLoungesApi = async ({
     return data;
   } else {
     const { data } = await axios
-      .get<Lounge[]>(`${apiEndpoint}${sortByTime}`, {
+      .get<Lounge[]>(`${apiEndpoint}${sortByTime}&user_id=${user_id}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
