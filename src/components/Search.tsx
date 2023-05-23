@@ -18,10 +18,9 @@ export const Search = () => {
   } = useForm<SearchData>();
 
   let navigate = useNavigate();
-
-  // Optimization the search field. Update setSerchValue after same time.
   const onSearch = (data: any) => {
-    //navigate('/disneyland/search/post/' + data.searchValue);
+    if(data.searchValue == '')
+      return;
     if (window.location.href.indexOf('disneyland') > -1) {
       window.location.href = '/disneyland/search/post/' + data.searchValue;
     } else {

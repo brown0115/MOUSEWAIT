@@ -82,14 +82,9 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
     sortByTime != '' && setShortByTime(sortByTime);
   }, [sortByTime]);
 
-  //const notify = () => toast("Wow so easy!");
   const [Notify, setIsNotify] = useState<any | string>();
 
   const onSubmit = (data: any) => {
-    /* console.log('uuuu');
-    console.log(data);
-    console.log(data.chat_reply_msg);
-    return false; */
 
     if (data.chat_reply_msg != undefined) {
       dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
@@ -128,11 +123,6 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
     });
   }
 
-  function getWords(str: any) {
-    const result = str.split(/\s+/).slice(0, 5).join(' ');
-    return result;
-  }
-
   return (
     <>
       <div className='card-m rounded card-m2'>
@@ -160,7 +150,7 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
                 </Link>
 
                 {
-                  obj?.user.getuserlogodetails.map((logoDetailObj: any) => (
+                  obj?.user.getuserlogodetails?.map((logoDetailObj: any) => (
                       logoDetailObj?.speciallogo.image != null ? (
                           <img
                               src={

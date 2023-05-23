@@ -136,16 +136,17 @@ export const TagMe: React.FC<TagMePropsType> = ({
                 sx: {
                   overflowY: 'inherit',
                   zIndex: '1',
-                  width: '17rem',
+                  width: '20rem',
                   height: '80%',
                 },
               }}
+              className="tagDialog"
               open={isOpen}
               onClose={isClosed}
             >
               <DialogContent>
 
-                <input type="button" value="Submit" onClick={onSubmit}></input>
+                <input type="button" value="Submit" onClick={onSubmit} style={{display: 'flex', margin: '10px auto'}}></input>
                 <span
                   className="d-inline-block"
                   data-toggle="popover"

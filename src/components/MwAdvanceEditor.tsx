@@ -33,6 +33,8 @@ function MwAdvanceEditor() {
 
   const { LoungeId } = useParams();
 
+  const loginuserid = localStorage.getItem('user_id');
+
   const [getData, SetGetData] = useState<any | []>([]);
   const loadDataOnlyOnce = () => {
     dispatch(fetchByComposerEditor({ LoungeId })).then((res: any) => {
@@ -41,8 +43,20 @@ function MwAdvanceEditor() {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    loadDataOnlyOnce(); // this will fire only on first render
+
+  if(!(loginuserid == '18' ||
+    loginuserid == '914' ||
+    loginuserid == '38' ||
+    loginuserid == '46770' ))
+    {
+      navigate('/disneyland/login');
+    }
+    else {
+      window.scrollTo(0, 0);
+      loadDataOnlyOnce(); // this will fire only on first render
+    }
+
+    
   }, []);
 
   const onEditorStateChange = (editorState: any) => {
