@@ -82,14 +82,15 @@ const WdwLandLounge = () => {
   // console.log(audienceSample);
 
   useEffect(() => {
+    loadProgressBar();
     if (search) {
       searchValue = search;
     }
+    else 
+      dispatch(fetchStickyLoungeWdw({}));
     /*   if (currentPage == 1) {
       window.scrollTo(0, 0);
     } */
-    loadProgressBar();
-    dispatch(fetchStickyLoungeWdw({}));
     dispatch(
       fetchDisneyWorldLounges({
         sortType,
