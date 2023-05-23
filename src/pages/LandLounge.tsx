@@ -80,14 +80,14 @@ const LandLounge = () => {
     /*    if (currentPage == 1) {
       window.scrollTo(0, 0);
     } */
+    loadProgressBar();
     if (search) {
       searchValue = search;
     }
-    loadProgressBar();
-    dispatch(fetchStickyLounge({}));
-
+    else {
+      dispatch(fetchStickyLounge({}));
+    }
     
-    console.log('search lounge', LoungeId, currentPage)
     dispatch(
       fetchLounges({
         sortType,
