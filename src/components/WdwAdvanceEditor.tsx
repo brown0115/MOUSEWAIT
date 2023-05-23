@@ -33,6 +33,7 @@ function WdwAdvanceEditor() {
   const editor = useRef(null);
   let navigate = useNavigate();
   const [content, setcontent] = useState('');
+  const post_editor = localStorage.getItem('editor');
 
   const { LoungeId } = useParams();
 
@@ -44,8 +45,14 @@ function WdwAdvanceEditor() {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    loadDataOnlyOnce(); // this will fire only on first render
+    if(!post_editor)
+    {
+      navigate('/disneyland/login');
+    }
+    else {
+      window.scrollTo(0, 0);
+      loadDataOnlyOnce(); // this will fire only on first render
+    }
   }, []);
 
   const onEditorStateChange = (editorState: any) => {

@@ -115,6 +115,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const MP = localStorage.getItem('MP');
   const DM = localStorage.getItem('DM');
   const SP = localStorage.getItem('SP');
+  const post_editor = localStorage.getItem('editor');
   const [userRank, setUserRank] = useState<any | number>(loginuserrank);
   const [Notify, setIsNotify] = useState<any | string>();
 
@@ -568,6 +569,17 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                   <></>
                 )}
 
+                {post_editor && 
+                  <li className='nav-item'>
+                    <div className='nav-icon'>
+                      <BiMessageDots></BiMessageDots>
+                    </div>
+                    <span onClick={openComposeEditor}>
+                      Edit With Composer
+                    </span>
+                  </li>
+                }
+
                 {loginuserid == '18' ||
                 loginuserid == '914' ||
                 loginuserid == '38' ||
@@ -586,14 +598,6 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                       </div>
                       <span onClick={() => onRemove(LoungeId, 'D')}>
                         Delete
-                      </span>
-                    </li>
-                    <li className='nav-item'>
-                      <div className='nav-icon'>
-                        <BiMessageDots></BiMessageDots>
-                      </div>
-                      <span onClick={openComposeEditor}>
-                        Edit With Composer
                       </span>
                     </li>
 
