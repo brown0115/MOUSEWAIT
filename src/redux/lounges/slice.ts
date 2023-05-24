@@ -2008,7 +2008,8 @@ export const movePost = createAsyncThunk<Lounge[], MovePost>(
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(GET_BASE_URL + '/backend/api/v1/movePost', {
+      const user_id = localStorage.getItem('user_id');
+      const response = await fetch(GET_BASE_URL + '/backend/api/v1/movePost/'+user_id, {
         method: 'POST',
         headers: {
           Authorization: `bearer ${token}`,
