@@ -1190,6 +1190,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   background-color: #fff;
   width: 80%;
   margin: 0 auto;
+  text-align: left;
   /*  padding: 1rem; */
 }
 .mws-mid-sec .mid-head {
@@ -2422,7 +2423,7 @@ textarea {
   min-height: 1.2em;
   display: inline-block;
   margin: 0.3em;
-  float: left;
+  /* float: left; */
   width: 40%;
 }
 
@@ -2675,7 +2676,16 @@ input:disabled {
   font-family: 'Inter';
 }
 
+.choosefile, .youtubelink, .selectmenu {
+  text-align: left;
+}
+
+.editor-arrowdown, .editor-arrowup {
+  vertical-align: middle;
+}
+
 @media only screen and (max-width: 768px) {
+
   .fixed-bottom-bar {
     position: fixed;
     bottom: -16px;

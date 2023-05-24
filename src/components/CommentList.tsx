@@ -219,7 +219,6 @@ export const CommentList: React.FC<CommentListPropsType> = ({
   //   }
     
     // setFormatedMsg(msg)
-    // console.log('bbbbbbbbbb', msg)
     // return msg;
     // var links = doc.querySelectorAll('.mention');
     // links.forEach(function (linkTag: any) {

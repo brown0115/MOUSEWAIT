@@ -76,7 +76,7 @@
 | Large devices (tablets, 992px)                                    | 
 |-------------------------------------------------------------------|
 */
-@media screen and (min-width: 768px) and (max-width: 991.98px) {
+/* @media screen and (min-width: 768px) and (max-width: 991.98px) {
   .Mouse-Wait-sec .navbar-toggler .bar {
     box-shadow: 3px 3px 0 0 #ddd;
     color: #d0cfcf;
@@ -132,7 +132,6 @@
     margin: 2.5rem 0rem;
   }
 
-  /* mousewait-desborad2 start css */
   .des-main-sec {
     display: grid;
     grid-template-columns: 152px 2fr 1fr;
@@ -144,16 +143,13 @@
     width: 95%;
   }
 
-  /* mousewait-desborad2 end css */
 
-  /*** mwstore-page mid-sec start css ***/
   .mwstore-mid-bg {
     width: 100%;
     margin: 0 auto;
     padding: 0rem 0.7rem;
   }
 
-  /*** mwstore-page mid-sec end css ***/
   .link-img-s .link-main {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -185,9 +181,9 @@
   .ReactModal__Overlay ReactModal__Overlay--after-open {
     z-index: 9999;
   }
-}
+} */
 
-@media screen and (min-width: 576px) and (max-width: 767.98px) {
+@media screen and (min-width: 576px) and (max-width: 991.98px) {
   .profile-container {
     /* border: 2px solid red; */
     margin-left: 12%;
@@ -319,7 +315,7 @@
     width: 90%;
   }
   .mwstore-mid-bg {
-    padding: 1rem 0rem 0rem 0rem;
+    padding: 0rem 0rem 0rem 0rem;
   }
   .name-form {
     padding: 1rem;

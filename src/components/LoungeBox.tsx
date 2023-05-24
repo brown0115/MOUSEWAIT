@@ -14,6 +14,9 @@ import { isMobile } from 'react-device-detect';
 import Post from '../assets/img/h-p.png';
 import { getValue } from '@testing-library/user-event/dist/utils';
 import { BiWindows } from 'react-icons/bi';
+import MwAdvanceEditor from './MwAdvanceEditor';
+import arrowup from '../assets/img/arrowup.png';
+import arrowdown from '../assets/img/arrowdown.png';
 
 // import ProgressBar from "@ramonak/react-progress-bar";
 type LoungeBoxPropsType = {
@@ -60,9 +63,10 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
 
   let navigate = useNavigate();
 
-  const { register, setValue, getValues, formState: {  errors } } = useForm<{'chat_img': any, 'chat_room_id': any, 'chat_msg': any}>({defaultValues: {'chat_img': '', 'chat_room_id': '', 'chat_msg': ''}});
+  const { register, setValue, getValues, formState: {  errors } } = useForm<{'chat_img': any, 'chat_room_id': any, 'chat_msg': any, 'updatefile': any, 'youtubelink': any, 'fullsizepic': any, 'mediumsizepic': any, 'thumbnailfile': any, 'selectbar': any}>({defaultValues: {'chat_img': '', 'chat_room_id': '', 'chat_msg': '', 'updatefile': '', 'youtubelink': '', 'fullsizepic': '', 'mediumsizepic': '', 'thumbnailfile': '', 'selectbar': ''}});
 
   const token = localStorage.getItem('token');
+  const post_editor = localStorage.getItem('editor');
 
   const inputFile = useRef<HTMLInputElement | any>();
 
@@ -102,6 +106,8 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   const [shortByTime, setShortByTime] = useState<any | string>(
     localStorage.getItem('shortByTime')
   );
+
+  const [ advancedpost, setAdvancedPost ] = useState(false);
   
   useEffect(() => {
     sortByTime != '' && setShortByTime(sortByTime);
@@ -116,12 +122,15 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     setIsOpen(false);
   }
 
+
   const onPostClick = () => {
+
     if (token == null) {
       navigate('/disneyland/login');
     } else {
       setIsLoading(true);
-      var data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': text, 'chat_img': getValues('chat_img')}
+      var data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': text, 'chat_img': getValues('chat_img'), 'updatefile': getValues('updatefile'), 'youtubelink': getValues('youtubelink'), 'fullsizepic': getValues('fullsizepic'), 'mediumsizepic': getValues('mediumsizepic'), 'thumbnailfile': getValues('thumbnailfile'), 'selectbar': getValues('selectbar')}
+      console.log('aaaaaaaaaaa', data)
       if(land == 5 || land == 6 || land == 10) {
         if(land == 10) data['chat_room_id'] = 0;
         else data['chat_room_id'] = land - 4;
@@ -147,6 +156,11 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
     }
     setIsLoading(true);
   }
+
+  const onClickAdvanced = () => {
+    setAdvancedPost(!advancedpost)
+  }
+
   return (
     <div>
       <Modal
@@ -157,6 +171,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
       >
         <form
           className='space-y-6'
+          style={{height: '600px'}}
         >
           <div className='row'>
             <div className='box-t-1'>
@@ -209,6 +224,24 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                     // setValue={file}
                     {...register('chat_img')}
                   />
+
+                  { post_editor == 'true' ? (
+                      <div className="advance-editor">
+                        <div>
+                          {
+                            advancedpost == true ?
+                              <img src={arrowdown} alt="Arrow Down" width={50} className='editor-arrowup'/> :
+                              <img src={arrowup} alt="Arrow Up" width={50} className='editor-arrowdown'/>
+                          }
+                          <input type="button" onClick={onClickAdvanced} value="Advanced Post"/>
+                          </div>
+                        { advancedpost &&
+                          <MwAdvanceEditor LoungeId={null} register={register} setValue={setValue}></MwAdvanceEditor>
+                        }
+                      </div>
+                    ) : <div></div>
+                  }          
+
                   <div className='box-li'>
                     <ul className='m-0 p-0' style={{ cursor: 'pointer' }}>
                       <li

@@ -216,10 +216,10 @@ const App = () => {
               </Suspense>
             }
           />
-          <Route
+          {/* <Route
             path='/disneyland/mw-advance-editor/:LoungeId'
             element={<MwAdvanceEditor />}
-          />
+          /> */}
           <Route
             path='/disneyworld/mw-advance-editor/:LoungeId'
             element={<WdwAdvanceEditor />}
