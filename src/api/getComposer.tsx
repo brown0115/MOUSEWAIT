@@ -5,7 +5,7 @@ import {
 } from '../redux/lounges/slice';
 import { Lounge } from '../redux/lounges/types';
 import { GET_BASE_URL } from '../constants/apiEndpoints';
-export const getComposer = async ({ LoungeId }: fetchComposerType) => {
+export const getComposer = async (LoungeId: any) => {
   const responseBody = (response: AxiosResponse) => response.data;
 
   const token = localStorage.getItem('token');

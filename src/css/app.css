@@ -230,7 +230,7 @@ textarea {
   width: 25vw;
   height: 100%;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1366.98px) {
   .banner-img .banner-logo{
     width: 32vw;
     height: 100%;
@@ -1188,8 +1188,9 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
 } */
 .mwstore-mid-bg {
   background-color: #fff;
-  width: 80%;
-  margin: 0 auto;
+  /* width: 80%; */
+  /* margin: 0 auto; */
+  text-align: left;
   /*  padding: 1rem; */
 }
 .mws-mid-sec .mid-head {
@@ -1672,6 +1673,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   border: 1px solid #ccc;
   box-shadow: 1px 1px 1px #999;
   font-family: 'Inter';
+  width: 100%;
 }
 
 .mw-post .MW-btn {
@@ -2145,7 +2147,7 @@ textarea {
   margin-bottom: 10px;
 }
 .mid-container {
-  padding-left: 3%;
+  /* padding-left: 3%; */
 }
 
 .choosefile,
@@ -2422,7 +2424,7 @@ textarea {
   min-height: 1.2em;
   display: inline-block;
   margin: 0.3em;
-  float: left;
+  /* float: left; */
   width: 40%;
 }
 
@@ -2658,7 +2660,33 @@ input:disabled {
   background-color: #d8cccc;
 }
 
-@media only screen and (max-width: 768px) {
+.no-permission {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  font-weight: bold;
+}
+
+.advance_editor textarea {
+  padding: 10px;
+  max-width: 100%;
+  line-height: 25px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px #999;
+  font-family: 'Inter';
+}
+
+.choosefile, .youtubelink, .selectmenu, .advance-chatmsg {
+  text-align: left;
+}
+
+.editor-arrowdown, .editor-arrowup {
+  vertical-align: middle;
+}
+
+@media only screen and (max-width: 1366.98px) {
+
   .fixed-bottom-bar {
     position: fixed;
     bottom: -16px;

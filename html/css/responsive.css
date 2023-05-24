@@ -35,8 +35,9 @@
 | Large devices (tablets, 992px)                                    | 
 |-------------------------------------------------------------------|
 */
-@media screen and (min-width: 768px) and (max-width: 991.98px) {
-  /* mousewait-desborad2 start css */
+
+
+/* @media screen and (min-width: 768px) and (max-width: 991.98px) {
   .des-main-sec {
     display: grid;
     grid-template-columns: 152px 2fr 1fr;
@@ -47,16 +48,14 @@
   .mid-card-sec {
     width: 95%;
   }
-
-  /* mousewait-desborad2 end css */
-}
+} */
 
 /*
 |-------------------------------------------------------------------|
 | Medium devices (Mobiles, 768px)                                   | 
 |-------------------------------------------------------------------|
 */
-@media screen and (min-width: 576px) and (max-width: 767.98px) {
+@media screen and (min-width: 576px) and (max-width: 991.98px) {
    /* mousewait-desborad2 start css */
   .des-main-sec {
     display: grid;

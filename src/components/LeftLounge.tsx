@@ -19,7 +19,6 @@ import { useLocation } from 'react-router';
 import { useEffect, useRef, useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import RightLoungeBest from '../components/RightLoungeBest';
-import { isMobile } from 'react-device-detect';
 import { LoungeBox } from '../components/LoungeBox';
 
 import {
