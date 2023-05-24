@@ -127,7 +127,7 @@ function MwAdvanceEditor({LoungeId, register, setValue} : MwAdvanceEditorProps) 
                   <textarea
                     style={{
                       border: '1px solid grey',
-                      width: '70%',
+                      width: '100%',
                       marginTop: '1rem',
                       borderRadius: '5px',
                     }}

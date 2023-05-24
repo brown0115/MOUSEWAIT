@@ -287,7 +287,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
         </button>
       </div> */}
 
-      {isMobile ? (
+      {window.innerWidth < 1367 ? (
         <li className='nav-item last-li my-link' onClick={openModal}>
           <div className='nav-icon'>
             <img src={Post} className='img-fluid' alt='img' />

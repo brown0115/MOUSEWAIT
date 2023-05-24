@@ -205,25 +205,27 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
 
                 <div className='box-ttt'>
                   {/* <label for="story" class="w-50 m-auto justify-content-start">Tell us your story</label> */}
-                  <textarea
-                    rows={3}
-                    cols={60}
-                    value={text}
-                    onChange={e => setText(e.target.value)}
-                    placeholder='write a caption '
-                    disabled={isLoading}
-                    // {...register('chat_msg')}
-                  />
-                  <input
-                    type='hidden'
-                    // setValue={land}
-                    {...register('chat_room_id')}
-                  />
-                  <input
-                    type='hidden'
-                    // setValue={file}
-                    {...register('chat_img')}
-                  />
+                  <div className='advance-chatmsg'>
+                    <textarea
+                      rows={3}
+                      cols={60}
+                      value={text}
+                      onChange={e => setText(e.target.value)}
+                      placeholder='write a caption '
+                      disabled={isLoading}
+                      // {...register('chat_msg')}
+                    />
+                    <input
+                      type='hidden'
+                      // setValue={land}
+                      {...register('chat_room_id')}
+                    />
+                    <input
+                      type='hidden'
+                      // setValue={file}
+                      {...register('chat_img')}
+                    />
+                  </div>
 
                   { post_editor == 'true' ? (
                       <div className="advance-editor">
@@ -330,7 +332,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
         </form>
       </Modal>
 
-      {isMobile ? (
+      {window.innerWidth < 1367 ? (
         <li className='nav-item last-li my-link' onClick={openModal}>
           <div className='nav-icon'>
             <img src={Post} className='img-fluid' alt='img' />

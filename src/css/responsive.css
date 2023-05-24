@@ -6,7 +6,7 @@
 | Extra large devices (large desktops, 1200px)                      | 
 |-------------------------------------------------------------------|
 */
-@media screen and (min-width: 1200px) and (max-width: 1920px) {
+@media screen and (min-width: 1367px) and (max-width: 1920px) {
   /*** mid-sec mobile-view start css ***/
   .mid-sec .top-text-m {
     display: none;
@@ -14,12 +14,20 @@
   /*** mid-sec mobile-view end css ***/
 }
 
+@media screen and (min-width: 1199px) and (max-width: 1366.98px) {
+  .top-trend {
+    padding-top: 13rem !important;
+    margin-bottom: -0.5rem;
+  }
+  
+}
+
 /*|-------------------------------------------------------------------|
 | Extra large devices (large desktops, 1200px)                      | 
 |-------------------------------------------------------------------|
 */
-@media screen and (min-width: 992px) and (max-width: 1199px) {
-  .MW-banner-sec .wh-home {
+@media screen and (min-width: 992px) and (max-width: 1198.98px) {
+  /* .MW-banner-sec .wh-home {
     width: 93%;
   }
   .MW-bimg .mwb {
@@ -32,7 +40,6 @@
     margin: 2.5rem 0rem;
   }
 
-  /*** mid-sec mobile-view start css ***/
   .mid-sec .top-text-m {
     display: none;
   }
@@ -41,15 +48,12 @@
     grid-template-columns: 155px 3fr 1fr;
   }
 
-  /*** mid-sec mobile-view end css ***/
-  /*** mwstore-page mid-sec start css ***/
   .mwstore-mid-bg {
     width: 100%;
     margin: 0 auto;
     padding: 0rem 0.7rem;
   }
 
-  /*** mwstore-page mid-sec end css ***/
   .link-img-s .link-main {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -69,6 +73,11 @@
     margin-left: -150px;
     display: flex;
     justify-content: space-between;
+  } */
+
+  .top-trend {
+    padding-top: 11rem !important;
+    margin-bottom: -0.5rem;
   }
 }
 /*
@@ -76,8 +85,12 @@
 | Large devices (tablets, 992px)                                    | 
 |-------------------------------------------------------------------|
 */
-/* @media screen and (min-width: 768px) and (max-width: 991.98px) {
-  .Mouse-Wait-sec .navbar-toggler .bar {
+@media screen and (min-width: 768px) and (max-width: 991.98px) {
+  .top-trend {
+    padding-top: 9rem !important;
+    margin-bottom: -0.5rem;
+  }
+  /* .Mouse-Wait-sec .navbar-toggler .bar {
     box-shadow: 3px 3px 0 0 #ddd;
     color: #d0cfcf;
     border: 2px solid #ddd;
@@ -180,10 +193,10 @@
   }
   .ReactModal__Overlay ReactModal__Overlay--after-open {
     z-index: 9999;
-  }
-} */
+  } */
+}
 
-@media screen and (min-width: 576px) and (max-width: 991.98px) {
+@media screen and (min-width: 576px) and (max-width: 1366.98px) {
   .profile-container {
     /* border: 2px solid red; */
     margin-left: 12%;
@@ -291,6 +304,7 @@
   .mid-sec .banner-img {
     position: fixed;
     top: 0;
+    left: 0;
   }
   .mobile-right-bar {
     display: block;
@@ -305,7 +319,7 @@
     display: inline-flex;
   }
   .top-trend {
-    padding-top: 4rem;
+    padding-top: 7rem;
     margin-bottom: -0.5rem;
   }
   .trending-t {
@@ -456,6 +470,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-column-gap: 10px;
+    margin-top: calc(100vw/1376*218);
   }
   .mid-card-sec .card-m .card-img-b img {
     height: auto;
@@ -539,7 +554,7 @@
 
 /*
 |-------------------------------------------------------------------|
-| Small devices (landscape phones, 476px)                           | 
+| Small devices (landscape phones, 476px)            575.98px               | 
 |-------------------------------------------------------------------|
 */
 @media screen and (min-width: 0px) and (max-width: 575.98px) {
@@ -750,6 +765,7 @@
     width: 100%;
     margin: 0 auto;
     padding: 0rem 0.7rem;
+    margin-top: calc(100vw/1376*218) !important;
   }
   .mid-card-sec .card-m .card-img-b img {
     height: auto;
@@ -1077,7 +1093,7 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 575.98px) {
   .profile-container {
     /* border: 2px solid red; */
     margin-left: 12%;
@@ -1152,6 +1168,7 @@
   .mid-sec .banner-img {
     position: fixed;
     top: 0;
+    left: 0;
   }
 
   .msgs {
@@ -1188,7 +1205,4 @@
   .desk-li {
     margin-top: 0rem !important;
   }
-}
-
-@media screen and (min-width: 992px) and (max-width: 1199px) {
 }
