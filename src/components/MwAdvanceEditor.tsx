@@ -127,16 +127,12 @@ function MwAdvanceEditor() {
                           }}
                           // rows={3}
 
-<<<<<<< HEAD
-                    {/* <input type='hidden' {...register('edit_chat_msg')} /> */}
-=======
                           {...register('youtubelink')}
                           placeholder='Youtube Link'
                           // defaultValue={chat_reply_msg}
                           /* {...register("Type")} {...register("LoungeId")} */
                         />
                       </div>
->>>>>>> develop
 
                       <input
                         type='hidden'

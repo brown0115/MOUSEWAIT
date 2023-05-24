@@ -4,6 +4,7 @@ type LoungeNamePropsType = {
   Roomid: any;
 };
 
+
 export const LoungeName: React.FC<LoungeNamePropsType> = ({ Time, Roomid }) => {
   function converDate(datevalue: any) {
     const date = new Date(datevalue);
@@ -16,6 +17,7 @@ export const LoungeName: React.FC<LoungeNamePropsType> = ({ Time, Roomid }) => {
     });
     return formattedDate;
   }
+
   return (
     <>
       <div className='d-flex'>
@@ -34,6 +36,14 @@ export const LoungeName: React.FC<LoungeNamePropsType> = ({ Time, Roomid }) => {
         ) : Roomid == null || Roomid == '0' ? (
           <p className='my-dis'>
             <Link to={`/disneyland/lands/0/the-hub/`}>The-Hub</Link>
+          </p>
+        ) : Roomid == '3' ? (
+          <p className='my-dis'>
+            <Link to={`/loungeland`}>LoungeLand</Link>
+          </p>
+        ) : Roomid == '4' ? (
+          <p className='my-dis'>
+            <Link to={`/club333`}>Club333</Link>
           </p>
         ) : (
           <></>
