@@ -494,7 +494,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
           <CommentReply
             replyData={cmt.commentsreply}
             replyShow={showReply}
-            chatId={cmt.chat_reply_id}
+            chatId={cmt.chat_id}
             chat_reply_id={cmt.chat_reply_id}
             stickerData={stickerData}
           />
