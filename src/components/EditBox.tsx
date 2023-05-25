@@ -145,7 +145,6 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
   const [Notify, setIsNotify] = useState<any | string>();
 
   const onSubmit = (data: any) => {
-
     data['chat_reply_msg'] = stickerSelection; 
      /* return false; */
     

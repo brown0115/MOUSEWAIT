@@ -28,6 +28,7 @@ import { LikeCommentReply } from '../components/LikeCommentReply';
 import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import { GET_BASE_URL } from '../constants/apiEndpoints';
 import axios, { AxiosResponse } from 'axios';
+import  { CommentReplyBox } from './WdwCommentReplyBox';
 
 type CommentReplyPropsType = {
   replyData: any;
@@ -138,16 +139,6 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
   }
   const [Notify, setIsNotify] = useState<any | string>();
   const [RemoveType, setRemoveType] = useState<any | string>('R');
-  const onRemove = (ban_chat_id: any) => {
-    alert('asdfasdfsdf')
-    return false;
-    dispatch<any>(removeUserLounge  ({ ban_chat_id, RemoveType })).then(
-      (res: any) => {
-        window.location.reload();
-        // Notify(toast('Comment Removed'));
-      }
-    );
-  };
 
   const [editbox, SetEditBox] = useState<any | string>(false);
   const showEditBox = () => {
@@ -337,135 +328,137 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
         </div>
       )}
       {commentData.map((rep: any, index2: any) => (
-        <div className='mid-comm-s mid-comm-s2' key={index2}>
-          <div className='comm-bo d-flex'>
-            <div className='small-c'>
-              <a href=''>
-                <img
-                  style={{
-                    verticalAlign: 'middle',
-                    height: '35px',
-                    width: '35px',
-                    borderRadius: '50%',
-                  }}
-                  src={
-                    GET_BASE_URL_IMAGE +
-                    '/disneyland/images/thumbs/' +
-                    rep.replyuser.image +
-                    dTime
-                  }
-                  className='com-imggg'
-                />
-              </a>
-            </div>
-            <div className='comm-c d-flex'>
-              <p className='commentlist' style={{ marginTop: '-1rem' }}>
-                <span
-                  style={{
-                    fontFamily: 'Inter',
-                    fontSize: '1rm',
 
-                    marginTop: '-1rem',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
-                    color: '#313237',
-                  }}
-                  dangerouslySetInnerHTML={{
-                    __html: rep.chat_reply_msg
-                      .replace('<p>', '<span>')
-                      .replace('</p>', '</spam>')
-                      .replace('<br>', ''),
-                  }}
-                ></span>
+        <CommentReplyBox replyData={rep} key={index2} stickerData={stickerData}></CommentReplyBox>
+        // <div className='mid-comm-s mid-comm-s2' key={index2}>
+        //   <div className='comm-bo d-flex'>
+        //     <div className='small-c'>
+        //       <a href=''>
+        //         <img
+        //           style={{
+        //             verticalAlign: 'middle',
+        //             height: '35px',
+        //             width: '35px',
+        //             borderRadius: '50%',
+        //           }}
+        //           src={
+        //             GET_BASE_URL_IMAGE +
+        //             '/disneyland/images/thumbs/' +
+        //             rep.replyuser.image +
+        //             dTime
+        //           }
+        //           className='com-imggg'
+        //         />
+        //       </a>
+        //     </div>
+        //     <div className='comm-c d-flex'>
+        //       <p className='commentlist' style={{ marginTop: '-1rem' }}>
+        //         <span
+        //           style={{
+        //             fontFamily: 'Inter',
+        //             fontSize: '1rm',
 
-                <br />
-                <Link
-                  style={{
-                    marginRight: '.5rem',
-                    color: '#000',
-                  }}
-                  to={`/disneyland/user/${rep.replyuser?.user_id}/mypost`}
-                >
-                  {rep.replyuser?.user_name}
-                </Link>
+        //             marginTop: '-1rem',
+        //             fontWeight: 400,
+        //             fontStyle: 'normal',
+        //             color: '#313237',
+        //           }}
+        //           dangerouslySetInnerHTML={{
+        //             __html: rep.chat_reply_msg
+        //               .replace('<p>', '<span>')
+        //               .replace('</p>', '</spam>')
+        //               .replace('<br>', ''),
+        //           }}
+        //         ></span>
 
-                <span className='com-tt'>
-                  <span>{rep.replyuser?.rank}</span>
-                  <span
-                    style={{
-                      marginLeft: '.5rem',
-                    }}
-                  >
-                    #{rep.replyuser?.position}
-                  </span>
+        //         <br />
+        //         <Link
+        //           style={{
+        //             marginRight: '.5rem',
+        //             color: '#000',
+        //           }}
+        //           to={`/disneyland/user/${rep.replyuser?.user_id}/mypost`}
+        //         >
+        //           {rep.replyuser?.user_name}
+        //         </Link>
 
-                  <span
-                    style={{
-                      marginLeft: '.5rem',
-                      marginRight: '1rem',
-                      fontSize: 'smaller',
-                    }}
-                  >
-                    {converDate(rep?.chat_reply_date)}
-                  </span>
-                </span>
-                <br />
-                <span className='co-l'>
-                  <span>FLAG</span>
+        //         <span className='com-tt'>
+        //           <span>{rep.replyuser?.rank}</span>
+        //           <span
+        //             style={{
+        //               marginLeft: '.5rem',
+        //             }}
+        //           >
+        //             #{rep.replyuser?.position}
+        //           </span>
 
-                  <>
-                    <LikeCommentReply
-                      likecount={rep.no_of_likes}
-                      chat_id={rep.chat_id}
-                      comment_id={rep.chat_reply_id}
-                      reply_id={rep.id}
-                      commnet_userid={rep.replyuser.user_id}
-                      type={'R'}
-                      page={'WL'}
-                    />
-                  </>
+        //           <span
+        //             style={{
+        //               marginLeft: '.5rem',
+        //               marginRight: '1rem',
+        //               fontSize: 'smaller',
+        //             }}
+        //           >
+        //             {converDate(rep?.chat_reply_date)}
+        //           </span>
+        //         </span>
+        //         <br />
+        //         <span className='co-l'>
+        //           <span>FLAG</span>
 
-                  {/*                 <span
-                    style={{ cursor: 'pointer' }}
-                    onClick={() =>
-                      likeCommnetAndReply(
-                        rep.chat_id,
-                        rep.chat_reply_id,
-                        rep.id,
-                        rep.replyuser.user_id,
-                        'R'
-                      )
-                    }
-                  >
-                    LIKE{' '}
-                    {rep.no_of_likes > 0 ? <>({rep.no_of_likes}) </> : <></>}
-                  </span> */}
-                </span>
+        //           <>
+        //             <LikeCommentReply
+        //               likecount={rep.no_of_likes}
+        //               chat_id={rep.chat_id}
+        //               comment_id={rep.chat_reply_id}
+        //               reply_id={rep.id}
+        //               commnet_userid={rep.replyuser.user_id}
+        //               type={'R'}
+        //               page={'WL'}
+        //             />
+        //           </>
 
-                <>
-                  {rep.replyuser.user_id == loginuserid ? (
-                    <span className='co-l'>
-                      <span onClick={showEditBox}>EDIT</span>
-                      <span onClick={() => onRemove(rep.id)}>DELETE</span>
-                    </span>
-                  ) : (
-                    <></>
-                  )}
-                </>
-              </p>
-            </div>
-          </div>
-          <EditBox
-            replyData={''}
-            id={rep.id}
-            chatId={rep.chat_id}
-            chat_reply_id={rep.chat_reply_id}
-            chat_reply_msg={rep.chat_reply_msg}
-            stickerData={stickerData}
-            editbox={editbox}
-            type={'WR'}
-          />
-        </div>
+        //           {/*                 <span
+        //             style={{ cursor: 'pointer' }}
+        //             onClick={() =>
+        //               likeCommnetAndReply(
+        //                 rep.chat_id,
+        //                 rep.chat_reply_id,
+        //                 rep.id,
+        //                 rep.replyuser.user_id,
+        //                 'R'
+        //               )
+        //             }
+        //           >
+        //             LIKE{' '}
+        //             {rep.no_of_likes > 0 ? <>({rep.no_of_likes}) </> : <></>}
+        //           </span> */}
+        //         </span>
+
+        //         <>
+        //           {rep.replyuser.user_id == loginuserid ? (
+        //             <span className='co-l'>
+        //               <span onClick={showEditBox}>EDIT</span>
+        //               <span onClick={() => onRemove(rep.id)}>DELETE</span>
+        //             </span>
+        //           ) : (
+        //             <></>
+        //           )}
+        //         </>
+        //       </p>
+        //     </div>
+        //   </div>
+        //   <EditBox
+        //     replyData={''}
+        //     id={rep.id}
+        //     chatId={rep.chat_id}
+        //     chat_reply_id={rep.chat_reply_id}
+        //     chat_reply_msg={rep.chat_reply_msg}
+        //     stickerData={stickerData}
+        //     editbox={editbox}
+        //     type={'WR'}
+        //   />
+        // </div>
       ))}
     </>
   );
