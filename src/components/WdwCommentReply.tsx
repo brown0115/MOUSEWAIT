@@ -364,8 +364,7 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
                   style={{
                     fontFamily: 'Inter',
                     fontSize: '1rm',
-                    marginLeft: '1rem',
-                    marginRight: '1rem',
+
                     marginTop: '-1rem',
                     fontWeight: 400,
                     fontStyle: 'normal',
@@ -382,7 +381,6 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
                 <br />
                 <Link
                   style={{
-                    marginLeft: '1rem',
                     marginRight: '.5rem',
                     color: '#000',
                   }}
@@ -465,7 +463,7 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
             chat_reply_msg={rep.chat_reply_msg}
             stickerData={stickerData}
             editbox={editbox}
-            type={'R'}
+            type={'WR'}
           />
         </div>
       ))}

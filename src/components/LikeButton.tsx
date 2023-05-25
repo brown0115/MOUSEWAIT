@@ -23,7 +23,7 @@ export const LikeButton: React.FC<LikeButtonPropsType> = ({
   const [Notify, setIsNotify] = useState<any | string>();
   const onLike = (LoungeId: any, countvalue: number) => {
     dispatch<any>(postBookMark({ LoungeId })).then((res: any) => {
-      console.log(res);
+      // console.log(res);
 
       res.payload.data[0].message == 'Added' && SetLikeCount(countvalue + 1);
       res.payload.data[0].message == 'Removed' && SetLikeCount(countvalue - 1);

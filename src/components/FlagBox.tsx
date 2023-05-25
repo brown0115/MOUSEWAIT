@@ -101,7 +101,7 @@ export const FlagBox: React.FC<FlagBoxPropsType> = ({
     setValue('LoungeId', LoungeIdd);
   }, [LoungeIdd]); */
 
-  console.log(menutype);
+  // console.log(menutype);
 
   const onSubmit =()=>{
     alert('submit')

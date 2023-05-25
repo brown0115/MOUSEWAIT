@@ -149,8 +149,6 @@ export const CommentList: React.FC<CommentListPropsType> = ({
   }, [LoungeId]);
 
   const onSubmit = (data: any) => {
-    console.log('flag');
-    return false;
     dispatch<any>(postLoungeFlag(data)).then((res: any) => {
       // Notify(toast(res.payload.data[0].error));
     });
@@ -488,7 +486,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
             chat_reply_msg={cmt.chat_reply_msg}
             stickerData={stickerData}
             editbox={editbox}
-            type={'C'}
+            type={'WC'}
           />
 
           <CommentReply

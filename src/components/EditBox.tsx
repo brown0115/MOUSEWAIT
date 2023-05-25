@@ -6,6 +6,7 @@ import { useAppDispatch } from '../redux/store';
 import {
   postLoungeCommentReply,
   postLoungeCommentEdit,
+  postLoungeCommentEditWdw,
   fetchLoungeDetails,
   fetchStickerLounges,
   addSticker,
@@ -74,7 +75,7 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
         callback: any
       ) => {
         setSearchText(searchTerm);
-        console.log('searchTerm', searchTerm)
+        // console.log('searchTerm', searchTerm)
         if(mentionChar == ' ')
           setFilterUser([]);
         else if (searchTerm.length > 0) {
@@ -146,16 +147,29 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
   const onSubmit = (data: any) => {
 
     data['chat_reply_msg'] = stickerSelection; 
-    console.log('stickerSelection', stickerSelection);   
      /* return false; */
-     stickerSelection != '<p><br></p>' && stickerSelection != ''
-      ? dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
+    
+     if(type === 'WC' || type === 'WR') {
+      data['type'] = type.slice(1);
+      stickerSelection != '<p><br></p>' && stickerSelection != ''
+      ? dispatch<any>(postLoungeCommentEditWdw(data)).then((res: any) => {
           reset();
           SetStickerSelection(null);
           window.location.reload();
           // Notify(toast('Updated Successfully'));
         })
       : alert('Please enter comment');
+     }
+     else {
+      stickerSelection != '<p><br></p>' && stickerSelection != ''
+        ? dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
+            reset();
+            SetStickerSelection(null);
+            window.location.reload();
+            // Notify(toast('Updated Successfully'));
+          })
+        : alert('Please enter comment');
+     }
   };
 
  
@@ -180,13 +194,13 @@ export const EditBox: React.FC<EditBoxPropsType> = ({
               padding: '10px', 'position': 'relative'
             }}
           >
-            {type === 'C' ? (
+            {type === 'C' || type === 'WC' ? (
               <h6 style={{ textAlign: 'center', color: 'red' }}>
                 Edit
               </h6>
             ) : (
               <h6 style={{ textAlign: 'center', color: 'red' }}>
-                Edit
+                Reply
               </h6>
             )}           
 
