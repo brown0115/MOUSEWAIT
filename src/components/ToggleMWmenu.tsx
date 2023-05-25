@@ -33,6 +33,9 @@ import { BiMessageDots } from 'react-icons/bi';
 import DmMe from './DmMe';
 import TagMe from './TagMe';
 import MovePost from './MovePost';
+import arrowup from '../assets/img/arrowup.png';
+import arrowdown from '../assets/img/arrowdown.png';
+import MwAdvanceEditor from './MwAdvanceEditor';
 
 type ToggleMenuMWPropsType = {
   getBookMark: any;
@@ -89,6 +92,11 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
   const [thankData, SetThankData] = useState<any | []>([]);
   const [bookMark, SetBookMark] = useState<any | string>(getBookMark);
   const [thankYou, SetThankYou] = useState<any | string>(getThankYou);
+  const [ advancedpost, setAdvancedPost ] = useState(false);
+
+  const onClickAdvanced = () => {
+    setAdvancedPost(!advancedpost)
+  }
 
   /*  useEffect(() => {
     setValue('LoungeId', LoungeIdd); // if comment this,  will not update.
@@ -478,17 +486,6 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                   <></>
                 )}
 
-                {post_editor && 
-                  <li className='nav-item'>
-                    <div className='nav-icon'>
-                      <BiMessageDots></BiMessageDots>
-                    </div>
-                    <span onClick={openComposeEditor}>
-                      Edit With Composer
-                    </span>
-                  </li>
-                }
-
                 {loginuserid == '18' ||
                 loginuserid == '914' ||
                 loginuserid == '38' ||
@@ -685,6 +682,23 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                         defaultValue={chat_reply_msg}
                         /* {...register("Type")} {...register("LoungeId")} */
                       />
+
+                      { post_editor == 'true' ? (
+                        <div className="advance-editor">
+                          <div>
+                            {
+                              advancedpost == true ?
+                                <img src={arrowdown} alt="Arrow Down" width={50} className='editor-arrowup'/> :
+                                <img src={arrowup} alt="Arrow Up" width={50} className='editor-arrowdown'/>
+                            }
+                            <input type="button" onClick={onClickAdvanced} value="Advanced Edit"/>
+                            </div>
+                          { advancedpost &&
+                            <MwAdvanceEditor LoungeId={LoungeId} register={register} setValue={setValue}></MwAdvanceEditor>
+                          }
+                        </div>
+                        ) : <div></div>
+                      }   
                     </>
                   ) : (
                     <>
