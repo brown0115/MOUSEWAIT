@@ -270,7 +270,6 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                 <br />
                 <Link
                   style={{
-                    marginLeft: '1rem',
                     marginRight: '.5rem',
                     color: '#000',
                     background: 'transparent',
