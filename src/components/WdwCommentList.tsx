@@ -483,7 +483,7 @@ export const CommentList: React.FC<CommentListPropsType> = ({
           <EditBox
             replyData={''}
             id={''}
-            chatId={cmt.chat_reply_id}
+            chatId={cmt.chat_id}
             chat_reply_id={cmt.chat_reply_id}
             chat_reply_msg={cmt.chat_reply_msg}
             stickerData={stickerData}
