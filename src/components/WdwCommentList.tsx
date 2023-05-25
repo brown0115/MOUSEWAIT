@@ -255,8 +255,6 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                   style={{
                     fontFamily: 'Inter',
                     fontSize: '1rm',
-                    marginLeft: '1rem',
-                    marginRight: '1rem',
                     fontWeight: 400,
                     fontStyle: 'normal',
                     color: '#313237',
