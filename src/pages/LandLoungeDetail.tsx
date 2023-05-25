@@ -332,7 +332,7 @@ return ret;
               />
               <Link to={`/disneyland/lounge`} className='banner-logo'></Link>
             </div>
-            <div>
+            <div className='land-detail'>
               {status === 'error' ? (
                 <div className='content__error-info'>
                   <h2>Error</h2>

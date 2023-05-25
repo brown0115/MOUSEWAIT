@@ -6,7 +6,7 @@
 | Extra large devices (large desktops, 1200px)                      | 
 |-------------------------------------------------------------------|
 */
-@media screen and (min-width: 1367px) and (max-width: 1920px) {
+@media screen and (min-width: 1024px) and (max-width: 1920px) {
   /*** mid-sec mobile-view start css ***/
   .mid-sec .top-text-m {
     display: none;
@@ -14,19 +14,11 @@
   /*** mid-sec mobile-view end css ***/
 }
 
-@media screen and (min-width: 1199px) and (max-width: 1366.98px) {
-  .top-trend {
-    padding-top: 13rem !important;
-    margin-bottom: -0.5rem;
-  }
-  
-}
-
 /*|-------------------------------------------------------------------|
 | Extra large devices (large desktops, 1200px)                      | 
 |-------------------------------------------------------------------|
 */
-@media screen and (min-width: 992px) and (max-width: 1198.98px) {
+@media screen and (min-width: 992px) and (max-width: 1023.98px) {
   /* .MW-banner-sec .wh-home {
     width: 93%;
   }
@@ -196,7 +188,7 @@
   } */
 }
 
-@media screen and (min-width: 576px) and (max-width: 1366.98px) {
+@media screen and (min-width: 576px) and (max-width: 1024.98px) {
   .profile-container {
     /* border: 2px solid red; */
     margin-left: 12%;
@@ -470,8 +462,12 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-column-gap: 10px;
+  }
+
+  .land-detail .mid-card-sec {
     margin-top: calc(100vw/1376*218);
   }
+
   .mid-card-sec .card-m .card-img-b img {
     height: auto;
   }
@@ -765,8 +761,12 @@
     width: 100%;
     margin: 0 auto;
     padding: 0rem 0.7rem;
-    margin-top: calc(100vw/1376*218) !important;
   }
+
+  .land-detail .mid-card-sec {
+    margin-top: calc(100vw/1376*218);
+  }
+  
   .mid-card-sec .card-m .card-img-b img {
     height: auto;
   }
