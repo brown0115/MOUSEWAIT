@@ -134,7 +134,6 @@ export const CommentReplyBox: React.FC<CommentReplyBoxPropsType> = ({
     var domParser = new DOMParser();
     var doc = domParser.parseFromString(formatedMsg, 'text/html');
     var msg = doc.body.innerHTML;
-    console.log('formatedMsg', msg)
     
     let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
     async function convert()

@@ -118,8 +118,9 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
   const [text, setText] = useState('');
 
   useEffect(() => {
-    register('chat_reply_msg', { required: true, minLength: 11 });
     setValue('chat_reply_msg', text);
+    if(text == '' || text == '<p><br></p>') 
+      setFilterUser([]);
   }, [text]);
 
 
