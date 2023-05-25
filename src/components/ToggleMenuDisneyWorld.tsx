@@ -35,6 +35,9 @@ import { BiMessageDots } from 'react-icons/bi';
 import DmMe from './DmMe';
 import TagMe from './TagMe';
 import MovePost from './WdwMovePost';
+import arrowup from '../assets/img/arrowup.png';
+import arrowdown from '../assets/img/arrowdown.png';
+import WdwAdvanceEditor from './WdwAdvanceEditor';
 
 type ToggleMenuPropsType = {
   getBookMark: any;
@@ -117,7 +120,9 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const SP = localStorage.getItem('SP');
   const post_editor = localStorage.getItem('editor');
   const [userRank, setUserRank] = useState<any | number>(loginuserrank);
-  const [Notify, setIsNotify] = useState<any | string>();
+  const [Notify, setIsNotify] = useState<any | string>(); 
+  const [ advancedpost, setAdvancedPost ] = useState(false);
+
 
   // thank you
   const onThankyou = (LoungeId: any) => {
@@ -251,6 +256,10 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   };
 
   //Dm Box
+
+  const onClickAdvanced = () => {
+    setAdvancedPost(!advancedpost)
+  }
 
   const [dmuserId, setdmuserId] = useState<any | String>();
   const [dmusername, setdmuserame] = useState<any | String>();
@@ -569,7 +578,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                   <></>
                 )}
 
-                {post_editor && 
+                {/* {post_editor && 
                   <li className='nav-item'>
                     <div className='nav-icon'>
                       <BiMessageDots></BiMessageDots>
@@ -578,7 +587,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                       Edit With Composer
                     </span>
                   </li>
-                }
+                } */}
 
                 {loginuserid == '18' ||
                 loginuserid == '914' ||
@@ -760,13 +769,32 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
               <div className='boxwidth'>
                 <div className='box-ttt'>
                   {onedit != '' ? (
-                    <textarea
-                      rows={3}
-                      cols={60}
-                      {...register('chat_reply_msg')}
-                      defaultValue={chat_reply_msg}
-                      /* {...register("Type")} {...register("LoungeId")} */
-                    />
+                    <div>
+                      <textarea
+                        rows={3}
+                        cols={60}
+                        {...register('chat_reply_msg')}
+                        defaultValue={chat_reply_msg}
+                        /* {...register("Type")} {...register("LoungeId")} */
+                      />
+
+                      { post_editor == 'true' ? (
+                        <div className="advance-editor">
+                          <div>
+                            {
+                              advancedpost == true ?
+                                <img src={arrowdown} alt="Arrow Down" width={50} className='editor-arrowup'/> :
+                                <img src={arrowup} alt="Arrow Up" width={50} className='editor-arrowdown'/>
+                            }
+                            <input type="button" onClick={onClickAdvanced} value="Advanced Edit"/>
+                            </div>
+                          { advancedpost &&
+                            <WdwAdvanceEditor LoungeId={LoungeId} register={register} setValue={setValue}></WdwAdvanceEditor>
+                          }
+                        </div>
+                        ) : <div></div>
+                      }
+                    </div>
                   ) : (
                     <textarea
                       rows={3}

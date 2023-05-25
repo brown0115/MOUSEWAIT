@@ -220,10 +220,10 @@ const App = () => {
             path='/disneyland/mw-advance-editor/:LoungeId'
             element={<MwAdvanceEditor />}
           /> */}
-          <Route
+          {/* <Route
             path='/disneyworld/mw-advance-editor/:LoungeId'
             element={<WdwAdvanceEditor />}
-          />
+          /> */}
           <Route
             path='/disneyland/setting/dp'
             element={
