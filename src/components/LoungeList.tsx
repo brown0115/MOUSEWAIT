@@ -88,14 +88,14 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
 
     if (data.chat_reply_msg != undefined) {
       dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
-        reset();
+        // reset();
         window.location.reload();
         // Notify(toast('Post Updated Successfully'));
       });
     } else {
       setIsLoading(true);
       dispatch<any>(postLoungeFlag(data)).then((res: any) => {
-        window.confirm(res.payload.data[0].error);
+        // window.confirm(res.payload.data[0].error);
         window.location.reload();
       });
     }

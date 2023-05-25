@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import qs from 'qs';
 import { Placeholder } from '../components/Placeholder';
 import { CommentBox } from '../components/CommentBox';
-import { fetchLoungeDetails } from '../redux/lounges/slice';
+import { fetchLoungeDetails, postLoungeCommentEditWdw } from '../redux/lounges/slice';
 import { selectLounges } from '../redux/lounges/selectors';
 import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
 import { useForm } from 'react-hook-form';
@@ -101,6 +101,19 @@ const WDWLandLoungeDetail = (props: any) => {
   }
 
   const onSubmit = (data: any) => {
+
+    if (data.chat_reply_msg != undefined) {
+      dispatch<any>(postLoungeCommentEditWdw(data)).then((res: any) => {
+        reset();
+        window.location.reload();
+      });
+    } else {
+      dispatch<any>(postLoungeFlag(data)).then((res: any) => {
+      });
+    }
+  };
+
+  const onSubmit1 = (data: any) => {
     if (token != null) {
       const chat_msg = getValues('chat_msg');
       chat_msg != ''
@@ -343,7 +356,7 @@ const WDWLandLoungeDetail = (props: any) => {
             <div className='commentOutside'>
               <CommentBox
                 chatId={LoungeId}
-                onSubmit={onSubmit}
+                onSubmit={onSubmit1}
                 register={register}
                 handleSubmit={handleSubmit}
                 stickerData={stickerItems}

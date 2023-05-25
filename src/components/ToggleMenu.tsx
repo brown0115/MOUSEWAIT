@@ -475,7 +475,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                       <div className='nav-icon'>
                         <i className='fa fa-edit' />
                       </div>
-                      <span onClick={() => onEdit(LoungeId)}>Edit</span>
+                      <span onClick={() => onEdit(LoungeId)}>Edit1</span>
                     </li>
 
                     <li className='nav-item'>
@@ -648,10 +648,10 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                   </li>
                 } */}
                 
-                {loginuserid == '18' ||
+                {editType != true && (loginuserid == '18' ||
                 loginuserid == '914' ||
                 loginuserid == '38' ||
-                loginuserid == '46770' ? (
+                loginuserid == '46770') && 
                   <>
                     <li className='nav-item'>
                       <div className='nav-icon'>
@@ -668,8 +668,14 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                         Delete
                       </span>
                     </li>
-                    
+                  </>
+                } 
 
+                {loginuserid == '18' ||
+                loginuserid == '914' ||
+                loginuserid == '38' ||
+                loginuserid == '46770' ? (
+                  <>
                     <li className='nav-item'>
                       <div className='nav-icon'>
                         <i className='fa fa-life-ring' />

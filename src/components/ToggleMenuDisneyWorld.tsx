@@ -589,27 +589,35 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                   </li>
                 } */}
 
+              {
+                editType != true && (loginuserid == '18' ||
+                  loginuserid == '914' ||
+                  loginuserid == '38' ||
+                  loginuserid == '46770') && 
+                  <>
+                    <li className='nav-item'>
+                        <div className='nav-icon'>
+                          <i className='fa fa-edit' />
+                        </div>
+                        <span onClick={() => onEdit(LoungeId)}>Edit</span>
+                      </li>
+
+                      <li className='nav-item'>
+                        <div className='nav-icon'>
+                          <i className='fa fa-trash' />
+                        </div>
+                        <span onClick={() => onRemove(LoungeId, 'D')}>
+                          Delete
+                        </span>
+                      </li>
+                  </>
+                }
+
                 {loginuserid == '18' ||
                 loginuserid == '914' ||
                 loginuserid == '38' ||
                 loginuserid == '46770' ? (
                   <>
-                    <li className='nav-item'>
-                      <div className='nav-icon'>
-                        <i className='fa fa-edit' />
-                      </div>
-                      <span onClick={() => onEdit(LoungeId)}>Edit</span>
-                    </li>
-
-                    <li className='nav-item'>
-                      <div className='nav-icon'>
-                        <i className='fa fa-trash' />
-                      </div>
-                      <span onClick={() => onRemove(LoungeId, 'D')}>
-                        Delete
-                      </span>
-                    </li>
-
                     <li className='nav-item'>
                       <div className='nav-icon'>
                         <i className='fa fa-life-ring' />
