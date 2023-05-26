@@ -96,13 +96,14 @@ const WDWLandLoungeDetail = (props: any) => {
   }
   
   function getWords(str: any) {
-    const result = str.split("\.").slice(0, 1).join(' ');
+    const result = str?.split("\.").slice(0, 1).join(' ');
     return result;
   }
 
   const onSubmit = (data: any) => {
 
     if (data.chat_reply_msg != undefined) {
+      if(data.chat_reply_msg == '') return;
       dispatch<any>(postLoungeCommentEditWdw(data)).then((res: any) => {
         reset();
         window.location.reload();

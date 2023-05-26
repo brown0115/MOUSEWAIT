@@ -242,7 +242,7 @@ return ret;
   }
 
   function getWords(str: any) {
-    const result = str.split("\.").slice(0, 1).join(' ');
+    const result = str?.split("\.").slice(0, 1).join(' ');
     return result;
   }
 
