@@ -129,8 +129,8 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
       setIsLoading(true);
       var data;
       if(!advancedpost)
-        data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': text, 'chat_img': getValues('chat_img'), 'chat_type': false};
-      else data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': richtextvalue, 'chat_img': '', 'chat_type': true};
+        data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': text, 'chat_img': getValues('chat_img'), 'chat_type': '0'};
+      else data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': richtextvalue, 'chat_img': '', 'chat_type': '1'};
       if(land == 5 || land == 6 || land == 10) {
         if(land == 10) data['chat_room_id'] = 0;
         else data['chat_room_id'] = land - 4;

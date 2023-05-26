@@ -316,6 +316,7 @@ export type PostLoungeCommentReply = {
   id: any;
   Type: any;
   LoungeId: any;
+  chat_type: any;
 };
 export type PostLoungeCommentWdwEdit = {
   chat_reply_msg: any;
@@ -725,7 +726,7 @@ export const fetchwdwLoungeDetails = createAsyncThunk<
 
 export const postLounge = createAsyncThunk<Lounge[], PostLoungesType>(
   'users/postLoungeStatus',
-  async ({ chat_msg, chat_room_id, chat_img }, thunkAPI) => {
+  async ({ chat_msg, chat_room_id, chat_img, chat_type }, thunkAPI) => {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(
@@ -740,6 +741,7 @@ export const postLounge = createAsyncThunk<Lounge[], PostLoungesType>(
             chat_msg,
             chat_room_id,
             chat_img,
+            chat_type
           }),
         }
       );
@@ -1488,7 +1490,7 @@ export const postLoungeCommentEdit = createAsyncThunk<
 >(
   'users/postLoungeCommentEdit',
   async (
-    { chat_reply_msg, chat_id, chat_reply_id, type, id, Type, LoungeId },
+    { chat_reply_msg, chat_id, chat_reply_id, type, id, Type, LoungeId, chat_type },
     thunkAPI
   ) => {
 
@@ -1512,6 +1514,7 @@ export const postLoungeCommentEdit = createAsyncThunk<
           chat_reply_id,
           type,
           id,
+          chat_type
         }),
       });
       let data: any = await response.json();

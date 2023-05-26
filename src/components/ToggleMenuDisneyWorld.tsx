@@ -59,6 +59,7 @@ type ToggleMenuPropsType = {
   chatRoomId: any;
   getStick: any;
   getSubscribe: any;
+  chat_type: any;
 };
 
 const customStyles = {
@@ -98,6 +99,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   chatRoomId,
   getStick,
   getSubscribe,
+  chat_type
 }) => {
   const [showIcon, SetShowIcon] = useState<any | string>(true);
 
@@ -123,7 +125,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const post_editor = localStorage.getItem('editor');
   const [userRank, setUserRank] = useState<any | number>(loginuserrank);
   const [Notify, setIsNotify] = useState<any | string>(); 
-  const [ advancedpost, setAdvancedPost ] = useState(false);
+  const [ advancedpost, setAdvancedPost ] = useState(chat_type);
 
 
   // thank you
@@ -267,6 +269,10 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const [dmusername, setdmuserame] = useState<any | String>();
   const [dmchatId, setdmchatId] = useState<any | String>();
   const [richtextvalue, onRichTextChange] = useState(chat_reply_msg);
+
+  useEffect(() => {
+    setValue('chat_reply_msg_advance', richtextvalue)
+  }, [richtextvalue])
 
   const openDm = (userId: any, username: any, chatId: any) => {
     if (token == null) {
@@ -796,7 +802,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                         </div>
                       )}
 
-                      {advancedpost != true ? (
+                      {!advancedpost ? (
                       <>
                         <textarea
                           rows={3}
@@ -815,22 +821,6 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                             />
                           </div>
                         </>)
-                      }
-                      { post_editor == 'true' ? (
-                        <div className="advance-editor">
-                          <div>
-                            {
-                              advancedpost == true ?
-                                <img src={arrowdown} alt="Arrow Down" width={50} className='editor-arrowup'/> :
-                                <img src={arrowup} alt="Arrow Up" width={50} className='editor-arrowdown'/>
-                            }
-                            <input type="button" onClick={onClickAdvanced} value="Advanced Edit"/>
-                            </div>
-                          { advancedpost &&
-                            <WdwAdvanceEditor LoungeId={LoungeId} register={register} setValue={setValue}></WdwAdvanceEditor>
-                          }
-                        </div>
-                        ) : <div></div>
                       }
                     </div>
                   ) : (

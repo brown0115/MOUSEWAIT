@@ -37,7 +37,9 @@ import { CommentList } from '../components/CommentList';
 
 type FormData = {
   chat_msg: string;
+  chat_reply_msg_advance: string;
   chat_id: number;
+  chat_type: any;
 };
 
 const LandLoungeDetail = (props: any) => {
@@ -184,6 +186,12 @@ return ret;
 
 
   const onSubmit = (data: any ) => {
+
+    data.chat_type = getValues('chat_type');
+    if(getValues('chat_type')) {
+      data.chat_reply_msg = getValues('chat_reply_msg_advance');
+    }
+
     if (data.chat_reply_msg != undefined) {
       dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
         // reset();
@@ -196,13 +204,12 @@ return ret;
         window.location.reload();
       });
     }
-   }
+  }
 
   const onSubmit1 = (data: any) => {
     if (token != null) {
       const chat_msg = getValues('chat_msg');
 
-      console.log('chat_msg', chat_msg)
       chat_msg != '<p><br></p>' && chat_msg != ''
         ? dispatch<any>(postLoungeComment(data)).then((res: any) => {
             if (res.payload.message != undefined) {
@@ -453,6 +460,7 @@ return ret;
                                   obj.user?.user_id == user ? true : false
                                 }
                                 chat_reply_msg={obj.chat_msg}
+                                chat_type={obj.chat_type}
                                 pageName={'Detail'}
                                 lock={obj.islock == '0' ? 'Lock' : 'UnLock'}
                                 chatRoomId={obj.chat_room_id}
@@ -483,7 +491,7 @@ return ret;
                           </div>
 
                           <div className='card-body '>
-                            <CommonPostMessage myChat={obj.chat_msg} />
+                            <CommonPostMessage myChat={obj.chat_msg} chatType={obj.chatType}/>
                             {commentData?.map((cmt: any, index: any) => (
                               <>
                                 <CommentList

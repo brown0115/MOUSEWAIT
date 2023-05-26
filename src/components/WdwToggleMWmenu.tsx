@@ -38,6 +38,8 @@ import MovePost from './WdwMovePost';
 import arrowup from '../assets/img/arrowup.png';
 import arrowdown from '../assets/img/arrowdown.png';
 import WdwAdvanceEditor from './WdwAdvanceEditor';
+import { RichTextEditor } from '@mantine/rte';
+
 
 type ToggleMenuMWPropsType = {
   getBookMark: any;
@@ -208,7 +210,8 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
   const onSubmit = (data: any) => {
     /*   console.log(data);
     return false; */
-
+    if(advancedpost) 
+      data.chat_reply_msg = richtextvalue;
     if (data.chat_reply_msg !== undefined) {
       dispatch<any>(postLoungeCommentEditWdw(data)).then((res: any) => {
         // console.log(res)
@@ -339,7 +342,8 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
     });
   };
 
-  //console.log(userId);
+  const [richtextvalue, onRichTextChange] = useState(chat_reply_msg);
+
   return (
     <div className='menu-nav'>
       <div className='dropdown-container' tabIndex={-1}>
@@ -695,30 +699,40 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                 <div className='box-ttt'>
                   {onedit != '' ? (
                     <>
-                      <textarea
-                        rows={3}
-                        cols={60}
-                        {...register('chat_reply_msg')}
-                        defaultValue={chat_reply_msg}
-                        /* {...register("Type")} {...register("LoungeId")} */
-                      />
 
-                      { post_editor == 'true' ? (
-                        <div className="advance-editor">
+                      {post_editor == 'true' && (
+                        <div className="advance-radio-gruop">
                           <div>
-                            {
-                              advancedpost == true ?
-                                <img src={arrowdown} alt="Arrow Down" width={50} className='editor-arrowup'/> :
-                                <img src={arrowup} alt="Arrow Up" width={50} className='editor-arrowdown'/>
-                            }
-                            <input type="button" onClick={onClickAdvanced} value="Advanced Edit"/>
-                            </div>
-                          { advancedpost &&
-                            <WdwAdvanceEditor LoungeId={LoungeId} register={register} setValue={setValue}></WdwAdvanceEditor>
-                          }
+                            <input type="radio" id="default" checked={!advancedpost} onClick={onClickAdvanced}></input>
+                            <label htmlFor="default">Default Post</label>
+                          </div>
+                          
+                          <div>
+                            <input type="radio" id="advanced" checked={advancedpost} onClick={onClickAdvanced}></input>
+                            <label htmlFor="advanced">Advanced Post</label>
+                          </div>
                         </div>
-                        ) : <div></div>
-                      }   
+                      )}
+                      {!advancedpost ? (
+                        <>
+                          <textarea
+                            rows={3}
+                            cols={60}
+                            {...register('chat_reply_msg')}
+                            defaultValue={chat_reply_msg}
+                            /* {...register("Type")} {...register("LoungeId")} */
+                          />
+                        </>
+                      ) : ( 
+                        <>
+                          <div className="advance-editor">
+                            <RichTextEditor 
+                            value={richtextvalue}
+                            onChange={onRichTextChange} 
+                            />
+                          </div>
+                        </>)
+                      }
                     </>
                   ) : (
                     <>

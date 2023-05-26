@@ -279,7 +279,7 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
                     : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
                 }
               >
-                <CommonPostMessage myChat={obj.chat_msg} />
+                <CommonPostMessage myChat={obj.chat_msg} chatType={obj.chatType}/>
               </Link>
 
               <div className='chat-icon d-flex'>

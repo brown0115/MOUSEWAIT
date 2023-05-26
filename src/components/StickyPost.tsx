@@ -237,6 +237,7 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
                 handleSubmit={handleSubmit}
                 setValue={setValue}
                 isLoading={isLoading}
+                chat_type={obj.chat_type}
                 username={obj.user.user_name}
                 userid={obj.user.user_id}
                 LoungeId={obj.chat_id}
@@ -339,7 +340,7 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
               >
                 {/*      <h6>{formatText(obj.chat_msg)}</h6> */}
                 {/*     <h6>{removeTags(obj.chat_msg)}</h6> */}
-                <CommonPostMessage myChat={obj.chat_msg} />
+                <CommonPostMessage myChat={obj.chat_msg} chatType={obj.chatType}/>
               </Link>
 
               <div className='chat-icon d-flex'>
