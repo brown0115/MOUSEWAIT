@@ -234,11 +234,13 @@ export type PostLoungesType = {
   chat_msg: any;
   chat_room_id: any;
   chat_img: any;
+  chat_type: any;
 };
 export type PostWdwLoungesType = {
   chat_msg: any;
   chat_room_id: any;
   chat_img: any;
+  chat_type: any;
 };
 export type BanUserLounges = {
   ban_chat_id: any;

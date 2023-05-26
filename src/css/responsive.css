@@ -18,7 +18,11 @@
 | Extra large devices (large desktops, 1200px)                      | 
 |-------------------------------------------------------------------|
 */
+
 @media screen and (min-width: 992px) and (max-width: 1023.98px) {
+  .boxwidth {
+    width: 80%;
+  }
   /* .MW-banner-sec .wh-home {
     width: 93%;
   }
@@ -81,6 +85,9 @@
   .top-trend {
     padding-top: 9rem !important;
     margin-bottom: -0.5rem;
+  }
+  .boxwidth {
+    width: 80%;
   }
   /* .Mouse-Wait-sec .navbar-toggler .bar {
     box-shadow: 3px 3px 0 0 #ddd;

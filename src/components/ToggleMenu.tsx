@@ -38,6 +38,7 @@ import MovePost from './MovePost';
 import arrowup from '../assets/img/arrowup.png';
 import arrowdown from '../assets/img/arrowdown.png';
 import MwAdvanceEditor from './MwAdvanceEditor';
+import { RichTextEditor } from '@mantine/rte';
 
 
 type ToggleMenuPropsType = {
@@ -394,6 +395,8 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const onClickAdvanced = () => {
     setAdvancedPost(!advancedpost)
   }
+
+  const [richtextvalue, onRichTextChange] = useState(chat_reply_msg);
 
   return (
     <div className='menu-nav'>
@@ -832,37 +835,47 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
               <div className='close-p' onClick={closeModal}>
                 <i className='fa fa-close my-b' />
               </div>
+
               <div className='boxwidth'>
                 <div className='box-ttt'>
                   {onedit != '' ? (
-
                     <div>
-                      <textarea
-                        rows={3}
-                        cols={60}
-                        {...register('chat_reply_msg')}
-                        defaultValue={chat_reply_msg}
-                        /* {...register("Type")} {...register("LoungeId")} */
-                      />
-
-                      { post_editor == 'true' ? (
-                        <div className="advance-editor">
+                      {post_editor == 'true' && (
+                        <div className="advance-radio-gruop">
                           <div>
-                            {
-                              advancedpost == true ?
-                                <img src={arrowdown} alt="Arrow Down" width={50} className='editor-arrowup'/> :
-                                <img src={arrowup} alt="Arrow Up" width={50} className='editor-arrowdown'/>
-                            }
-                            <input type="button" onClick={onClickAdvanced} value="Advanced Edit"/>
-                            </div>
-                          { advancedpost &&
-                            <MwAdvanceEditor LoungeId={LoungeId} register={register} setValue={setValue}></MwAdvanceEditor>
-                          }
+                            <input type="radio" id="default" checked={!advancedpost} onClick={onClickAdvanced}></input>
+                            <label htmlFor="default">Default Post</label>
+                          </div>
+                          
+                          <div>
+                            <input type="radio" id="advanced" checked={advancedpost} onClick={onClickAdvanced}></input>
+                            <label htmlFor="advanced">Advanced Post</label>
+                          </div>
                         </div>
-                        ) : <div></div>
-                      }   
-                    </div>
+                      )}
 
+                      {advancedpost != true ? (
+                        <>
+                          <textarea
+                            rows={3}
+                            cols={60}
+                            {...register('chat_reply_msg')}
+                            defaultValue={chat_reply_msg}
+                            /* {...register("Type")} {...register("LoungeId")} */
+                          />
+                        </>
+                        ) : ( 
+                        <>
+                          <div className="advance-editor">
+                            <RichTextEditor 
+                            value={richtextvalue}
+                            onChange={onRichTextChange} 
+                            />
+                          </div>
+                        </>)
+                      }
+            
+                    </div>
                         
                   ) : (
                     <textarea

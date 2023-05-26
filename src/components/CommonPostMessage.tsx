@@ -32,7 +32,8 @@ export const CommonPostMessage: React.FC<CommonPostMessagePropsType> = ({
   return (
     <>
       <h6>
-        <Linkify>{removeTags(myChat)}</Linkify>
+        {/* <Linkify>{removeTags(myChat)}</Linkify> */}
+        <Linkify><div dangerouslySetInnerHTML={{__html: myChat}}></div></Linkify>
       </h6>
     </>
   );

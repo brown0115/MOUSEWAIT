@@ -1456,7 +1456,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   vertical-align: middle;
 }
 
-.quill {
+.quill:not(.advance-editor .quill) {
   width: 100%;
 }
 
@@ -1464,10 +1464,10 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   border-radius: 1.625rem;
   /*  overflow-x: scroll; */
 }
-.ql-editor {
+.ql-editor:not(.advance-editor .ql-editor) {
   overflow-y: visible !important;
 }
-.ql-container.ql-snow {
+.ql-container.ql-snow:not(.advance-editor .ql-container.ql-snow) {
   border: none;
 }
 
@@ -1560,7 +1560,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   margin-right: 0rem;
 }
 
-.ql-container.ql-snow {
+.ql-container.ql-snow:not(.advance-editor .ql-container.ql-snow) {
   border: none !important;
 }
 
@@ -1569,7 +1569,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   padding: 0.375rem 2.7rem 0.375rem 0.75rem;
 }
 
-.quill > .ql-container > .ql-editor.ql-blank::before {
+.quill > .ql-container > .ql-editor.ql-blank::before:not(.advance-editor .quill > .ql-container > .ql-editor.ql-blank::before) {
   color: #000;
   font-style: normal;
   font-weight: 400;
@@ -1613,7 +1613,6 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   outline: none;
   position: relative;
   box-shadow: 2px 2px 3px #999;
-  margin: auto;
 }
 
 .close-p {
@@ -1755,7 +1754,7 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   height: auto;
 }
 
-.quill > .ql-container > .ql-editor {
+.quill > .ql-container > .ql-editor:not(.advance-editor .quill > .ql-container > .ql-editor) {
   overflow-wrap: anywhere !important;
   word-wrap: none !important;
 }
@@ -2075,10 +2074,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
   padding-right: 2px;
   color: blue;
 }
-.mantine-RichTextEditor-toolbar {
+
+.mantine-RichTextEditor-toolbar:not(.advance-editor .mantine-RichTextEditor-toolbar) {
   display: none;
 }
-.mantine-RichTextEditor-root {
+
+.mantine-RichTextEditor-root:not(.advance-editor .mantine-RichTextEditor-root) {
   width: 100%;
   padding: 8px 0px 8px 8px;
   border-top-left-radius: 1.625rem;
@@ -2086,7 +2087,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
   height: 55px;
   overflow-y: auto;
 }
-.ql-snow .ql-editor img {
+
+.ql-snow .ql-editor img:not(.advance-editor .ql-snow .ql-editor img) {
   display: inline !important;
   width: fit-content;
   margin-right: 5px;
@@ -2094,7 +2096,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   height: 30px;
   margin-bottom: 0px !important;
 }
-.ql-editor {
+.ql-editor:not(.advance-editor .ql-editor) {
   padding: 5px 0px 0px 5px !important;
 }
 
@@ -2117,13 +2119,13 @@ textarea {
 .co-l {
   cursor: pointer;
 }
-.ql-mention-list-container {
+.ql-mention-list-container:not(.advance-editor .ql-mention-list-container) {
   top: -170px !important;
   height: 10rem !important;
   overflow-y: scroll !important;
 }
 
-.icon {
+.icon:not(.advance-editor .icon) {
   /* border: 2px solid red; */
   border-radius: 50%;
   font-size: 25px;
@@ -2145,9 +2147,6 @@ textarea {
 }
 .advance_editor {
   margin-bottom: 10px;
-}
-.mid-container {
-  /* padding-left: 3%; */
 }
 
 .choosefile,
@@ -2527,7 +2526,7 @@ textarea {
   border: 1px dashed red;
   display: block;
 }
-.ql-editor p {
+.ql-editor p:not(.advance-editor .ql-editor p) {
   width: auto;
   /* height: 38px; */
   /* overflow-y: scroll; */
@@ -2541,7 +2540,7 @@ textarea {
   word-break: break-all;
 }
 
-.ql-editor p::-webkit-scrollbar {
+.ql-editor p::-webkit-scrollbar:not(.advance-editor .ql-editor p::-webkit-scrollbar) {
   display: none;
 }
 
@@ -2679,6 +2678,12 @@ input:disabled {
 
 .choosefile, .youtubelink, .selectmenu, .advance-chatmsg {
   text-align: left;
+}
+
+.advance-radio-gruop {
+  display: flex;
+  gap: 60px;
+  margin: 20px 0;
 }
 
 .editor-arrowdown, .editor-arrowup {

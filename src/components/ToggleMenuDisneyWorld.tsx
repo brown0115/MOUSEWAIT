@@ -38,6 +38,8 @@ import MovePost from './WdwMovePost';
 import arrowup from '../assets/img/arrowup.png';
 import arrowdown from '../assets/img/arrowdown.png';
 import WdwAdvanceEditor from './WdwAdvanceEditor';
+import { RichTextEditor } from '@mantine/rte';
+
 
 type ToggleMenuPropsType = {
   getBookMark: any;
@@ -264,6 +266,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const [dmuserId, setdmuserId] = useState<any | String>();
   const [dmusername, setdmuserame] = useState<any | String>();
   const [dmchatId, setdmchatId] = useState<any | String>();
+  const [richtextvalue, onRichTextChange] = useState(chat_reply_msg);
 
   const openDm = (userId: any, username: any, chatId: any) => {
     if (token == null) {
@@ -778,14 +781,41 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                 <div className='box-ttt'>
                   {onedit != '' ? (
                     <div>
-                      <textarea
-                        rows={3}
-                        cols={60}
-                        {...register('chat_reply_msg')}
-                        defaultValue={chat_reply_msg}
-                        /* {...register("Type")} {...register("LoungeId")} */
-                      />
 
+                      {post_editor == 'true' && (
+                        <div className="advance-radio-gruop">
+                          <div>
+                            <input type="radio" id="default" checked={!advancedpost} onClick={onClickAdvanced}></input>
+                            <label htmlFor="default">Default Post</label>
+                          </div>
+                          
+                          <div>
+                            <input type="radio" id="advanced" checked={advancedpost} onClick={onClickAdvanced}></input>
+                            <label htmlFor="advanced">Advanced Post</label>
+                          </div>
+                        </div>
+                      )}
+
+                      {advancedpost != true ? (
+                      <>
+                        <textarea
+                          rows={3}
+                          cols={60}
+                          {...register('chat_reply_msg')}
+                          defaultValue={chat_reply_msg}
+                          /* {...register("Type")} {...register("LoungeId")} */
+                        />
+                      </>
+                      ) : ( 
+                        <>
+                          <div className="advance-editor">
+                            <RichTextEditor 
+                            value={richtextvalue}
+                            onChange={onRichTextChange} 
+                            />
+                          </div>
+                        </>)
+                      }
                       { post_editor == 'true' ? (
                         <div className="advance-editor">
                           <div>

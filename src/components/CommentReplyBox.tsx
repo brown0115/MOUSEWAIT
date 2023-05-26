@@ -149,7 +149,8 @@ export const CommentReplyBox: React.FC<CommentReplyBoxPropsType> = ({
 
     var domParser = new DOMParser();
     var doc = domParser.parseFromString(formatedMsg, 'text/html');
-    var msg = doc.body.innerText;
+    var msg = doc.body.innerHTML;
+    console.log('formatedMsg', msg)
     
     let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
     async function convert()
@@ -206,7 +207,7 @@ export const CommentReplyBox: React.FC<CommentReplyBoxPropsType> = ({
                 dangerouslySetInnerHTML={{
                   __html: formatedMsg
                     .replace('<p>', '<span>')
-                    .replace('</p>', '</spam>')
+                    .replace('</p>', '</span>')
                     .replace('<br>', ''),
                 }}
               ></span>
