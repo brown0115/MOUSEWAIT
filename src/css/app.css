@@ -1578,6 +1578,10 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   margin-top: 7px;
 }
 
+.advance-editor .quill  {
+  height: 150px;
+}
+
 .plus-show-btn {
   position: fixed;
   top: 90%;

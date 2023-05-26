@@ -195,12 +195,12 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
 
                 {post_editor == 'true' && (
                   <div className="advance-radio-gruop">
-                    <div>
+                    <div onClick={() => setAdvancedPost(false)}>
                       <input type="radio" id="default" checked={!advancedpost} onClick={onClickAdvanced}></input>
                       <label htmlFor="default">Default Post</label>
                     </div>
                     
-                    <div>
+                    <div onClick={() => setAdvancedPost(true)}>
                       <input type="radio" id="advanced" checked={advancedpost} onClick={onClickAdvanced}></input>
                       <label htmlFor="advanced">Advanced Post</label>
                     </div>
