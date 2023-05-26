@@ -326,6 +326,7 @@ export type PostLoungeCommentWdwEdit = {
   id: any;
   Type: any;
   LoungeId: any;
+  chat_type: any;
 };
 export type PostLoungeCommentReplyWdw = {
   chat_reply_msg: any;
@@ -764,7 +765,7 @@ export const postLounge = createAsyncThunk<Lounge[], PostLoungesType>(
 
 export const postLoungeWdw = createAsyncThunk<Lounge[], PostWdwLoungesType>(
   'users/postWdwLoungeStatus',
-  async ({ chat_msg, chat_room_id, chat_img }, thunkAPI) => {
+  async ({ chat_msg, chat_room_id, chat_img, chat_type }, thunkAPI) => {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(
@@ -779,6 +780,7 @@ export const postLoungeWdw = createAsyncThunk<Lounge[], PostWdwLoungesType>(
             chat_msg,
             chat_room_id,
             chat_img,
+            chat_type
           }),
         }
       );
@@ -1536,22 +1538,9 @@ export const postLoungeCommentEditWdw = createAsyncThunk<
 >(
   'users/postLoungeCommentEditWdw',
   async (
-    { chat_reply_msg, chat_id, chat_reply_id, type, id, Type, LoungeId },
+    { chat_reply_msg, chat_id, chat_reply_id, type, id, Type, LoungeId, chat_type },
     thunkAPI
   ) => {
-    /*     console.log(chat_reply_msg);
-    console.log(chat_id);
-    console.log(chat_reply_id);
-    console.log(type);
-    console.log(id);
-    console.log(Type);
-    console.log(LoungeId);
-
-    
-    console.log(chat_id);
-    console.log(type); 
-
-    return false; */
 
     if (LoungeId == undefined) {
     } else {
@@ -1575,6 +1564,7 @@ export const postLoungeCommentEditWdw = createAsyncThunk<
             chat_reply_id,
             type,
             id,
+            chat_type
           }),
         }
       );

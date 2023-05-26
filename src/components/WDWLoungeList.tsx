@@ -248,15 +248,17 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
                   : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
-              <img
-                src={
-                  GET_BASE_URL_IMAGE +
-                  '/disneyworld/chat_images/' +
-                  obj.chat_img
-                }
-                className='card-img-top img-fluid'
-                alt='img'
-              />
+              {obj.chat_type == '0' && 
+                <img
+                  src={
+                    GET_BASE_URL_IMAGE +
+                    '/disneyworld/chat_images/' +
+                    obj.chat_img
+                  }
+                  className='card-img-top img-fluid'
+                  alt='img'
+                />
+              }
             </Link>
           )}
         </div>

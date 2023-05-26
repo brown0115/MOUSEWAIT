@@ -202,10 +202,11 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
   };
 
   const onSubmit = (data: any) => {
-    /*   console.log(data);
-    return false; */
-    if(advancedpost)
+    data.chat_type = advancedpost;
+    if(advancedpost) {
       data.chat_reply_msg = richtextvalue;
+    }
+
     if (data.chat_reply_msg !== undefined) {
       dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
         // console.log(res)
@@ -215,17 +216,6 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
     } else {
       dispatch<any>(postLoungeFlag(data)).then((res: any) => {
         setIsOpen(false);
-        // Notify(toast(res.payload.data[0].error));
-        //reset();
-        /*     dispatch(
-          fetchLounges({
-            sortType,
-            LoungeId,
-            currentPage,
-            searchValue,
-            shortByTime,
-          })
-        ); */
       });
     }
   };

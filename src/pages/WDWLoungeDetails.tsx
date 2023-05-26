@@ -299,7 +299,7 @@ const WDWLandLoungeDetail = (props: any) => {
                             </div>
                           </div>
                           <div className='card-img-b my-2'>
-                            {obj.chat_img.includes('c_img') && (
+                            {obj.chat_type == '0' && obj.chat_img.includes('c_img') && (
                               <img
                                 src={
                                   GET_BASE_URL_IMAGE +

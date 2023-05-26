@@ -158,16 +158,6 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
 
         setIsLoading(false);
         window.location.reload();
-
-        /*      dispatch(
-          fetchDisneyWorldLounges({
-            sortType,
-            LoungeId,
-            currentPage,
-            searchValue,
-            shortByTime,
-          })
-        ); */
       });
     }
   };

@@ -262,13 +262,16 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
                   : '/disneyland/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
-              <img
-                src={
-                  GET_BASE_URL_IMAGE + '/disneyland/chat_images/' + obj.chat_img
-                }
-                className='card-img-top img-fluid'
-                alt='img'
-              />
+              {
+                obj.chat_type == '0' && 
+                  <img
+                    src={
+                      GET_BASE_URL_IMAGE + '/disneyland/chat_images/' + obj.chat_img
+                    }
+                    className='card-img-top img-fluid'
+                    alt='img'
+                  />
+              }
             </Link>
           )}
         </div>

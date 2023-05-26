@@ -127,6 +127,9 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const [Notify, setIsNotify] = useState<any | string>(); 
   const [ advancedpost, setAdvancedPost ] = useState(chat_type);
 
+  useEffect(() => {
+    setValue('chat_type', advancedpost)
+  }, [advancedpost])
 
   // thank you
   const onThankyou = (LoungeId: any) => {

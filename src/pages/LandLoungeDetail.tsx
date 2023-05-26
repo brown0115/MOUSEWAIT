@@ -477,7 +477,7 @@ return ret;
                             </div>
                           </div>
                           <div className='card-img-b my-2'>
-                            {obj.chat_img.includes('c_img') && (
+                            {obj.chat_type == '0' && obj.chat_img.includes('c_img') && (
                               <img
                                 src={
                                   GET_BASE_URL_IMAGE +
@@ -505,64 +505,6 @@ return ret;
                           </div>
 
                           <div className='card-body'>
-                            {/*    {showIcon==true &&
-                    <div className="link-img-s">
-                      <div className="link-main">
-                        <div className="img-l" onClick={()=>onLoungeFlag(LoungeId,flagType,flagAction,user_id)}>
-                          
-                            <i className="fa-solid fa-flag" /> Flag
-                        
-                        </div>
-                        <div className="img-l"   onClick={()=>onThankyou(LoungeId)}
-                        >
-                          
-                            <i className="fa-solid fa-star" /> 
-                            {thankYou ==true ? ' Thanked' : ' Thank You!'} 
-                        </div>
-                        <div className="img-l" onClick={()=>onBookMark(LoungeId)}>
-                        
-                    <i className="fa-solid fa-bookmark"  />   
-                      {bookMark ==true ? ' Bookmarked' : ' Bookmark'}    
-                          
-                        </div>
-                        <div className="img-l">
-                         
-                            <i className="fa-solid fa-xmark" onClick={()=>onRemoveFlag(LoungeId)}  /> Remove
-                    
-                        </div>
-                      </div>
-                    </div>
-                  } */}
-
-                            {/* <form
-                                className="space-y-6"
-                                onSubmit={handleSubmit(onSubmit)}
-                                method="POST"
-                              >
-                    <div className="com-box-main">
-                      <div className="com-box d-flex">
-                        <textarea className="form-control"
-                          {...register("chat_msg")} rows={3} 
-                      
-                          />
-
-                  <input type="hidden" readOnly={true} {...register("chat_id")} 
-                    defaultValue={obj.chat_id}/> 
-                        <a href="">
-                          <img
-                            src={stickerImage}
-                            className="com-imgg  img-fluid"
-                            alt="img"
-                          />
-                        </a>
-                      </div>
-                      <div className="post">
-                      {token!=null ? <input type="Submit"  defaultValue="Post"/> 
-                        :<input type="Submit" disabled defaultValue="Post"/> }
-                      
-                      </div>
-                    </div>
-                    </form> */}
                             <div className='thank-sec'>
                               <div className='thank-t d-flex'>
                                 <h6>
