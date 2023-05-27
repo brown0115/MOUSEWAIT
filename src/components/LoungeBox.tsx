@@ -14,7 +14,7 @@ import { isMobile } from 'react-device-detect';
 import Post from '../assets/img/h-p.png';
 import { getValue } from '@testing-library/user-event/dist/utils';
 import { BiWindows } from 'react-icons/bi';
-import { RichTextEditor } from '@mantine/rte';
+import { RichTextEditor, DEFAULT_CONTROLS  } from '@mantine/rte';
 
 // import ProgressBar from "@ramonak/react-progress-bar";
 type LoungeBoxPropsType = {
@@ -251,7 +251,8 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                     <div className="advance-editor">
                       <RichTextEditor 
                       value={richtextvalue}
-                      onChange={onRichTextChange} 
+                      onChange={onRichTextChange}
+                      controls={DEFAULT_CONTROLS}
                       />
                     </div>
                   </>

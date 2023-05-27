@@ -1464,6 +1464,15 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   border-radius: 1.625rem;
   /*  overflow-x: scroll; */
 }
+
+.advance-editor .ql-action::after {
+  display: none;
+}
+
+.advance-editor .ql-action {
+  margin-left: 10px;
+}
+
 .ql-editor:not(.advance-editor .ql-editor) {
   overflow-y: visible !important;
 }
