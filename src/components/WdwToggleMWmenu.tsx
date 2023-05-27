@@ -207,8 +207,9 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
     );
   };
 
+  const [richtextvalue, setRichTextValue] = useState('');
+
   const onSubmit = (data: any) => {
-    // data.chat_type = advancedpost;
     if(richtextvalue != '') {
       data.chat_reply_msg = richtextvalue;
     }
@@ -297,6 +298,19 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
     });
   };
 
+  useEffect( () => {
+    if(chat_reply_msg.startsWith('<p>')) {
+      setRichTextValue(chat_reply_msg);
+      setAdvancedPost(true)
+      setValue('chat_reply_msg', '')
+    }
+    else {
+      setRichTextValue('');
+      setValue('chat_reply_msg', chat_reply_msg)
+      setAdvancedPost(false)
+    }
+  }, [modalIsOpen])
+
   // To bump a post
   const isBump = (e: any, chat_id: any, type: any) => {
     dispatch<any>(bumpPostWdw({ chat_id, type })).then((res: any) => {
@@ -343,7 +357,18 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
     });
   };
 
-  const [richtextvalue, onRichTextChange] = useState(chat_reply_msg);
+  const onBeforeSubmit = (data: any) => {
+    if(advancedpost) {
+      data.chat_img = false;
+      data.chat_reply_msg = richtextvalue;
+    }
+    else data.chat_img = true;
+
+    if(data.chat_reply_msg == '' || data.chat_reply_msg == '<p><br></p>')
+      return;
+    
+    onSubmit(data);
+  }
 
   return (
     <div className='menu-nav'>
@@ -670,7 +695,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
       >
         <form
           className='space-y-6'
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onBeforeSubmit)}
           method='POST'
         >
           <div className='row'>
@@ -729,7 +754,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                           <div className="advance-editor">
                             <RichTextEditor 
                             value={richtextvalue}
-                            onChange={onRichTextChange} 
+                            onChange={setRichTextValue} 
                             />
                           </div>
                         </>)

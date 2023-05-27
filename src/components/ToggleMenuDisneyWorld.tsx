@@ -127,10 +127,6 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const [Notify, setIsNotify] = useState<any | string>(); 
   const [ advancedpost, setAdvancedPost ] = useState(false);
 
-  useEffect(() => {
-    setValue('chat_type', advancedpost)
-  }, [advancedpost])
-
   // thank you
   const onThankyou = (LoungeId: any) => {
     if (token == null) {
@@ -271,7 +267,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const [dmuserId, setdmuserId] = useState<any | String>();
   const [dmusername, setdmuserame] = useState<any | String>();
   const [dmchatId, setdmchatId] = useState<any | String>();
-  const [richtextvalue, onRichTextChange] = useState(chat_reply_msg);
+  const [richtextvalue, setRichTextValue] = useState('');
 
   useEffect(() => {
     setValue('chat_reply_msg_advance', richtextvalue)
@@ -289,6 +285,19 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
       setDmBox(true);
     }
   };
+
+  useEffect( () => {
+    if(chat_reply_msg.startsWith('<p>')) {
+      setRichTextValue(chat_reply_msg);
+      setAdvancedPost(true)
+      setValue('chat_reply_msg', '')
+    }
+    else {
+      setRichTextValue('');
+      setValue('chat_reply_msg', chat_reply_msg)
+      setAdvancedPost(false)
+    }
+  }, [modalIsOpen])
 
   const [openDmBox, setDmBox] = useState<string | any>(false);
   const closeDmBox = () => {
@@ -391,7 +400,18 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
     }
   };
 
-  // console.log(userid);
+  const onBeforeSubmit = (data: any) => {
+    if(advancedpost) {
+      data.chat_img = false;
+      data.chat_reply_msg = richtextvalue;
+    }
+    else data.chat_img = true;
+
+    if(data.chat_reply_msg == '' || data.chat_reply_msg == '<p><br></p>')
+      return;
+    
+    onSubmit(data);
+  }
 
   return (
     <div className='menu-nav'>
@@ -768,7 +788,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
       >
         <form
           className='space-y-6'
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onBeforeSubmit)}
           method='POST'
         >
           <div className='row'>
@@ -820,7 +840,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                           <div className="advance-editor">
                             <RichTextEditor 
                             value={richtextvalue}
-                            onChange={onRichTextChange} 
+                            onChange={setRichTextValue} 
                             />
                           </div>
                         </>)

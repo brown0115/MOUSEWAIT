@@ -92,15 +92,6 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
   const [thankYou, SetThankYou] = useState<any | string>(getThankYou);
   const [ advancedpost, setAdvancedPost ] = useState(false);
 
-  const onClickAdvanced = () => {
-    setAdvancedPost(!advancedpost)
-  }
-
-  /*  useEffect(() => {
-    setValue('LoungeId', LoungeIdd); // if comment this,  will not update.
-    setValue('Type', Type);
-  }, [LoungeIdd, Type]); */
-
   useEffect(() => {
     // setValue('LoungeId', LoungeIdd); // if comment this,  will not update.
     setValue('Type', Type);
@@ -135,33 +126,27 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
 
   const onBookMark = (LoungeId: any) => {
     dispatch<any>(postBookMark({ LoungeId })).then((res: any) => {
-      //reset()
-      //console.log(res.payload.data[0].message);
-      //console.log('kkkkk000');
 
       res.payload.data[0].message == 'Added'
         ? SetBookMark(true)
         : SetBookMark(false);
-
-      // Notify(toast(res.payload.data[0].message));
-      //res.payload[0].isbookmark?.status ==1 && SetBookMark(true)
     });
   };
 
   const onThankyou = (LoungeId: any) => {
     dispatch<any>(postThankyou({ LoungeId })).then((res: any) => {
-      //reset()
-
+ 
       res.payload.data[0].message == 'Added'
         ? SetThankYou(true)
         : SetThankYou(false);
       SetThankData([]);
       SetThankData(res.payload.data[0].thankdata);
-      // Notify(toast(res.payload.data[0].message));
-
-      // res.payload[0].isthankyou?.status ==1 && SetThankYou(true)
     });
   };
+
+  const onClickAdvanced = () => {
+    setAdvancedPost(!advancedpost)
+  }
 
   const onEdit = (loungeId: any) => {
     setshowIcon(true);
@@ -170,11 +155,13 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
     setFlagType('P');
     setdefaultcontent(chat_reply_msg);
   };
+  
   function closeModal() {
     setdefaultcontent(chat_reply_msg);
     setIsOpen(false);
     setshowIcon(false);
   }
+
   useEffect(() => {
     setdefaultcontent(chat_reply_msg);
   }, [setIsOpen]);
@@ -317,9 +304,34 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
     });
   };
 
-  const [richtextvalue, onRichTextChange] = useState(chat_reply_msg);
+  const [richtextvalue, setRichTextValue] = useState('');
 
-  //console.log(userId);
+  useEffect( () => {
+    if(chat_reply_msg.startsWith('<p>')) {
+      setRichTextValue(chat_reply_msg);
+      setAdvancedPost(true)
+      setValue('chat_reply_msg', '')
+    }
+    else {
+      setRichTextValue('');
+      setValue('chat_reply_msg', chat_reply_msg)
+      setAdvancedPost(false)
+    }
+  }, [modalIsOpen])
+
+  const onBeforeSubmit = (data: any) => {
+    if(advancedpost) {
+      data.chat_img = false;
+      data.chat_reply_msg = richtextvalue;
+    }
+    else data.chat_img = true;
+
+    if(data.chat_reply_msg == '' || data.chat_reply_msg == '<p><br></p>')
+      return;
+    
+    onSubmit(data);
+  }
+
   return (
     <div className='menu-nav'>
       <div className='dropdown-container' tabIndex={-1}>
@@ -694,7 +706,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                           <div className="advance-editor">
                             <RichTextEditor 
                             value={richtextvalue}
-                            onChange={onRichTextChange} 
+                            onChange={setRichTextValue} 
                             />
                           </div>
                       </>)

@@ -87,15 +87,6 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
   //const notify = () => toast("Wow so easy!");
   const [Notify, setIsNotify] = useState<any | string>();
   const onSubmit = (data: any) => {
-
-    // data.chat_type = getValues('chat_type');
-
-    if(getValues('chat_reply_msg_advance') != '') {
-      data.chat_img = false;
-      data.chat_reply_msg = getValues('chat_reply_msg_advance');
-    }
-    else data.chat_img = true;
-
     if (data.chat_reply_msg != undefined) {
       dispatch<any>(postLoungeCommentEditWdw(data)).then((res: any) => {
         window.location.reload();
