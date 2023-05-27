@@ -398,16 +398,34 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const onClickAdvanced = () => {
     setAdvancedPost(!advancedpost)
   }
+  
+  const [richtextvalue, setRichTextValue] = useState('');
 
-  const [richtextvalue, onRichTextChange] = useState(chat_reply_msg);
+  useEffect( () => {
+    if(chat_reply_msg.startsWith('<p>')) {
+      setRichTextValue(chat_reply_msg);
+      setAdvancedPost(true)
+      setValue('chat_reply_msg', '')
+    }
+    else {
+      setRichTextValue('');
+      setValue('chat_reply_msg', chat_reply_msg)
+      setAdvancedPost(false)
+    }
+  }, [modalIsOpen])
 
-  useEffect(() => {
-    setValue('chat_reply_msg_advance', richtextvalue)
-  }, [richtextvalue])
+  const onBeforeSubmit = (data: any) => {
+    if(advancedpost) {
+      data.chat_img = false;
+      data.chat_reply_msg = richtextvalue;
+    }
+    else data.chat_img = true;
 
-  // useEffect(() => {
-  //   setValue('chat_type', advancedpost)
-  // }, [advancedpost])
+    if(data.chat_reply_msg == '' || data.chat_reply_msg == '<p><br></p>')
+      return;
+    
+    onSubmit(data);
+  }
 
   return (
     <div className='menu-nav'>
@@ -828,7 +846,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
       >
         <form
           className='space-y-6'
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onBeforeSubmit)}
           method='POST'
         >
           <div className='row'>
@@ -871,7 +889,6 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                             rows={3}
                             cols={60}
                             {...register('chat_reply_msg')}
-                            defaultValue={chat_reply_msg}
                             /* {...register("Type")} {...register("LoungeId")} */
                           />
                         </>
@@ -880,7 +897,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                           <div className="advance-editor">
                             <RichTextEditor
                             value={richtextvalue}
-                            onChange={onRichTextChange} 
+                            onChange={setRichTextValue}
                             />
                           </div>
                         </>)
@@ -909,7 +926,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                     {isLoading == true ? (
                       <input className='MW-btn' type='Submit' value='Edit' style={{backgroundColor: '#0d6efd'}} />
                     ) : (
-                      <input className='MW-btn' type='Submit' value='Edit' style={{backgroundColor: '#0d6efd'}} />
+                      <input className='MW-btn' type='Submit' value='Edit'  style={{backgroundColor: '#0d6efd'}}/>
                     )}
                   </div>
                 </div>
