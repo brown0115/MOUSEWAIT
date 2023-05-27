@@ -155,7 +155,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
     setFlagType('P');
     setdefaultcontent(chat_reply_msg);
   };
-  
+
   function closeModal() {
     setdefaultcontent(chat_reply_msg);
     setIsOpen(false);
@@ -307,7 +307,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
   const [richtextvalue, setRichTextValue] = useState('');
 
   useEffect( () => {
-    if(chat_reply_msg.startsWith('<p>')) {
+    if(chat_reply_msg?.startsWith('<p>')) {
       setRichTextValue(chat_reply_msg);
       setAdvancedPost(true)
       setValue('chat_reply_msg', '')
@@ -648,7 +648,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
       >
         <form
           className='space-y-6'
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onBeforeSubmit)}
           method='POST'
         >
           <div className='row'>
@@ -698,7 +698,6 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                           rows={3}
                           cols={60}
                           {...register('chat_reply_msg')}
-                          defaultValue={chat_reply_msg}
                           /* {...register("Type")} {...register("LoungeId")} */
                         />
                       ) : ( 

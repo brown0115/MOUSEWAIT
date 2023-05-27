@@ -287,7 +287,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   };
 
   useEffect( () => {
-    if(chat_reply_msg.startsWith('<p>')) {
+    if(chat_reply_msg?.startsWith('<p>')) {
       setRichTextValue(chat_reply_msg);
       setAdvancedPost(true)
       setValue('chat_reply_msg', '')
@@ -831,7 +831,6 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                           rows={3}
                           cols={60}
                           {...register('chat_reply_msg')}
-                          defaultValue={chat_reply_msg}
                           /* {...register("Type")} {...register("LoungeId")} */
                         />
                       </>

@@ -402,7 +402,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const [richtextvalue, setRichTextValue] = useState('');
 
   useEffect( () => {
-    if(chat_reply_msg.startsWith('<p>')) {
+    if(chat_reply_msg?.startsWith('<p>')) {
       setRichTextValue(chat_reply_msg);
       setAdvancedPost(true)
       setValue('chat_reply_msg', '')
