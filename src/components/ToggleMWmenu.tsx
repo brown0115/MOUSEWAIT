@@ -646,7 +646,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                   <h6
                     style={{ fontSize: '1rm', fontWeight: 400, color: 'red' }}
                   >
-                    Edit
+                    Edit Post
                   </h6>
                 </>
               ) : (
@@ -734,9 +734,9 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
 
                   <div className='mw-post text-center'>
                     {isLoading == true ? (
-                      <input className='MW-btn' type='Submit' value='Posting' />
+                      <input className='MW-btn' type='Submit' value='Edit' style={{backgroundColor: '#0d6efd'}}/>
                     ) : (
-                      <input className='MW-btn' type='Submit' value='Post' />
+                      <input className='MW-btn' type='Submit' value='Edit' style={{backgroundColor: '#0d6efd'}}/>
                     )}
                   </div>
                 </div>

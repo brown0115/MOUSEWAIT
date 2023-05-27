@@ -835,7 +835,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
             <div className='box-t-1'>
               {onedit != '' ? (
                 <h6 style={{ fontSize: '1rm', fontWeight: 400, color: 'red' }}>
-                  Edit
+                  Edit Post
                 </h6>
               ) : (
                 <h6 style={{ fontSize: '1rm', fontWeight: 400, color: 'red' }}>
@@ -907,9 +907,9 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                   /> */}
                   <div className='mw-post text-center'>
                     {isLoading == true ? (
-                      <input className='MW-btn' type='Submit' value='Posting' />
+                      <input className='MW-btn' type='Submit' value='Edit' style={{backgroundColor: '#0d6efd'}} />
                     ) : (
-                      <input className='MW-btn' type='Submit' value='Post' />
+                      <input className='MW-btn' type='Submit' value='Edit' style={{backgroundColor: '#0d6efd'}} />
                     )}
                   </div>
                 </div>
