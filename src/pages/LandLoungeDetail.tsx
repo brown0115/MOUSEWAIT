@@ -34,6 +34,7 @@ import {
 import cardmImage from '../assets/img/card-m-img.png';
 
 import { CommentList } from '../components/CommentList';
+import { lutimesSync } from 'fs';
 
 type FormData = {
   chat_msg: string;
@@ -70,7 +71,12 @@ const LandLoungeDetail = (props: any) => {
 
   const editorRef = useRef(null);
 
+  const club333  = localStorage.getItem('club333');
+  const loungeland  = localStorage.getItem('loungeland');
+
   const user_id = localStorage.removeItem('userid');
+
+  const [ perm, setPerm ] = useState(true);
   // const user_name = localStorage.removeItem('user_name');
 
   let navigate = useNavigate();
@@ -83,6 +89,14 @@ const LandLoungeDetail = (props: any) => {
     window.scrollTo(0, 0);
 
     dispatch(fetchLoungeDetails({ LoungeId })).then((res: any) => {
+
+      if(res.payload[0].chat_room_id == '3' && loungeland != 'true') {
+        setPerm(false);
+      }
+      else if(res.payload[0].chat_room_id == '4' && club333 != 'true') 
+        setPerm(false);
+      else setPerm(true);
+
       SetCommentData(res.payload[0].comments);
       SetThankData(res.payload[0].thanks);
       //console.log(res.payload[0].isbookmark?.status)
@@ -341,220 +355,229 @@ return ret;
               />
               <Link to={`/disneyland/lounge`} className='banner-logo'></Link>
             </div>
-            <div className='land-detail'>
-              {status === 'error' ? (
-                <div className='content__error-info'>
-                  <h2>Error</h2>
-                  <p>Please try to open the page later.</p>
-                </div>
-              ) : (
-                <div className='mid-card-sec mobile-card-sec'>
-                  {status === 'loading'
-                    ? [...new Array(9)].map((_, index) => (
-                        <Placeholder key={index} />
-                      ))
-                    : itemDetail?.map((obj) => (
-                        <div
-                          className='card-m rounded card-m2'
-                          key={obj.chat_id}
-                        >
-                          <div className='card-s-img justify-content-between d-flex'>
-                            <div className='small-box d-flex'>
-                              <div className='small-c'>
-                                <a>
+
+            {
+              perm == true ? (
+                <div className='land-detail'>
+                  {status === 'error' ? (
+                    <div className='content__error-info'>
+                      <h2>Error</h2>
+                      <p>Please try to open the page later.</p>
+                    </div>
+                  ) : (
+                    <div className='mid-card-sec mobile-card-sec'>
+                      {status === 'loading'
+                        ? [...new Array(9)].map((_, index) => (
+                            <Placeholder key={index} />
+                          ))
+                        : itemDetail?.map((obj) => (
+                            <div
+                              className='card-m rounded card-m2'
+                              key={obj.chat_id}
+                            >
+                              <div className='card-s-img justify-content-between d-flex'>
+                                <div className='small-box d-flex'>
+                                  <div className='small-c'>
+                                    <a>
+                                      <img
+                                        src={
+                                          GET_BASE_URL_IMAGE +
+                                          '/disneyland/images/thumbs/' +
+                                          obj.user.image +
+                                          dTime
+                                        }
+                                        className='img-fluid'
+                                        alt={obj.user.user_name}
+                                      />
+                                    </a>
+                                  </div>
+                                  <div className='small-tt'>
+                                    <h6>
+                                      {' '}
+                                      <Link
+                                        to={`/disneyland/user/${obj.user?.user_id}/mypost`}
+                                      >
+                                        {obj.user?.user_name}
+                                      </Link>
+                                    </h6>
+                                    <span>
+                                      {obj.user.position} #{obj.user.totalpoints}{' '}
+                                      Quality #{obj.user.rank}
+                                    </span>
+                                    <LoungeName
+                                      Time={obj.chat_time}
+                                      Roomid={obj?.chat_room_id}
+                                    />
+                                  </div>
+                                </div>
+
+                                <>
+                                  <Helmet>
+                                    <title property='og:title'>
+                                    {getWords(obj.chat_msg)} - Disneyland Lounge
+                                    </title>
+                                    
+                                    <meta
+                                      name="description"
+                                      content={obj.chat_msg}
+                                    />
+                                    <meta property="og:title" content="MouseWait" />
+                                    
+                                    <meta
+                                      property='og:description'
+                                      content={obj.chat_msg}
+                                      name='description'
+                                      />
+                                      <meta
+                                      name='keywords'
+                                      content={getWords(obj.chat_msg)}
+                                    />
+                                    <meta
+                                      property='fb:app_id'
+                                      content='152066798153435'
+                                    />
+                                    <meta property='og:type' content='website' />
+                                    <meta
+                                      property='og:site_name'
+                                      content='MouseWait'
+                                      />
+                                      <meta
+                                      property='og:url'
+                                      content={
+                                        GET_BASE_URL_IMAGE +
+                                        `/disneyland/lands-talk/${obj.chat_id}/${obj.chat_msg}`
+                                      }
+                                    /> 
+                                    <meta
+                                      property='og:image'
+                                      content={
+                                        GET_BASE_URL_IMAGE +
+                                        '/disneyland/chat_images/' +
+                                        obj.chat_img
+                                      }
+                                    />
+                                </Helmet>
+                              </>
+
+                                <div>
+                                  <ToggleMenu
+                                    onSubmit={onSubmit}
+                                    register={register}
+                                    handleSubmit={handleSubmit}
+                                    setValue={setValue}
+                                    isLoading={''}
+                                    LoungeId={obj.chat_id}
+                                    username={obj.user.user_name}
+                                    userid={obj.user.user_id}
+                                    getThankYou={
+                                      obj.isthankyou?.status == '1' ? true : false
+                                    }
+                                    getBookMark={
+                                      obj.isbookmark?.status == '1' ? true : false
+                                    }
+                                    editType={
+                                      obj.user?.user_id == user ? true : false
+                                    }
+                                    chat_reply_msg={obj.chat_msg}
+                                    // chat_type={obj.chat_type}
+                                    pageName={'Detail'}
+                                    lock={obj.islock == '0' ? 'Lock' : 'UnLock'}
+                                    chatRoomId={obj.chat_room_id}
+                                    getStick={
+                                      obj.checksticky == null ? 'Stick' : 'UnStick'
+                                    }
+                                    getSubscribe={
+                                      obj.subscribepost?.user_id == user &&
+                                      obj.subscribepost != null
+                                        ? false
+                                        : true
+                                    }
+                                  />
+                                </div>
+                              </div>
+                              <div className='card-img-b my-2'>
+                                {obj.chat_img.includes('c_img') && (
                                   <img
                                     src={
                                       GET_BASE_URL_IMAGE +
-                                      '/disneyland/images/thumbs/' +
-                                      obj.user.image +
-                                      dTime
+                                      '/disneyland/chat_images/' +
+                                      obj.chat_img
                                     }
-                                    className='img-fluid'
-                                    alt={obj.user.user_name}
+                                    className='card-img-top img-fluid'
+                                    alt='img'
                                   />
-                                </a>
+                                )}
                               </div>
-                              <div className='small-tt'>
-                                <h6>
-                                  {' '}
-                                  <Link
-                                    to={`/disneyland/user/${obj.user?.user_id}/mypost`}
-                                  >
-                                    {obj.user?.user_name}
-                                  </Link>
-                                </h6>
-                                <span>
-                                  {obj.user.position} #{obj.user.totalpoints}{' '}
-                                  Quality #{obj.user.rank}
-                                </span>
-                                <LoungeName
-                                  Time={obj.chat_time}
-                                  Roomid={obj?.chat_room_id}
-                                />
+
+                              <div className='card-body '>
+                                <CommonPostMessage myChat={obj.chat_msg} />
+                                {commentData?.map((cmt: any, index: any) => (
+                                  <>
+                                    <CommentList
+                                      cmt={cmt}
+                                      chatId={obj.chat_id}
+                                      replyShow={false}
+                                      stickerData={stickerItems}
+                                    />
+                                  </>
+                                ))}
                               </div>
-                            </div>
 
-                            <>
-                              <Helmet>
-                                <title property='og:title'>
-                                {getWords(obj.chat_msg)} - Disneyland Lounge
-                                </title>
-                                
-                                <meta
-                                  name="description"
-                                  content={obj.chat_msg}
-                                />
-                                <meta property="og:title" content="MouseWait" />
-                                
-                                <meta
-                                  property='og:description'
-                                  content={obj.chat_msg}
-                                  name='description'
-                                  />
-                                  <meta
-                                  name='keywords'
-                                  content={getWords(obj.chat_msg)}
-                                />
-                                <meta
-                                  property='fb:app_id'
-                                  content='152066798153435'
-                                />
-                                <meta property='og:type' content='website' />
-                                <meta
-                                  property='og:site_name'
-                                  content='MouseWait'
-                                  />
-                                  <meta
-                                  property='og:url'
-                                  content={
-                                    GET_BASE_URL_IMAGE +
-                                    `/disneyland/lands-talk/${obj.chat_id}/${obj.chat_msg}`
-                                  }
-                                /> 
-                                <meta
-                                  property='og:image'
-                                  content={
-                                    GET_BASE_URL_IMAGE +
-                                    '/disneyland/chat_images/' +
-                                    obj.chat_img
-                                  }
-                                />
-                            </Helmet>
-                          </>
+                              <div className='card-body'>
+                                <div className='thank-sec'>
+                                  <div className='thank-t d-flex'>
+                                    <h6>
+                                      {thankData.length > 0 ? (
+                                        <> Thanked by:</>
+                                      ) : (
+                                        <></>
+                                      )}
 
-                            <div>
-                              <ToggleMenu
-                                onSubmit={onSubmit}
-                                register={register}
-                                handleSubmit={handleSubmit}
-                                setValue={setValue}
-                                isLoading={''}
-                                LoungeId={obj.chat_id}
-                                username={obj.user.user_name}
-                                userid={obj.user.user_id}
-                                getThankYou={
-                                  obj.isthankyou?.status == '1' ? true : false
-                                }
-                                getBookMark={
-                                  obj.isbookmark?.status == '1' ? true : false
-                                }
-                                editType={
-                                  obj.user?.user_id == user ? true : false
-                                }
-                                chat_reply_msg={obj.chat_msg}
-                                // chat_type={obj.chat_type}
-                                pageName={'Detail'}
-                                lock={obj.islock == '0' ? 'Lock' : 'UnLock'}
-                                chatRoomId={obj.chat_room_id}
-                                getStick={
-                                  obj.checksticky == null ? 'Stick' : 'UnStick'
-                                }
-                                getSubscribe={
-                                  obj.subscribepost?.user_id == user &&
-                                  obj.subscribepost != null
-                                    ? false
-                                    : true
-                                }
-                              />
-                            </div>
-                          </div>
-                          <div className='card-img-b my-2'>
-                            {obj.chat_img.includes('c_img') && (
-                              <img
-                                src={
-                                  GET_BASE_URL_IMAGE +
-                                  '/disneyland/chat_images/' +
-                                  obj.chat_img
-                                }
-                                className='card-img-top img-fluid'
-                                alt='img'
-                              />
-                            )}
-                          </div>
-
-                          <div className='card-body '>
-                            <CommonPostMessage myChat={obj.chat_msg} />
-                            {commentData?.map((cmt: any, index: any) => (
-                              <>
-                                <CommentList
-                                  cmt={cmt}
-                                  chatId={obj.chat_id}
-                                  replyShow={false}
-                                  stickerData={stickerItems}
-                                />
-                              </>
-                            ))}
-                          </div>
-
-                          <div className='card-body'>
-                            <div className='thank-sec'>
-                              <div className='thank-t d-flex'>
-                                <h6>
-                                  {thankData.length > 0 ? (
-                                    <> Thanked by:</>
-                                  ) : (
-                                    <></>
-                                  )}
-
-                                  {thankData?.map((data: any, index: any) => (
-                                    <span key={index}>
-                                      <Link
-                                        to={`/disneyland/user/${data.user_id}/mypost`}
-                                      >
-                                        {data.user.user_name}
-                                      </Link>
-                                    </span>
-                                  ))}
-                                </h6>
+                                      {thankData?.map((data: any, index: any) => (
+                                        <span key={index}>
+                                          <Link
+                                            to={`/disneyland/user/${data.user_id}/mypost`}
+                                          >
+                                            {data.user.user_name}
+                                          </Link>
+                                        </span>
+                                      ))}
+                                    </h6>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                      ))}
-               
+                          ))}
+                  
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              )
+              : <div className='no-permission'><div>Sorry <br></br> You don't have permission to access this page</div></div>
+            }
           </div>
         </div>
 
-        <div className='search-comm-sec des-main-sec fixed-bottom-bar' >
-            <div></div>
-            <div >
-              <div className='commentOutside'>
-                <CommentBox
-                  
-                  chatId={LoungeId}
-                  onSubmit={onSubmit1}
-                  register={register}
-                  handleSubmit={handleSubmit}
-                  stickerData={stickerItems}
-                  setValue={setValue}
-                />
-              </div>
-            </div>
-            <div></div>
-          </div> 
+        {
+          perm == true && 
+            <div className='search-comm-sec des-main-sec fixed-bottom-bar' >
+                <div></div>
+                <div >
+                  <div className='commentOutside'>
+                    <CommentBox
+                      
+                      chatId={LoungeId}
+                      onSubmit={onSubmit1}
+                      register={register}
+                      handleSubmit={handleSubmit}
+                      stickerData={stickerItems}
+                      setValue={setValue}
+                    />
+                  </div>
+                </div>
+                <div></div>
+            </div> 
+        }
 
       </div>
     </>
