@@ -159,15 +159,6 @@ const UserLounge = () => {
     return formattedDate;
   }
 
-  const onSubmit = () => {
-    //  alert('submitting');
-  };
-
-  //console.log(audienceSample);
-  // console.log(loggeduser);
-
-  //Dm Box
-
   const [openDmBox, setDmBox] = useState<string | any>(false);
   const openDm = () => {
     if (token == null) {
@@ -493,7 +484,6 @@ const UserLounge = () => {
 
                                 <div>
                                   <ToggleMWmenu
-                                    onSubmit={onSubmit}
                                     register={register}
                                     handleSubmit={handleSubmit}
                                     setValue={setValue}

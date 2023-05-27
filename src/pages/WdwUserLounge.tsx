@@ -123,15 +123,6 @@ const UserLounge = () => {
     return formattedDate;
   }
 
-  const onSubmit = () => {
-    //  alert('submitting');
-  };
-
-  //console.log(items[0]);
-  // console.log(loggeduser);
-
-  //Dm Box
-
   const [openDmBox, setDmBox] = useState<string | any>(false);
   const openDm = () => {
     if (token == null) {
@@ -378,7 +369,6 @@ const UserLounge = () => {
 
                                 <div>
                                   <ToggleMWmenu
-                                    onSubmit={onSubmit}
                                     register={register}
                                     handleSubmit={handleSubmit}
                                     setValue={setValue}
@@ -456,11 +446,6 @@ const UserLounge = () => {
                                         : false
                                     }
                                   />
-
-                                  {/* <LikeButtonWdw
-                                    likecount={obj.likecount}
-                                    chatId={obj.chat_id}
-                                  /> */}
 
                                   <Link
                                     to={`/disneyworld/lands-talk/${

@@ -39,7 +39,6 @@ type ToggleMenuMWPropsType = {
   getBookMark: any;
   getThankYou: any;
   LoungeId: any;
-  onSubmit: any;
   register: any;
   handleSubmit: any;
   setValue: any;
@@ -189,10 +188,6 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
   };
 
   const onSubmit = (data: any) => {
-    // data.chat_type = advancedpost;
-    if(richtextvalue != '') {
-      data.chat_reply_msg = richtextvalue;
-    }
 
     if (data.chat_reply_msg !== undefined) {
       dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
