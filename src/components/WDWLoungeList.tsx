@@ -29,6 +29,14 @@ type WDWLoungeListPropsType = {
   obj: any;
 };
 
+type FormData = {
+  chat_msg: string;
+  chat_reply_msg_advance: string;
+  chat_id: number;
+  chat_reply_msg: string;
+  chat_type: any;
+};
+
 export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
   const dispatch = useAppDispatch();
   const {
@@ -36,6 +44,7 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
     setValue,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm<FormData>();
   const [isLoading, setIsLoading] = useState<any | string>(false);
@@ -78,10 +87,11 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
   //const notify = () => toast("Wow so easy!");
   const [Notify, setIsNotify] = useState<any | string>();
   const onSubmit = (data: any) => {
-    /* console.log('uuuu');
-    console.log(data);
-    console.log(data.chat_reply_msg);
-    return false; */
+
+    data.chat_type = getValues('chat_type');
+    if(getValues('chat_type')) {
+      data.chat_reply_msg = getValues('chat_reply_msg_advance');
+    }
 
     if (data.chat_reply_msg != undefined) {
       dispatch<any>(postLoungeCommentEditWdw(data)).then((res: any) => {
@@ -200,6 +210,7 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
               getBookMark={obj.isbookmark?.status == '1' ? true : false}
               editType={obj.user?.user_id == user ? true : false}
               chat_reply_msg={obj.chat_msg}
+              chat_type={obj.chat_type}
               pageName={'Detail'}
               lock={obj.islock == '0' ? 'Lock' : 'UnLock'}
               chatRoomId={obj.chat_room_id}
@@ -237,15 +248,17 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
                   : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
-              <img
-                src={
-                  GET_BASE_URL_IMAGE +
-                  '/disneyworld/chat_images/' +
-                  obj.chat_img
-                }
-                className='card-img-top img-fluid'
-                alt='img'
-              />
+              {obj.chat_type == '0' && 
+                <img
+                  src={
+                    GET_BASE_URL_IMAGE +
+                    '/disneyworld/chat_images/' +
+                    obj.chat_img
+                  }
+                  className='card-img-top img-fluid'
+                  alt='img'
+                />
+              }
             </Link>
           )}
         </div>
@@ -273,7 +286,7 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
                   : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
-              <CommonPostMessage myChat={obj.chat_msg} />
+              <CommonPostMessage myChat={obj.chat_msg} chatType={obj.chat_type}/>
             </Link>
 
             <div className='chat-icon d-flex'>

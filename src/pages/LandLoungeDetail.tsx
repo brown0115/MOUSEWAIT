@@ -37,7 +37,9 @@ import { CommentList } from '../components/CommentList';
 
 type FormData = {
   chat_msg: string;
+  chat_reply_msg_advance: string;
   chat_id: number;
+  chat_type: any;
 };
 
 const LandLoungeDetail = (props: any) => {
@@ -184,6 +186,12 @@ return ret;
 
 
   const onSubmit = (data: any ) => {
+
+    data.chat_type = getValues('chat_type');
+    if(getValues('chat_type')) {
+      data.chat_reply_msg = getValues('chat_reply_msg_advance');
+    }
+
     if (data.chat_reply_msg != undefined) {
       dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
         // reset();
@@ -196,13 +204,12 @@ return ret;
         window.location.reload();
       });
     }
-   }
+  }
 
   const onSubmit1 = (data: any) => {
     if (token != null) {
       const chat_msg = getValues('chat_msg');
 
-      console.log('chat_msg', chat_msg)
       chat_msg != '<p><br></p>' && chat_msg != ''
         ? dispatch<any>(postLoungeComment(data)).then((res: any) => {
             if (res.payload.message != undefined) {
@@ -453,6 +460,7 @@ return ret;
                                   obj.user?.user_id == user ? true : false
                                 }
                                 chat_reply_msg={obj.chat_msg}
+                                chat_type={obj.chat_type}
                                 pageName={'Detail'}
                                 lock={obj.islock == '0' ? 'Lock' : 'UnLock'}
                                 chatRoomId={obj.chat_room_id}
@@ -469,7 +477,7 @@ return ret;
                             </div>
                           </div>
                           <div className='card-img-b my-2'>
-                            {obj.chat_img.includes('c_img') && (
+                            {obj.chat_type == '0' && obj.chat_img.includes('c_img') && (
                               <img
                                 src={
                                   GET_BASE_URL_IMAGE +
@@ -483,7 +491,7 @@ return ret;
                           </div>
 
                           <div className='card-body '>
-                            <CommonPostMessage myChat={obj.chat_msg} />
+                            <CommonPostMessage myChat={obj.chat_msg} chatType={obj.chatType}/>
                             {commentData?.map((cmt: any, index: any) => (
                               <>
                                 <CommentList
@@ -497,64 +505,6 @@ return ret;
                           </div>
 
                           <div className='card-body'>
-                            {/*    {showIcon==true &&
-                    <div className="link-img-s">
-                      <div className="link-main">
-                        <div className="img-l" onClick={()=>onLoungeFlag(LoungeId,flagType,flagAction,user_id)}>
-                          
-                            <i className="fa-solid fa-flag" /> Flag
-                        
-                        </div>
-                        <div className="img-l"   onClick={()=>onThankyou(LoungeId)}
-                        >
-                          
-                            <i className="fa-solid fa-star" /> 
-                            {thankYou ==true ? ' Thanked' : ' Thank You!'} 
-                        </div>
-                        <div className="img-l" onClick={()=>onBookMark(LoungeId)}>
-                        
-                    <i className="fa-solid fa-bookmark"  />   
-                      {bookMark ==true ? ' Bookmarked' : ' Bookmark'}    
-                          
-                        </div>
-                        <div className="img-l">
-                         
-                            <i className="fa-solid fa-xmark" onClick={()=>onRemoveFlag(LoungeId)}  /> Remove
-                    
-                        </div>
-                      </div>
-                    </div>
-                  } */}
-
-                            {/* <form
-                                className="space-y-6"
-                                onSubmit={handleSubmit(onSubmit)}
-                                method="POST"
-                              >
-                    <div className="com-box-main">
-                      <div className="com-box d-flex">
-                        <textarea className="form-control"
-                          {...register("chat_msg")} rows={3} 
-                      
-                          />
-
-                  <input type="hidden" readOnly={true} {...register("chat_id")} 
-                    defaultValue={obj.chat_id}/> 
-                        <a href="">
-                          <img
-                            src={stickerImage}
-                            className="com-imgg  img-fluid"
-                            alt="img"
-                          />
-                        </a>
-                      </div>
-                      <div className="post">
-                      {token!=null ? <input type="Submit"  defaultValue="Post"/> 
-                        :<input type="Submit" disabled defaultValue="Post"/> }
-                      
-                      </div>
-                    </div>
-                    </form> */}
                             <div className='thank-sec'>
                               <div className='thank-t d-flex'>
                                 <h6>

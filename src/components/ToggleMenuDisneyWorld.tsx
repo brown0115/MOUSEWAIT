@@ -38,6 +38,8 @@ import MovePost from './WdwMovePost';
 import arrowup from '../assets/img/arrowup.png';
 import arrowdown from '../assets/img/arrowdown.png';
 import WdwAdvanceEditor from './WdwAdvanceEditor';
+import { RichTextEditor } from '@mantine/rte';
+
 
 type ToggleMenuPropsType = {
   getBookMark: any;
@@ -57,6 +59,7 @@ type ToggleMenuPropsType = {
   chatRoomId: any;
   getStick: any;
   getSubscribe: any;
+  chat_type: any;
 };
 
 const customStyles = {
@@ -96,6 +99,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   chatRoomId,
   getStick,
   getSubscribe,
+  chat_type
 }) => {
   const [showIcon, SetShowIcon] = useState<any | string>(true);
 
@@ -121,8 +125,11 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const post_editor = localStorage.getItem('editor');
   const [userRank, setUserRank] = useState<any | number>(loginuserrank);
   const [Notify, setIsNotify] = useState<any | string>(); 
-  const [ advancedpost, setAdvancedPost ] = useState(false);
+  const [ advancedpost, setAdvancedPost ] = useState(chat_type);
 
+  useEffect(() => {
+    setValue('chat_type', advancedpost)
+  }, [advancedpost])
 
   // thank you
   const onThankyou = (LoungeId: any) => {
@@ -264,6 +271,11 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const [dmuserId, setdmuserId] = useState<any | String>();
   const [dmusername, setdmuserame] = useState<any | String>();
   const [dmchatId, setdmchatId] = useState<any | String>();
+  const [richtextvalue, onRichTextChange] = useState(chat_reply_msg);
+
+  useEffect(() => {
+    setValue('chat_reply_msg_advance', richtextvalue)
+  }, [richtextvalue])
 
   const openDm = (userId: any, username: any, chatId: any) => {
     if (token == null) {
@@ -778,29 +790,40 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
                 <div className='box-ttt'>
                   {onedit != '' ? (
                     <div>
-                      <textarea
-                        rows={3}
-                        cols={60}
-                        {...register('chat_reply_msg')}
-                        defaultValue={chat_reply_msg}
-                        /* {...register("Type")} {...register("LoungeId")} */
-                      />
 
-                      { post_editor == 'true' ? (
-                        <div className="advance-editor">
+                      {post_editor == 'true' && (
+                        <div className="advance-radio-gruop">
                           <div>
-                            {
-                              advancedpost == true ?
-                                <img src={arrowdown} alt="Arrow Down" width={50} className='editor-arrowup'/> :
-                                <img src={arrowup} alt="Arrow Up" width={50} className='editor-arrowdown'/>
-                            }
-                            <input type="button" onClick={onClickAdvanced} value="Advanced Edit"/>
-                            </div>
-                          { advancedpost &&
-                            <WdwAdvanceEditor LoungeId={LoungeId} register={register} setValue={setValue}></WdwAdvanceEditor>
-                          }
+                            <input type="radio" id="default" checked={!advancedpost} onClick={onClickAdvanced}></input>
+                            <label htmlFor="default">Default Post</label>
+                          </div>
+                          
+                          <div>
+                            <input type="radio" id="advanced" checked={advancedpost} onClick={onClickAdvanced}></input>
+                            <label htmlFor="advanced">Advanced Post</label>
+                          </div>
                         </div>
-                        ) : <div></div>
+                      )}
+
+                      {!advancedpost ? (
+                      <>
+                        <textarea
+                          rows={3}
+                          cols={60}
+                          {...register('chat_reply_msg')}
+                          defaultValue={chat_reply_msg}
+                          /* {...register("Type")} {...register("LoungeId")} */
+                        />
+                      </>
+                      ) : ( 
+                        <>
+                          <div className="advance-editor">
+                            <RichTextEditor 
+                            value={richtextvalue}
+                            onChange={onRichTextChange} 
+                            />
+                          </div>
+                        </>)
                       }
                     </div>
                   ) : (

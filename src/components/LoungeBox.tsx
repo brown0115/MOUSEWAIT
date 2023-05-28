@@ -14,9 +14,7 @@ import { isMobile } from 'react-device-detect';
 import Post from '../assets/img/h-p.png';
 import { getValue } from '@testing-library/user-event/dist/utils';
 import { BiWindows } from 'react-icons/bi';
-import MwAdvanceEditor from './MwAdvanceEditor';
-import arrowup from '../assets/img/arrowup.png';
-import arrowdown from '../assets/img/arrowdown.png';
+import { RichTextEditor, DEFAULT_CONTROLS  } from '@mantine/rte';
 
 // import ProgressBar from "@ramonak/react-progress-bar";
 type LoungeBoxPropsType = {
@@ -63,7 +61,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
 
   let navigate = useNavigate();
 
-  const { register, setValue, getValues, formState: {  errors } } = useForm<{'chat_img': any, 'chat_room_id': any, 'chat_msg': any, 'updatefile': any, 'youtubelink': any, 'fullsizepic': any, 'mediumsizepic': any, 'thumbnailfile': any, 'selectbar': any}>({defaultValues: {'chat_img': '', 'chat_room_id': '', 'chat_msg': '', 'updatefile': '', 'youtubelink': '', 'fullsizepic': '', 'mediumsizepic': '', 'thumbnailfile': '', 'selectbar': ''}});
+  const { register, setValue, getValues, formState: {  errors } } = useForm<{'chat_img': any, 'chat_room_id': any, 'chat_msg': any}>({defaultValues: {'chat_img': '', 'chat_room_id': '', 'chat_msg': ''}});
 
   const token = localStorage.getItem('token');
   const post_editor = localStorage.getItem('editor');
@@ -129,8 +127,10 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
       navigate('/disneyland/login');
     } else {
       setIsLoading(true);
-      var data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': text, 'chat_img': getValues('chat_img'), 'updatefile': getValues('updatefile'), 'youtubelink': getValues('youtubelink'), 'fullsizepic': getValues('fullsizepic'), 'mediumsizepic': getValues('mediumsizepic'), 'thumbnailfile': getValues('thumbnailfile'), 'selectbar': getValues('selectbar')}
-      console.log('aaaaaaaaaaa', data)
+      var data;
+      if(!advancedpost)
+        data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': text, 'chat_img': getValues('chat_img'), 'chat_type': '0'};
+      else data = {'chat_room_id': getValues('chat_room_id'), 'chat_msg': richtextvalue, 'chat_img': '', 'chat_type': '1'};
       if(land == 5 || land == 6 || land == 10) {
         if(land == 10) data['chat_room_id'] = 0;
         else data['chat_room_id'] = land - 4;
@@ -160,6 +160,8 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
   const onClickAdvanced = () => {
     setAdvancedPost(!advancedpost)
   }
+
+  const [richtextvalue, onRichTextChange] = useState('');
 
   return (
     <div>
@@ -191,59 +193,72 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                   </p>
                 )}
 
-                <div className='plus-p'>
-                  <i className='fa fa-plus my-b' onClick={onButtonClick} />
-
-                  <input
-                    id='fileinput'
-                    ref={inputFile}
-                    className='fileInput'
-                    type='file'
-                    onChange={(e) => handleImageChange(e)}
-                  />
-                </div>
-
-                <div className='box-ttt'>
-                  {/* <label for="story" class="w-50 m-auto justify-content-start">Tell us your story</label> */}
-                  <div className='advance-chatmsg'>
-                    <textarea
-                      rows={3}
-                      cols={60}
-                      value={text}
-                      onChange={e => setText(e.target.value)}
-                      placeholder='write a caption '
-                      disabled={isLoading}
-                      // {...register('chat_msg')}
-                    />
-                    <input
-                      type='hidden'
-                      // setValue={land}
-                      {...register('chat_room_id')}
-                    />
-                    <input
-                      type='hidden'
-                      // setValue={file}
-                      {...register('chat_img')}
-                    />
+                {post_editor == 'true' && (
+                  <div className="advance-radio-gruop">
+                    <div onClick={() => setAdvancedPost(false)}>
+                      <input type="radio" id="default" checked={!advancedpost} onClick={onClickAdvanced}></input>
+                      <label htmlFor="default">Default Post</label>
+                    </div>
+                    
+                    <div onClick={() => setAdvancedPost(true)}>
+                      <input type="radio" id="advanced" checked={advancedpost} onClick={onClickAdvanced}></input>
+                      <label htmlFor="advanced">Advanced Post</label>
+                    </div>
                   </div>
+                )}
 
-                  { post_editor == 'true' ? (
-                      <div className="advance-editor">
-                        <div>
-                          {
-                            advancedpost == true ?
-                              <img src={arrowdown} alt="Arrow Down" width={50} className='editor-arrowup'/> :
-                              <img src={arrowup} alt="Arrow Up" width={50} className='editor-arrowdown'/>
-                          }
-                          <input type="button" onClick={onClickAdvanced} value="Advanced Post"/>
-                          </div>
-                        { advancedpost &&
-                          <MwAdvanceEditor LoungeId={null} register={register} setValue={setValue}></MwAdvanceEditor>
-                        }
+                {advancedpost != true ? (
+                  <>
+                    <div className='plus-p'>
+                      <i className='fa fa-plus my-b' onClick={onButtonClick} />
+
+                      <input
+                        id='fileinput'
+                        ref={inputFile}
+                        className='fileInput'
+                        type='file'
+                        onChange={(e) => handleImageChange(e)}
+                      />
+                    </div>
+
+                    <div className='box-ttt'>
+                      {/* <label for="story" class="w-50 m-auto justify-content-start">Tell us your story</label> */}
+                      <div className='advance-chatmsg'>
+                        <textarea
+                          rows={3}
+                          cols={60}
+                          value={text}
+                          onChange={e => setText(e.target.value)}
+                          placeholder='write a caption '
+                          disabled={isLoading}
+                          // {...register('chat_msg')}
+                        />
+                        <input
+                          type='hidden'
+                          // setValue={land}
+                          {...register('chat_room_id')}
+                        />
+                        <input
+                          type='hidden'
+                          // setValue={file}
+                          {...register('chat_img')}
+                        />
                       </div>
-                    ) : <div></div>
-                  }          
+                    </div>
+                  </>
+                ) : 
+                  <>
+                    <div className="advance-editor">
+                      <RichTextEditor 
+                      value={richtextvalue}
+                      onChange={onRichTextChange}
+                      controls={DEFAULT_CONTROLS}
+                      />
+                    </div>
+                  </>
+                }
 
+                <div>
                   <div className='box-li'>
                     <ul className='m-0 p-0' style={{ cursor: 'pointer' }}>
                       <li
@@ -319,10 +334,20 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
                     {isLoading == true ? (
                       <CircularProgress />
                     ) : (
-                      /*  <input className='MW-btn' type='Submit' value='Loading' /> */
-                      <input className='MW-btn' type='button' value="Post" style={{backgroundColor: text == '' ? '#d8cccc' : '#0d6efd'}} disabled={text == '' || isLoading} 
-                      onClick={onPostClick}
-                      />
+                      <>
+                        {advancedpost ? (
+                          <input className='MW-btn' type='button' value="Post" style={{backgroundColor: (richtextvalue == '' ||richtextvalue == '<p><br></p>') ? '#d8cccc' : '#0d6efd'}} disabled={richtextvalue == '' || richtextvalue == '<p><br></p>' || isLoading} 
+                          onClick={onPostClick}
+                        />
+                        ) : (
+                          <input className='MW-btn' type='button' value="Post" style={{backgroundColor: text == '' ? '#d8cccc' : '#0d6efd'}} disabled={text == '' || isLoading} 
+                          onClick={onPostClick}
+                        />
+                        )}
+                      </>                      
+                      // <input className='MW-btn' type='button' value="Post" style={{backgroundColor: text == '' ? '#d8cccc' : '#0d6efd'}} disabled={text == '' || isLoading} 
+                      // onClick={onPostClick}
+                      // />
                     )}
                   </div>
                 </div>
@@ -332,7 +357,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
         </form>
       </Modal>
 
-      {window.innerWidth < 1367 ? (
+      {window.innerWidth < 1024 ? (
         <li className='nav-item last-li my-link' onClick={openModal}>
           <div className='nav-icon'>
             <img src={Post} className='img-fluid' alt='img' />

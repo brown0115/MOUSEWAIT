@@ -158,16 +158,6 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
 
         setIsLoading(false);
         window.location.reload();
-
-        /*      dispatch(
-          fetchDisneyWorldLounges({
-            sortType,
-            LoungeId,
-            currentPage,
-            searchValue,
-            shortByTime,
-          })
-        ); */
       });
     }
   };
@@ -282,7 +272,7 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
         </form>
       </Modal>
 
-      {window.innerWidth < 1367 ? (
+      {window.innerWidth < 1024 ? (
         <li className='nav-item last-li my-link' onClick={openModal}>
           <div className='nav-icon'>
             <img src={Post} className='img-fluid' alt='img' />

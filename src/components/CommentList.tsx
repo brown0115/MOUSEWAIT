@@ -175,7 +175,6 @@ export const CommentList: React.FC<CommentListPropsType> = ({
     var domParser = new DOMParser();
     var doc = domParser.parseFromString(formatedMsg, 'text/html');
     var msg = doc.body.innerHTML;
-    
     let replacemsg = msg.match(/@(\w+)/g)?.map(match => match.substring(1));
     async function convert()
     {
@@ -190,7 +189,6 @@ export const CommentList: React.FC<CommentListPropsType> = ({
         } 
       }
       doc.body.innerHTML = msg;
-      // console.log('formatedMsg', msg)
       setFormatedMsg(msg)
     }
     convert();

@@ -212,6 +212,7 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
                 getBookMark={obj.isbookmark?.status == '1' ? true : false}
                 editType={obj.user?.user_id == user ? true : false}
                 chat_reply_msg={obj.chat_msg}
+                chat_type={obj.chat_type}
                 pageName={'Detail'}
                 lock={obj.islock == '0' ? 'Lock' : 'UnLock'}
                 chatRoomId={obj.chat_room_id}
@@ -279,7 +280,7 @@ export const StickyPost: React.FC<StickyPostPropsType> = ({
                     : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
                 }
               >
-                <CommonPostMessage myChat={obj.chat_msg} />
+                <CommonPostMessage myChat={obj.chat_msg} chatType={obj.chatType}/>
               </Link>
 
               <div className='chat-icon d-flex'>
