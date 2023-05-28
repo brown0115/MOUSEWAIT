@@ -269,7 +269,7 @@ const TagLandLounge = () => {
                               }
                             >
                               <div className='tag-msg'>
-                                <CommonPostMessage myChat={obj.chat_msg} chatType={obj.chatType}/>
+                                <CommonPostMessage myChat={obj.chat_msg} />
                               </div>
                             </Link>
 

@@ -234,13 +234,13 @@ export type PostLoungesType = {
   chat_msg: any;
   chat_room_id: any;
   chat_img: any;
-  chat_type: any;
+  // chat_type: any;
 };
 export type PostWdwLoungesType = {
   chat_msg: any;
   chat_room_id: any;
   chat_img: any;
-  chat_type: any;
+  // chat_type: any;
 };
 export type BanUserLounges = {
   ban_chat_id: any;
@@ -316,7 +316,7 @@ export type PostLoungeCommentReply = {
   id: any;
   Type: any;
   LoungeId: any;
-  chat_type: any;
+  chat_img: any;
 };
 export type PostLoungeCommentWdwEdit = {
   chat_reply_msg: any;
@@ -326,7 +326,7 @@ export type PostLoungeCommentWdwEdit = {
   id: any;
   Type: any;
   LoungeId: any;
-  chat_type: any;
+  chat_img: any;
 };
 export type PostLoungeCommentReplyWdw = {
   chat_reply_msg: any;
@@ -727,7 +727,7 @@ export const fetchwdwLoungeDetails = createAsyncThunk<
 
 export const postLounge = createAsyncThunk<Lounge[], PostLoungesType>(
   'users/postLoungeStatus',
-  async ({ chat_msg, chat_room_id, chat_img, chat_type }, thunkAPI) => {
+  async ({ chat_msg, chat_room_id, chat_img }, thunkAPI) => {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(
@@ -741,8 +741,8 @@ export const postLounge = createAsyncThunk<Lounge[], PostLoungesType>(
           body: JSON.stringify({
             chat_msg,
             chat_room_id,
-            chat_img,
-            chat_type
+            chat_img
+            // chat_type
           }),
         }
       );
@@ -765,7 +765,7 @@ export const postLounge = createAsyncThunk<Lounge[], PostLoungesType>(
 
 export const postLoungeWdw = createAsyncThunk<Lounge[], PostWdwLoungesType>(
   'users/postWdwLoungeStatus',
-  async ({ chat_msg, chat_room_id, chat_img, chat_type }, thunkAPI) => {
+  async ({ chat_msg, chat_room_id, chat_img }, thunkAPI) => {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(
@@ -779,8 +779,7 @@ export const postLoungeWdw = createAsyncThunk<Lounge[], PostWdwLoungesType>(
           body: JSON.stringify({
             chat_msg,
             chat_room_id,
-            chat_img,
-            chat_type
+            chat_img
           }),
         }
       );
@@ -1492,7 +1491,7 @@ export const postLoungeCommentEdit = createAsyncThunk<
 >(
   'users/postLoungeCommentEdit',
   async (
-    { chat_reply_msg, chat_id, chat_reply_id, type, id, Type, LoungeId, chat_type },
+    { chat_reply_msg, chat_id, chat_reply_id, type, id, Type, LoungeId, chat_img },
     thunkAPI
   ) => {
 
@@ -1516,7 +1515,7 @@ export const postLoungeCommentEdit = createAsyncThunk<
           chat_reply_id,
           type,
           id,
-          chat_type
+          chat_img
         }),
       });
       let data: any = await response.json();
@@ -1538,7 +1537,7 @@ export const postLoungeCommentEditWdw = createAsyncThunk<
 >(
   'users/postLoungeCommentEditWdw',
   async (
-    { chat_reply_msg, chat_id, chat_reply_id, type, id, Type, LoungeId, chat_type },
+    { chat_reply_msg, chat_id, chat_reply_id, type, id, Type, LoungeId, chat_img },
     thunkAPI
   ) => {
 
@@ -1564,7 +1563,7 @@ export const postLoungeCommentEditWdw = createAsyncThunk<
             chat_reply_id,
             type,
             id,
-            chat_type
+            chat_img
           }),
         }
       );

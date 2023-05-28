@@ -39,7 +39,7 @@ type FormData = {
   chat_msg: string;
   chat_reply_msg_advance: string;
   chat_id: number;
-  chat_type: any;
+  // chat_type: any;
 };
 
 const LandLoungeDetail = (props: any) => {
@@ -187,10 +187,12 @@ return ret;
 
   const onSubmit = (data: any ) => {
 
-    data.chat_type = getValues('chat_type');
-    if(getValues('chat_type')) {
+    // data.chat_type = getValues('chat_type');
+    if(getValues('chat_reply_msg_advance') != '') {
+      data.chat_img = false;
       data.chat_reply_msg = getValues('chat_reply_msg_advance');
     }
+    else data.chat_img = true;
 
     if (data.chat_reply_msg != undefined) {
       dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
@@ -460,7 +462,7 @@ return ret;
                                   obj.user?.user_id == user ? true : false
                                 }
                                 chat_reply_msg={obj.chat_msg}
-                                chat_type={obj.chat_type}
+                                // chat_type={obj.chat_type}
                                 pageName={'Detail'}
                                 lock={obj.islock == '0' ? 'Lock' : 'UnLock'}
                                 chatRoomId={obj.chat_room_id}
@@ -477,7 +479,7 @@ return ret;
                             </div>
                           </div>
                           <div className='card-img-b my-2'>
-                            {obj.chat_type == '0' && obj.chat_img.includes('c_img') && (
+                            {obj.chat_img.includes('c_img') && (
                               <img
                                 src={
                                   GET_BASE_URL_IMAGE +
@@ -491,7 +493,7 @@ return ret;
                           </div>
 
                           <div className='card-body '>
-                            <CommonPostMessage myChat={obj.chat_msg} chatType={obj.chatType}/>
+                            <CommonPostMessage myChat={obj.chat_msg} />
                             {commentData?.map((cmt: any, index: any) => (
                               <>
                                 <CommentList

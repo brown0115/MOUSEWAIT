@@ -59,7 +59,7 @@ type ToggleMenuPropsType = {
   chatRoomId: any;
   getStick: any;
   getSubscribe: any;
-  chat_type: any;
+  // chat_type: any;
 };
 
 const customStyles = {
@@ -99,7 +99,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   chatRoomId,
   getStick,
   getSubscribe,
-  chat_type,
+  // chat_type,
 }) => {
   const [showIcon, SetShowIcon] = useState<any | string>(true);
 
@@ -126,7 +126,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const [userRank, setUserRank] = useState<any | number>(loginuserrank);
   const [Notify, setIsNotify] = useState<any | string>();
 
-  const [ advancedpost, setAdvancedPost ] = useState(chat_type);
+  const [ advancedpost, setAdvancedPost ] = useState(false);
 
   // thank you
   const onThankyou = (LoungeId: any) => {
@@ -405,9 +405,9 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
     setValue('chat_reply_msg_advance', richtextvalue)
   }, [richtextvalue])
 
-  useEffect(() => {
-    setValue('chat_type', advancedpost)
-  }, [advancedpost])
+  // useEffect(() => {
+  //   setValue('chat_type', advancedpost)
+  // }, [advancedpost])
 
   return (
     <div className='menu-nav'>
