@@ -1465,6 +1465,10 @@ background: linear-gradient(90deg, rgba(155,184,239,1) 0%, rgba(216,229,252,1) 1
   /*  overflow-x: scroll; */
 }
 
+.ql-video {
+  width: 100%;
+}
+
 .advance-editor .ql-action::after {
   display: none;
 }
