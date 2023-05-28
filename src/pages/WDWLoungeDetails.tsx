@@ -168,14 +168,14 @@ const WDWLandLoungeDetail = (props: any) => {
                 />
               </Link>
             </div>
-            <div>
+            <div className='land-detail'>
               {status === 'error' ? (
                 <div className='content__error-info'>
                   <h2>Error</h2>
                   <p>Please try to open the page later.</p>
                 </div>
               ) : (
-                <div className='mid-card-sec'>
+                <div className='mid-card-sec mobile-card-sec'>
                   {status === 'loading'
                     ? [...new Array(9)].map((_, index) => (
                         <Placeholder key={index} />
