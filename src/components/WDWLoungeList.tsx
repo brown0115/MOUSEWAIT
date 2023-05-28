@@ -85,15 +85,13 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
 
     if (data.chat_reply_msg != undefined) {
       dispatch<any>(postLoungeCommentEditWdw(data)).then((res: any) => {
-        reset();
         window.location.reload();
-        // Notify(toast('Post Updated Successfully'));
+        // reset();
       });
     } else {
       setIsLoading(true);
       dispatch<any>(postLoungeFlagWdw(data)).then((res: any) => {
         // Notify(toast(res.payload.data[0].error));
-        reset();
         setIsLoading(false);
         loadProgressBar();
         dispatch(
@@ -105,6 +103,7 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
             shortByTime,
           })
         );
+        // reset();
       });
     }
   };

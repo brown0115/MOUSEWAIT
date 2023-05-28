@@ -281,11 +281,6 @@ export const LoungeBox: React.FC<LoungeBoxPropsType> = ({
           </div>
         </form>
       </Modal>
-      {/*   <div className='plus-show-btn' onClick={openModal}>
-        <button className='plus-show'>
-          <i className='fa fa-plus plus-i'></i>
-        </button>
-      </div> */}
 
       {window.innerWidth < 1367 ? (
         <li className='nav-item last-li my-link' onClick={openModal}>

@@ -35,6 +35,10 @@ import DmMe from './DmMe';
 import TagMe from './TagMe';
 import MovePost from './WdwMovePost';
 
+import arrowup from '../assets/img/arrowup.png';
+import arrowdown from '../assets/img/arrowdown.png';
+import WdwAdvanceEditor from './WdwAdvanceEditor';
+
 type ToggleMenuMWPropsType = {
   getBookMark: any;
   getThankYou: any;
@@ -53,6 +57,7 @@ type ToggleMenuMWPropsType = {
   getStick: any;
   chatRoomId: any;
 };
+
 
 type FormData = {
   chat_reply_msg: string;
@@ -91,6 +96,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
   const [thankData, SetThankData] = useState<any | []>([]);
   const [bookMark, SetBookMark] = useState<any | string>(getBookMark);
   const [thankYou, SetThankYou] = useState<any | string>(getThankYou);
+  const [ advancedpost, setAdvancedPost ] = useState(false);
 
   /*  useEffect(() => {
     setValue('LoungeId', LoungeIdd); // if comment this,  will not update.
@@ -142,6 +148,10 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
       //res.payload[0].isbookmark?.status ==1 && SetBookMark(true)
     });
   };
+
+  const onClickAdvanced = () => {
+    setAdvancedPost(!advancedpost)
+  }
 
   const onThankyou = (LoungeId: any) => {
     dispatch<any>(postThankyouWdw({ LoungeId })).then((res: any) => {
@@ -486,7 +496,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                   <></>
                 )}
 
-                {post_editor && 
+                {/* {post_editor && 
                   <li className='nav-item'>
                     <div className='nav-icon'>
                       <BiMessageDots></BiMessageDots>
@@ -495,7 +505,7 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                       Edit With Composer
                     </span>
                   </li>
-                }
+                } */}
 
                 {loginuserid == '18' ||
                 loginuserid == '914' ||
@@ -692,6 +702,23 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
                         defaultValue={chat_reply_msg}
                         /* {...register("Type")} {...register("LoungeId")} */
                       />
+
+                      { post_editor == 'true' ? (
+                        <div className="advance-editor">
+                          <div>
+                            {
+                              advancedpost == true ?
+                                <img src={arrowdown} alt="Arrow Down" width={50} className='editor-arrowup'/> :
+                                <img src={arrowup} alt="Arrow Up" width={50} className='editor-arrowdown'/>
+                            }
+                            <input type="button" onClick={onClickAdvanced} value="Advanced Edit"/>
+                            </div>
+                          { advancedpost &&
+                            <WdwAdvanceEditor LoungeId={LoungeId} register={register} setValue={setValue}></WdwAdvanceEditor>
+                          }
+                        </div>
+                        ) : <div></div>
+                      }   
                     </>
                   ) : (
                     <>

@@ -184,18 +184,18 @@ return ret;
 
 
   const onSubmit = (data: any ) => {
-  if (data.chat_reply_msg != undefined) {
-    dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
-      reset();
-      window.location.reload();
-      // Notify(toast('Post Updated Successfully'));
-    });
-  } else {
-    dispatch<any>(postLoungeFlag(data)).then((res: any) => {
-      window.confirm(res.payload.data[0].error);
-      window.location.reload();
-    });
-  }
+    if (data.chat_reply_msg != undefined) {
+      dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
+        // reset();
+        window.location.reload();
+        // Notify(toast('Post Updated Successfully'));
+      });
+    } else {
+      dispatch<any>(postLoungeFlag(data)).then((res: any) => {
+        window.confirm(res.payload.data[0].error);
+        window.location.reload();
+      });
+    }
    }
 
   const onSubmit1 = (data: any) => {
@@ -242,7 +242,7 @@ return ret;
   }
 
   function getWords(str: any) {
-    const result = str.split("\.").slice(0, 1).join(' ');
+    const result = str?.split("\.").slice(0, 1).join(' ');
     return result;
   }
 

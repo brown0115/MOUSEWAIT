@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -26,6 +26,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { removeUserLounge } from '../redux/lounges/slice';
 import { LikeCommentReply } from '../components/LikeCommentReply';
 import { GET_BASE_URL_IMAGE, dTime } from '../constants/apiEndpoints';
+import { GET_BASE_URL } from '../constants/apiEndpoints';
+import axios, { AxiosResponse } from 'axios';
+
 type CommentReplyPropsType = {
   replyData: any;
   replyShow: boolean;
@@ -63,6 +66,8 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
   const loginuserid = localStorage.getItem('user_id');
 
   const textRef = useRef(null);
+  const [ filterUser, setFilterUser ] = useState([]);
+  const [ searchText, setSearchText ] = useState('');
 
   const onClickSticker = (data: any) => {
     let editor = (textRef.current  as any ).getEditor();
@@ -177,6 +182,48 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
     }
   }; */
 
+  const mentions = useMemo(
+    () => ({
+      allowedChars: /^[A-Za-z0-9_\-\sÅÄÖåäö]*$/,
+      mentionDenotationChars: ['@', '#', ' '],
+      source: (
+        searchTerm: any,
+        renderList: any,
+        mentionChar: any,
+        callback: any
+      ) => {
+        setSearchText(searchTerm);
+        if(mentionChar == ' ')
+          setFilterUser([]);
+        else if (searchTerm.length > 0) {
+          axios
+            .get(GET_BASE_URL + '/backend/api/v1/getUser?name=' + searchTerm)
+            .then((response: any) => {
+              const includesSearchTerm = response.data.data.filter(
+                (item: any) =>
+                  item.value.toLowerCase().includes(searchTerm.toLowerCase())
+              );
+
+              setFilterUser(includesSearchTerm);
+              renderList(includesSearchTerm);
+            });
+        }
+      },
+    }),
+    []
+  );
+
+  const onChangeFilterUser = (item: any) => {
+
+    let editor = (textRef.current  as any ).getEditor();
+    var range = editor.getSelection();
+    let position = range ? range.index : editor.getLength()-1;
+    var oldText = editor.getText(position);
+    var newText = editor.getText(0, position-searchText.length) + item['value'] + oldText;
+    editor.setText(newText);
+    editor.setSelection(position + item['value'].length - searchText.length, 0);
+  }
+
   return (
     <>
       {replyShow == true && (
@@ -186,16 +233,47 @@ export const CommentReply: React.FC<CommentReplyPropsType> = ({
             onSubmit={handleSubmit(onSubmit)}
             method='POST'
           >
-            <div className='com-box-main'>
+            <div className='com-box-main' style={{'position': 'relative'}}>
+              <div className="tagUserList" style={{'position': 'absolute', 'bottom': '60px'}}>
+                {
+                  filterUser.map((item, index) => {
+                    return (
+                      <>
+                      <div className="tagUserItem">
+                        <div onClick={() => onChangeFilterUser(item)} className="button">
+                          <div>
+                            <img
+                              style={{ verticalAlign: 'middle' }}
+                              src={
+                                GET_BASE_URL_IMAGE +
+                                '/disneyland/images/thumbs/' +
+                                item['image']
+                              }
+                              className='com-imggg'
+                            />
+                          </div>
+                          
+                          <div>
+                            {item['value']}
+                          </div>
+                        </div>
+                      </div>
+                      </>
+                    )
+                  })
+                }
+                </div>
+
               <div className='com-box d-flex'>
                 <RichTextEditor
                   id='rte'
                   placeholder='Add your magic...'
+                  mentions={mentions}
                   value={text}
                   onChange={setText}
                   controls={[[]]}
                   ref={textRef}
-                />
+                />  
 
                 <input
                   type='hidden'

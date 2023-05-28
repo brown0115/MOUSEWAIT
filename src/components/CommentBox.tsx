@@ -96,7 +96,7 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
 
   const mentions = useMemo(
     () => ({
-      allowedChars: /^[A-Za-z\-sÅÄÖåäö_]*$/,
+      allowedChars: /^[A-Za-z0-9_\-\sÅÄÖåäö]*$/,
       mentionDenotationChars: ['@', '#', ' '],
       source: (
         searchTerm: any,
@@ -105,7 +105,6 @@ export const CommentBox: React.FC<CommenBoxPropsType> = ({
         callback: any
       ) => {
         setSearchText(searchTerm);
-        console.log('searchTerm', searchTerm)
         if(mentionChar == ' ')
           setFilterUser([]);
         else if (searchTerm.length > 0) {

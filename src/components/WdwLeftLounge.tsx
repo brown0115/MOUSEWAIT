@@ -118,7 +118,7 @@ const WdwLeftLounge = (props: any) => {
             </li>
 
             <li className='nav-item new-color' onClick={closeSideBar}>
-              <Link to={`/disneyland/user/${userId}/mypost`}>MyMW</Link>
+              <Link to={`/disneyworld/user/${userId}/mypost`}>MyMW</Link>
             </li>
 
             <li className='nav-item new-color' onClick={closeSideBar}>
