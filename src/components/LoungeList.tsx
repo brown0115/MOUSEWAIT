@@ -34,7 +34,7 @@ type FormData = {
   chat_reply_msg_advance: string;
   chat_id: number;
   chat_reply_msg: string;
-  chat_type: any;
+  // chat_type: any;
 };
 
 // land real-time
@@ -94,10 +94,13 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
   const [Notify, setIsNotify] = useState<any | string>();
 
   const onSubmit = (data: any) => {
-    data.chat_type = getValues('chat_type');
-    if(getValues('chat_type')) {
+    // data.chat_type = getValues('chat_type');
+
+    if(getValues('chat_reply_msg_advance') != '') {
+      data.chat_img = false;
       data.chat_reply_msg = getValues('chat_reply_msg_advance');
     }
+    else data.chat_img = true;
 
     if (data.chat_reply_msg != undefined) {
       dispatch<any>(postLoungeCommentEdit(data)).then((res: any) => {
@@ -215,7 +218,7 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
               }
               editType={obj.user?.user_id == user ? true : false}
               chat_reply_msg={obj.chat_msg}
-              chat_type={obj.chat_type}
+              // chat_type={obj.chat_type}
               pageName={'Lounge'}
               lock={obj.islock == '0' ? 'Lock' : 'UnLock'}
               chatRoomId={obj.chat_room_id}
@@ -263,7 +266,7 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
               }
             >
               {
-                obj.chat_type == '0' && 
+                // obj.chat_type == '0' && 
                   <img
                     src={
                       GET_BASE_URL_IMAGE + '/disneyland/chat_images/' + obj.chat_img
@@ -301,7 +304,7 @@ export const LoungeList: React.FC<LoungeListPropsType> = ({ obj }) => {
                   : '/disneyland/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
-              <CommonPostMessage myChat={obj.chat_msg} chatType={obj.chat_type}/>
+              <CommonPostMessage myChat={obj.chat_msg}/>
             </Link>
 
             <div className='chat-icon d-flex'>

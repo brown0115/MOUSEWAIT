@@ -208,8 +208,8 @@ export const ToggleMWmenu: React.FC<ToggleMenuMWPropsType> = ({
   };
 
   const onSubmit = (data: any) => {
-    data.chat_type = advancedpost;
-    if(advancedpost) {
+    // data.chat_type = advancedpost;
+    if(richtextvalue != '') {
       data.chat_reply_msg = richtextvalue;
     }
     

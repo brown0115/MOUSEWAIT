@@ -59,7 +59,7 @@ type ToggleMenuPropsType = {
   chatRoomId: any;
   getStick: any;
   getSubscribe: any;
-  chat_type: any;
+  // chat_type: any;
 };
 
 const customStyles = {
@@ -99,7 +99,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   chatRoomId,
   getStick,
   getSubscribe,
-  chat_type
+  // chat_type
 }) => {
   const [showIcon, SetShowIcon] = useState<any | string>(true);
 
@@ -125,7 +125,7 @@ export const ToggleMenu: React.FC<ToggleMenuPropsType> = ({
   const post_editor = localStorage.getItem('editor');
   const [userRank, setUserRank] = useState<any | number>(loginuserrank);
   const [Notify, setIsNotify] = useState<any | string>(); 
-  const [ advancedpost, setAdvancedPost ] = useState(chat_type);
+  const [ advancedpost, setAdvancedPost ] = useState(false);
 
   useEffect(() => {
     setValue('chat_type', advancedpost)

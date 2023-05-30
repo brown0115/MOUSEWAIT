@@ -567,7 +567,7 @@ const UserLounge = () => {
                                         '/Mousewait'
                                   }
                                 >
-                                  <CommonPostMessage myChat={obj.chat_msg} chatType={obj.chatType}/>
+                                  <CommonPostMessage myChat={obj.chat_msg}/>
                                 </Link>
 
                                 <div className='chat-icon d-flex'>

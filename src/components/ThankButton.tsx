@@ -11,6 +11,7 @@ import {
   postBookMark,
   postLoungeComment,
 } from '../redux/lounges/slice';
+import { getTagLoungesApi } from '../api/getTagLounges';
 type ThankButtonPropsType = {
   chatId: number;
   likecount: number;
@@ -28,6 +29,7 @@ export const ThankButton: React.FC<ThankButtonPropsType> = ({
   const [myicon, SetMyIcon] = useState<any>(
     getThankYou == true ? likeB : likeV
   );
+
   const onThank = (LoungeId: any, countvalue: number) => {
     const token = localStorage.getItem('token');
     if(token == null){

@@ -34,7 +34,7 @@ type FormData = {
   chat_reply_msg_advance: string;
   chat_id: number;
   chat_reply_msg: string;
-  chat_type: any;
+  // chat_type: any;
 };
 
 export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
@@ -88,10 +88,13 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
   const [Notify, setIsNotify] = useState<any | string>();
   const onSubmit = (data: any) => {
 
-    data.chat_type = getValues('chat_type');
-    if(getValues('chat_type')) {
+    // data.chat_type = getValues('chat_type');
+
+    if(getValues('chat_reply_msg_advance') != '') {
+      data.chat_img = false;
       data.chat_reply_msg = getValues('chat_reply_msg_advance');
     }
+    else data.chat_img = true;
 
     if (data.chat_reply_msg != undefined) {
       dispatch<any>(postLoungeCommentEditWdw(data)).then((res: any) => {
@@ -210,7 +213,7 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
               getBookMark={obj.isbookmark?.status == '1' ? true : false}
               editType={obj.user?.user_id == user ? true : false}
               chat_reply_msg={obj.chat_msg}
-              chat_type={obj.chat_type}
+              // chat_type={obj.chat_type}
               pageName={'Detail'}
               lock={obj.islock == '0' ? 'Lock' : 'UnLock'}
               chatRoomId={obj.chat_room_id}
@@ -248,7 +251,7 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
                   : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
-              {obj.chat_type == '0' && 
+              {
                 <img
                   src={
                     GET_BASE_URL_IMAGE +
@@ -286,7 +289,7 @@ export const WDWLoungeList: React.FC<WDWLoungeListPropsType> = ({ obj }) => {
                   : '/disneyworld/lands-talk/' + obj.chat_id + '/Mousewait'
               }
             >
-              <CommonPostMessage myChat={obj.chat_msg} chatType={obj.chat_type}/>
+              <CommonPostMessage myChat={obj.chat_msg} />
             </Link>
 
             <div className='chat-icon d-flex'>

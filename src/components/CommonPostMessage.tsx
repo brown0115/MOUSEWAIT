@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Linkify from 'react-linkify';
 type CommonPostMessagePropsType = {
   myChat: any;
-  chatType: any;
+  // chatType: any;
 };
 
 function removeTags(string: any) {
@@ -28,17 +28,17 @@ function removeTags(string: any) {
   });
 }
 export const CommonPostMessage: React.FC<CommonPostMessagePropsType> = ({
-  myChat,
-  chatType
+  myChat
+  // chatType
 }) => {
   return (
     <>
       <h6>
-        {chatType == '0' ?
+        {/* {chatType == '0' ?
           <Linkify>{removeTags(myChat)}</Linkify>
-        : 
+        :  */}
           <Linkify><div dangerouslySetInnerHTML={{__html: myChat}}></div></Linkify>
-        }
+        {/* } */}
       </h6>
     </>
   );

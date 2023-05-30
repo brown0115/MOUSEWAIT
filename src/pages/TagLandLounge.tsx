@@ -57,7 +57,8 @@ const TagLandLounge = () => {
     handleSubmit: handleSubmit2,
   } = useForm<SearchData>();
   const token = localStorage.getItem('token');
-  const user = localStorage.getItem('user');
+  const user = localStorage.getItem('user_id');
+
   const { isLoggedIn } = useSelector(usersSelector);
 
   const [shortByTime, setShortByTime] = useState<any | string>(
@@ -92,6 +93,7 @@ const TagLandLounge = () => {
         shortByTime,
       })
     );
+
   }, [shortByTime, tag]);
 
   function converDate(datevalue: any) {
@@ -269,7 +271,7 @@ const TagLandLounge = () => {
                               }
                             >
                               <div className='tag-msg'>
-                                <CommonPostMessage myChat={obj.chat_msg} chatType={obj.chatType}/>
+                                <CommonPostMessage myChat={obj.chat_msg} />
                               </div>
                             </Link>
 
