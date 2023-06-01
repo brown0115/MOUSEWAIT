@@ -133,8 +133,15 @@ const WDWLandLoungeDetail = (props: any) => {
             let data: any = null;
             let up = document.getElementsByClassName('ql-editor');
             up[0].innerHTML = '';
-            dispatch<any>(addSticker(data));
-            SetCommentData(res.payload.data.commentdata);
+
+            SetCommentData((commentData: any) => [
+              ...commentData,
+              res.payload.data.commentdata[0],
+            ]);
+
+
+            // dispatch<any>(addSticker(data));
+            // SetCommentData(res.payload.data.commentdata);
 
             /*      SetCommentData((commentData: any) => [
               ...commentData,

@@ -149,8 +149,6 @@ export const CommentList: React.FC<CommentListPropsType> = ({
   }, [LoungeId]);
 
   const onSubmit = (data: any) => {
-    console.log('flag');
-    return false;
     dispatch<any>(postLoungeFlag(data)).then((res: any) => {
       // Notify(toast(res.payload.data[0].error));
     });
@@ -255,8 +253,6 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                   style={{
                     fontFamily: 'Inter',
                     fontSize: '1rm',
-                    marginLeft: '1rem',
-                    marginRight: '1rem',
                     fontWeight: 400,
                     fontStyle: 'normal',
                     color: '#313237',
@@ -272,7 +268,6 @@ export const CommentList: React.FC<CommentListPropsType> = ({
                 <br />
                 <Link
                   style={{
-                    marginLeft: '1rem',
                     marginRight: '.5rem',
                     color: '#000',
                     background: 'transparent',
@@ -486,18 +481,18 @@ export const CommentList: React.FC<CommentListPropsType> = ({
           <EditBox
             replyData={''}
             id={''}
-            chatId={cmt.chat_reply_id}
+            chatId={cmt.chat_id}
             chat_reply_id={cmt.chat_reply_id}
             chat_reply_msg={cmt.chat_reply_msg}
             stickerData={stickerData}
             editbox={editbox}
-            type={'C'}
+            type={'WC'}
           />
 
           <CommentReply
             replyData={cmt.commentsreply}
             replyShow={showReply}
-            chatId={cmt.chat_reply_id}
+            chatId={cmt.chat_id}
             chat_reply_id={cmt.chat_reply_id}
             stickerData={stickerData}
           />
