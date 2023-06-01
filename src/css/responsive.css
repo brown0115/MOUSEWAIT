@@ -75,6 +75,9 @@
     padding-top: 11rem !important;
     margin-bottom: -0.5rem;
   }
+  .ql-video {
+    height: 54vw;
+  }
 }
 /*
 |-------------------------------------------------------------------|
@@ -89,6 +92,10 @@
   .boxwidth {
     width: 80%;
   }
+  .ql-video {
+    height: 400px;
+  }
+  
   /* .Mouse-Wait-sec .navbar-toggler .bar {
     box-shadow: 3px 3px 0 0 #ddd;
     color: #d0cfcf;
@@ -193,6 +200,12 @@
   .ReactModal__Overlay ReactModal__Overlay--after-open {
     z-index: 9999;
   } */
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  .ql-video {
+    height: 300px;
+  }
 }
 
 @media screen and (min-width: 576px) and (max-width: 1024.98px) {
@@ -1211,5 +1224,9 @@
   }
   .desk-li {
     margin-top: 0rem !important;
+  }
+
+  .ql-video {
+    height: 52vw;
   }
 }
