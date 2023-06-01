@@ -38,7 +38,7 @@ export const CommonPostMessage: React.FC<CommonPostMessagePropsType> = ({
   const [ newChat, setNewChat ] = useState(myChat)
 
   useEffect(() => {
-    setNewChat(removeTags(myChat).join(''));
+    setNewChat(removeTags(myChat)?.join(''));
   }, [])
 
   return (
