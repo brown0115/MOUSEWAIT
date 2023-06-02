@@ -22,6 +22,10 @@ import ToggleMWmenu from '../components/WdwToggleMWmenu';
 import DmMe from '../components/DmMe';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ThankButton } from '../components/ThankButton';
+import { ThankButtonWdw } from '../components/ThankButtonWdw';
+
+
 const UserLounge = () => {
   const dispatch = useAppDispatch();
   let navigate = useNavigate();
@@ -442,10 +446,22 @@ const UserLounge = () => {
                                 </Link>
 
                                 <div className='chat-icon d-flex'>
-                                  <LikeButtonWdw
+
+                                  <ThankButtonWdw
+                                    likecount={obj.thankcount}
+                                    chatId={obj.chat_id}
+                                    getThankYou={
+                                      obj.isthankyou?.status == '1'
+                                        ? true
+                                        : false
+                                    }
+                                  />
+
+                                  {/* <LikeButtonWdw
                                     likecount={obj.likecount}
                                     chatId={obj.chat_id}
-                                  />
+                                  /> */}
+
                                   <Link
                                     to={`/disneyworld/lands-talk/${
                                       obj.chat_id
